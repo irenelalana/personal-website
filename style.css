@@ -1,7 +1,6 @@
 body {
     font-family: Cambria, serif;
     color: #333;
-    font-size: 2em;
 }
   
 header {
@@ -29,6 +28,9 @@ a:hover {
   align-items: center;
 }
 
+p {
+  font-size: 2em;
+}
 #services {
   display: flex;
   flex-direction: column;
@@ -45,6 +47,7 @@ a:hover {
   background-color: #f1f1f1;
   border-radius: 10px;
 }
+
   
 .question{
   font-weight: bold;
@@ -172,7 +175,6 @@ margin-top: 5px;
     
 .card h2 {
 margin-bottom: 10px;
-font-size: 3em;
 }
     
 .card p {
@@ -195,18 +197,30 @@ line-height: 1.5em;
   flex: 1;
   text-align: justify;
 }
-/*
-@media screen and  (min-width: 600px) {
+
+
+
+
+@media screen and  (width > 600px) {
+  body {
+    font-size: 1em;
+  }
+
   #services {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .card {
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 300px;
+    max-width: 300px;
   }
+  .card h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    }
 }
-*/
+
 
    
