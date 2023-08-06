@@ -251,6 +251,14 @@ line-height: 1.5em;
     margin-bottom: 10px;
     font-size: 1.2em;
   }
+  .about-me{
+    align-items: flex-start;
+ 
+  }
+  .about-me img{
+    padding-top: 40px;
+ 
+  }
 }
 
 
