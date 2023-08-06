@@ -11,7 +11,11 @@ header {
   background-size: 100% 100%;
   padding: 20px;
 }
-  
+
+h1 {
+  font-size: 2em;
+}
+
 a {
   color: #07a0e3;
   font-weight: bold;
