@@ -33,7 +33,7 @@ a:hover {
 }
 
 p {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 #services {
   display: flex;
@@ -224,6 +224,10 @@ line-height: 1.5em;
 @media screen and  (width > 600px) {
   body {
     font-size: 1em;
+  }
+
+  p {
+    font-size: 2em;
   }
 
   #services {
