@@ -6,7 +6,7 @@ body {
 header {
   display: flex;
   align-items: center;
-  background-image: url("images/balance_core_strength_onlineworkouts.png");
+  background-image: url("images/irela13coach_banner_balanceonablock.jpeg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 20px;
@@ -62,7 +62,7 @@ p {
 }
   
 .logo img {
-  max-width: 150px;
+  max-width: 30px;
 }
   
 .banner {
@@ -225,7 +225,10 @@ line-height: 1.5em;
   body {
     font-size: 1em;
   }
-
+  header {
+    background-image: url("images/irela13coach_banner_balanceonablock_landscape.jpeg");
+  }
+  
   p {
     font-size: 2em;
   }
@@ -281,8 +284,12 @@ line-height: 1.5em;
 
   .whatson-img  {
     display: flex;
+    justify-content: center;
   }
 
+.whatson-img img{
+  width:700px;
+}
 }
 
 
