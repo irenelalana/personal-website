@@ -217,7 +217,9 @@ line-height: 1.5em;
 .partners-img img {
   width:250px;
 }
-
+.timetable-img img {
+  width: 300px;
+}
 
 
 @media screen and  (width > 600px) {
@@ -285,9 +287,15 @@ line-height: 1.5em;
     display: flex;
     justify-content: center;
   }
-
+  .timetable-img  {
+    display: flex;
+    justify-content: center;
+  }
 .whatson-img img{
   width:400px;
+}
+.timetable-img img {
+  width: 1000px;
 }
 
 .logo img {
