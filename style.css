@@ -46,6 +46,11 @@ p {
   align-items: center;
 }
 
+#training_program li {
+  font-size: 1.5em;
+}
+
+
 .card{
   width: 100%;
   max-width: none;
@@ -56,14 +61,10 @@ p {
   background-color: #f1f1f1; */
   border-radius: 10px;
 }
-
   
 .question{
   font-weight: bold;
 }
-  
-
-
   
 .banner img {
   width: 100%;
@@ -242,7 +243,7 @@ line-height: 1.5em;
 
   .card_single {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .card_single h2 {
@@ -250,9 +251,7 @@ line-height: 1.5em;
     font-size: 4em;
   }
 
-  .caption {
-    padding-left: 30px;
-  }
+ 
 
   .card_single img {
     width: 30%;
@@ -268,6 +267,21 @@ line-height: 1.5em;
   .card h2 {
     margin-bottom: 10px;
     font-size: 1.2em;
+  }
+
+  .caption {
+    padding-left: 30px;
+    display: flex;
+  }
+  .caption img{
+    padding-top: 0;
+    padding-left: 30px;
+    width: 550px;
+   
+  }
+
+  .caption iframe{
+    padding-left: 100px;
   }
   .about-me{
     flex-direction: row;
@@ -311,6 +325,19 @@ line-height: 1.5em;
     text-align: center;
     font-size: 30px;
   }
+  .card-top {
+    display: flex;
+    flex-direction: row;
+  }
+  #training_program {
+    display: flex;
+    flex-direction: column;
+  }
+  #training_program li {
+    font-size: 2em;
+  }
+
+  
 }
 
    
