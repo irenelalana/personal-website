@@ -125,6 +125,12 @@ form textarea {
   margin-bottom: 20px;
   border: 1px solid #ccc;
 }
+
+.Certified img {
+  max-width: 300px;
+  padding: 0.75rem;
+}
+
   
 form input[type="submit"] {
   background-color: #f39304;
