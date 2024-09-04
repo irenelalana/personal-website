@@ -239,6 +239,11 @@ line-height: 1.5em;
   width: 300px;
 }
 
+#bccform img{
+  width: 100%;
+  
+}
+
 
 @media screen and  (width > 600px) {
   body {
@@ -356,8 +361,19 @@ line-height: 1.5em;
   #tasscarrera {
     font-size: 2em;
   }
+  #bccform{
+    display: flex;
+  }
+  #bccform div{
+    width: 50%;
+  }
+  #bccform img{
+    width: 70%;
+    
+  }
+  #bccform label{
+    width:90%;
+    
+  }
 
-  
 }
-
-   
