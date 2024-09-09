@@ -46,7 +46,7 @@ p {
   align-items: center;
 }
 
-#training_program li {
+li {
   font-size: 1.5em;
 }
 
@@ -355,7 +355,7 @@ line-height: 1.5em;
     display: flex;
     flex-direction: column;
   }
-  #training_program li {
+  li {
     font-size: 2em;
   }
   #tasscarrera {
