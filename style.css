@@ -167,7 +167,6 @@ footer {
 }
 
 .social-media img {
-  width: 75px;
   border-radius: 50%;
 }
 
@@ -319,7 +318,7 @@ line-height: 1.5em;
     height: 315px;
   }
 
-  .whatson-img  {
+  .whatson-row  {
     display: flex;
     justify-content: center;
   }
@@ -327,7 +326,7 @@ line-height: 1.5em;
     display: flex;
     justify-content: center;
   }
-.whatson-img img{
+.whatson-row img{
   width:400px;
 }
 .timetable-img img {
