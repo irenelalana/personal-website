@@ -119,6 +119,7 @@ form label {
 
 form input[type="text"],
 form input[type="email"],
+form input[type="phone"],
 form textarea {
   width: 100%;
   padding: 10px;
