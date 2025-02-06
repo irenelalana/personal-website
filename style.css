@@ -1,6 +1,7 @@
 body {
     font-family: Cambria, serif;
     color: #076873;
+    margin: 0;
 }
   
 header {
@@ -237,6 +238,18 @@ line-height: 1.5em;
 .partners-img img {
   width:250px;
 }
+
+.partner-card {
+  margin:auto;
+  border: 3px solid;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.partner-logo img{ 
+  width: 100%;
+}
 .timetable-img img {
   width: 300px;
 }
@@ -391,8 +404,23 @@ line-height: 1.5em;
   max-width: 70px;
 }
 
-.partners-img img {
-  width:250px;
+
+
+.partner-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.partner-logo {
+  width: 35%;
+}
+.partner-description {
+  padding-left: 20px;
+  width: 40%;
+}
+.partner-discount {
+  padding-left: 20px;
+  width: 25%;
 }
   nav li {
     flex: 1;
