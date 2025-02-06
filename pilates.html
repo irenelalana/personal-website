@@ -28,7 +28,7 @@
         <li><a href="./gift-cards.html">Gift Cards</a></li>
         <li><a href="./whatson.html">What's on</a></li>
         <li><a href="./faq.html">FAQ</a></li>
-        <li><a href="./partners.html">Partners</a></li>
+        <li><a href="./partners.html">Venues & Partners</a></li>
       </ul>
     </nav>
     <main>
@@ -60,50 +60,48 @@
         </div>     
       </section>
   
-      <section id="contact">
-        <h1>Contact</h1>
-        <form action="https://formspree.io/f/xjvdnpqv" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name"><br>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email"><br>
-          <label for="phone">Phone number:</label>
-          <input type="phone" id="phone" name="phone"><br>
-          <label for="message">Message:</label>
-          <textarea id="message" name="message"></textarea><br>
-          <input type="submit" value="Send">
-        </form>
-      </section>
-
       <section id="reviews">
         <h1>Reviews</h1>
         <p> Have a look to what my athletes shared about their experience with Irela Aqua & Fitness:
         </p>
         <div class='sk-ww-google-reviews' data-embed-id='25457088'></div>
       </section>
-    
-        </main>
-        <footer>
-          <div class="social-media">
-            <a 
-            href="https://www.instagram.com/irela_aquaandfitness/" target="_blank">
-            <img src="images/instagram_exercise_online_100x100.png" alt="logo de Instagram Irela13Coach">
-            </a>
-            <a 
-            href="https://www.facebook.com/IrelaAquaAndFitness" target="_blank">
-            <img src="images/facebook_personaltrainer_in_brisbane_100x100.png" alt="logo de Facebook Irela13Coach">
-            </a>
-            <a 
-            href="https://www.youtube.com/@irelaaquaandfitness" target="_blank">
-            <img src="images/Youtube_logo_onlineworkouts_100x100.png" alt="logo de YouTube Irela13Coach">
-            </a>
-            <a 
-            href="https://www.linkedin.com/in/irene-lalana-mu%C3%B1oz-3964a527/" target="_blank">
-            <img src="images/linkedin_50x50.png" alt="logo de linkedin Irela13Coach">
-            </a>
-          </div>
-          <div class="copyright">©2025 Irela Aqua & Fitness</div>
-        </footer>
-        <script src='https://widgets.sociablekit.com/google-reviews/widget.js' async defer></script> 
-        </body>
+      <button class="floating-button" onclick="toggleForm()">Contact Me</button>
+      <form action="https://formspree.io/f/xjvdnpqv" method="POST" class="contact-form" id="contactForm">
+          <input type="text" id="name" name="name" placeholder="Name">
+          <input type="email" id="email" name="email" placeholder="Email">
+          <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+          <textarea id="message" name="message" placeholder="Message"></textarea>
+          <button>Send</button>
+      </form>
+    </main>
+    <footer>
+      <div class="social-media">
+        <a 
+        href="https://www.instagram.com/irela_aquaandfitness/" target="_blank">
+        <img src="images/instagram_exercise_online_100x100.png" alt="logo de Instagram Irela13Coach">
+        </a>
+        <a 
+        href="https://www.facebook.com/IrelaAquaAndFitness" target="_blank">
+        <img src="images/facebook_personaltrainer_in_brisbane_100x100.png" alt="logo de Facebook Irela13Coach">
+        </a>
+        <a 
+        href="https://www.youtube.com/@irelaaquaandfitness" target="_blank">
+        <img src="images/Youtube_logo_onlineworkouts_100x100.png" alt="logo de YouTube Irela13Coach">
+        </a>
+        <a 
+        href="https://www.linkedin.com/in/irene-lalana-mu%C3%B1oz-3964a527/" target="_blank">
+        <img src="images/linkedin_50x50.png" alt="logo de linkedin Irela13Coach">
+        </a>
+      </div>
+      <div class="copyright">©2025 Irela Aqua & Fitness</div>
+    </footer>
+    <script src='https://widgets.sociablekit.com/google-reviews/widget.js' async defer></script> 
+    <script>
+      function toggleForm() {
+          var form = document.getElementById("contactForm");
+          form.style.display = (form.style.display === "block") ? "none" : "block";
+      }
+    </script>
+  </body>
 </html>
