@@ -121,6 +121,10 @@ form label {
   margin-bottom: 10px;
 }
 
+.sublist{
+  font-size: small;
+}
+
 /* form input[type="text"],
 form input[type="email"],
 form input[type="phone"],
