@@ -205,6 +205,18 @@ margin-top: 5px;
   margin: 30px;
 }
 
+.card_single_h img {
+  width: 80%;
+  margin: 30px;
+}
+
+.FAQ_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
     
 .card h2 {
 margin-bottom: 10px;
