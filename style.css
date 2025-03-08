@@ -91,7 +91,7 @@ nav a:hover {
   width: 90%;
   margin-left: 5px;
   margin-right: 5px;
-  border: 3px solid;
+  border: 5px solid;
   border-radius: 15px;
   margin-bottom: 20px;
   overflow: hidden;
@@ -282,7 +282,7 @@ line-height: 1.5em;
 
 .home-fluidx iframe {
   /* width: 375px;  */
-  width:100px;
+  width: 375px;
   height: 211px;
 }
 
