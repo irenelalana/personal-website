@@ -29,7 +29,7 @@ nav {
   flex-grow: 1;
   display: flex;
   justify-content: space-around;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding: 0;
   background-color: #02678F;
 
@@ -77,12 +77,17 @@ nav a:hover {
   overflow: hidden;
 }
 
-.other-programs {
+/* .other-programs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+} */
+.sub-others {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.other-programs img {
+.sub-others img {
   width: 90%;
   margin-left: 5px;
   margin-right: 5px;
@@ -276,7 +281,8 @@ line-height: 1.5em;
 }
 
 .home-fluidx iframe {
-  width: 375px; 
+  /* width: 375px;  */
+  width:100px;
   height: 211px;
 }
 
@@ -418,7 +424,13 @@ line-height: 1.5em;
         width: 25%;
     }
     
-
+    .other-programs {
+      display: flex;
+      flex-direction: row;
+    }
+    .sub-others {
+      display: flex;
+    }
     .other-programs img {
       border: 10px solid;
     }
