@@ -396,7 +396,7 @@ line-height: 1.5em;
   z-index: 0;
 }
 
-@media screen and  (width > 600px) {
+@media screen and  (width > 450px) {
   body {
     font-size: 1em;
   }
