@@ -405,7 +405,6 @@ line-height: 1.5em;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    position: none;
    }
 
    .isotipo img {
@@ -416,7 +415,6 @@ line-height: 1.5em;
   nav {
   font-size: 1.7rem;
   width:70%;
-  position: sticky;
   }
   .irela-header-phone {
         display: none;
