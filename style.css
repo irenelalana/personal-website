@@ -396,6 +396,21 @@ line-height: 1.5em;
   z-index: 0;
 }
 
+.privacy-policy a{
+  background-color: #07a0e3;
+  color: white;
+}
+
+.form-disclaimer {
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 10px;
+}
+.form-disclaimer a {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media screen and  (width > 450px) {
   body {
     font-size: 1em;
