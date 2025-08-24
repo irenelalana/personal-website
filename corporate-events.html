@@ -67,10 +67,10 @@
   </section>
   <button class="floating-button" onclick="toggleForm()">Contact Me</button>
   <form action="https://formspree.io/f/xjvdnpqv" method="POST" class="contact-form" id="contactForm">
-      <input type="text" id="name" name="name" placeholder="Name">
-      <input type="email" id="email" name="email" placeholder="Email">
-      <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-      <textarea id="message" name="message" placeholder="Message"></textarea>
+          <input type="text" id="name" name="name" placeholder="Name" required>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+          <textarea id="message" name="message" placeholder="Message" required></textarea>
       <button>Send</button>
       <p class="form-disclaimer">By submitting this form, you agree to our <a href="./privacy-policy.html" target="_blank">Privacy Policy</a>.</p>
 
