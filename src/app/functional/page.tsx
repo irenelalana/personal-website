@@ -1,0 +1,66 @@
+// pages/functional.js
+import React from "react";
+
+export default function Functional() {
+  return (
+    <section id="services">
+      <div className="card_single">
+        <div className="card-top">
+          <img
+            src="/images/Irela_fitness_trainer.JPG"
+            alt="Functional Training"
+          />
+          <div>
+            <h2>SMART FITNESS</h2>
+            <p>
+              The effective functional training program that enhance your quality
+              of life and performance. The perfect combination of coordination,
+              balance, mobility, strength, cardio & core, which improves mood,
+              skills, concentration, time management, self-esteem, habits,
+              alleviates body aches, and reduces stress.
+            </p>
+            <p>
+              This program is designed to ready your body for daily activities.
+              These exercises equip you with improved skills that preps you for
+              real-life, daily living stuff like bending, twisting, lifting,
+              loading, pushing, pulling, squatting and hauling.
+            </p>
+            <p>Our live online workouts provide structure, accountability, and motivation.</p>
+            <p>Personal training also available in Toowong and West End. </p>
+          </div>
+        </div>
+
+        <div className="caption">
+          <section id="training_program">
+            <ul>
+              <li>10 Weeks program.</li>
+              <li>60min sessions.</li>
+              <li>3 fitness live sessions per week.</li>
+              <li>Mon, Tue, Fri 6.15am.</li>
+              <li>$550. First week for free. (try first!)</li>
+              <li>Access to recorded materials.</li>
+              <li>Discounts with local partners.</li>
+              <li>Extra group swimming lessons included.</li>
+              <li>Follow ups, reports and analysys.</li>
+              <form
+                action="https://shorturl.at/hcCjW"
+                target="_blank"
+                style={{ marginTop: "1rem" }}
+              >
+                <button className="form-button">See full program</button>
+              </form>
+            </ul>
+          </section>
+          <iframe
+            src="https://www.youtube.com/embed/XOcuZt7vKhs"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{ marginTop: "1rem", height: "315px" }}
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  );
+}
