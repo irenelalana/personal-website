@@ -17,7 +17,7 @@ export default function Functional() {
             <p>This is the effective functional training program that enhance your quality of life and performance. The perfect combination of coordination, balance, mobility, strength, cardio & core, which improves mood, skills, concentration, time management, self-esteem, habits, alleviates body aches, and reduces stress.</p>
             <h1>Real-Life Benefits for Your Body:</h1>
             <p>This training for women over 35 is designed to ready our mid-aged body for our daily activities with no pain and to minimise menopause symptoms. These exercises equip you with improved skills that preps you for real-life, daily living stuff like bending, twisting, lifting, loading, pushing, pulling, squatting and hauling.</p>
-            <12>Start Your Live Online Workouts</h1>
+            <h1>Start Your Live Online Workouts</h1>
             <p>Our live online workouts provide structure, accountability, and motivation.</p>
             <p>(If you prefer, personal training also available in Toowong, CBD and West End. Tell me what training yiu need and I will tailor it for you) </p>
           </div>

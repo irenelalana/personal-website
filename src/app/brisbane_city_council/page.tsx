@@ -50,7 +50,7 @@ export default function BrisbaneCityCouncil() {
             </form>
 
             <p>
-              <strong>Aquafitness Gold (kid with and adult) during school holidays</strong>: unique and heartwarming Aquafitness class designed for grandparents and children to exercise together! We focus on low-impact, joint-friendly movements and games that improve coordination, balance, and overall fitness. Get ready to splash, play, and work out to a fun mix of classic and modern tunes. This class is a fantastic opportunity to create lasting memories while strengthening family bonds and getting fit as a team! All participants should be confident in shallow water.
+              <strong>Aquafitness Gold´s & Kids (kid with and adult) during school holidays</strong>: unique and heartwarming Aquafitness class designed for grandparents and children to exercise together! We focus on low-impact, joint-friendly movements and games that improve coordination, balance, and overall fitness. Get ready to splash, play, and work out to a fun mix of classic and modern tunes. This class is a fantastic opportunity to create lasting memories while strengthening family bonds and getting fit as a team! All participants should be confident in shallow water.
             </p>
             <p>Sessions were run at Moorlands Park, in Aucheflower, Brisbane. Next dates at 11.00am: Thursdays 25 Sep, 2 Oct, 18 Dec 2025, 15 Jan, 22 Jan, 9 Apr, 16 Apr 2026.</p>
             <p>Please, note that after filling the form out with preferences, you will be confirmed by email as spots are limited.</p>
