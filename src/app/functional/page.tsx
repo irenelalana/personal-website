@@ -12,27 +12,18 @@ export default function Functional() {
           />
           <div>
             <h2>SMART FITNESS</h2>
-            <p>
-              The effective functional training program that enhance your quality
-              of life and performance. The perfect combination of coordination,
-              balance, mobility, strength, cardio & core, which improves mood,
-              skills, concentration, time management, self-esteem, habits,
-              alleviates body aches, and reduces stress.
-            </p>
-            <p>
-              This program is designed to ready your body for daily activities.
-              These exercises equip you with improved skills that preps you for
-              real-life, daily living stuff like bending, twisting, lifting,
-              loading, pushing, pulling, squatting and hauling.
-            </p>
+            <p>Frustrated with inefficient programs or feeling lost in a crowded gym full of equipment you don´t know how to use? Tired of not seeing results, or embarrassed to work out in public? If you're struggling to find a fitness routine that fits your busy life, my PREMIUM Smart Fitness Program is for you:</p>
+            <p>This is the effective functional training program that enhance your quality of life and performance. The perfect combination of coordination, balance, mobility, strength, cardio & core, which improves mood, skills, concentration, time management, self-esteem, habits, alleviates body aches, and reduces stress.</p>
+            <p>This program is designed to ready our mid-aged body for our daily activities with no pain and to minimise menopause symptoms. These exercises equip you with improved skills that preps you for real-life, daily living stuff like bending, twisting, lifting, loading, pushing, pulling, squatting and hauling.</p>
             <p>Our live online workouts provide structure, accountability, and motivation.</p>
-            <p>Personal training also available in Toowong and West End. </p>
+            <p>(If you prefer, personal training also available in Toowong and West End. Tell me what training yiu need and I will tailor it for you) </p>
           </div>
         </div>
 
         <div className="caption">
           <section id="training_program">
             <ul>
+              <li>Premium group, only 8 spots available.</li>
               <li>10 Weeks program.</li>
               <li>60min sessions.</li>
               <li>3 fitness live sessions per week.</li>

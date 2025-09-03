@@ -13,19 +13,13 @@ export default function Pilates() {
           <div>
             <h2>PILATES</h2>
             <p>
-              Online and face to face group and one to one sessions, focused on
-              improving flexibility, strength, and body awareness through
-              controlled movements.
+              From beginners to advanced level, online and face to face group and one to one classes, focused on improving mobility, flexibility, strength, and body awareness through controlled movements.
             </p>
             <p>
-              Following the Pilates principles: Centering, concentration,
-              control, precision breath and flow you will feel your core
-              engagement which helps you achieve functional movements and
-              stability.
+              Following the Pilates principles: Centering, concentration, control, precision breath and flow you will feel your core engagement which helps you achieve functional movements and stability.
             </p>
             <p>
-              You can join us on Tuesdays 6.15am Online small group, 10 weeks for
-              $300 or...:
+              Early bird? Join us from home on Tuesdays 6.15am Online in our Premium training group, 10 weeks for only $300! or ask me for Casual, Personal training options in Toowong...:
             </p>
           </div>
         </div>
@@ -36,9 +30,9 @@ export default function Pilates() {
               <li>45-60min sessions.</li>
               <li>$665 - $825.</li>
               <li>Budget option: sharing lessons.</li>
-              <li>Follow ups, reports and analysys.</li>
+              <li>Welcome package.</li>
               <li>Discounts with local partners.</li>
-              <li>Casual, P.T. options in Toowong (try first!).</li>
+              <li>try first for free!</li>
             </ul>
           </section>
           <iframe
