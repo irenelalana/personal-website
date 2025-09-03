@@ -11,7 +11,7 @@ export default function Swimming() {
             alt="Swimming Lessons"
           />
           <div>
-            <h2>ADULTS SWIMMING LESSONS</h2>
+            <h1>ADULTS SWIMMING LESSONS</h1>
             <p>
               Specialised in all levels and ages adults swimming lessons. It is
               never too late to learn new skills, and enjoy Australian treasures

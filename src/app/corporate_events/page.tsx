@@ -11,7 +11,7 @@ export default function CorporateEvents() {
             alt="Team_building"
           />
           <div>
-            <h2>CORPORATE WELLNESS</h2>
+            <h1>CORPORATE WELLNESS</h1>
             <p>
               We are specialised in providing customised wellbeing plans and
               team building events for companies, catering to the physical needs

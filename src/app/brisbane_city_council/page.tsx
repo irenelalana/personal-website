@@ -11,7 +11,7 @@ export default function BrisbaneCityCouncil() {
             alt="Brisbane City Council"
           />
           <div>
-            <h2>BCC Active and Healthy Free Events</h2>
+            <h1>BCC Active and Healthy Free Events</h1>
             <p>
               These FREE activities have been funded by Brisbane City Council as
               part of Council's Active and Healthy program.

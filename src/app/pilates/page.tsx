@@ -11,7 +11,7 @@ export default function Pilates() {
             alt="Pilates"
           />
           <div>
-            <h2>PILATES</h2>
+            <h1>PILATES</h1>
             <p>
               From beginners to advanced level, online and face to face group and one to one classes, focused on improving mobility, flexibility, strength, and body awareness through controlled movements.
             </p>

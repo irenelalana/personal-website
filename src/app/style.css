@@ -433,6 +433,10 @@ line-height: 1.5em;
     align-items: flex-end;
    }
 
+   h1 {
+  font-size: 3em;
+}
+
    .isotipo img {
     width: 120px;  
     margin: auto;      
@@ -504,7 +508,7 @@ line-height: 1.5em;
 
   .card_single h2 {
     margin-bottom: 10px;
-    font-size: 4em;
+    font-size: 2em;
   }
 
  

@@ -8,7 +8,7 @@ export default function Triathlon() {
         <div className="card-top">
           <img src="/images/Irela_triathlon_swimming.jpg" alt="Triathlon" />
           <div>
-            <h2>SWIMMING FOR TRIATHLETES</h2>
+            <h1>SWIMMING FOR TRIATHLETES</h1>
             <p>
               We equip you with the skills and confidence needed to thrive in
               the demanding world of triathlon, by teaching you how to exit,

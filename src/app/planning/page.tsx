@@ -8,7 +8,7 @@ export default function Planning() {
         <div className="card-top">
           <img src="/images/Irela_triathlon_plans21.jpeg" alt="Planning" />
           <div>
-            <h2>PLANNING</h2>
+            <h1>PLANNING</h1>
             <p>
               I plan and design personalized training programs to help you reach
               your fitness, running, swimming, triathlon... goals so you perform

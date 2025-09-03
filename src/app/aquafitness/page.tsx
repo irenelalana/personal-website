@@ -11,7 +11,7 @@ export default function Aquafitness() {
             alt="Aquafitness"
           />
           <div>
-            <h2>AQUAFITNESS - AQUAEROBICS - AQUAGYM</h2>
+            <h1>AQUAFITNESS - AQUAEROBICS - AQUAGYM</h1>
             <p>
               The combination of strength and cardio routines with water resistance ensures that the body receives a complete workout with Low impact, ideal for those with joint injuries and chronic pains.</p>
             <p>
