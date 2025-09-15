@@ -9,7 +9,7 @@ export default function WhatsOnPage() {
         <div className="whatson-img">
           <div className="whatson-row">
             <img
-              src="/images/Journey_to_a_holistic_wellness.png"
+              src="/images/Journey_to_a_holistic_wellness.jpeg"
               alt="Picture about Holistic Wellness"
             />
           </div>
