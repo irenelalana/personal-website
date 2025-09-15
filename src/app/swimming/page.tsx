@@ -11,7 +11,7 @@ export default function Swimming() {
             alt="Swimming Lessons"
           />
           <div>
-            <h1>ADULTS SMART STROKES SWIMMING LESSONS</h1>
+          <h1>ADULTS SWIMMING LESSONS</h1>
             <p>
               Specialised in all levels and ages adults swimming lessons in Brisbane. It is never too late to learn new skills, and enjoy Australian treasures around the water. It doesn't matter how much afraid of water you
               are, we work on your confidence, floating, breathing, propulsion improving your control, technique and fitness level as main goals.
@@ -20,6 +20,7 @@ export default function Swimming() {
               We use video recording as a tool to enhance your learning experience when needed, providing personalized feedback to improve your technique. My lessons are designed to help you achieve your goals in a supportive, inclusive and encouraging environment.
             </p>
             <p>Spanish and English options.</p>
+           <h2>SMART STROKES:</h2>
             <p>Smart Strokes is a small swimming group for stroke correction in adults - intermediate level.</p>
             <p>Mondays and Wednsedays 6.30pm, we improve technique and endurance and having fun with unique exercises in Musgrave Park Pool, West End.</p>
             <p>5 (45min) session packs, $105.</p>
@@ -28,9 +29,9 @@ export default function Swimming() {
 
         <div className="caption">
           <section id="training_program">
-           <h1>ADULTS PRIVATE SWIMMING LESSONS</h1>
+           <h2>ADULTS PRIVATE SWIMMING LESSONS</h2>
             <ul>
-              <li>Private and sharing lessons are run in Brisbane, at Musgrave Park Pool (West End) and QUT Kelvin Grove Campus.</li>
+              <li>Private lessons are run in Brisbane, at Musgrave Park Pool (West End) and QUT Kelvin Grove Campus.</li>
               <li>Beginners - Intermediate - advanced - triathletes level.</li>
               <li>10 Weeks program.</li>
               <li>45 - 60min private sessions.</li>
