@@ -11,18 +11,39 @@ export default function Pilates() {
             alt="Pilates"
           />
           <div>
-            <h1>PILATES</h1>
-            <p>
-              From beginners to advanced level, online and face to face group and one to one classes, focused on improving mobility, flexibility, strength, and body awareness through controlled movements.
-            </p>
-            <p>
-              Following the Pilates principles: Centering, concentration, control, precision breath and flow you will feel your core engagement which helps you achieve functional movements and stability.
-            </p>
-            <p>
-              Early bird? Join us from home on Tuesdays 6.15am Online in our Premium training group, 10 weeks for only $300! or ask me for Casual, Personal training options in Toowong...:
-            </p>
-          </div>
-        </div>
+            <h1>Pilates-Inspired Core & Mobility</h1>
+             <h2>Who it’s for</h2>
+              <ul>
+                <li>Are you desperately looking to strengthen your core safely and effectively?</li>
+                <li>Anyone with lower back pain, poor posture, or desk-related stiffness in the room?</li>
+                <li>Over-35s wanting to maintain mobility and flexibility as they age?</li>
+                <li>Are you recovering from injury or needing a gentler yet powerful workout option?</li>
+              </ul>
+              <p>You are in the right place!</p>
+
+              <h2>What it is:</h2>
+              <p>
+                Our <strong>Pilates Program</strong> combines controlled movements, 
+                deep core activation, and stretching to improve posture, flexibility, and stability. 
+                Classes are mat-based, low-impact, and tailored to suit all levels.
+              </p>
+
+              <h2>What results you’ll get</h2>
+              <ul>
+                <li>Stronger core muscles that support the spine and improve posture</li>
+                <li>Greater flexibility and joint mobility</li>
+                <li>Reduced tension, stiffness, and back discomfort</li>
+                <li>Improved balance and coordination</li>
+                <li>Relaxed, focused mind with reduced stress</li>
+              </ul>
+
+              <h2>Why now</h2>
+              <ul>
+                <li>Many daily aches and pains stem from weak core muscles and tight joints</li>
+                <li>Early correction prevents long-term issues with back, hips, and shoulders</li>
+                <li>Building mobility and strength now means staying active, independent, and pain-free as you age</li>
+              </ul>  
+            </div>
         <div className="caption">
           <section id="training_program">
             <ul>
@@ -33,6 +54,7 @@ export default function Pilates() {
               <li>Welcome package.</li>
               <li>Discounts with local partners.</li>
               <li>try first for free!</li>
+              <li>Early bird at home? Join our Online Smart Pilates online group, Tuesdays 6.15am (10 sessions $300)</li>
             </ul>
           </section>
           <iframe
