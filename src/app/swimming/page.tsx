@@ -12,15 +12,22 @@ export default function Swimming() {
           />
           <div>
           <h1>ADULTS SWIMMING LESSONS</h1>
-            <p>
-              All levels and ages adults swimming lessons in Brisbane. It is never too late to learn new skills, and enjoy Australian treasures around the water. It doesn't matter how much afraid of water or nervous you
-              are. 
-              </p>
-             <p>
-              This is a tailored swimming program for adults who want to swim with confidence, improve technique, build endurance, or return to the water after a break. Includes stroke correction, breath control, drills & pacing.
+           <h2>Who it’s for</h2>
+              <ul>
+                <li>Do you think It is too late to learn new skills, and enjoy Australian treasures around the water?</li>
+                <li>You learnt to swim as a child but can´t remember much how to perform?</li>
+                <li>Are afraid of water or just feel nervous when you have to breath under the water?</li>
+                <li>You come from a non aquatic background and feel that nobody understands your needs and your starting point?</li>
+                <li>The doctor told you that swimming would be great to reduce your aches but don´t know how to do it efficiently and confidently?</li>
+                <li>You learnt to swim as a child but can´t remember much how to perform?</li>
+              </ul>
+              <p>You are in the right place!</p>
+            
+            <h2>What it is:</h2>
+            <p> Our <strong>adults swimming lessons </strong>in Brisbane is a tailored swimming program for all levels and ages adults who want to swim with confidence, improve technique, build endurance, or return to the water after a break. Includes stroke correction, breath control, drills & pacing.
             </p>
             <p>
-              We use video recording as a tool to enhance your learning experience when needed, providing personalized feedback to improve your technique. My lessons are designed to help you achieve your goals in a supportive, inclusive and encouraging environment.
+              We use video recording as a tool to enhance your learning experience when needed, providing personalized feedback to improve your technique. My lessons are designed to help you achieve your goals in a supportive, inclusive and encouraging environment (I´ll get in the water with you if needed).
             </p>
             <p>Spanish and English options.</p>
           <h2>What results you’ll get:</h2>
