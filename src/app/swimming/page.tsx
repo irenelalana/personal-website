@@ -35,24 +35,25 @@ export default function Swimming() {
 
         <div className="caption">
           <section id="training_program">
-           <h2>SMART STROKES:</h2>
-            <p>Smart Strokes is a swimming premium group for stroke correction in adults - intermediate level, for those wanting to swim longer without fatigue..</p>
-            <p>Mondays and Wednsedays 6.30pm, we improve technique and endurance and having fun with unique exercises in Musgrave Park Pool, West End.</p>
+           <h2>SMART STROKES GROUP LESSONS:</h2>
+            <p>Smart Strokes is a swimming premium group for stroke correction in adults - intermediate level, for those wanting to swim longer without fatigue with a fun and unique touch of variety.</p>
+            <p>Mondays and Wednsedays 6.30pm, we improve technique and endurance in Musgrave Park Pool, West End.</p>
             <p>5 (45min) session packs, $105.</p>
 
-           <h2>ADULTS PRIVATE SWIMMING LESSONS</h2>
+           <h2>PRIVATE SWIMMING LESSONS</h2>
             <ul>
-              <li>Private lessons in Brisbane, Musgrave Park Pool (West End) and QUT Kelvin Grove Campus.</li>
-              <li>Beginners - Intermediate - advanced - triathletes level.</li>
+              <li>Musgrave Park Pool (West End) and QUT Kelvin Grove Campus, Brisbane.</li>
+              <li>Adults Beginners - Intermediate - advanced - triathletes level.</li>
               <li>10 Weeks program.</li>
               <li>45 - 60min private sessions.</li>
               <li>$665 - $825.</li>
-              <li>Budget option: sharing lessons.</li>
+              <li>Budget option: sharing lessons. Bring a friend or I´ll find your buddie</li>
               <li>Reschedule within 24h notice.</li>
               <li>Discounts with local partners.</li>
               <li>Preference in spots over casuals.</li>
               <li>Follow ups, reports and analysys.</li>
-              <li>Casual options available (try first!).</li>
+              <li>Casual options available (try now!).</li>
+                          <p></p>
               <form action="https://shorturl.at/Doc2b" target="_blank" rel="noopener noreferrer">
                 <button className="form-button">See full program</button>
               </form>
