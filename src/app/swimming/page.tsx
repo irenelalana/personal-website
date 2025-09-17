@@ -42,7 +42,7 @@ export default function Swimming() {
 
            <h2>ADULTS PRIVATE SWIMMING LESSONS</h2>
             <ul>
-              <li>Private lessons are run in Brisbane, at Musgrave Park Pool (West End) and QUT Kelvin Grove Campus.</li>
+              <li>Private lessons in Brisbane, Musgrave Park Pool (West End) and QUT Kelvin Grove Campus.</li>
               <li>Beginners - Intermediate - advanced - triathletes level.</li>
               <li>10 Weeks program.</li>
               <li>45 - 60min private sessions.</li>
