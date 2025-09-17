@@ -12,7 +12,13 @@ export default function Functional() {
           />
           <div>
             <h1>SMART FITNESS Program Preps You for Over 35 Life:</h1>
-            <p>Frustrated with inefficient programs or feeling lost in a crowded gym full of equipment you don´t know how to use? Tired of not seeing results, or embarrassed to work out in public? If you're struggling to find a fitness routine that fits your busy life, my Premium Smart Fitness Program is for you:</p>
+            <h2>Who it’s for</h2>
+          <ul>
+            <li>Frustrated with inefficient programs or feeling lost in a crowded gym full of equipment you don´t know how to use?</li>
+            <li>Tired of not seeing results, or embarrassed to work out in public?</li>
+            <li>Struggling to find a fitness routine that fits your busy life?</li>
+          </ul>
+            <p>Then, my Premium Smart Fitness Program is for you!</p>
             <h2>Why now:</h2>
             <ul>
               <li>Muscle and bone density naturally decline after 30 (3-8% per decade)... the sooner you act, the more you preserve.</li>

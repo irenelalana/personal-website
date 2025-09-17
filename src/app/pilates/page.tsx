@@ -44,6 +44,7 @@ export default function Pilates() {
                 <li>Building mobility and strength now means staying active, independent, and pain-free as you age</li>
               </ul>  
             </div>
+          </div>
         <div className="caption">
           <section id="training_program">
             <ul>
