@@ -30,7 +30,7 @@ export default function AboutPage() {
               your fitness and health goals!
             </p>
             <p>
-              I'm Irene Lalana, and I'm passionate about helping you achieve your
+              I'm Irene Lalana, Aquaprofessional of the year (National Fitness awards 2024 - Ausactive) and I'm passionate about helping you achieve your
               fitness and health goals. As a professional swimmer and rescuer
               (Australian Master Champion 2025 and Lifesaving World silver Medal
               2024 and National records), I bring over 20 years of experience, a
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </p>
             <p>
               At Irela Aqua & Fitness, I offer unique, comprehensive programs
-              combining fitness, aquafitness, and swimming—available in both
+              combining fitness, low impact aquaerobics, and swimming—available in both
               Spanish and English - making me potentially the only provider of
               this integrated approach in Brisbane, what sets me apart.
             </p>

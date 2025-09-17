@@ -17,9 +17,9 @@ export default function Triathlon() {
               smarter.
             </p>
             <p>
-              Seasoned triathlete, conquering races for ages but still finding
-              the swimming leg challenging; new triathlete starting your journey
-              and feeling uncertain about tackling the swim, this program is
+              For seasoned triathletes, conquering races for ages but still finding
+              the swimming leg challenging; and for new triathletes starting your journey
+              and feeling uncertain about tackling the swim; this program is
               designed specifically with you in mind.
             </p>
             <p>Lessons are run at Musgrave Park Pool, in West End, Brisbane.</p>
