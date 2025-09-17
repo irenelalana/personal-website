@@ -29,6 +29,25 @@ export default function Partners() {
             <p>Swimming lessons and Aquafitness sessions.</p>
           </div>
         </div>
+        <div className="venue-card">
+          <div className="venue-logo">
+            <a
+              href="https://www.qut.edu.au/study/student-life/qut-sport-fitness-and-aquatic-centres"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/images/QUT_VENUE.png"
+                alt="QUT pool"
+              />
+            </a>
+          </div>
+          <div className="venue-description">
+            <p>QUT Aquatic Centre - Kelvin Grove campus.</p>
+            <p>25m indoor pool.</p>
+            <p>Swimming lessons and Aquafitness sessions.</p>
+          </div>
+        </div>
 
         <div className="venue-card">
           <div className="venue-logo">
