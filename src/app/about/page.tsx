@@ -87,8 +87,8 @@ export default function AboutPage() {
             alt="Aquaprofessional of the year award"
           />
           <img
-            src="/images/Group_fitness_finalist_2025.png"
-            alt="Group Fitness leader and Instructor of the year award"
+            src="/images/GROUP_EXERCISE_LEADER_INSTRUCTOR_OF_THE_YEAR_2025.png"
+            alt="Group Exercise leader and Instructor of the year award"
           />
           <img
             src="/images/ausactive.jpeg"

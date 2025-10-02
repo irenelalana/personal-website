@@ -55,7 +55,7 @@ export default function Pilates() {
               <li>Welcome package.</li>
               <li>Discounts with local partners.</li>
               <li>try first for free!</li>
-              <li>Early bird at home? Join our Online Smart Pilates online group, Tuesdays 6.15am (10 sessions $300)</li>
+              <li>Early bird at home? Join our Online Smart Pilates online group, Tuesdays 6.15am (10 sessions $250)</li>
             </ul>
           </section>
           <iframe
