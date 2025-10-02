@@ -62,7 +62,7 @@ export default function Aquafitness() {
       <ul>
           <li>$20 casual. 10 passes for $180 (expiring in 5 months).</li>
           <li>Monday and Wednesday 5.30pm. Friday 12.30pm.</li>
-          <li>Monday and Friday are FREE as part of BCC Active and Healthy program (click here to know more and join BCC programs)</li>
+          <li>Monday and Friday are FREE as part of BCC Active and Healthy program (click <a href = "/brisbane_city_council">here</a> to know more and join BCC programs)</li>
             </ul>
 <p>Our sessions are at Musgrave Park Pool, in West End, Brisbane. Multicultural environment, tunes and vibes. All levels welcome!</p>
 <p>You want to train in your building? Let´s organise something cool with your neighbours! One to one also available.</p>
