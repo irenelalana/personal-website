@@ -24,7 +24,7 @@ export default function WhatsOnPage() {
             />
           </div>
         </div>
-        <p>Click on the image to join us in this special FREE Pilates session and talk abut Cancer awareness as part of QMHW</p>
+        <p>Contact me to join us in this special FREE Pilates and self care session for Domestic Violence survivors as part of QMHW</p>
 
         <div className="whatson-img">
           <div className="whatson-row">
@@ -34,7 +34,7 @@ export default function WhatsOnPage() {
             />
           </div>
         </div>
-        <p>Click on the image to join us in this special FREE Pilates and self care session for Domestic Violence survivors as part of QMHW</p>
+        <p>Contact me to join us in this special FREE Pilates session and talk abut Cancer awareness as part of QMHW</p>
 
         <div className="whatson-img">
           <div className="whatson-row">
