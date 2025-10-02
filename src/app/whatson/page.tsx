@@ -5,6 +5,36 @@ export default function WhatsOnPage() {
     <main>
       <section id="pilates" className="parrafos">
         <p><strong>Experience a journey to a holistic Wellness IV: 22/112025.</strong></p>
+      
+        <div className="whatson-img">
+          <div className="whatson-row">
+            <img
+              src="/images/queensland_mental_health_week.png"
+              alt="Picture about Queensland Mental Health Week"
+            />
+          </div>
+        </div>
+        <p>Because everyone know someone who would benefit from these 400 events. check below what we have organised for you</p>
+       
+        <div className="whatson-img">
+          <div className="whatson-row">
+            <img
+              src="/images/QMHW_pilates_selfcare.png"
+              alt="Picture about CV Survivors Pilates event"
+            />
+          </div>
+        </div>
+        <p>Click on the image to join us in this special FREE Pilates session and talk abut Cancer awareness as part of QMHW</p>
+
+        <div className="whatson-img">
+          <div className="whatson-row">
+            <img
+              src="/images/Pilates_cancer_awareness.jpeg"
+              alt="Picture about Cancer awareness event"
+            />
+          </div>
+        </div>
+        <p>Click on the image to join us in this special FREE Pilates and self care session for Domestic Violence survivors as part of QMHW</p>
 
         <div className="whatson-img">
           <div className="whatson-row">
