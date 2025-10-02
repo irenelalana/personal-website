@@ -83,11 +83,11 @@ export default function AboutPage() {
       <section id="Certified">
         <div className="Certified">
           <img
-            src="/images/Aquaprofessional_of_the_year.jpeg"
+            src="/images/Aquaprofessional_of_the_year_2024.png"
             alt="Aquaprofessional of the year award"
           />
           <img
-            src="/images/GROUP_EXERCISE_LEADER_INSTRUCTOR_OF_THE_YEAR_2025.png"
+            src="/images/Group_exercise_leader_instructor_of_the_year_2025.png"
             alt="Group Exercise leader and Instructor of the year award"
           />
           <img
