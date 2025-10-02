@@ -4,7 +4,7 @@ export default function WhatsOnPage() {
   return (
     <main>
       <section id="pilates" className="parrafos">
-        <p><strong>Experience a journey to a holistic Wellness IV: 22/112025.</strong></p>
+        <p><strong>Experience a journey to a holistic Wellness</strong></p>
       
         <div className="whatson-img">
           <div className="whatson-row">
@@ -14,7 +14,7 @@ export default function WhatsOnPage() {
             />
           </div>
         </div>
-        <p>Because everyone know someone who would benefit from these 400 events. check below what we have organised for you</p>
+        <p>Because everyone knows someone who would benefit from these 400 events. Check below what we have organised for you, share, bring a friend, you are not alone</p>
        
         <div className="whatson-img">
           <div className="whatson-row">
