@@ -18,21 +18,17 @@ export default function BrisbaneCityCouncil() {
             </p>
             <p>
               <strong>Aquafitness for adults</strong>: experience an excellent,
-              low-impact cross-training workout in the water. Feel the benefits
+              low-impact workout in the water. Feel the benefits
               of exercise without the pain. Using minimum impact movements,
               participants will develop strength, mobility and cardio with fun
               tunes.
             </p>
+            <p>Sessions are run at Musgrave Park Pool, in West End, Brisbane. Mondays 5.30pm and Fridays 12.30pm (except School Holidays)</p>
             <p>
-              Sessions are run at Musgrave Park Pool, in West End, Brisbane.
-              Mondays 5.30pm. New group Fridays 12.30pm (from 30th January)
-            </p>
-            <p>
-              Please, note that after filling the initial form out, you will have
-              to send an email to the pool, clicking{" "}
+              Please, note that after filling the initial form out, you will have to send an email to the pool, clicking{" "}
               <a href="mailto:info@musgraveparkaquaticcentre.com.au">here</a>{" "}
               every week (before Saturday) to book your spot for the following
-              Monday as the spots are limited.
+              week as the spots are limited.
             </p>
             <form action="https://forms.gle/mNK6n5XKE9Fng2Yn9" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>

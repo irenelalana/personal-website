@@ -10,30 +10,62 @@ export default function Aquafitness() {
             src="/images/Irela_swimming_confidence23.jpg"
             alt="Aquafitness"
           />
-          <div>
-            <h1>AQUAFITNESS - AQUAEROBICS - AQUAGYM</h1>
-            <p>
-              The combination of strength and cardio routines with water resistance ensures that the body receives a complete workout with Low impact, ideal for those with joint injuries and chronic pains.</p>
-            <p>
-              Aquafitness increases endurance and enhances fitness, reduces blood pressure, boosts mobility & flexibility; improves balance, coordination and agility, mitigates stress and makes a fun environment.</p>
-            <p>
-              Sessions are run at Musgrave Park Pool, in West End, Brisbane. Multicultural environment, tunes and vibes.
-              One to one and group Aqua based training sessions. 
-            </p>
-          </div>
-        </div>
+<div>
+<h1>AQUAFITNESS - AQUAEROBICS - AQUAGYM - Low-Impact, High-Results Training in the Water</h1>
+  <h2>What it is:</h2>
+  <p>
+    Our <strong>Aquafitness Program</strong> delivers a fun, energising, and joint-friendly workout 
+    in the pool. Combining cardio, strength, and mobility exercises, water resistance 
+    makes every movement more effective while reducing stress on your joints.
+  </p>
+  <h2>Who it’s for:</h2>
+  <ul>
+    <li>Adults over 30 looking for a safe and enjoyable way to stay fit.</li>
+    <li>Anyone managing joint pain, arthritis, or recovering from injury.</li>
+    <li>People wanting a low-impact alternative to gym workouts.</li>
+    <li>Beginner swimmiers or returning exercisers who want a supportive environment and gain confidence.</li>
+  </ul>  
 
-        <div className="caption">
-          <section id="training_program">
-            <ul>
-              <li>Casual sessions for $20.</li>
-              <li>10 passes for $180.</li>
-              <li>Seasonal deals.</li>
-              <li>60 min sessions.</li>
-              <li>Mon, Wed 5.30pm. Tue (deep water), Thu 9.00am. Friday 12.30pm.</li>
-              <li>Discounts with local partners.</li>
-              <li>Monday and Friday FREE as part of BCC Active and Healthy program. Pay only for pool entry.</li>
+  <h2>What results you’ll get:</h2>
+  <ul>
+    <li>Improved cardiovascular health, endurance and stamina.</li>
+    <li>Increased strength and muscle tone without heavy weights.</li>
+    <li>Better flexibility, mobility, coordination, agility and balance.</li>
+    <li>Reduced impact on joints, with less pain and stiffness.</li>
+    <li>A fun, social environment that keeps you motivated.</li>
+    <li>Reduced blood pressure and mitigate stress.</li>
+  </ul>  
+
+  <h2>Why now:</h2>
+  <ul>
+    <li>Because you don´t want more pain and impact on your joints and water-based workouts protect your joints while building strength and endurance</li>
+    <li>Because we have all year outdoor heated pools (33 degrees), and... we want to be fit and tanned for the summer season which is around the corner</li>
+    <li>Because regular aquafitness reduces long-term risk of mobility loss and stiffness</li>
+    <li>Because it’s a safe, welcoming option if you’ve struggled with traditional gyms</li>
+    <li>Research shows that water-based activities have a more positive effect on your mood and stamina, and are more effective at reducing stress and depression, than many other forms of exercise.</li>
+  </ul>
+</div>
+</div>
+
+ <div className="caption">
+  <section id="training_program">
+    <h2>JOIN NOW THE AQUA CHALLENGE SPRING 2025:</h2>
+      <ul>
+          <li>8 weeks challenge 14/10/2025 - 04/12/2025</li>
+          <li>Tuesdays 9.00am / Thursdays 9.00am</li>
+          <li>60 min sessions.</li>
+          <li>$96 -$128 per slot (8 sessions)</li>
+          <li>Discounts with local partners.</li>
+      </ul>
+
+    <h2>CASUAL AQUA OPTIONS:</h2>
+      <ul>
+          <li>$20 casual. 10 passes for $180 (expiring in 5 months).</li>
+          <li>Monday and Wednesday 5.30pm. Friday 12.30pm.</li>
+          <li>Monday and Friday are FREE as part of BCC Active and Healthy program (click here to know more and join BCC programs)</li>
             </ul>
+<p>Our sessions are at Musgrave Park Pool, in West End, Brisbane. Multicultural environment, tunes and vibes. All levels welcome!</p>
+<p>You want to train in your building? Let´s organise something cool with your neighbours! One to one also available.</p>
           </section>
           <iframe
             src="https://www.youtube.com/embed/KUogIKsmdsc"

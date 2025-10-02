@@ -11,7 +11,7 @@ export default function Functional() {
             alt="Functional Training"
           />
           <div>
-            <h1>SMART FITNESS Program Preps You for Over 35 Life:</h1>
+            <h1>SMART FITNESS Program - Over 35 High quality Lifestyle:</h1>
             <h2>Who it’s for</h2>
           <ul>
             <li>Frustrated with inefficient programs or feeling lost in a crowded gym full of equipment you don´t know how to use?</li>
@@ -40,7 +40,7 @@ export default function Functional() {
 
         <div className="caption">
           <section id="training_program">
-            <h2>SMART FITNESS program offers:</h2>
+            <h2>SMART FITNESS program high results:</h2>
             <ul>
               <li>Premium group, only 8 spots available.</li>
               <li>Our live online workouts provide structure, accountability, and motivation.</li>

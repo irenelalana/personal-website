@@ -18,23 +18,28 @@ export default function WhatsOnPage() {
        
         <div className="whatson-img">
           <div className="whatson-row">
+            <a href = "https://events.humanitix.com/holistic-healing-and-empowerment-nurturing-mental-wellbeing-for-women-dv-survivors" target="_blank">
             <img
               src="/images/QMHW_pilates_selfcare.png"
               alt="Picture about CV Survivors Pilates event"
             />
+            </a>
           </div>
         </div>
-        <p>Contact me to join us in this special FREE Pilates and self care session for Domestic Violence survivors as part of QMHW</p>
+        <p>Click on the picture to know more and join us in this special FREE Pilates and self care session for Domestic Violence survivors as part of QMHW</p>
 
         <div className="whatson-img">
           <div className="whatson-row">
+            <a href = "https://www.eventbrite.com/e/unidos-por-la-vida-una-manana-de-conexion-y-bienestar-tickets-1742390951239?aff=oddtdtcreator/" target="_blank">
             <img
               src="/images/Pilates_cancer_awareness.jpeg"
               alt="Picture about Cancer awareness event"
             />
+           </a>
+
           </div>
         </div>
-        <p>Contact me to join us in this special FREE Pilates session and talk abut Cancer awareness as part of QMHW</p>
+        <p>Click on the picture to know more and join us in this special FREE Pilates session and talk abut Cancer awareness as part of QMHW</p>
 
         <div className="whatson-img">
           <div className="whatson-row">
