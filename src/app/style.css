@@ -397,11 +397,19 @@ line-height: 1.5em;
   z-index: 0;
 }
 #reviews {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
   z-index: 0;
 }
 
-.privacy-policy a{
+.footer-links {
+  padding-top: 5px; 
+  padding-bottom: 5px;
+}
+
+.footer-links a{
   background-color: #07a0e3;
   color: white;
   
@@ -529,6 +537,7 @@ line-height: 1.5em;
     font-size: 1.2em;
   }
 
+
   .caption {
     padding-left: 30px;
     display: flex;
@@ -618,9 +627,7 @@ line-height: 1.5em;
     width:90%;
     
   }
-  #reviews {
-    margin-left: 50px;
-  }
+  
 
   .floating-button {
     font-size: 1.5em;
@@ -657,5 +664,10 @@ line-height: 1.5em;
     padding-left: 20px;
     max-width: 100%;
   }
-
+/* div {
+  border:  1px black dotted
+}
+section {
+  border:  1px black dotted
+} */
 }

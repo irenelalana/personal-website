@@ -214,6 +214,31 @@ export default function Partners() {
         <div className="partner-card">
           <div className="partner-logo">
             <a
+              href="https://www.instagram.com/angelica.r.m.chef?igsh=em9wdXlld3NhcGlu"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/images/brand_logo_ange_cook.jpg"
+                alt="Picture about Ange Cook
+              />
+            </a>
+          </div>
+          <div className="partner-description">
+            <p>
+              Chef Angelica R.M. is a private culinary expert who draws upon international experience, from cafes to Qantas Lounge, and her trips across Latin America, Europe, and Australia. She excels at fusing global methods and ingredients. Her brand offers three core services: private chef at home, private event with cooking class, and multidisciplinary cooking classes/workshops.
+            </p>
+          </div>
+          <div className="partner-discount">
+            <p>
+              Irela clients benefit: 40% private event with cooking class. 
+            </p>
+          </div>
+        </div>
+
+        <div className="partner-card">
+          <div className="partner-logo">
+            <a
               href="https://Www.nutriwellness.com.au"
               target="_blank"
               rel="noopener noreferrer"

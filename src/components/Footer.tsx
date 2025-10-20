@@ -18,12 +18,13 @@ const Footer = () => {
           <img src="/images/linkedin_50x50.png" alt="LinkedIn logo Irela13Coach" />
         </a>
       </div>
-
-      <div className="copyright">©2025 Irela Aqua & Fitness</div>
-
-      <div className="privacy-policy">
+      <div className="footer-links">
         <a href="./privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
       </div>
+      <div className="footer-links">
+        <a href="./sustainability" target="_blank" rel="noopener noreferrer">Sustainability and Net Zero Intent</a>
+      </div>
+      <div className="copyright">©2025 Irela Aqua & Fitness</div>
     </footer>
   );
 };
