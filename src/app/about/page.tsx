@@ -30,7 +30,7 @@ export default function AboutPage() {
               your fitness and health goals!
             </p>
             <p>
-              I'm Irene Lalana, Aquaprofessional of the year (National Fitness awards 2024 - Ausactive) and I'm passionate about helping you achieve your
+              I'm Irene Lalana, Aquaprofessional of the year 2024 and Group Exercise Leader and Instructor of the year 2025 (National Fitness awards by Ausactive) and I'm passionate about helping you achieve your
               fitness and health goals. As a professional swimmer and rescuer
               (Australian Master Champion 2025 and Lifesaving World silver Medal
               2024 and National records), I bring over 20 years of experience, a
