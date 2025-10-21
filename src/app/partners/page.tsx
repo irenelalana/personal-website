@@ -18,7 +18,7 @@ export default function Partners() {
               rel="noopener noreferrer"
             >
               <img
-                src="/images/brand_logo_musrave_aquaerobics.jpg"
+                src="/images/brand_logo_musgrave_aquaerobics.jpg"
                 alt="Musgrave Park pool"
               />
             </a>
