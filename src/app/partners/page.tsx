@@ -15,8 +15,7 @@ export default function Partners() {
             <a
               href="https://www.musgraveparkaquaticcentre.com.au/"
               target="_blank"
-              rel="noopener noreferrer"
-            >
+              rel="noopener noreferrer">
               <img
                 src="/images/brand_logo_musgrave_aquaerobics.jpg"
                 alt="Musgrave Park pool"
@@ -220,7 +219,7 @@ export default function Partners() {
             >
               <img
                 src="/images/brand_logo_ange_cook.jpg"
-                alt="Picture about Ange Cook
+                alt="Picture about Ange Cook"
               />
             </a>
           </div>
