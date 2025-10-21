@@ -218,7 +218,7 @@ export default function Partners() {
               rel="noopener noreferrer"
             >
               <img
-                src="/images/brand_logo_ange_cook.jpg"
+                src="/images/brand_logo_ange_cook.png"
                 alt="Picture about Ange Cook"
               />
             </a>
