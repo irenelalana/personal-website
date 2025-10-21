@@ -19,7 +19,7 @@ const Home: React.FC = () => {
         <p className="irela-intro">
           Hi! I'm Irene Lalana, Australian Master swimming Champion 2025,
           Spanish Lifesaving National records and Silver medal in World
-          Championship 2024, sports science graduate, and your go-to coach for
+          Championship 2024, Australian Aquaprofessional of the year 2024 and Group Exercise Leader and Instructor of the year 2025, sports science graduate, and your go-to coach for
           adult swimming, aquafitness, and functional fitness. With over 20
           years of experience, I am dedicated to making fitness enjoyable and
           accessible, especially for my amazing over-40 crew. Whether you're
