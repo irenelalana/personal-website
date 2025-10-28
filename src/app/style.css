@@ -43,9 +43,9 @@ nav a {
   padding: 10px;
 }
   
-nav a:hover {
+/* nav a:hover {
   background-color: #02678F;
-}
+} */
 
 
 .irela-header {
@@ -77,11 +77,6 @@ nav a:hover {
   overflow: hidden;
 }
 
-/* .other-programs {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
 .sub-others {
   display: flex;
   flex-direction: row;
@@ -430,6 +425,94 @@ line-height: 1.5em;
   color: white;
 }
 
+nav {
+    display: none;
+    flex-direction: column;
+    background-color: #02678F;
+    width: 100%;
+    text-align: center;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .burger-button {
+    display: block;
+  }
+
+  nav a {
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 1rem;
+  }
+
+  nav a:hover {
+    color: #f39304;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+/* Botón burger (visible por defecto en mobile) */
+.burger-button {
+  background: none;
+  border: none;
+  color: #e8e1d0;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 1001;
+}
+
+/* Menú cerrado por defecto en mobile */
+.nav-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #02678F;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  z-index: 1000;
+}
+
+/* Menú abierto (desliza suavemente) */
+.nav-menu.open {
+  max-height: 400px;
+  opacity: 1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Enlaces del menú móvil */
+.nav-menu a {
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 1rem;
+  color: #e8e1d0;
+  text-decoration: none;
+}
+
+/* .nav-menu a:hover {
+  background-color: #07a0e3;
+} */
+
+/* Ajuste del header */
+header {
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 @media screen and  (width > 450px) {
   body {
     font-size: 1em;
@@ -664,6 +747,30 @@ line-height: 1.5em;
     padding-left: 20px;
     max-width: 100%;
   }
+  .burger-button {
+    display: none;
+  }
+
+  /* Menú horizontal tradicional */
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: static;
+    width: 70%;
+    max-height: none;
+    opacity: 1;
+    background-color: #02678F;
+    box-shadow: none;
+  }
+
+  .nav-menu a {
+    border: none;
+    padding: 10px;
+    font-size: 1.7rem;
+    width: auto;
+  }
+  
 /* div {
   border:  1px black dotted
 }

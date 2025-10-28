@@ -1,5 +1,7 @@
 import '../app/style.css';
 import NavMenu from './NavMenu';
+import NavMenu2 from './NavMenu';
+
 import React from 'react';
 
 const Header = () => {
@@ -21,7 +23,7 @@ const Header = () => {
           />
         </a>
       </div>
-      <NavMenu />
+      <NavMenu2 />
     </header>
   );
 };
