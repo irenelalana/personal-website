@@ -30,6 +30,7 @@ const ContactForm: React.FC = () => {
           <input type="text" id="name" name="name" placeholder="Name" required />
           <input type="email" id="email" name="email" placeholder="Email" required />
           <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+          <input type="goals" id="goals" name="goals" placeholder="Level/Goals" required />
           <textarea id="message" name="message" placeholder="Message" required></textarea>
           <button type="submit">Send</button>
           <p className="form-disclaimer">
