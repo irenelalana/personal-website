@@ -1,8 +1,6 @@
 // pages/brisbane_city_council.js
 "use client";
 import React from "react";
-
-
 import Script from "next/script";
 
 export default function BrisbaneCityCouncil() {
@@ -38,6 +36,7 @@ export default function BrisbaneCityCouncil() {
             <p>If the session is fully booked, please check back closer to the start time, as spots may open up if participants cancel.</p>
             <>
               <div
+                id="bcc_aqua_bookings"
                 className="calendly-inline-widget"
                 data-url="https://calendly.com/irene-lalana/bcc-aquafitness-musgrave?hide_event_type_details=1&hide_gdpr_banner=1&background_color=e8e1d0&text_color=076873&primary_color=f19601"
                 style={{ minWidth: "320px", height: "50vh" }}
