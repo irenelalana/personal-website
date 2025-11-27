@@ -27,7 +27,7 @@ export default function BrisbaneCityCouncil() {
               participants will develop strength, mobility and cardio with fun tunes.
             </p>
             <p>Sessions are run at Musgrave Park Pool, in West End, Brisbane. Mondays 5.30pm and Fridays 12.30pm (except School Holidays)</p>
-            <p><strong>Step 1</strong>. Fill this initial form out if it is your first time attending.</p>
+            <p id="bcc_aqua_bookings"><strong>Step 1</strong>. Fill this initial form out if it is your first time attending.</p>
             <form action="https://forms.gle/mNK6n5XKE9Fng2Yn9" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>
             </form>
@@ -36,7 +36,6 @@ export default function BrisbaneCityCouncil() {
             <p>If the session is fully booked, please check back closer to the start time, as spots may open up if participants cancel.</p>
             <>
               <div
-                id="bcc_aqua_bookings"
                 className="calendly-inline-widget"
                 data-url="https://calendly.com/irene-lalana/bcc-aquafitness-musgrave?hide_event_type_details=1&hide_gdpr_banner=1&background_color=e8e1d0&text_color=076873&primary_color=f19601"
                 style={{ minWidth: "320px", height: "50vh" }}
