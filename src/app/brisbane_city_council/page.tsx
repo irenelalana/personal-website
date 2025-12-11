@@ -28,7 +28,7 @@ export default function BrisbaneCityCouncil() {
               of exercise without the pain. Using minimum impact movements,
               participants will develop strength, mobility and cardio with fun tunes.
             </p>
-            <p>Sessions are run at Musgrave Park Pool, in West End, Brisbane. Mondays 5.30pm and Fridays 12.30pm (except School Holidays)</p>
+            <p>Sessions are run at Musgrave Park Pool, in West End, Brisbane. Mondays 5.30pm and Fridays 12.30pm (except School Holidays). Resuming on the 30th January</p>
             <p><strong>Step 1</strong>. Fill this initial form out if it is your first time attending.</p>
             <form action="https://forms.gle/mNK6n5XKE9Fng2Yn9" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>
@@ -53,8 +53,8 @@ export default function BrisbaneCityCouncil() {
               participants will develop strength, mobility and cardio with fun
               tunes in the park. Just fill the form and show up!
             </p>
-            <p>Functional Fitness, Thursdays 6.00am, Moorlands Park, Auchenflower.</p>
-            <p>Low Impact Fitness and Pilates, Fridays 9.45am Anzac Park, Toowong.</p>
+            <p>Functional Fitness, Thursdays 6.00am, Moorlands Park, Auchenflower. (except School Holidays). Resuming on the 30th January</p>
+            <p>Low Impact Fitness and Pilates, Fridays 9.45am Anzac Park, Toowong. (except School Holidays). Resuming on the 30th January</p>
             <form action="https://forms.gle/XjEFREE7PKHYdn2H8" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>
             </form>
