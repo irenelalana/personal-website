@@ -53,7 +53,7 @@ export default function BrisbaneCityCouncil() {
               participants will develop strength, mobility and cardio with fun
               tunes in the park. Just fill the form and show up!
             </p>
-            <p>Functional Fitness, Thursdays 6.00am, Moorlands Park, Auchenflower. (except School Holidays). Resuming on the 30th January</p>
+            <p>Functional Fitness, Thursdays 6.00am, Moorlands Park, Auchenflower. (except School Holidays). Resuming on the 29th January</p>
             <p>Low Impact Fitness and Pilates, Fridays 9.45am Anzac Park, Toowong. (except School Holidays). Resuming on the 30th January</p>
             <form action="https://forms.gle/XjEFREE7PKHYdn2H8" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>
