@@ -1,14 +1,14 @@
 ---
-title: "+60 Commitments for Cancer Wellness (The Ultimate Action List)"
-excerpt: "A comprehensive action plan for cancer wellness, including movement, nutrition, hydration, and toxin reduction."
+title: "+60 Commitments for Cancer Awareness"
+excerpt: "A comprehensive action plan for cancer awareness, including movement, nutrition, hydration, and toxin reduction."
 date: "2025-10-19"
 seo:
-  title: "Commitments for Cancer Wellness | Fitness & Health"
-  description: "Discover a structured action list for cancer wellness, focusing on physical activity, nutrition, hydration, stress reduction, and toxin avoidance."
+  title: "+60 Commitments for Cancer Awareness | Fitness & Health"
+  description: "Discover a structured action list for cancer awareness, focusing on physical activity, nutrition, hydration, stress reduction, and toxin avoidance."
 ---
 
 
-This guide presents **a complete set of commitments** to promote wellness and reduce cancer risks through lifestyle choices.
+This guide presents **a complete set of commitments** to promote awareness and reduce cancer risks through lifestyle choices.
 
 ---
 
