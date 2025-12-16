@@ -80,8 +80,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="Certified">
-        <div className="Certified">
+      <section className="badges">
+        <div className="badges-container">
           <img
             src="/images/Aquaprofessional_of_the_year_2024.png"
             alt="Aquaprofessional of the year award"

@@ -171,11 +171,26 @@ form label {
 }
 
 
-.Certified img {
-  max-width: 300px;
-  max-height: 200px;
-  padding: 0.75rem;
+/* BADGES SECTION */
+.badges {
+  margin: 2rem 0;
 }
+
+.badges-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* Badges look */
+.badges-container img {
+  
+  width: 70px;
+  height: auto;
+}
+
 
   
 form input[type="submit"] {
@@ -771,6 +786,27 @@ header {
     width: auto;
   }
   
+  .badges-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .badges-container img {
+
+    width: 100px;
+    height: auto;
+    opacity: 0.75;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  /* Optional subtle hover */
+  .badges-container img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
 /* div {
   border:  1px black dotted
 }

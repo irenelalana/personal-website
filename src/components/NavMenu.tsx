@@ -33,6 +33,9 @@ const NavMenu = () => {
         <Link href="./partners" onClick={() => setOpen(false)}>
           Venues & Partners
         </Link>
+        <Link href="/blog" onClick={() => setOpen(false)}>
+          Blog
+        </Link>
       </nav>
     </>
   );
