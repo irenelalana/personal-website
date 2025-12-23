@@ -1,12 +1,15 @@
 // pages/brisbane_city_council.js
 "use client";
-import React from "react";
-
-
-import Script from "next/script";
+import React, { useEffect } from "react";
+import Cal, { getCalApi } from "@calcom/embed-react";
 
 export default function BrisbaneCityCouncil() {
-
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({"namespace":"bcc-aquafitness"});
+      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    })();
+  }, [])
 
   return (
     <section id="services">
@@ -36,18 +39,11 @@ export default function BrisbaneCityCouncil() {
             <p><strong>Step 2</strong>. To join any of these sessions, please make sure to book your spot in advance through the calendar below, as spaces are limited.</p>
             <p>If you are unable to attend, please cancel your booking as early as possible, via confirmation mail sent, so someone else can take your spot.</p>
             <p>If the session is fully booked, please check back closer to the start time, as spots may open up if participants cancel.</p>
-            <>
-              <div
-                className="calendly-inline-widget"
-                data-url="https://calendly.com/irene-lalana/bcc-aquafitness-musgrave?hide_event_type_details=1&hide_gdpr_banner=1&background_color=e8e1d0&text_color=076873&primary_color=f19601"
-                style={{ minWidth: "320px", height: "50vh" }}
-              />
-
-              <Script
-                src="https://assets.calendly.com/assets/external/widget.js"
-                strategy="lazyOnload"
-              />
-            </>  
+            <Cal namespace="bcc-aquafitness"
+              calLink="irela-aqua-and-fitness/bcc-aquafitness"
+              style={{width:"100%",height:"700px", background_color:"#e8e1d0", primary_color:"#f19601",overflow:"scroll"}}
+              config={{"layout":"month_view"}}
+            />
             <p>
               <strong>Fitness for adults</strong>: Using minimum equipment,
               participants will develop strength, mobility and cardio with fun
