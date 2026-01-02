@@ -6,8 +6,7 @@ export default function AboutPage() {
   return (
     <main className="about-container">
       <section id="about-me">
-        <h1>Why are you choosing Irela Aqua and Fitness?</h1>
-
+        <h1>Why Are You Choosing Irela Aqua And Fitness?</h1>
         <div className="about-me">
           <div className="about-images">
             <img
