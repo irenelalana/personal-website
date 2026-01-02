@@ -528,6 +528,10 @@ header {
   align-items: flex-start;
 }
 
+.p-4{
+  width: 100%;
+} 
+
 @media screen and  (width > 450px) {
   body {
     font-size: 1em;
