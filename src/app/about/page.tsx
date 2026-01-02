@@ -36,7 +36,7 @@ export default function AboutPage() {
               goal-driven mindset, and exceptional organisational skills to every
               session. I'm a certified Fitness and Swimming coach with a degree in
               Sport Science and recognised qualifications in both Europe and
-              Australia.
+              Australia acknowledged in 2025 as Lord Mayor Emerging Leader of the Year.
             </p>
             <p>
               But you may still be wondering why you should choose me. My
