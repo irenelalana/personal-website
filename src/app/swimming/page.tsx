@@ -45,7 +45,7 @@ export default function Swimming() {
            <h2>SMART STROKES GROUP LESSONS:</h2>
             <p>Smart Strokes is a swimming premium group for stroke correction in adults - intermediate level, for those wanting to swim longer without fatigue with a fun and unique touch of variety.</p>
             <p>Mondays and Wednsedays 6.30pm, we improve technique and endurance in Musgrave Park Pool, West End.</p>
-            <p>5 (45min) session packs, $105.</p>
+            <p>6 (45min) session packs, $132.</p>
 
            <h2>PRIVATE SWIMMING LESSONS</h2>
             <ul>
@@ -53,7 +53,7 @@ export default function Swimming() {
               <li>Adults Beginners - Intermediate - advanced - triathletes level.</li>
               <li>10 Weeks program.</li>
               <li>45 - 60min private sessions.</li>
-              <li>$665 - $825.</li>
+              <li>$693 - $855.</li>
               <li>Budget option: sharing lessons. Bring a friend or I´ll find your buddie</li>
               <li>Reschedule within 24h notice.</li>
               <li>Discounts with local partners.</li>
