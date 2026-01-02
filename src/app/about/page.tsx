@@ -82,6 +82,10 @@ export default function AboutPage() {
       <section className="badges">
         <div className="badges-container">
           <img
+            src="/images/lord_mayor_awards.jpg"
+            alt="Aquaprofessional of the year award"
+          />
+          <img
             src="/images/Aquaprofessional_of_the_year_2024.png"
             alt="Aquaprofessional of the year award"
           />
