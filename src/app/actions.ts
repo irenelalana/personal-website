@@ -7,7 +7,6 @@ import { revalidatePath } from 'next/cache'
 export async function getSessions() {
   // AÑADIR AWAIT AQUÍ 👇
   const supabase = await createClient() 
-  console.log("click get sessions - inside")
   const { data, error } = await supabase
     .from('sessions')
     .select(`
@@ -23,7 +22,6 @@ export async function getSessions() {
     console.error('Error fetching sessions:', error)
     return []
   }
-  console.log("click get sessions", data)
   return data.map((session: any) => ({
     ...session,
     booked_count: session.bookings[0]?.count || 0,
@@ -33,21 +31,48 @@ export async function getSessions() {
 
 // 2. Crear una reserva
 export async function createBooking(formData: FormData) {
-  // AÑADIR AWAIT AQUÍ TAMBIÉN 👇
   const supabase = await createClient()
   
   const sessionId = formData.get('sessionId') as string
   const name = formData.get('name') as string
   const email = formData.get('email') as string
 
-  const { error } = await supabase
+  // 1. Verificar si el usuario ya está inscrito en ESTA sesión
+  const { data: existingBooking, error: checkError } = await supabase
     .from('bookings')
-    .insert({ session_id: sessionId, name, email })
+    .select('id')
+    .eq('session_id', sessionId)
+    .eq('email', email)
+    .maybeSingle() // Devuelve una fila o null, sin dar error si no hay nada
 
-  if (error) {
-    return { success: false, message: 'Error al reservar' }
+  if (checkError) {
+    return { success: false, message: 'Availability checking error' }
+  }
+
+  if (existingBooking) {
+    return { 
+      success: false, 
+      message: 'You already booked this session with this email.' 
+    }
+  }
+
+  // 2. Proceder con la inserción si no existe
+  const { error: insertError } = await supabase
+    .from('bookings')
+    .insert({ 
+      session_id: sessionId, 
+      name: name, 
+      email: email 
+    })
+
+  if (insertError) {
+    // Si la DB rechaza por la restricción UNIQUE que pusimos en el paso 1
+    if (insertError.code === '23505') {
+      return { success: false, message: 'You already booked this session with this email.' }
+    }
+    return { success: false, message: 'Booking could not be processed.' }
   }
 
   revalidatePath('/') 
-  return { success: true, message: 'Reserva creada con éxito' }
+  return { success: true, message: '¡Booking confirmed!' }
 }

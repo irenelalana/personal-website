@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Reviews from '@/components/Reviews';
 import ContactForm from '@/components/ContactForm';
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: 'Irela Aqua and Fitness',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ContactForm />
         <Reviews/>
         <Footer />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );

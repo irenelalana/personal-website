@@ -7,11 +7,13 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { addMinutes } from 'date-fns'
 import { getSessions, createBooking } from '@/app/actions' // Tus acciones
+import { toast } from 'sonner'
 
 export default function BookingCalendar() {
   const [events, setEvents] = useState<any[]>([])
   const [selectedSession, setSelectedSession] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isPending, setIsPending] = useState(false)
 
   // Cargar eventos al montar
   useEffect(() => {
@@ -53,19 +55,31 @@ export default function BookingCalendar() {
   }
 
   // Manejar el submit del formulario
-  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    // 1. Iniciamos la carga
+    setIsPending(true)
+    
     const formData = new FormData(e.currentTarget)
     
-    const res = await createBooking(formData)
-    
-    if (res.success) {
-      alert('¡Reserva completada!')
-      setIsModalOpen(false)
-      // Opcional: Recargar los eventos aquí para actualizar la disponibilidad visualmente
-      window.location.reload() 
-    } else {
-      alert('Hubo un error.')
+    try {
+      const res = await createBooking(formData)
+      
+      if (res.success) {
+        toast.success(res.message)
+        setIsModalOpen(false)
+        // Opcional: refrescar datos sin recargar toda la página
+        // router.refresh() si usas next/navigation
+        window.location.reload() 
+      } else {
+        toast.error(res.message)
+      }
+    } catch (error) {
+      toast.error("Ocurrió un error inesperado.")
+    } finally {
+      // 2. Terminamos la carga (sea éxito o error)
+      setIsPending(false)
     }
   }
 
@@ -123,30 +137,35 @@ export default function BookingCalendar() {
                   />
                 </div>
 
-                <div className="flex justify-end gap-2 mt-4">
-                  <button 
-                    type="button" 
-                    onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
-                  >
-                    Cancel
-                  </button>
+                <div className="flex justify-end gap-2 mt-4"> 
                   <button 
                     type="submit" 
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >   
-                    Book
+                    disabled={isPending} // Evita el doble clic
+                  >
+                  {isPending ? (
+                    <>
+                      Loading...
+                      </>
+                    ) : (
+                      'Book Session'
+                    )}
                   </button>
+                  <button 
+                      type="button" 
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      Cancel
+                    </button>
                 </div>
               </form>
             ) : (
               <div className="text-center">
-                <p className="text-red-500 font-bold mb-4">Esta sesión está completa.</p>
+                <p className="text-red-500 font-bold mb-4">This session is fully booked.</p>
                 <button 
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 border rounded hover:bg-gray-100"
                 >
-                  Cerrar
+                  Close
                 </button>
               </div>
             )}
