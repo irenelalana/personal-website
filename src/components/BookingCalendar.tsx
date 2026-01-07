@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -8,57 +8,39 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { addMinutes } from 'date-fns'
 import { getSessions, createBooking } from '@/app/actions' // Tus acciones
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export default function BookingCalendar() {
+  const router = useRouter()
   const [events, setEvents] = useState<any[]>([])
   const [selectedSession, setSelectedSession] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isPending, setIsPending] = useState(false)
 
-  // Cargar eventos al montar
+  const loadCalendarData = useCallback(async () => {
+    const data = await getSessions()
+    const calendarEvents = data.map((s: any) => ({
+      id: s.id,
+      title: s.title,
+      start: s.starts_at,
+      end: addMinutes(new Date(s.starts_at), s.duration).toISOString(),
+      extendedProps: {
+        available_spots: s.available_spots,
+        capacity: s.capacity,
+        duration: s.duration
+      },
+      backgroundColor: s.available_spots > 0 ? '#3788d8' : '#d9534f',
+    }))
+    setEvents(calendarEvents)
+  }, [])
+
+  // Carga inicial
   useEffect(() => {
-    async function loadData() {
-      console.log("loading data")
-      const data = await getSessions() 
-      console.log("sessions data:", data)
-      // Transformar datos al formato de FullCalendar
-      const calendarEvents = data.map((s: any) => ({
-        id: s.id,
-        title: s.title,
-        start: s.starts_at,
-        end: addMinutes(new Date(s.starts_at), s.duration).toISOString(),
-        // Guardamos datos extra para usarlos en el modal
-        extendedProps: {
-          available_spots: s.available_spots,
-          capacity: s.capacity,
-          duration: s.duration
-        },
-        // Cambiar color si está lleno
-        backgroundColor: s.available_spots > 0 ? '#3788d8' : '#d9534f',
-        borderColor: s.available_spots > 0 ? '#3788d8' : '#d9534f'
-      }))
-      
-      setEvents(calendarEvents)
-    }
-    loadData()
-  }, []) // Dependencias vacías = solo al montar (o añadir triggers de recarga)
+    loadCalendarData()
+  }, [loadCalendarData])
 
-  // Manejar click en un evento
-  const handleEventClick = (info: any) => {
-    setSelectedSession({
-      id: info.event.id,
-      title: info.event.title,
-      start: info.event.start,
-      ...info.event.extendedProps
-    })
-    setIsModalOpen(true)
-  }
-
-  // Manejar el submit del formulario
-const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    // 1. Iniciamos la carga
     setIsPending(true)
     
     const formData = new FormData(e.currentTarget)
@@ -69,18 +51,31 @@ const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       if (res.success) {
         toast.success(res.message)
         setIsModalOpen(false)
-        // Opcional: refrescar datos sin recargar toda la página
-        // router.refresh() si usas next/navigation
-        window.location.reload() 
+        
+        // 2. Refrescamos los datos de la página (Server Components)
+        router.refresh() 
+        
+        // 3. Y volvemos a cargar los eventos del calendario localmente
+        await loadCalendarData() 
       } else {
         toast.error(res.message)
       }
     } catch (error) {
-      toast.error("Ocurrió un error inesperado.")
+      toast.error("Error inesperado")
     } finally {
-      // 2. Terminamos la carga (sea éxito o error)
       setIsPending(false)
     }
+  }
+
+  // Manejar click en un evento
+  const handleEventClick = (info: any) => {
+    setSelectedSession({
+      id: info.event.id,
+      title: info.event.title,
+      start: info.event.start,
+      ...info.event.extendedProps
+    })
+    setIsModalOpen(true)
   }
 
   return (

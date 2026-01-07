@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
 
       <p className="question">1. Information We Collect</p>
       <p>
-        When you submit a contact form, we collect your name, phone number, and
+        When you submit a contact form or book a lesson, we collect your name, phone number, and
         email address.
       </p>
 
@@ -27,11 +27,13 @@ export default function PrivacyPolicyPage() {
         Your information is sent through Formspree (a third-party form handling
         service) and delivered to our email account (Hotmail). We do not store
         your data on this website.
+
+        When you book a session, your information is stored in our Database, hosted by Supabase.
       </p>
 
       <p className="question">4. Disclosure to Overseas Recipients</p>
       <p>
-        As we use Formspree and Hotmail, your information may be processed and
+        As we use Formspree, Supabase and Hotmail, your information may be processed and
         stored on servers located outside Australia, including in the United
         States and other countries where these services operate.
       </p>
@@ -40,7 +42,7 @@ export default function PrivacyPolicyPage() {
       <p>
         We take reasonable steps to protect your information, but no online
         transmission is completely secure. We recommend not sending sensitive
-        information via the contact form.
+        information via the contact forms.
       </p>
 
       <p className="question">6. How Long We Keep Your Information</p>
