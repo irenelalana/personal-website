@@ -30,8 +30,8 @@ export default function BrisbaneCityCouncil() {
             <form action="https://forms.gle/mNK6n5XKE9Fng2Yn9" target="_blank" rel="noreferrer">
               <button className="form-button">Preactivity form</button>
             </form>
-            <p><strong>Step 2</strong>. To join any of these sessions, please make sure to book your spot in advance through the calendar below, as spaces are limited.</p>
-            <p>If you are unable to attend, please cancel your booking as early as possible, via confirmation mail sent, so someone else can take your spot.</p>
+            <p><strong>Step 2</strong>. To join any of these sessions, please make sure to book your spot in advance through the calendar below, as spaces are limited. You will see a "Booking Confirmed" notification on the site when done</p>
+            <p>If you are unable to attend, please cancel your booking as early as possible, via email to irene.lalana@gmail.com or website contact form, so someone else can take your spot.</p>
             <p>If the session is fully booked, please check back closer to the start time, as spots may open up if participants cancel.</p>
             <BookingCalendar />
 
