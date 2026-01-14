@@ -2,6 +2,9 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { Resend } from 'resend';
+import { format } from 'date-fns';
+import { enAU } from 'date-fns/locale'
 
 // 1. Obtener sesiones
 export async function getSessions() {
@@ -19,7 +22,7 @@ export async function getSessions() {
     `)
 
   if (error) {
-    console.error('Error fetching sessions:', error)
+    //console.error('Error fetching sessions:', error)
     return []
   }
   return data.map((session: any) => ({
@@ -29,6 +32,7 @@ export async function getSessions() {
   }))
 }
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 // 2. Crear una reserva
 export async function createBooking(formData: FormData) {
   const supabase = await createClient()
@@ -56,14 +60,46 @@ export async function createBooking(formData: FormData) {
     }
   }
 
-  // 2. Proceder con la inserción si no existe
-  const { error: insertError } = await supabase
+  const { data: newBooking, error: insertError } = await supabase
     .from('bookings')
-    .insert({ 
-      session_id: sessionId, 
-      name: name, 
-      email: email 
-    })
+    .insert({ session_id: sessionId, name, email })
+    .select('token, name, email') // Importante: devolvemos la fila insertada para obtener el ID
+    .single();
+
+  if (!insertError && newBooking) {
+    // 2. Enviar email de confirmación
+    const { data: session } = await supabase
+    .from('sessions')
+    .select('title, starts_at')
+    .eq('id', sessionId)
+    .single()
+
+    if (session) {
+      const dateObj = new Date(session.starts_at);
+      const formatDate = format(dateObj, "EEEE, d MMMM yyyy, h:mm b", { locale: enAU });;
+      const cancelLink = `${process.env.NEXT_PUBLIC_APP_URL}/cancel?token=${newBooking.token}`;
+      const { data, error } = await resend.emails.send({
+        from: 'Irela Aqua and Fitness [No reply] <irela@irelaaquaandfitness.com>',
+        to: email,
+        subject: 'Booking confirmation',
+        html: `
+          <h1>¡Hello ${newBooking.name}!</h1>
+          <p>Your booking for ${session.title} at ${formatDate} is confirmed.</p>
+          <p>If you cannot attend, we would appreciate it if you can cancel by clicking here so someone else can enjoy the session as spots are limited and usually quite popular:</p>
+          <a href="${cancelLink}">Cancel my booking</a>
+          <p>Thank you and see you on the wave,</p>
+          <p>Irela Aqua and Fitness</p>
+        `
+      });
+    
+
+      // if (error) {
+      //   console.error("Error de Resend:", error);
+      // } else {
+      //   console.log("Email enviado con éxito. ID:", data?.id);
+      // }
+    }
+  }
 
   if (insertError) {
     // Si la DB rechaza por la restricción UNIQUE que pusimos en el paso 1
@@ -76,3 +112,18 @@ export async function createBooking(formData: FormData) {
   revalidatePath('/') 
   return { success: true, message: '¡Booking confirmed!' }
 }
+
+export async function cancelBooking(token: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from('bookings')
+    .delete()
+    .eq('token', token);
+
+  if (error) return { success: false, message: 'Error. Booking cancellation not completed.' };
+
+  revalidatePath('/');
+  return { success: true, message: 'Booking Cancelled.' };
+}
+

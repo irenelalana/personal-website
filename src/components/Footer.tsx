@@ -2,6 +2,8 @@ import React from 'react';
 import '../app/style.css';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear(); 
+
   return (
     <footer className="footer">
       <div className="social-media">
@@ -24,7 +26,7 @@ const Footer = () => {
       <div className="footer-links">
         <a href="./sustainability" target="_blank" rel="noopener noreferrer">Sustainability and Net Zero Intent</a>
       </div>
-      <div className="copyright">©2025 Irela Aqua & Fitness</div>
+      <div className="copyright">©{currentYear} Irela Aqua & Fitness</div>
     </footer>
   );
 };
