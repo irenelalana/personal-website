@@ -61,7 +61,7 @@ export default function BookingCalendar() {
         toast.error(res.message)
       }
     } catch (error) {
-      toast.error("Error inesperado")
+      toast.error("Unexpected error occurred.")
     } finally {
       setIsPending(false)
     }
