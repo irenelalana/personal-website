@@ -1,22 +1,22 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { cancelBooking } from '@/app/actions';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
-export default function CancelPage() {
+function CancelContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get('token');
+  const token = searchParams.get('token');
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
 
   const handleCancel = async () => {
-    if (!id) return;
+    if (!token) return;
     setLoading(true);
-    const res = await cancelBooking(id);
+    const res = await cancelBooking(token);
     if (res.success) {
       setDone(true);
       toast.success(res.message);
@@ -42,5 +42,13 @@ export default function CancelPage() {
         {loading ? 'Cancelling...' : 'Confirm Cancellation'}
       </button>
     </div>
+  );
+}
+
+export default function CancelPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center">Cargando...</div>}>
+      <CancelContent />
+    </Suspense>
   );
 }
