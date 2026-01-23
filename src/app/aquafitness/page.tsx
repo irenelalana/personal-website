@@ -49,18 +49,18 @@ export default function Aquafitness() {
 
  <div className="caption">
   <section id="training_program">
-    <h2>JOIN NOW THE AQUA CHALLENGE SPRING 2025:</h2>
+    <h2>JOIN NOW THE AQUA CHALLENGE SUMMER 2026:</h2>
       <ul>
-          <li>12 weeks challenge 14/01/2026 - 03/04/2026</li>
+          <li>10 weeks challenge 27/01/2026 - 03/04/2026</li>
           <li>Tuesdays 9.00am / Thursdays 9.00am / Wednesdays 5.30pm</li>
           <li>60 min sessions.</li>
-          <li>$168 per slot (12 sessions) / $96 per slot (6 sessions)</li>
+          <li>$150 per slot (10 sessions).</li>
           <li>Discounts with local partners.</li>
       </ul>
 
     <h2>CASUAL AQUA OPTIONS:</h2>
       <ul>
-          <li>$20 casual. 10 passes for $180 (expiring in 5 months).</li>
+          <li>$20 casual. 10 passes for $180 (expiring in 6 months).</li>
           <li>Mondays* and Wednesdays 5.30pm. Tuesdays (deep water) and Thursdays 9.00am. Fridays* 12.30pm.</li>
           <li>*Monday and Friday are FREE as part of BCC Active and Healthy program (click <a href = "/brisbane_city_council">here</a> to know more and join BCC programs)</li>
             </ul>
