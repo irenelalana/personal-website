@@ -127,3 +127,34 @@ export async function cancelBooking(token: string) {
   return { success: true, message: 'Booking Cancelled.' };
 }
 
+
+export async function sendContactEmail(formData: FormData) {
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const phone = formData.get('phone') as string;
+  const goals = formData.get('level/goals') as string;
+  const message = formData.get('message') as string;
+
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'Irela Web Contact Form <contactform@irelaaquaandfitness.com>',
+      to: 'irela13@hotmail.com', // EL EMAIL DONDE QUIERES RECIBIR LOS MENSAJES
+      subject: `New Contact Lead: ${name}`,
+      replyTo: email, // Para que al dar a "Responder" le escribas al cliente
+      html: `
+        <h2>New Contact Request</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Level/Goals:</strong> ${goals}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    if (error) return { success: false, message: 'Could not send email' };
+    return { success: true, message: 'Message sent successfully!' };
+  } catch (err) {
+    return { success: false, message: 'Server error' };
+  }
+}
