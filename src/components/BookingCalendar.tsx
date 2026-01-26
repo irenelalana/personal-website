@@ -5,7 +5,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { addMinutes } from 'date-fns'
+import { format, addMinutes } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 import { getSessions, createBooking } from '@/app/actions' // Tus acciones
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
@@ -18,21 +19,34 @@ export default function BookingCalendar() {
   const [isPending, setIsPending] = useState(false)
 
   const loadCalendarData = useCallback(async () => {
-    const data = await getSessions()
-    const calendarEvents = data.map((s: any) => ({
-      id: s.id,
-      title: s.title,
-      start: s.starts_at,
-      end: addMinutes(new Date(s.starts_at), s.duration).toISOString(),
-      extendedProps: {
-        available_spots: s.available_spots,
-        capacity: s.capacity,
-        duration: s.duration
-      },
-      backgroundColor: s.available_spots > 0 ? '#3788d8' : '#d9534f',
-    }))
-    setEvents(calendarEvents)
-  }, [])
+    const data = await getSessions();
+    const timeZone = 'Australia/Brisbane'; // Fijamos la zona
+
+    const calendarEvents = data.map((s: any) => {
+      // 1. Convertimos la fecha UTC de la base de datos a la zona de Brisbane
+      const zonedStart = toZonedTime(new Date(s.starts_at), timeZone);
+      
+      // 2. Calculamos el final usando la fecha ya zonificada
+      const zonedEnd = addMinutes(zonedStart, s.duration);
+
+      return {
+        id: s.id,
+        title: s.title,
+        // 3. Formateamos como string ISO "ingenuo" (sin offset Z) 
+        // para que el calendario lo tome como hora local de la zona configurada
+        start: format(zonedStart, "yyyy-MM-dd'T'HH:mm:ss"),
+        end: format(zonedEnd, "yyyy-MM-dd'T'HH:mm:ss"),
+        extendedProps: {
+          available_spots: s.available_spots,
+          capacity: s.capacity,
+          duration: s.duration
+        },
+        backgroundColor: s.available_spots > 0 ? '#3788d8' : '#d9534f',
+      };
+    });
+
+    setEvents(calendarEvents);
+  }, []);
 
   // Carga inicial
   useEffect(() => {

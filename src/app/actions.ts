@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend';
 import { format } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
 
 // 1. Obtener sesiones
@@ -75,8 +76,14 @@ export async function createBooking(formData: FormData) {
     .single()
 
     if (session) {
-      const dateObj = new Date(session.starts_at);
-      const formatDate = format(dateObj, "EEEE, d MMMM yyyy, h:mm b", { locale: enAU });;
+      const timeZone = 'Australia/Brisbane';
+      const dateObj = new Date(session.starts_at); 
+      // Convertimos la fecha UTC específicamente a la hora de Brisbane
+      const zonedDate = toZonedTime(dateObj, timeZone);
+      // Ahora format usará la hora de la "zona" que hemos fijado
+      const formatDate = format(zonedDate, "EEEE, d MMMM yyyy, h:mm b", { locale: enAU });
+      // const dateObj = new Date(session.starts_at);
+      // const formatDate = format(dateObj, "EEEE, d MMMM yyyy, h:mm b", { locale: enAU });;
       const cancelLink = `${process.env.NEXT_PUBLIC_APP_URL}/cancel?token=${newBooking.token}`;
       const { data, error } = await resend.emails.send({
         from: 'Irela Aqua and Fitness [No reply] <irela@irelaaquaandfitness.com>',
