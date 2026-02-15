@@ -6,6 +6,8 @@ import { Resend } from 'resend';
 import { format } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 // 1. Obtener sesiones
 export async function getSessions() {
@@ -164,4 +166,140 @@ export async function sendContactEmail(formData: FormData) {
   } catch (err) {
     return { success: false, message: 'Server error' };
   }
+}
+
+
+
+export async function checkoutTickets(cartItems: { id: string; qty: number }[]) {
+  const supabase = await createClient();
+
+  // 1. Obtener precios reales de la DB para evitar hackeos desde el frontend
+  const { data: dbTickets } = await supabase
+    .from('ticket_types')
+    .select('*')
+    .in('id', cartItems.map(i => i.id));
+
+  const line_items = cartItems.map(item => {
+    const ticket = dbTickets?.find(t => t.id === item.id);
+    if (!ticket) return null;
+    
+    return {
+      price_data: {
+        currency: 'aud',
+        product_data: {
+          name: ticket.name,
+          metadata: { ticket_type_id: ticket.id } // Importante para luego
+        },
+        unit_amount: ticket.price * 100, // Stripe usa centavos
+      },
+      quantity: item.qty,
+    };
+  }).filter(Boolean);
+
+  // 2. Crear sesión de Stripe
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: line_items as any,
+    mode: 'payment',
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane`,
+    metadata: {
+      // Guardamos un resumen en JSON para leerlo en el webhook
+      cart_summary: JSON.stringify(cartItems)
+    }
+  });
+
+  return { url: session.url };
+}
+
+// app/actions.ts
+
+// Asegúrate de tener una tabla 'orders' o 'bookings' que acepte un campo JSONB 'attendees_data'
+// CREATE TABLE orders (id uuid primary key, attendees_data jsonb, status text default 'pending', ...);
+
+
+export async function checkoutComplexBooking(data: any) {
+  const supabase = await createClient();
+
+  // 1. Obtener precios OFICIALES de la base de datos
+  const { data: dbPrices } = await supabase
+    .from('ticket_types')
+    .select('name, price')
+    .in('name', ['Adult', 'Kid', 'Soccer Team']);
+
+  const priceMap = dbPrices?.reduce((acc, curr) => ({
+    ...acc, [curr.name]: curr.price
+  }), {} as Record<string, number>) || {};
+
+  // 2. Recalcular el total en el servidor (Seguridad)
+  const serverTotal = 
+    (data.adults.length * (priceMap['Adult'] || 0)) +
+    (data.kids.length * (priceMap['Kid'] || 0)) +
+    (data.team ? (priceMap['Soccer Team'] || 0) : 0);
+
+  // 3. Guardar la reserva pendiente en Supabase
+  const { data: order, error } = await supabase
+    .from('orders')
+    .insert({
+      status: 'pending_payment',
+      attendees_data: data,
+      total_amount: serverTotal
+    })
+    .select('id')
+    .single();
+
+  if (error) {
+    console.error("Error saving order:", error);
+    return { error: "DB Error" };
+  }
+
+  // 4. Crear Line Items para Stripe (Stripe usa centavos, por eso * 100)
+  const line_items = [];
+
+  if (data.adults.length > 0) {
+    line_items.push({
+      price_data: {
+        currency: 'aud',
+        product_data: { name: 'Adulto Ticket' },
+        unit_amount: Math.round(priceMap['Adult'] * 100),
+      },
+      quantity: data.adults.length,
+    });
+  }
+
+  if (data.kids.length > 0) {
+    line_items.push({
+      price_data: {
+        currency: 'aud',
+        product_data: { name: 'kid Ticket' },
+        unit_amount: Math.round(priceMap['Kid'] * 100),
+      },
+      quantity: data.kids.length,
+    });
+  }
+
+  if (data.team) {
+    line_items.push({
+      price_data: {
+        currency: 'aud',
+        product_data: { name: `Team: ${data.team.teamName}` },
+        unit_amount: Math.round(priceMap['Soccer Team'] * 100),
+      },
+      quantity: 1,
+    });
+  }
+
+  // 5. Crear Sesión de Stripe
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items,
+    mode: 'payment',
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane`,
+    metadata: {
+      order_id: order.id // Pasamos el ID para el Webhook
+    }
+  });
+
+  return { url: session.url };
 }
