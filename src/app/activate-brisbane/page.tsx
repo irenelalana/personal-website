@@ -23,11 +23,19 @@ export default function ActivateBrisbanePage() {
             <p>📅 12 July 2026</p>
             <p>📍 Yeronga Eagles Football Club</p>
             <p>⏰ 8:00AM – 5:00PM</p>
+            <p>📸 <a 
+                    href="https://www.instagram.com/activatebrisbane" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'underline', color: 'inherit' }}
+            >
+              Follow us for updates and exclusive content!
+            </a></p>
           </div>
           
           <div className="cta-container">
             <button onClick={scrollToForm} className="cta-button pulse">
-              GET TICKETS NOW
+              Tickets Coming Soon
             </button>
           </div>
         </div>
@@ -41,13 +49,13 @@ export default function ActivateBrisbanePage() {
 
       {/* --- WHAT IS IT --- */}
       <section className="content-section">
-        <div className="card">
+        <div className="card-activate">
           <h2>💥 What is ACTÍVATE BRISBANE?</h2>
           <p>
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, mini football, and wellness workshops.
+            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, a <a href="/soccer-tournament-rules" target="_blank" rel="noopener noreferrer">soccer 5-a-side tournament</a>, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don’t just attend — you participate."
@@ -59,13 +67,14 @@ export default function ActivateBrisbanePage() {
       <section className="content-section alt-bg">
         <h2>🎯 Who is it for?</h2>
         <div className="features-grid">
-          <div className="feature-item">✔ Spanish Spoken Community in Brisbane</div>
+          <div className="feature-item">✔ Spanish-Speaking Community in Brisbane</div>
           <div className="feature-item">✔ Fitness lovers</div>
           <div className="feature-item">✔ Soccer lovers</div>
           <div className="feature-item">✔ Runners</div>
           <div className="feature-item">✔ Exercise passionate</div>
           <div className="feature-item">✔ Active Families</div>
           <div className="feature-item">✔ Multicultural community</div>
+          <div className="feature-item">✔ Pet Friendly!</div>
         </div>
         <p style={{textAlign: 'center', marginTop: '20px'}}>
           No elite level required. Just bring your energy.
@@ -79,20 +88,23 @@ export default function ActivateBrisbanePage() {
             <ul>
               <li>Multiple 30-minute stage fitness sessions</li>
               <li>Entry to the Family Run / Walk</li>
-              <li>Access to mini football tournament</li>
+              <li>Access to Soccer 5-a-side tournament</li>
               <li>Free fitness assessment opportunities</li>
               <li>Sponsor goodie bag</li>
               <li>Food trucks and licensed bar access</li>
+              <li>Raffle tickets</li>
+              <li>Traditional games and activities</li>
+              <li>Bibs</li>
             </ul>
         </div>
         <div className="cta-container" style={{marginTop: '30px'}}>
-            <button onClick={scrollToForm}>SECURE YOUR SPOT</button>
+            <button onClick={scrollToForm}>Tickets coming soon</button>
         </div>
       </section>
 
       {/* --- WHY MATTERS --- */}
       <section className="content-section alt-bg">
-        <div className="card">
+        <div className="card-activate">
             <h2>🤝 Why This Event Matters</h2>
             <p>
                 Research shows that culturally inclusive, community-led events significantly increase participation in physical activity.
@@ -105,11 +117,11 @@ export default function ActivateBrisbanePage() {
 
       {/* --- EVENT DETAILS --- */}
       <section className="content-section details-grid">
-         <div className="card">
+         <div className="card-activate">
             <h2>👩‍🏫 Meet the Trainers</h2>
             <p>Qualified bilingual fitness professionals leading high-energy sessions.</p>
          </div>
-         <div className="card">
+         <div className="card-activate">
             <h2>🍴 Food & Community</h2>
             <p>Enjoy food vendors, healthy options, community stalls and a licensed bar.</p>
          </div>
@@ -118,20 +130,20 @@ export default function ActivateBrisbanePage() {
       {/* --- FINAL CTA & FORM --- */}
       <section id="registration-form" className="form-section">
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h2 style={{color: '#f39304'}}>🎟 TICKETS NOW AVAILABLE</h2>
-            <p>Spots are limited to approximately 700 participants.</p>
+            <h2 style={{color: '#f39304'}}>🎟 TICKETS WILL BE AVAILABLE SOON</h2>
+            {/* <p>Early bird ends in...</p> */}
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
-            <EventRegistrationForm />
+            {/* <EventRegistrationForm /> */}
         </div>
       </section>
 
       {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
       <div className="fixed-banner">
-        <span>12 July 2026 – Tickets Selling Now</span>
-        <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
+        <span>12 July 2026 – Tickets Selling Soon</span>
+        {/* <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
-        </button>
+        </button> */}
       </div>
 
     </main>

@@ -137,6 +137,16 @@ li {
   background-color: #f1f1f1; */
   border-radius: 10px;
 }
+.card-activate{
+  width: 100%;
+  max-width: none;
+  flex: 1;
+  text-align: center;
+  margin: 5px;
+  /* padding: 10px;
+  background-color: #f1f1f1; */
+  border-radius: 10px;
+}
   
 .question{
   font-weight: bold;
@@ -523,7 +533,7 @@ nav {
 
 /* Ajuste del header */
 header {
-  position: relative;
+  /* position: relative; */
   flex-direction: column;
   align-items: flex-start;
 }
@@ -553,7 +563,7 @@ header {
 .hero-section {
   background-color: #02678F; /* Tu azul corporativo */
   color: #e8e1d0; /* Tu color crema claro */
-  padding: 60px 20px;
+  padding: 0px 20px;
   text-align: center;
   border-bottom: 5px solid #f39304;
 }
@@ -580,7 +590,7 @@ header {
   background-color: #f39304;
   color: white;
   padding: 15px 40px;
-  font-size: 1.5em;
+  font-size: 1em;
   border: none;
   border-radius: 50px; /* Redondeado moderno */
   cursor: pointer;
@@ -852,6 +862,226 @@ header {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.form-tabs {
+    display: flex;
+    gap: 10px;
+    background-color: #f1f1f1;
+    padding: 5px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px 10px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Cambria, serif;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #02678F;
+}
+
+.tab-btn.active {
+    background-color: #02678F;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Animación suave al cambiar de pestaña */
+.fade-in {
+    animation: fadeInTab 0.4s ease-in-out;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- BADGES (Solución de contraste) --- */
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background-color: #e2e8f0; /* Gris por defecto */
+    color: #333; 
+}
+
+.badge.orange {
+    background-color: #f39304; /* Tu naranja */
+    color: white; /* Texto blanco para que contraste */
+}
+
+.badge.green {
+    background-color: #10b981; /* Verde éxito */
+    color: white; /* Texto blanco para asegurar que se lee perfectamente */
+}
+
+/* --- BOTONES DEL EQUIPO DE FÚTBOL --- */
+.team-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.team-btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-family: Cambria, serif;
+    transition: opacity 0.3s;
+}
+
+.team-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.team-btn.add {
+    background-color: #02678F;
+    color: white;
+}
+
+.team-btn.remove {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* --- TÉRMINOS Y CONDICIONES --- */
+.terms-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #f39304; /* Detalle naranja */
+    border-radius: 4px;
+}
+
+.terms-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.terms-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.terms-label a {
+    color: #02678F;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.terms-label a:hover {
+    color: #f39304;
+}
+
+/* --- TOURNAMENT RULES SPECIFIC --- */
+
+.card_single ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card_single ul li {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.card_single ul li:last-child {
+    border-bottom: none;
+}
+
+.card_single ul li strong {
+    color: #02678F;
+    margin-right: 5px;
+}
+
+/* Ajuste para que el Hero de reglas no sea tan gigante como el de la landing */
+.hero-section {
+    background: linear-gradient(rgba(7, 104, 115, 0.8), rgba(7, 104, 115, 0.8)), url('/hero-bg.jpg'); /* Usa tu imagen */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.feature-item strong {
+    display: block;
+    color: #f39304;
+    margin-bottom: 5px;
+}
+
+/* --- TOURNAMENT RULES UPDATED --- */
+
+.small-hero {
+    min-height: 15vh !important;
+    padding: 40px 20px !important;
+}
+
+/* El truco para que los bullets no se vean enormes */
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.rules-list li {
+    padding: 8px 0; /* Menos padding */
+    border-bottom: 1px solid #eee;
+    font-size: 1rem; /* Tamaño más pequeño y equilibrado */
+    line-height: 1.4;
+    color: #444;
+}
+
+.rules-list li:last-child {
+    border-bottom: none;
+}
+
+.rules-list li strong {
+    color: #02678F;
+    font-weight: 600;
+}
+
+/* Ajuste de los items de la rejilla */
+.feature-item {
+    font-size: 1rem;
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #efefef;
+}
+
+.red-border {
+    border-left: 5px solid #d9534f;
+}
+
+/* Efecto hover suave para la lista */
+.rules-list li:hover {
+    padding-left: 5px;
+    transition: all 0.2s ease;
+    background-color: #fafafa;
 }
 
 @media screen and  (min-width: 768px) {
@@ -1159,6 +1389,42 @@ header {
     .status-title {
         font-size: 1.5rem;
   }
+  .form-tabs {
+        flex-direction: column;
+  }
+
+  /* BOTONES CTA */
+.cta-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.cta-button {
+  background-color: #f39304;
+  color: white;
+  padding: 15px 40px;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 50px; /* Redondeado moderno */
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(243, 147, 4, 0.4);
+  transition: transform 0.2s;
+}
+
+  .card-activate {
+    width: 900px;
+  }
+
+  .card-activate p {
+    font-size: 1.5em;
+  }
+
+.content-section {
+  padding: 40px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /* div {
   border:  1px black dotted
 }
