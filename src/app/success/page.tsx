@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react'; // Importa Suspense
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
 
-export default function SuccessPage() {
+// 1. Creamos un componente interno para la lógica de los params
+function SuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sessionId = searchParams.get('session_id');
@@ -49,7 +50,6 @@ export default function SuccessPage() {
   return (
     <section className="status-container">
       <div className="status-card">
-        
         <div className="status-icon-check">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
@@ -70,5 +70,18 @@ export default function SuccessPage() {
         </footer>
       </div>
     </section>
+  );
+}
+
+// 2. El export default envuelve el contenido en Suspense
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <section className="status-container">
+        <div className="custom-loader"></div>
+      </section>
+    }>
+      <SuccessContent />
+    </Suspense>
   );
 }
