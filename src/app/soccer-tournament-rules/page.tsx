@@ -84,7 +84,7 @@ export default function TournamentRulesPage() {
         <div className="card" style={{textAlign: 'center', border: '2px dashed #ccc'}}>
           <h2>🏆 Prizes & Awards</h2>
           <p>We are currently finalizing our sponsors to bring you the best rewards!</p>
-          <p style={{fontStyle: 'italic', color: '#02678F'}}>Winners, runners-up, and top scorer awards will be announced soon.</p>
+          <p style={{fontStyle: 'italic', color: '#02678F'}}>Winners and runners-up awards will be announced soon.</p>
         </div>
       </section>
 

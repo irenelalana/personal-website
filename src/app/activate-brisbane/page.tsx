@@ -2,6 +2,7 @@
 import EventRegistrationForm from '@/components/EventRegistrationForm'; // Ajusta la ruta
 import Countdown from '@/components/Countdown';
 import Image from 'next/image';
+import { Link } from 'lucide-react';
 
 export default function ActivateBrisbanePage() {
   
@@ -17,20 +18,32 @@ export default function ActivateBrisbanePage() {
       {/* --- HERO SECTION --- */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1>ACTÍVATE BRISBANE 2026</h1>
+          <div className="logo-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
+        {/* H1 oculto para SEO (opcional pero recomendado) */}
+        <h1 className="sr-only" style={{ display: 'none' }}>Actívate Brisbane</h1>
+  
+        <Image 
+          src="/images/activate-brisbane.png"          // Ruta a tu imagen en la carpeta public
+          alt="Actívate Brisbane Logo"
+          width={500}              // Ajusta el tamaño según tu diseño
+          height={100}             // Ajusta el tamaño según tu diseño
+          priority                 // Indica a Next.js que cargue esta imagen primero
+          style={{ 
+            maxWidth: '100%', 
+            height: 'auto',
+            display: 'block',
+            margin: '0 auto'
+          }}
+        />
+        </div>
           <p className="hero-subtitle">Move. Connect. Celebrate.</p>
           <div className="hero-details">
             <p>📅 12 July 2026</p>
             <p>📍 Yeronga Eagles Football Club</p>
             <p>⏰ 8:00AM – 5:00PM</p>
-            <p>📸 <a 
-                    href="https://www.instagram.com/activatebrisbane" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'underline', color: 'inherit' }}
-            >
+            <p>📸 <Link href="https://www.instagram.com/activatebrisbane" target="_blank"  style={{ textDecoration: 'underline', color: 'inherit' }}>
               Follow us for updates and exclusive content!
-            </a></p>
+            </Link></p>
           </div>
           
           <div className="cta-container">
@@ -55,10 +68,10 @@ export default function ActivateBrisbanePage() {
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, a <a href="/soccer-tournament-rules" target="_blank" rel="noopener noreferrer">soccer 5-a-side tournament</a>, and wellness workshops.
+            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, a <Link href="/soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</Link>, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
-            "This is not a passive event. You don’t just attend — you participate."
+            "This is not a passive event. You don't just attend — you participate."
           </p>
         </div>
       </section>
@@ -83,7 +96,7 @@ export default function ActivateBrisbanePage() {
 
       {/* --- WHATS INCLUDED --- */}
       <section className="content-section">
-        <h2>🏃 What’s Included in Your Ticket?</h2>
+        <h2>🏃 What's Included in Your Ticket?</h2>
         <div className="card_single">
             <ul>
               <li>Multiple 30-minute stage fitness sessions</li>
@@ -140,7 +153,7 @@ export default function ActivateBrisbanePage() {
 
       {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
       <div className="fixed-banner">
-        <span>12 July 2026 – Tickets Selling Soon</span>
+        <span>12 July 2026 - Tickets Selling Soon</span>
         {/* <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
         </button> */}
