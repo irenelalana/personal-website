@@ -153,7 +153,7 @@ export default function EventRegistrationForm() {
       
       <div className="form-tabs">
         <button className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`} onClick={() => setActiveTab('general')}>
-          Single & Group Tickets
+          Single & Multiple Event Tickets
         </button>
         <button className={`tab-btn ${activeTab === 'team' ? 'active' : ''}`} onClick={() => setActiveTab('team')}>
           Soccer Team Pack
@@ -186,7 +186,7 @@ export default function EventRegistrationForm() {
 
           <div className="registration-forms">
             {adults.map((adult, i) => (
-              <article key={i} className="form-card">
+              <article key={i} className="form-card-activate">
                 <header className="card-header"><span className="badge">Adult {i + 1}</span></header>
                 <div className="input-group">
                   <input type="text" placeholder="Full Name" value={adult.name} onChange={(e) => handleInputChange('adult', i, 'name', e.target.value)} required />
@@ -197,8 +197,8 @@ export default function EventRegistrationForm() {
             ))}
 
             {kids.map((kid, i) => (
-              <article key={i} className="form-card kid-card">
-                <header className="card-header">
+              <article key={i} className="form-card-activate kid-card">
+                <div className="card-header">
                   <span className="badge orange">Kid {i + 1}</span>
                   <label className="contact-sync">
                     <input type="checkbox" checked={kid.useAdultContact} onChange={() => {
@@ -209,9 +209,9 @@ export default function EventRegistrationForm() {
                         newKids[i].phone = adults[0].phone;
                       }
                       setKids(newKids);
-                    }} /> Use Adult 1 info
+                    }} /> <span className="badge">Use Adult 1 info</span>
                   </label>
-                </header>
+                </div>
                 <div className="input-group">
                   <input type="text" placeholder="Kid's Full Name" value={kid.name} onChange={(e) => handleInputChange('kid', i, 'name', e.target.value)} required />
                   {!kid.useAdultContact && (
@@ -230,7 +230,7 @@ export default function EventRegistrationForm() {
       {activeTab === 'team' && (
         <div className="tab-content fade-in">
           <div className="registration-forms">
-            <article className="form-card team-card">
+            <article className="form-card-activate team-card">
               <header className="card-header">
                 <span className="badge green">Soccer Team Registration (${PRICE_TEAM})</span>
               </header>
@@ -265,7 +265,7 @@ export default function EventRegistrationForm() {
       )}
 
       {/* --- FOOTER: Origen, T&C y Pago --- */}
-      <footer className="form-footer">
+      <div className="form-footer">
         <div className="source-section">
           <label>Where did you hear from us?</label>
           <select value={source} onChange={(e) => setSource(e.target.value)} required>
@@ -282,7 +282,7 @@ export default function EventRegistrationForm() {
               checked={acceptedTerms} 
               onChange={(e) => setAcceptedTerms(e.target.checked)} 
             />
-            I have read and accept the <Link href="/terms-and-conditions" target="_blank">Terms and Conditions</Link>
+            I have read and accept the <Link href="/terms-and-conditions" target="_blank"> Terms and Conditions</Link>
           </label>
         </div>
 
@@ -292,9 +292,9 @@ export default function EventRegistrationForm() {
         </div>
 
         <button className="payment-button" onClick={handleSubmit} disabled={loading || (activeTab === 'general' && total === 0)}>
-          {loading ? 'PROCESSING...' : 'SECURE MY SPOT'}
+          {loading ? 'PROCESSING...' : 'PURCHASE TICKETS'}
         </button>
-      </footer>
+      </div>
     </section>
   );
 }

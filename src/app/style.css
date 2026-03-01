@@ -164,7 +164,7 @@ li {
 
   
 main {
-  padding: 20px;
+  padding: 10px;
 }
   
 section {
@@ -217,8 +217,8 @@ button {
   color: #fff;
   font-size: 1.5em;
   border: none;
-  /* border-radius: 20%; */
-  margin-bottom: 1.5em;
+  /* border-radius: 20%;
+  margin-bottom: 1.5em; */
 }
 
 footer {
@@ -747,7 +747,7 @@ header {
 .form-card {
     border: 1px solid #e8e1d0;
     padding: 20px;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     border-radius: 10px;
 }
 
@@ -983,6 +983,7 @@ header {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    color:#02678F
 }
 
 .terms-label a {
@@ -1083,6 +1084,26 @@ header {
     transition: all 0.2s ease;
     background-color: #fafafa;
 }
+
+.form-card-activate {
+    background-color: #02678F;
+    border: 1px solid #e8e1d0;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.member-label {
+  color: #e8e1d0;
+}
+.team-member-row {
+  margin-top: 10px;
+}
+
+.team-name-input {
+  margin-top: 10px;
+}
+
 
 @media screen and  (min-width: 768px) {
   body {
