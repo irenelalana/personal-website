@@ -3,8 +3,41 @@ import EventRegistrationForm from '@/components/EventRegistrationForm'; // Ajust
 import Countdown from '@/components/Countdown';
 import Image from 'next/image';
 import { Link } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { TRAINERS } from '@/data/trainers'; // Importamos la constante
+import { SPONSORS } from '@/data/sponsors';
 
 export default function ActivateBrisbanePage() {
+
+
+
+  // --- LÓGICA DEL CARRUSEL ---
+  const [currentTrainerIndex, setCurrentTrainerIndex] = useState(0);
+
+  const nextTrainer = () => {
+    setCurrentTrainerIndex((prevIndex) => 
+      prevIndex === TRAINERS.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevTrainer = () => {
+    setCurrentTrainerIndex((prevIndex) => 
+      prevIndex === 0 ? TRAINERS.length - 1 : prevIndex - 1
+    );
+  };
+
+  const currentTrainer = TRAINERS[currentTrainerIndex];
+
+  const [sponsorIndex, setSponsorIndex] = useState(0);
+
+  // LOGICA DE AUTO-PLAY
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSponsorIndex((prev) => (prev === SPONSORS.length - 1 ? 0 : prev + 1));
+    }, 3000); // Cambia cada 3 segundos
+
+    return () => clearInterval(interval); // Limpieza al desmontar
+  }, []);
   
   const scrollToForm = () => {
     const formElement = document.getElementById('registration-form');
@@ -41,9 +74,9 @@ export default function ActivateBrisbanePage() {
             <p>📅 12 July 2026</p>
             <p>📍 Yeronga Eagles Football Club</p>
             <p>⏰ 8:00AM – 5:00PM</p>
-            <p>📸 <Link href="https://www.instagram.com/activatebrisbane" target="_blank"  style={{ textDecoration: 'underline', color: 'inherit' }}>
+            <p>📸 <a href="https://www.instagram.com/activatebrisbane" target="_blank"  style={{ textDecoration: 'underline', color: 'inherit' }}>
               Follow us for updates and exclusive content!
-            </Link></p>
+            </a></p>
           </div>
           
           <div className="cta-container">
@@ -68,7 +101,7 @@ export default function ActivateBrisbanePage() {
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, a <Link href="/soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</Link>, and wellness workshops.
+            Founded by <strong>Irene Lalana</strong> (Irela Aqua & Fitness) and <strong>Belén Roldán</strong>, this event brings together group fitness, family runs, a soccer 5-a-side tournament, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don't just attend — you participate."
@@ -101,12 +134,13 @@ export default function ActivateBrisbanePage() {
             <ul>
               <li>Multiple 30-minute stage fitness sessions</li>
               <li>Entry to the Family Run / Walk</li>
-              <li>Access to Soccer 5-a-side tournament</li>
               <li>Free fitness assessment opportunities</li>
+              <li>Traditional games and activities</li>
               <li>Sponsor goodie bag</li>
+              <li>Access to <a href="/soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</a> (Soccer Team Pack Needed)</li>
+              <li>Social soccer matches for kids and families</li>
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
-              <li>Traditional games and activities</li>
               <li>Bibs</li>
             </ul>
         </div>
@@ -128,16 +162,83 @@ export default function ActivateBrisbanePage() {
         </div>
       </section>
 
-      {/* --- EVENT DETAILS --- */}
+      {/* --- EVENT DETAILS (Sección modificada) --- */}
       <section className="content-section details-grid">
-         <div className="card-activate">
-            <h2>👩‍🏫 Meet the Trainers</h2>
-            <p>Qualified bilingual fitness professionals leading high-energy sessions.</p>
+         
+         {/* TARJETA MODIFICADA CON CARRUSEL */}
+         <div className="card-activate trainers-carousel-card">
+            <h2>👩‍🏫 Confirmed Coaches</h2>
+            <p className="section-subtitle">Qualified bilingual professionals leading high-energy sessions.</p>
+            
+            <div className="carousel-container">
+              {/* Botón Anterior */}
+              <button onClick={prevTrainer} className="carousel-btn prev-btn" aria-label="Previous trainer">
+                &#10094; {/* Icono < */}
+              </button>
+              
+              {/* Contenido del Entrenador Actual */}
+              <div className="trainer-slide fade-in">
+                <div className="trainer-photo-wrapper">
+                  <Image 
+                    src={currentTrainer.image} 
+                    alt={`Trainer ${currentTrainer.name}`}
+                    width={300} // Ajusta según diseño
+                    height={300} // Ajusta según diseño
+                    className="trainer-photo-round"
+                  />
+                </div>
+                <div className="trainer-text">
+                  <h3>{currentTrainer.name}</h3>
+                  <h4>{currentTrainer.role}</h4>
+                  <p>{currentTrainer.description}</p>
+                </div>
+              </div>
+
+              {/* Botón Siguiente */}
+              <button onClick={nextTrainer} className="carousel-btn next-btn" aria-label="Next trainer">
+                &#10095; {/* Icono > */}
+              </button>
+            </div>
+            
+            {/* Indicadores de puntos (Dots) */}
+            <div className="carousel-dots">
+              {TRAINERS.map((_, index) => (
+                <span 
+                  key={index} 
+                  className={`dot ${index === currentTrainerIndex ? 'active' : ''}`}
+                  onClick={() => setCurrentTrainerIndex(index)}
+                ></span>
+              ))}
+            </div>
          </div>
-         <div className="card-activate">
-            <h2>🍴 Food & Community</h2>
-            <p>Enjoy food vendors, healthy options, community stalls and a licensed bar.</p>
-         </div>
+
+         <div className="card-activate sponsors-card">
+        <h2>🤝 Our Sponsors</h2>
+        <p>Proudly supported by local organisations committed to our community.</p>
+        
+        <div className="sponsor-carousel">
+          <div className="sponsor-logo-wrapper fade-in" key={sponsorIndex}>
+            <Image 
+              src={SPONSORS[sponsorIndex].logo} 
+              alt={SPONSORS[sponsorIndex].name}
+              width={300}
+              height={300}
+              className="sponsor-logo-img"
+            />
+          </div>
+          
+          {/* Dots opcionales para los sponsors */}
+          <div className="carousel-dots">
+            {SPONSORS.map((_, i) => (
+              <span 
+                key={i} 
+                className={`dot ${i === sponsorIndex ? 'active' : ''}`}
+                onClick={() => setSponsorIndex(i)}
+              ></span>
+            ))}
+          </div>
+        </div>
+      </div>
       </section>
 
       {/* --- FINAL CTA & FORM --- */}

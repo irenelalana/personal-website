@@ -56,7 +56,8 @@ export default function TournamentRulesPage() {
         <h2>3. Gameplay Rules</h2>
         <div className="card_single">
           <ul className="rules-list">
-            <li><strong>Team:</strong> 1 Goalkeeper + 4 Outfielders.</li>
+            <li><strong>Team:</strong> All players must be adults (18+). Male, female and mixed teams are welcome.</li>
+            <li><strong>On the field:</strong> One goalkeeper and four outfield players.</li>
             <li><strong>Subs:</strong> Unlimited rolling subs (must be authorized by Referee).</li>
             <li><strong>Throw-ins:</strong> Taken with <strong>hands</strong>.</li>
             <li><strong>Corners:</strong> Taken with the <strong>foot</strong>.</li>

@@ -64,8 +64,8 @@ function SuccessContent() {
         </p>
 
         <footer className="status-footer">
-          <Link href="/" className="btn-return">
-            Back to Home Page
+          <Link href="/activate-brisbane" className="btn-return">
+            Back to Event Page
           </Link>
         </footer>
       </div>

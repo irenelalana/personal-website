@@ -1020,7 +1020,7 @@ header {
 
 /* Ajuste para que el Hero de reglas no sea tan gigante como el de la landing */
 .hero-section {
-    background: linear-gradient(rgba(7, 104, 115, 0.8), rgba(7, 104, 115, 0.8)), url('/hero-bg.jpg'); /* Usa tu imagen */
+    background: linear-gradient(rgba(7, 104, 115, 0.8), rgba(2, 11, 12, 0.8)), url('/images/activate-brisbane.png'); /* Usa tu imagen */
     background-size: cover;
     background-position: center;
     color: white;
@@ -1104,6 +1104,280 @@ header {
   margin-top: 10px;
 }
 
+/* --- LEGAL PAGES (Terms & Conditions, Privacy, etc.) --- */
+
+.legal-page {
+  background-color: #f9f9f9; /* Fondo gris muy claro para contrastar con el contenedor */
+  padding: 40px 20px;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.legal-container {
+  max-width: 800px; /* Ancho óptimo para lectura de textos largos */
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave tipo documento */
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #02678F;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #f39304;
+  text-decoration: underline;
+}
+
+.legal-section {
+  margin-bottom: 40px;
+}
+
+.legal-title {
+  color: #02678F; /* Azul corporativo */
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.legal-subtitle {
+  color: #f39304; /* Naranja corporativo */
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.legal-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.legal-content h3 {
+  color: #02678F;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.legal-content p {
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.legal-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.legal-list li {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.legal-highlight {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #f0f7f9; /* Azul muy clarito */
+  border-left: 4px solid #02678F;
+  border-radius: 0 4px 4px 0;
+}
+
+.legal-divider {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 50px 0;
+}
+
+/* --- TRAINERS CAROUSEL GENERAL --- */
+
+.trainers-carousel-card {
+    text-align: center;
+    padding-bottom: 30px; /* Espacio para los dots */
+}
+
+.section-subtitle {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+/* Ajuste del contenedor principal para que pueda ser más ancho en PC */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Aumentamos de 500px a 900px */
+    margin: 0 auto;
+}
+
+/* El envoltorio de la foto */
+.trainer-photo-wrapper {
+    width: 250px;  /* Tamaño base para móvil */
+    height: 250px;
+    margin: 0 auto 20px;
+    flex-shrink: 0; /* Evita que la foto se aplaste */
+}
+
+.trainer-photo-round {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50%;
+    object-fit: cover;
+    /* border: 6px solid #e8e1d0; */
+}
+
+/* TEXTO DEL ENTRENADOR */
+.trainer-text h3 {
+    color: #02678F; /* Tu azul corporativo */
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.trainer-text h4 {
+    color: #f39304; /* Tu naranja corporativo */
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.trainer-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* BOTONES DE NAVEGACIÓN */
+.carousel-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #02678F; /* Azul */
+    cursor: pointer;
+    position: absolute;
+    top: 30%; /* Alineado con la foto */
+    transform: translateY(-50%);
+    padding: 10px;
+    transition: color 0.3s, transform 0.3s;
+    opacity: 0.7;
+}
+
+.carousel-btn:hover {
+    color: #f39304; /* Naranja al hover */
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: -10px; /* Ajusta la posición fuera del contenido */
+}
+
+.next-btn {
+    right: -10px; /* Ajusta la posición fuera del contenido */
+}
+
+/* INDICADORES (DOTS) */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: #e8e1d0;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #02678F; /* Punto activo azul */
+}
+
+.dot:hover {
+    background-color: #f39304; /* Hover naranja */
+}
+
+/* ANIMACIÓN DE FADE-IN */
+.fade-in {
+    animation: fadeInAnimation ease 0.6s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sponsors-card {
+    text-align: center;
+    min-height: 350px; /* Evita que la tarjeta salte si los logos tienen alturas distintas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sponsor-carousel {
+    margin-top: 30px;
+    position: relative;
+}
+
+.sponsor-logo-wrapper {
+    height: 300px; /* Altura máxima del logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sponsor-logo-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain; /* Fundamental para no deformar logos */
+    transition: filter 0.3s;
+}
+
+
+
+/* Reutilizamos la animación fade-in que definimos para los trainers */
+.fade-in {
+    animation: fadeInAnimation ease 0.8s;
+}
 
 @media screen and  (min-width: 768px) {
   body {
@@ -1446,6 +1720,48 @@ header {
   flex-direction: column;
   align-items: center;
 }
+.legal-container {
+    padding: 30px 20px;
+  }
+  
+  .legal-title {
+    font-size: 1.8rem;
+  }
+
+ .trainer-slide {
+        display: flex; /* Ponemos foto y texto de lado */
+        align-items: center;
+        text-align: left; /* Alineamos texto a la izquierda */
+        gap: 50px;      /* Espacio entre foto y texto */
+        padding: 20px;
+    }
+
+    .trainer-photo-wrapper {
+        width: 400px;  /* Foto mucho más grande en Desktop */
+        height: 400px;
+        margin-bottom: 0; /* Quitamos el margen inferior porque ahora está al lado */
+    }
+
+    .trainer-text {
+        flex: 1; /* El texto ocupa el resto del espacio */
+        min-height: auto; /* Ya no necesitamos el min-height fijo de antes */
+    }
+
+    .trainer-text h3 {
+        font-size: 2.2rem; /* Nombre más grande */
+    }
+
+    .trainer-text h4 {
+        font-size: 1.4rem;
+    }
+
+    .trainer-text p {
+        font-size: 1.1rem;
+    }
+    
+    /* Reposicionamos las flechas para que no tapen la foto grande */
+    .prev-btn { left: -80px; }
+    .next-btn { right: -80px; }
 /* div {
   border:  1px black dotted
 }
