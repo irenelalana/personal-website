@@ -13,7 +13,7 @@ export const TRAINERS: Trainer[] = [
     id: 1,
     name: "Irene Lalana (Irela Aqua & Fitness)",
     role: "Sport Science & Fitness Coach",
-    description: "Recognised as the 2025 National Group Exercise Leader of the Year with over 20 years’ experience. She’s dedicated to building inclusive, high-impact active lifestyles for the community.",
+    description: "Recognised as the 2025 National Group Exercise Leader of the Year with over 20 years' experience. Shes dedicated to building inclusive, high-impact active lifestyles for the community.",
     image: "/images/irela.png",
   },
   {
@@ -39,10 +39,10 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 5,
-    name: "Carla (Booty Beats)",
-    role: "PT & PE Teacher",
-    description: "Physical Education teacher and founder of the 'Booty Beats' method. She specialises in resistance band training focused on muscle activation and high-energy tracks.",
-    image: "/images/lala.png",
+    name: "Verónica (Speedfit QLD)",
+    role: "Speedfit QLD Owner & Entrepreneur",
+    description: "As the owner of Speedfit in Queensland, Verónica is on a mission to empower busy mums to reclaim their strength and energy. She specialises in efficient, science-backed fitness solutions that fit perfectly into a hectic lifestyle.",
+    image: "/images/veronica_foto.png",
   },
   {
     id: 6,
@@ -61,8 +61,8 @@ export const TRAINERS: Trainer[] = [
   {
     id: 8,
     name: "Belén Roldán",
-    role: "Yoga & Mindfulness Coach",
-    description: "Focused on holistic health and genuine connection. She leads sessions that balance energy and relaxation to get your mind and body perfectly in sync.",
-    image: "/images/lala.png",
+    role: "Zumba & Pilates Specialist",
+    description: "With 11 years of experience in fitness and event management, Belén specialises in Zumba, Pilates and functional training to boost community wellbeing. She is passionate about creating inclusive activities that foster genuine connection.",
+    image: "/images/belen_foto.png",
   }
 ];
