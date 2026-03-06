@@ -1379,6 +1379,163 @@ header {
     animation: fadeInAnimation ease 0.8s;
 }
 
+/* --- FAQ PAGE MODERNIZATION --- */
+
+.faq-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+}
+
+/* Header */
+.faq-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.faq-header h1 {
+  color: #02678F; /* Tu azul corporativo */
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+.faq-header p {
+  color: #666;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Layout Principal */
+.faq-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.faq-image-container {
+  flex: 1;
+  /* max-width: 450px; */
+  margin: 0 auto;
+}
+
+.faq-hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* Contenedor del Acordeón */
+.faq-accordion-container {
+  flex: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Cada Item del Acordeón */
+.faq-accordion-item {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.faq-accordion-item:hover {
+  border-color: #02678F;
+}
+
+.faq-accordion-item.open {
+  border-color: #02678F;
+  box-shadow: 0 4px 15px rgba(2, 103, 143, 0.1);
+}
+
+/* Botón (La pregunta) */
+.faq-accordion-header {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #076873;
+  transition: background-color 0.3s;
+}
+
+.faq-accordion-header:hover {
+  background-color: #f9fbfc;
+}
+
+.faq-accordion-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  padding-right: 20px;
+  line-height: 1.4;
+}
+
+.faq-accordion-item.open .faq-accordion-header h3 {
+  color: #02678F;
+}
+
+/* El Icono (+ / -) */
+.faq-icon {
+  font-size: 1.5rem;
+  color: #f39304; /* Tu naranja corporativo */
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Cuerpo de la respuesta (Animación de altura) */
+.faq-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+
+.faq-accordion-item.open .faq-accordion-body {
+  grid-template-rows: 1fr;
+}
+
+.faq-accordion-content {
+  overflow: hidden;
+  padding: 0 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.faq-accordion-item.open .faq-accordion-content {
+  padding-bottom: 20px; /* Padding solo cuando está abierto */
+}
+
+.faq-accordion-content p {
+  margin-bottom: 10px;
+}
+
+.faq-accordion-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Lista dentro de las respuestas */
+.faq-list {
+  margin: 10px 0 10px 20px;
+  list-style-type: disc;
+}
+
+.faq-list li {
+  margin-bottom: 8px;
+}
+
 @media screen and  (min-width: 768px) {
   body {
     font-size: 1em;
@@ -1762,6 +1919,7 @@ header {
     /* Reposicionamos las flechas para que no tapen la foto grande */
     .prev-btn { left: -80px; }
     .next-btn { right: -80px; }
+
 /* div {
   border:  1px black dotted
 }
