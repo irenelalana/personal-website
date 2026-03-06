@@ -18,19 +18,19 @@ const NavMenu = () => {
       </button>
 
       <nav className={`nav-menu ${open ? "open" : ""}`}>
-        <Link href="./programs" onClick={() => setOpen(false)}>
+        <Link href="/programs" onClick={() => setOpen(false)}>
           Programs
         </Link>
-        <Link href="./about" onClick={() => setOpen(false)}>
+        <Link href="/about" onClick={() => setOpen(false)}>
           About Me
         </Link>
-        <Link href="./whatson" onClick={() => setOpen(false)}>
+        <Link href="/whatson" onClick={() => setOpen(false)}>
           What's on
         </Link>
-        <Link href="./faq" onClick={() => setOpen(false)}>
+        <Link href="/faq" onClick={() => setOpen(false)}>
           FAQ
         </Link>
-        <Link href="./partners" onClick={() => setOpen(false)}>
+        <Link href="/partners" onClick={() => setOpen(false)}>
           Venues & Partners
         </Link>
         <Link href="/blog" onClick={() => setOpen(false)}>
