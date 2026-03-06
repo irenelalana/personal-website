@@ -1674,6 +1674,261 @@ header {
   line-height: 1.4;
 }
 
+.blog-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+}
+
+/* Encabezado */
+.blog-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.blog-header h1 {
+  color: #02678F; /* Azul corporativo */
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+.blog-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Cuadrícula (Grid) */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Móvil: 1 columna */
+  gap: 30px;
+}
+
+.blog-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column; /* Para empujar el footer hacia abajo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(2, 103, 143, 0.1); /* Sombra azul al hover */
+  border-color: #02678F;
+}
+
+/* Borde superior de color como acento */
+.blog-card::before {
+  content: "";
+  height: 4px;
+  background-color: #f39304; /* Naranja corporativo */
+  width: 100%;
+  display: block;
+}
+
+.blog-card-content {
+  padding: 30px 25px 15px;
+  flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+/* Meta info (Fecha) */
+.blog-meta {
+  margin-bottom: 12px;
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Título */
+.blog-title-link {
+  text-decoration: none;
+  color: #02678F;
+}
+
+.blog-title {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin: 0 0 15px 0;
+  transition: color 0.2s;
+}
+
+.blog-title-link:hover .blog-title {
+  color: #f39304; /* Cambia a naranja al pasar el ratón */
+}
+
+/* Extracto */
+.blog-excerpt {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  /* Opcional: Truncar texto si es muy largo (3 líneas) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer de la tarjeta (Botón Leer Más) */
+.blog-card-footer {
+  padding: 15px 25px 25px;
+  margin-top: auto; /* Se queda siempre abajo del todo */
+}
+
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  color: #f39304;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-read-more .arrow {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.blog-read-more:hover {
+  color: #02678F;
+}
+
+.blog-read-more:hover .arrow {
+  transform: translateX(5px); /* La flechita se mueve a la derecha al hacer hover */
+}
+
+.post-page-wrapper {
+  max-width: 900px; /* Un poco más estrecho para facilitar la lectura */
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* Navegación */
+.post-navigation {
+  margin-bottom: 30px;
+}
+
+.back-to-blog {
+  color: #02678F;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.back-to-blog:hover {
+  color: #f39304;
+}
+
+/* Contenedor principal */
+.post-container {
+  background: #fff;
+}
+
+/* Header */
+.post-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.post-category {
+  color: #f39304;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.post-main-title {
+  font-size: 2.5rem;
+  color: #076873;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.post-info {
+  font-size: 0.9rem;
+  color: #076873;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.post-separator {
+  width: 60px;
+  height: 4px;
+  background-color: #f39304;
+  margin: 30px auto 0;
+}
+
+/* Cuerpo del contenido (Simulando el prose de Tailwind con estilos propios) */
+.post-content-body {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.post-content-body h2 {
+  color: #02678F;
+  font-size: 1.8rem;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.post-content-body h3 {
+  color: #02678F;
+  font-size: 1.4rem;
+  margin-top: 30px;
+}
+
+.post-content-body p {
+  margin-bottom: 25px;
+}
+
+.post-content-body ul, .post-content-body ol {
+  margin-bottom: 25px;
+  padding-left: 20px;
+}
+
+.post-content-body li {
+  margin-bottom: 10px;
+}
+
+.post-content-body strong {
+  color: #333;
+}
+
+/* Imagenes dentro del post */
+.post-content-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 30px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Footer del post */
+.post-footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
 
 @media screen and  (min-width: 768px) {
   body {
@@ -1744,7 +1999,7 @@ header {
     }
 
   p {
-    font-size: 2em;
+    font-size: 1.5em;
   }
 
   #services {
@@ -1855,7 +2110,7 @@ header {
     flex-direction: column;
   }
   li {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   #bccform{
@@ -2061,6 +2316,14 @@ header {
     .vp-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
   }
+
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columnas */
+  }
+
+  .post-main-title {
+    font-size: 1.8rem;
+  }
 /* div {
   border:  1px black dotted
 }
@@ -2072,5 +2335,9 @@ section {
 @media (min-width: 1024px) {
   .vp-grid {
     grid-template-columns: repeat(3, 1fr); /* 3 columnas en PC */
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr); /* PC: 3 columnas */
   }
 }

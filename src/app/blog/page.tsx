@@ -6,38 +6,45 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <section>
-      <h1 className="text-3xl mb-8">Blog</h1>
+    <section id="blog-modern" className="blog-page-container">
+      
+      {/* HEADER DEL BLOG */}
+      <div className="blog-header">
+        <h1>Blog & Insights</h1>
+        <p>Tips, news, and thoughts on fitness, swimming, and well-being.</p>
+      </div>
 
-      <div className="space-y-8">
+      {/* CUADRÍCULA DE ARTÍCULOS */}
+      <div className="blog-grid">
         {posts.map((post) => (
-          <article
-            key={post.slug}
-            className="border-b pb-6"
-          >
-            <h2 className="text-2xl mb-2">
-              <Link
-                href={`/blog/${post.slug}`}
-                className="hover:underline"
-              >
-                {post.title}
+          <article key={post.slug} className="blog-card">
+            <div className="blog-card-content">
+              
+              {/* Fecha (Meta info) */}
+              <div className="blog-meta">
+                <span className="blog-date">
+                  📅 {format(parseISO(post.date), "MMMM d, yyyy")}
+                </span>
+              </div>
+
+              {/* Título */}
+              <Link href={`/blog/${post.slug}`} className="blog-title-link">
+                <h2 className="blog-title">{post.title}</h2>
               </Link>
-            </h2>
 
-            <p className="text-gray-600 mb-2">
-              {post.excerpt}
-            </p>
+              {/* Extracto */}
+              <p className="blog-excerpt">
+                {post.excerpt}
+              </p>
 
-            <p className="text-sm text-gray-400">
-              {format(parseISO(post.date), "MMMM d, yyyy")}
-            </p>
+            </div>
 
-            <Link
-              href={`/blog/${post.slug}`}
-              className="inline-block mt-3 text-sm underline"
-            >
-              Read more →
-            </Link>
+            {/* Botón Leer Más (Empujado hacia abajo con flexbox) */}
+            <div className="blog-card-footer">
+              <Link href={`/blog/${post.slug}`} className="blog-read-more">
+                Read more <span className="arrow">→</span>
+              </Link>
+            </div>
           </article>
         ))}
       </div>

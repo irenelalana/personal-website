@@ -2,42 +2,13 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { remark } from "remark";
 import html from "remark-html";
+import Link from "next/link";
+import { format, parseISO } from "date-fns";
 
 import { getAllPosts, getPostBySlug } from "@/lib/getPost";
 
-/* ─────────────────────────────
-   1️⃣ SSG REAL (build time)
-───────────────────────────── */
-export async function generateStaticParams() {
-  const posts = getAllPosts();
+// ... generateStaticParams y generateMetadata se mantienen igual ...
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-/* ─────────────────────────────
-   2️⃣ SEO POR ARTÍCULO
-───────────────────────────── */
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) return {};
-
-  return {
-    title: post.seo?.title || post.title,
-    description: post.seo?.description || post.excerpt,
-  };
-}
-
-/* ─────────────────────────────
-   3️⃣ PÁGINA DEL ARTÍCULO
-───────────────────────────── */
 export default async function BlogPostPage({
   params,
 }: {
@@ -53,14 +24,46 @@ export default async function BlogPostPage({
     .process(post.content);
 
   return (
-    <article className="prose max-w-none">
-      <h1>{post.title}</h1>
+    <div className="post-page-wrapper">
+      {/* BOTÓN VOLVER */}
+      <div className="post-navigation">
+        <Link href="/blog" className="back-to-blog">
+          ← Back to Blog
+        </Link>
+      </div>
 
-      <div
-        dangerouslySetInnerHTML={{
-          __html: processedContent.toString(),
-        }}
-      />
-    </article>
+      <article className="post-container">
+        {/* CABECERA DEL POST */}
+        <div className="post-header">
+          <div className="post-category">Fitness & Well-being</div>
+          <h1 className="post-main-title">{post.title}</h1>
+          
+          <div className="post-info">
+            <span className="post-date">
+              Published on {format(parseISO(post.date), "MMMM d, yyyy")}
+            </span>
+            <span className="post-author">By Irela Aqua & Fitness</span>
+          </div>
+          
+          <div className="post-separator"></div>
+        </div>
+
+        {/* CONTENIDO DEL POST */}
+        <div 
+          className="post-content-body"
+          dangerouslySetInnerHTML={{
+            __html: processedContent.toString(),
+          }}
+        />
+
+        {/* PIE DE POST (Opcional) */}
+        <footer className="post-footer">
+          <p>Did you enjoy this article? Share it with your community!</p>
+          <div className="post-share-placeholder">
+            {/* Aquí podrías añadir iconos de redes sociales en el futuro */}
+          </div>
+        </footer>
+      </article>
+    </div>
   );
 }

@@ -35,7 +35,7 @@ Call it sport, call it exercise — **but do it** 🙂
 
 ## My Personal Experience
 
-I’m 37 years old and I’ve been physically active since I learned how to walk. I’ve run, swum, rowed, cycled, danced, climbed, hiked, skated and skied.
+I’m 42 years old and I’ve been physically active since I learned how to walk. I’ve run, swum, rowed, cycled, danced, climbed, hiked, skated and skied.
 
 In fact, I stopped running two years ago due to injuries — and I’m still just as active as I was before.
 
