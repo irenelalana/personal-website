@@ -1536,6 +1536,145 @@ header {
   margin-bottom: 8px;
 }
 
+/* --- VENUES AND PARTNERS MODERNIZATION --- */
+
+.vp-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+}
+
+/* Encabezados de Sección */
+.vp-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.vp-section-header h1 {
+  color: #02678F; /* Azul corporativo */
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.vp-section-header p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.vp-divider {
+  height: 2px;
+  background-color: #f0f0f0;
+  margin: 60px auto;
+  width: 80%;
+}
+
+/* La Cuadrícula (Grid) */
+.vp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+/* Tarjetas */
+.vp-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Clave para el pie de la tarjeta */
+  border: 1px solid #f5f5f5;
+}
+
+.vp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(2, 103, 143, 0.15);
+}
+
+/* Logos dentro de la tarjeta */
+.vp-logo-link {
+  display: block;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+.vp-logo-container {
+  height: 200px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vp-logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Fundamental: No deforma los logos */
+  transition: transform 0.3s ease;
+}
+
+.vp-card:hover .vp-logo-container img {
+  transform: scale(1.05); /* Pequeño zoom al pasar el ratón */
+}
+
+/* Contenido de la tarjeta */
+.vp-card-content {
+  padding: 25px 20px;
+}
+
+.vp-flex-grow {
+  flex-grow: 1; /* Empuja la caja de descuento hacia abajo */
+}
+
+.vp-card-content h3 {
+  color: #02678F;
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.vp-card-content p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.vp-card-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Caja de Beneficio / Descuento */
+.vp-benefit-box {
+  background-color: #fdf5e6; /* Fondo con un toque del naranja corporativo */
+  border-top: 2px solid #f39304; /* Naranja corporativo */
+  padding: 20px;
+  margin-top: auto; /* Se asegura de estar al final de la tarjeta */
+}
+
+.vp-benefit-title {
+  display: block;
+  font-weight: 700;
+  color: #f39304;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.vp-benefit-box p {
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
 @media screen and  (min-width: 768px) {
   body {
     font-size: 1em;
@@ -1919,11 +2058,19 @@ header {
     /* Reposicionamos las flechas para que no tapen la foto grande */
     .prev-btn { left: -80px; }
     .next-btn { right: -80px; }
-
+    .vp-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
+  }
 /* div {
   border:  1px black dotted
 }
 section {
   border:  1px black dotted
 } */
+}
+
+@media (min-width: 1024px) {
+  .vp-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en PC */
+  }
 }
