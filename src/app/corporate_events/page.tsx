@@ -1,52 +1,70 @@
-// pages/corporate_events.js
 import React from "react";
+// Importamos los estilos del módulo
+import styles from "./corporate.module.css";
 
 export default function CorporateEvents() {
   return (
-    <section id="services">
-      <div className="card_single">
-        <div className="card-top">
-          <img
-            src="/images/Irela_Functional_fitness_online23.jpg"
-            alt="Team_building"
-          />
-          <div>
-            <h1>CORPORATE WELLNESS</h1>
-            <p>
-              We are specialised in providing customised wellbeing plans and
-              team building events for companies, catering to the physical needs
-              of your employees.
-            </p>
-            <p>
-              We promote a healthy lifestyle, boost motivation, and enhance
-              productivity. Any activity and exciting team building events,
-              creating a positive work environment and fostering happier
-              teamwork.
-            </p>
-            <p>
-              Also specific workshops for non-profits and communities, who wants
-              to promote wellbeing and active life style.
-            </p>
+    <main className={styles.corpPageWrapper}>
+      <section>
+        <div className={styles.corpContainer}>
+          
+          {/* BLOQUE 1: Imagen Portrait + Texto Principal */}
+          <div className={styles.corpIntroGrid}>
+            <div className={styles.corpImagePortrait}>
+              <img
+                src="/images/Irela_Functional_fitness_online23.jpg"
+                alt="Corporate Wellness Team Building"
+              />
+            </div>
+            
+            <div className={styles.corpTextContent}>
+              <span className={styles.corpBadge}>Business Solutions</span>
+              <h1>Corporate Wellness</h1>
+              <p className={styles.corpLead}>
+                We specialise in providing customised wellbeing plans and 
+                team-building events for companies, catering to the physical needs 
+                of your employees.
+              </p>
+              <p>
+                We promote a healthy lifestyle, boost motivation, and enhance
+                productivity. Our exciting team-building events create a positive 
+                work environment and foster happier teamwork.
+              </p>
+              <p>
+                We also offer specific workshops for non-profits and communities 
+                looking to promote a sustainable, active lifestyle.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="caption">
-          <section id="training_program">
-            <ul>
-              <li>CustomiSed Aqua & Fitness sessions.</li>
-              <li>Aqua and Fitness ticketing for pre existing groups.</li>
-              <li>Online live fitness.</li>
-              <li>Team building, active and healthy mid and end of the year.</li>
-              <li>Tailored options.</li>
-              <li>Discounts with local partners.</li>
-            </ul>
-          </section>
-          <img
-            src="/images/Wellness_corporate_program_benefits.jpg"
-            alt="Team_building"
-          />
+          {/* BLOQUE 2: Servicios + Imagen Landscape */}
+          <div className={styles.corpServicesGrid}>
+            <div className={styles.corpServicesList}>
+              <h2>Our Programs Include:</h2>
+              <ul>
+                <li>Customised Aqua & Fitness sessions.</li>
+                <li>Ticketing for pre-existing groups.</li>
+                <li>Online live fitness for remote teams.</li>
+                <li>Mid and end-of-year healthy team building.</li>
+                <li>Fully tailored options for your company's needs.</li>
+                <li>Exclusive discounts with local partners.</li>
+              </ul>
+              
+              <div className={styles.corpCtaSimple}>
+                <p>Invest in your team's health today. Contact me in the button below to request a proposal.</p>
+              </div>
+            </div>
+
+            <div className={styles.corpImageLandscape}>
+              <img
+                src="/images/Wellness_corporate_program_benefits.jpg"
+                alt="Wellness corporate program benefits"
+              />
+            </div>
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

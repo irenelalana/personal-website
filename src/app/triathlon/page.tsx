@@ -1,52 +1,69 @@
-// pages/triathlon.js
 import React from "react";
+import styles from "./triathlon.module.css";
 
 export default function Triathlon() {
   return (
-    <section id="services">
-      <div className="card_single">
-        <div className="card-top">
-          <img src="/images/Irela_triathlon_swimming.jpg" alt="Triathlon" />
-          <div>
-            <h1>SWIMMING FOR TRIATHLETES</h1>
+    <main className={styles.triWrapper}>
+      <div className={styles.container}>
+        
+        {/* CABECERA: Imagen y Texto Intro */}
+        <section className={styles.triHero}>
+          <div className={styles.imageWrapper}>
+            <img 
+              src="/images/Irela_triathlon_swimming.jpg" 
+              alt="Triathlon swimming training" 
+              className={styles.heroImg}
+            />
+          </div>
+          
+          <div className={styles.heroContent}>
+            <span className={styles.badge}>Specialised Coaching</span>
+            <h1>Swimming for Triathletes</h1>
             <p>
               We equip you with the skills and confidence needed to thrive in
-              the demanding world of triathlon, by teaching you how to exit,
-              entry and navigation skills for triathlon environments. Our
-              drills will change your mindset and give you tools to swim
-              smarter.
+              the demanding world of triathlon. Our programme focuses on essential
+              exit, entry, and navigation skills tailored for open water and race environments.
             </p>
             <p>
-              For seasoned triathletes, conquering races for ages but still finding
-              the swimming leg challenging; and for new triathletes starting your journey
-              and feeling uncertain about tackling the swim; this program is
-              designed specifically with you in mind.
+              Whether you are a seasoned triathlete looking to optimise your swim leg 
+              or a beginner feeling uncertain about the water, our drills will 
+              change your mindset and provide the tools to swim smarter.
             </p>
-            <p>Lessons are run at Musgrave Park Pool, in West End, Brisbane.</p>
+            <p className={styles.location}>
+              📍 Lessons held at Musgrave Park Pool, West End, Brisbane.
+            </p>
           </div>
-        </div>
+        </section>
 
-        <div className="caption">
-          <section id="training_program">
-            <ul>
-              <li>5 Weeks program.</li>
-              <li>45min sessions.</li>
-              <li>$105.</li>
-              <li>4-8 people groups.</li>
-              <li>Discounts with local partners.</li>
-              <li>Follow ups, reports and analysys.</li>
-              <li>Private options available (try first!).</li>
+        {/* CUERPO: Lista de Detalles y Vídeo */}
+        <section className={styles.detailsGrid}>
+          <div className={styles.programmeInfo}>
+            <h2>Programme Highlights</h2>
+            <ul className={styles.featureList}>
+              <li><strong>5-Week intensive programme</strong></li>
+              <li>45-minute focused sessions</li>
+              <li>Small groups of <strong>4-8 people</strong> for personal attention</li>
+              <li>Comprehensive follow-ups and data analysis</li>
+              <li>Exclusive discounts with our local partners</li>
+              <li>
+                Investment: <span className={styles.priceHighlight}>$105</span>
+              </li>
+              <li><em>Private options available – perfect for your first time!</em></li>
             </ul>
-          </section>
-          <iframe
-            src="https://www.youtube.com/embed/yznrRTc_9vc"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        </div>
+          </div>
+
+          <div className={styles.videoContainer}>
+            <iframe
+              src="https://www.youtube.com/embed/yznrRTc_9vc"
+              title="Triathlon Swimming Drills and Technique"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </section>
+
       </div>
-    </section>
+    </main>
   );
 }

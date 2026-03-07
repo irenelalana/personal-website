@@ -1,0 +1,139 @@
+/* triathlon.module.css */
+
+.triWrapper {
+  padding: 60px 0;
+  background-color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.triHero {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 992px) {
+  .triHero {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.imageWrapper {
+  flex: 1;
+}
+
+.heroImg {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.heroContent {
+  flex: 1.2;
+}
+
+.badge {
+  color: #f39304;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+}
+
+.heroContent h1 {
+  color: #02678F;
+  font-size: 2.8rem;
+  margin: 10px 0 20px;
+  line-height: 1.2;
+}
+
+.heroContent p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.location {
+  font-weight: 600;
+  color: #02678F;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Info and Video Grid */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  background-color: #f9fbfc;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid #e1e8ed;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .detailsGrid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.programmeInfo h2 {
+  color: #02678F;
+  margin-bottom: 25px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+}
+
+.featureList li {
+  padding: 12px 0 12px 35px;
+  position: relative;
+  border-bottom: 1px solid #e1e8ed;
+  color: #444;
+}
+
+.featureList li::before {
+  content: "🏊‍♂️";
+  position: absolute;
+  left: 0;
+}
+
+.priceHighlight {
+  font-weight: 800;
+  color: #f39304;
+}
+
+/* Responsividad para el Iframe de YouTube */
+.videoContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Ratio 16:9 */
+  height: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.videoContainer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
