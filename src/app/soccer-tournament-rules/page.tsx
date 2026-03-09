@@ -56,13 +56,15 @@ export default function TournamentRulesPage() {
         <h2>3. Gameplay Rules</h2>
         <div className="card_single">
           <ul className="rules-list">
-            <li><strong>Team:</strong> All players must be adults (18+). Male, female and mixed teams are welcome.</li>
+            <li><strong>Team:</strong> All players must be adults (18+), from 5 to 8 players per team. </li>
+            <li><strong>Kit:</strong>All players must wear the same coloured jersey</li>
             <li><strong>On the field:</strong> One goalkeeper and four outfield players.</li>
             <li><strong>Subs:</strong> Unlimited rolling subs (must be authorized by Referee).</li>
             <li><strong>Throw-ins:</strong> Taken with <strong>hands</strong>.</li>
             <li><strong>Corners:</strong> Taken with the <strong>foot</strong>.</li>
             <li><strong>Fouls:</strong> All are <strong>Direct Free Kicks</strong>.</li>
             <li><strong>Penalties:</strong> Fouls inside the rival area result in a penalty kick.</li>
+            <li><strong>Diversity:</strong> Male, female and mixed teams are welcome.</li>
           </ul>
         </div>
       </section>

@@ -35,7 +35,7 @@ export const TRAINERS: Trainer[] = [
     name: "Yaya (Xango Capoeira)",
     role: "Capoeira Instructor & Osteopath",
     description: "A professional Osteopath and Capoeira practitioner with 10 years under her belt. She blends martial arts with Yoga and Pilates for a unique, holistic approach to movement.",
-    image: "/images/Xango.png",
+    image: "/images/Yaya_foto.png",
   },
   {
     id: 5,
@@ -53,10 +53,10 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 7,
-    name: "Manuela Osorio",
+    name: "Manuela Osorio (Manu Fit)",
     role: "Fitness & Booty Specialist",
     description: "Qualified PT (Cert III & IV) leading intensive lower-body sessions. Her 30-minute 'Booty with Bands' classes are designed for maximum energy and toning.",
-    image: "/images/lala.png",
+    image: "/images/Manu_foto.png",
   },
   {
     id: 8,

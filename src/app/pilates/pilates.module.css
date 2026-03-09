@@ -1,0 +1,199 @@
+/* pilates.module.css */
+
+.pilatesWrapper {
+  padding: 60px 0;
+  background-color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section (Portrait Image + Intro) */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 992px) {
+  .heroSection {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.imageSide {
+  flex: 1;
+}
+
+.portraitImg {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+}
+
+.textContent {
+  flex: 1.5;
+}
+
+.badge {
+  color: #f39304;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+}
+
+.textContent h1 {
+  color: #02678F;
+  font-size: 2.8rem;
+  margin: 10px 0 20px;
+}
+
+.questionList {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.questionList li {
+  padding: 10px 0 10px 35px;
+  position: relative;
+  font-style: italic;
+  color: #444;
+  font-size: 1.1rem;
+}
+
+.questionList li::before {
+  content: "👉";
+  position: absolute;
+  left: 0;
+}
+
+/* Info Blocks (Results & Why Now) */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+  .infoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.infoCard {
+  background: #f9fbfc;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #e1e8ed;
+}
+
+.infoCard h2 {
+  color: #02678F;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f39304;
+  display: inline-block;
+}
+
+.checkList {
+  list-style: none;
+  padding: 0;
+}
+
+.checkList li {
+  padding: 8px 0 8px 25px;
+  position: relative;
+}
+
+.checkList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #f39304;
+  font-weight: bold;
+}
+
+/* Program Options (Pricing) */
+.programSection {
+  background-color: #02678F;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+
+.programSection h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.programGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+@media (min-width: 768px) {
+  .programGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.priceCard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px border rgba(255, 255, 255, 0.2);
+}
+
+.priceCard h3 {
+  color: #f39304;
+  margin-bottom: 15px;
+}
+
+.priceCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.priceCard li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.onlineHighlight {
+  border: 2px solid #f39304;
+  background: rgba(243, 147, 4, 0.1);
+}
+
+/* Video Wrapper */
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

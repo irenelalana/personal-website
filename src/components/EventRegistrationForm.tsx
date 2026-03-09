@@ -21,6 +21,7 @@ export default function EventRegistrationForm() {
   // EQUIPO: Inicializamos con 5 miembros
   const [team, setTeam] = useState({
     teamName: '',
+    jerseyColour: '',
     members: Array.from({ length: 5 }, () => ({ name: '', email: '', phone: '' }))
   });
   const [source, setSource] = useState('');
@@ -121,6 +122,7 @@ export default function EventRegistrationForm() {
       }
     } else if (activeTab === 'team') {
       if (!team.teamName) return toast.error("Team name is required");
+      if (!team.jerseyColour) return toast.error("Jersey colour is required");
       for (let i = 0; i < team.members.length; i++) {
         const m = team.members[i];
         if (!m.name) return toast.error(`Name required for Player ${i + 1}`);
@@ -187,7 +189,7 @@ export default function EventRegistrationForm() {
           <div className="registration-forms">
             {adults.map((adult, i) => (
               <article key={i} className="form-card-activate">
-                <header className="card-header"><span className="badge">Adult {i + 1}</span></header>
+                <div className="card-header"><span className="badge">Adult {i + 1}</span></div>
                 <div className="input-group">
                   <input type="text" placeholder="Full Name" value={adult.name} onChange={(e) => handleInputChange('adult', i, 'name', e.target.value)} required />
                   <input type="email" placeholder="Email Address" value={adult.email} onChange={(e) => handleInputChange('adult', i, 'email', e.target.value)} required />
@@ -231,11 +233,16 @@ export default function EventRegistrationForm() {
         <div className="tab-content fade-in">
           <div className="registration-forms">
             <article className="form-card-activate team-card">
-              <header className="card-header">
+              <div className="card-header">
                 <span className="badge green">Soccer Team Registration (${PRICE_TEAM})</span>
-              </header>
-              <input className="team-name-input" type="text" placeholder="TEAM NAME (Required)" value={team.teamName} onChange={(e) => setTeam({...team, teamName: e.target.value})} />
-              
+              </div>
+              <div className="input-group">
+                <span className="member-label">Team Name</span>
+                <input className="team-name-input" type="text" placeholder="Team Name (Required)" value={team.teamName} onChange={(e) => setTeam({...team, teamName: e.target.value})} />
+                <span className="member-label">Team jersey Colour</span>   
+                <input className="team-name-input" type="text" placeholder="Jersey Colour (Required)" value={team.jerseyColour} onChange={(e) => setTeam({...team, jerseyColour: e.target.value})} />
+              </div>
+
               <div className="team-grid">
                 {team.members.map((m, i) => (
                   <div key={i} className="team-member-row">

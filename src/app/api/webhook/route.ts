@@ -27,6 +27,7 @@ interface BookingJSON {
   team?: {
     active: boolean;
     teamName: string;
+    jerseyColour: string;
     members: Attendee[];
   };
 }
@@ -37,6 +38,7 @@ interface ProcessedAttendee {
   phone?: string;
   type: string; // 'Adulto', 'Niño' o 'Jugador (Nombre Equipo)'
   team: string | null;
+  jerseyColour: string | null;
 }
 
 export async function POST(req: Request) {
@@ -96,7 +98,8 @@ export async function POST(req: Request) {
         email: a.email, 
         phone: a.phone, 
         type: 'Adult', 
-        team: null 
+        team: null ,
+        jerseyColour: null
       });
     });
     
@@ -107,13 +110,15 @@ export async function POST(req: Request) {
         email: k.email, 
         phone: k.phone, 
         type: 'Kid', 
-        team: null 
+        team: null,
+        jerseyColour: null
       });
     });
     
     // C. Equipo (si existe)
     if (bookingData.team?.active) {
       const teamName = bookingData.team.teamName;
+      const jerseyColour = bookingData.team.jerseyColour;
       bookingData.team.members.forEach(m => {
         if (m.name) {
           allAttendees.push({ 
@@ -121,7 +126,8 @@ export async function POST(req: Request) {
             email: m.email, 
             phone: m.phone, 
             type: `Player (${teamName})`, 
-            team: teamName 
+            team: teamName, 
+            jerseyColour: jerseyColour
           });
         }
       });
