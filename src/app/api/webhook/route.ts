@@ -153,7 +153,10 @@ export async function POST(req: Request) {
       //const qrBuffer = await QRCode.toBuffer(ticketId);
       const payload = signTicket(ticketId);
       const ticketUrl = `https://irelaaquaandfitness.com/activate-brisbane/t/${payload}`;
-      const qrBuffer = await QRCode.toBuffer(ticketUrl);
+      const qrBuffer = await QRCode.toBuffer(ticketUrl, {
+        width: 500,
+        margin: 4
+      });
       const qrBase64 = qrBuffer.toString('base64');
       // Guardar ticket individual en DB (opcional, pero recomendado)
       ticketsToInsert.push({

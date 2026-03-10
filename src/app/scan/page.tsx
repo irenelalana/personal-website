@@ -19,32 +19,37 @@ export default function ScanPage() {
     );
 
     scanner.render(
-      async (decodedText) => {
+    async (decodedText) => {
+
+        console.log("QR detected:", decodedText);
 
         try {
 
-          const url = new URL(decodedText);
-          const parts = url.pathname.split("/t/");
-          const payload = parts[1];
+        const url = new URL(decodedText);
+        const payload = url.pathname.split("/t/")[1];
 
-          const res = await fetch("/api/verify-ticket", {
+        console.log("Payload:", payload);
+
+        const res = await fetch("/api/verify-ticket", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+            "Content-Type": "application/json"
             },
             body: JSON.stringify({ payload })
-          });
+        });
 
-          const data = await res.json();
-          console.log(data);
-          setResult(data);
+        const data = await res.json();
+
+        console.log("API response:", data);
+
+        setResult(data);
 
         } catch (err) {
-          console.error(err);
+            console.error("Scan error:", err);
         }
 
-      },
-      () => {}
+    },
+    () => {}
     );
 
     return () => {

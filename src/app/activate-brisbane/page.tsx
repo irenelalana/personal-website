@@ -251,7 +251,7 @@ export default function ActivateBrisbanePage() {
             {/* <p>Early bird ends in...</p> */}
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
-            {/* <EventRegistrationForm />  */}
+            {/* <EventRegistrationForm />   */}
         </div>
       </section>
 
