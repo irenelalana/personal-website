@@ -84,7 +84,7 @@ const content: Record<'en' | 'es', Translation> = {
         title: "4. Discipline",
         p1: "No yellow/red cards. The Referee will expel players for unsportsmanlike conduct.",
         item1: "Expelled players cannot play the remainder of the current match.",
-        item2: "The team must play with one less player for that match.",
+        item2: "The team must play with one less player for the next 2 minutes.",
         item3: "Expulsion results in a 1-match ban for the next round."
       },
       prizes: {
@@ -149,7 +149,7 @@ const content: Record<'en' | 'es', Translation> = {
         title: "4. Disciplina",
         p1: "Sin tarjetas amarillas/rojas. El árbitro expulsará a jugadores por conducta antideportiva.",
         item1: "Jugadores expulsados no pueden jugar el resto del partido actual.",
-        item2: "El equipo debe jugar con un jugador menos ese partido.",
+        item2: "El equipo debe jugar con un jugador menos los siguientes 2 minutos.",
         item3: "La expulsión conlleva un partido de sanción para la siguiente ronda."
       },
       prizes: {
@@ -167,7 +167,7 @@ export default function TournamentRulesPage() {
   const t = content[lang];
 
   return (
-    <main className="landing-page">
+    <div className="landing-page">
       <div style={{ 
         position: 'fixed', top: '20px', right: '20px', zIndex: 1000, 
         display: 'flex', gap: '10px', backgroundColor: 'rgba(255,255,255,0.9)',
@@ -208,9 +208,9 @@ export default function TournamentRulesPage() {
           <ul className="rules-list">
             <li><strong>{t.sections.format.struct}</strong></li>
             <li><strong>{t.sections.format.adv}</strong></li>
-            <li>{t.sections.format.timeG}</li>
-            <li>{t.sections.format.timeK}</li>
-            <li>{t.sections.format.score}</li>
+            <li><strong>{t.sections.format.timeG}</strong></li>
+            <li><strong>{t.sections.format.timeK}</strong></li>
+            <li><strong>{t.sections.format.score}</strong></li>
             <li style={{ listStyle: 'none', marginTop: '10px' }}>
               <strong>{t.sections.format.tieTitle}</strong>
               <ul style={{ marginLeft: '20px', fontSize: '0.95rem', color: '#555' }}>
@@ -219,8 +219,8 @@ export default function TournamentRulesPage() {
                   <li>{t.sections.format.tie3}</li>
               </ul>
             </li>
-            <li>{t.sections.format.tieKO}</li>
-            <li>{t.sections.format.schedule}</li>
+            <li><strong>{t.sections.format.tieKO}</strong></li>
+            <li><strong>{t.sections.format.schedule}</strong></li>
           </ul>
           </div>
 
@@ -266,7 +266,7 @@ export default function TournamentRulesPage() {
             <li><strong>{t.sections.gameplay.corners}</strong></li>
             <li><strong>{t.sections.gameplay.fouls}</strong></li>
             <li><strong>{t.sections.gameplay.penalties}</strong></li>
-            <li>{t.sections.gameplay.diversity}</li>
+            <li><strong>{t.sections.gameplay.diversity}</strong></li>
           </ul>
         </div>
       </section>
@@ -298,6 +298,6 @@ export default function TournamentRulesPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -48,7 +48,7 @@ export default function ActivateBrisbanePage() {
   };
 
   return (
-    <main className="landing-page">
+    <div className="landing-page">
       {/* --- HERO SECTION --- */}
       <section className="hero-section">
         <div className="hero-content">
@@ -81,7 +81,7 @@ export default function ActivateBrisbanePage() {
           </div>
           
           <div className="cta-container">
-            <button onClick={scrollToForm} className="cta-button pulse">
+            <button className="cta-button pulse" onClick={scrollToForm}>
               Tickets Coming Soon
             </button>
           </div>
@@ -146,7 +146,9 @@ export default function ActivateBrisbanePage() {
             </ul>
         </div>
         <div className="cta-container" style={{marginTop: '30px'}}>
-            <button onClick={scrollToForm}>Tickets coming soon</button>
+            <button className="cta-button" onClick={scrollToForm}>
+              Tickets coming soon
+            </button>
         </div>
       </section>
 
@@ -261,6 +263,6 @@ export default function ActivateBrisbanePage() {
         </button> */}
       </div>
 
-    </main>
+    </div>
   );
 }

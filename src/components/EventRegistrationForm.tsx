@@ -298,7 +298,7 @@ export default function EventRegistrationForm() {
           <span className="total-amount">${total} AUD</span>
         </div>
 
-        <button className="payment-button" onClick={handleSubmit} disabled={loading || (activeTab === 'general' && total === 0)}>
+        <button className="payment-button cta-button" onClick={handleSubmit} disabled={loading || (activeTab === 'general' && total === 0)}>
           {loading ? 'PROCESSING...' : 'PURCHASE TICKETS'}
         </button>
       </div>
