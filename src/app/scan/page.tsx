@@ -23,7 +23,9 @@ export default function ScanPage() {
 
         try {
 
-          const payload = decodedText.split("/t/")[1];
+          const url = new URL(decodedText);
+          const parts = url.pathname.split("/t/");
+          const payload = parts[1];
 
           const res = await fetch("/api/verify-ticket", {
             method: "POST",
@@ -34,7 +36,7 @@ export default function ScanPage() {
           });
 
           const data = await res.json();
-
+          console.log(data);
           setResult(data);
 
         } catch (err) {
