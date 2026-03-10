@@ -6,6 +6,7 @@ import { Link } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { TRAINERS } from '@/data/trainers'; // Importamos la constante
 import { SPONSORS } from '@/data/sponsors';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 export default function ActivateBrisbanePage() {
 
@@ -248,8 +249,8 @@ export default function ActivateBrisbanePage() {
             {/* <p>Early bird ends in...</p> */}
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
+            
             {/* <EventRegistrationForm /> */}
-            <EventRegistrationForm />
         </div>
       </section>
 
