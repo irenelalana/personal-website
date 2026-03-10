@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-// Definimos la estructura para que TypeScript no se queje
 interface Translation {
   title: string;
   subtitle: string;
@@ -16,7 +15,10 @@ interface Translation {
       score: string; tieTitle: string; tie1: string; tie2: string; tie3: string; 
       tieKO: string; schedule: string;
     };
-    table: { phase: string; start: string; gStage: string; qFinal: string; sFinal: string; gFinal: string };
+    // AQUÍ ESTABA EL ERROR: Tenía que estar dentro de 'sections'
+    table: { 
+      phase: string; start: string; gStage: string; qFinal: string; sFinal: string; gFinal: string; 
+    };
     gameplay: { 
       title: string; team: string; kit: string; field: string; subs: string; 
       throwIns: string; corners: string; fouls: string; penalties: string; diversity: string;
@@ -226,25 +228,25 @@ export default function TournamentRulesPage() {
             <table style={{ width: '100%', borderCollapse: 'collapse', backgroundColor: '#fff', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
               <thead>
                 <tr style={{ backgroundColor: '#02678F', color: '#fff', textAlign: 'left' }}>
-                  <th style={{ padding: '12px 15px' }}>{t.table.phase}</th>
-                  <th style={{ padding: '12px 15px' }}>{t.table.start}</th>
+                  <th style={{ padding: '12px 15px' }}>{t.sections.table.phase}</th>
+                  <th style={{ padding: '12px 15px' }}>{t.sections.table.start}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={{ padding: '10px 15px' }}>{t.table.gStage}</td>
+                  <td style={{ padding: '10px 15px' }}>{t.sections.table.gStage}</td>
                   <td style={{ padding: '10px 15px' }}>9:00 am</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={{ padding: '10px 15px' }}>{t.table.qFinal}</td>
+                  <td style={{ padding: '10px 15px' }}>{t.sections.table.qFinal}</td>
                   <td style={{ padding: '10px 15px' }}>1:30 pm</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={{ padding: '10px 15px' }}>{t.table.sFinal}</td>
+                  <td style={{ padding: '10px 15px' }}>{t.sections.table.sFinal}</td>
                   <td style={{ padding: '10px 15px' }}>2:45 pm</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>{t.table.gFinal}</td>
+                  <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>{t.sections.table.gFinal}</td>
                   <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>3:30 pm</td>
                 </tr>
               </tbody>
