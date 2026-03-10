@@ -679,7 +679,7 @@ header {
 /* LISTAS DENTRO DE CARDS */
 .card_single ul {
   text-align: left;
-  display: inline-block;
+  /*display: inline-block;*/
   margin: 0 auto;
 }
 .card_single li {
