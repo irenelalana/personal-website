@@ -4,6 +4,8 @@ import Stripe from 'stripe';
 import { Resend } from 'resend';
 import QRCode from 'qrcode';
 import { createClient } from '@supabase/supabase-js';
+import { StandardFonts } from 'pdf-lib/cjs/api/StandardFonts';
+import PDFDocument from 'pdf-lib/cjs/api/PDFDocument';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -45,6 +47,9 @@ export async function POST(req: Request) {
   const body = await req.text();
   const headersList = await headers();
   const signature = headersList.get('stripe-signature') as string;
+
+  const pdfDoc = await PDFDocument.create();
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   let event
   try {
     event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
@@ -140,7 +145,7 @@ export async function POST(req: Request) {
       const cidName = `qr_${ticketId}`;
 
       // Generar Buffer QR
-      const qrBuffer = await QRCode.toBuffer(ticketId);
+      //const qrBuffer = await QRCode.toBuffer(ticketId);
 
       // Guardar ticket individual en DB (opcional, pero recomendado)
       ticketsToInsert.push({
@@ -154,11 +159,15 @@ export async function POST(req: Request) {
       });
 
       // Preparar adjunto
+      const qrBuffer = await QRCode.toBuffer(ticketId);
+      const qrBase64 = qrBuffer.toString('base64');
+
       attachments.push({
         filename: `ticket-${i + 1}.png`,
-        content: qrBuffer,
+        content: qrBase64,
         cid: cidName,
-        disposition: 'inline'
+        disposition: 'inline',
+        contentType: 'image/png'
       });
 
       // HTML del Ticket
@@ -169,13 +178,59 @@ export async function POST(req: Request) {
             ${person.type}
           </span>
           <div style="margin: 20px 0;">
-            <img src="cid:${cidName}" width="180" height="180" style="display: block; margin: 0 auto;" />
+            <img src="cid:qr_${ticketId}" width="180" height="180" style="display: block; margin: 0 auto;" />
           </div>
           <p style="font-size: 11px; color: #888;">ID: ${ticketId}</p>
         </div>
       `);
     }
 
+    for (let i = 0; i < allAttendees.length; i++) {
+        const person = allAttendees[i];
+        const ticketId = ticketsToInsert[i].id;
+
+        const page = pdfDoc.addPage([400, 500]);
+
+        const qrBuffer = await QRCode.toBuffer(ticketId);
+        const qrImage = await pdfDoc.embedPng(qrBuffer);
+
+        page.drawText("EVENT TICKET", {
+          x: 120,
+          y: 460,
+          size: 20,
+          font
+        });
+
+        page.drawText(person.name, {
+          x: 50,
+          y: 420,
+          size: 16,
+          font
+        });
+
+        page.drawText(person.type, {
+          x: 50,
+          y: 390,
+          size: 12,
+          font
+        });
+
+        page.drawImage(qrImage, {
+          x: 110,
+          y: 200,
+          width: 180,
+          height: 180
+        });
+
+        page.drawText(`Ticket ID: ${ticketId}`, {
+          x: 80,
+          y: 160,
+          size: 10,
+          font
+        });
+      }
+
+      const pdfBytes = await pdfDoc.save();
     // 3. ACTUALIZAR BASE DE DATOS
     
     // A. Insertar los tickets individuales
@@ -200,7 +255,13 @@ export async function POST(req: Request) {
       from: 'Eventos <tickets@irelaaquaandfitness.com>',
       to: customerEmail!,
       subject: `Tus entradas confirmadas (${allAttendees.length})`,
-      attachments: attachments,
+      attachments: [
+      {
+        filename: "tickets.pdf",
+        content: Buffer.from(pdfBytes).toString("base64"),
+        contentType: "application/pdf"
+      }
+  ],
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; background-color: #f9fafb; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">

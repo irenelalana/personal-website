@@ -249,6 +249,7 @@ export default function ActivateBrisbanePage() {
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
             {/* <EventRegistrationForm /> */}
+            <EventRegistrationForm />
         </div>
       </section>
 
