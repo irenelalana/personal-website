@@ -25,6 +25,22 @@ export async function POST(req: Request) {
     return Response.json({ valid: false });
   }
 
+  if (ticket.checked_in) {
+    return Response.json({
+      valid: false,
+      reason: "already_checked_in",
+      name: ticket.attendee_name
+    });
+}
+
+   await supabase
+    .from("tickets")
+    .update({
+      checked_in: true,
+      checked_in_at: new Date()
+    })
+    .eq("id", ticketId);
+
   return Response.json({
     valid: true,
     checked_in: ticket.checked_in,
