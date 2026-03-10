@@ -56,9 +56,38 @@ export default function TournamentRulesPage() {
               </ul>
             </li>
             <li><strong>Tie-break (Knockout only):</strong> If level at full time, 3 penalties per team, then sudden death.</li>
-            <li><strong>Schedule:</strong> The tournament starts at 9:00 am and will finish approximately at 2:00 pm.</li>
+            <li><strong>Schedule:</strong> The tournament starts at 9:00 am and will finish approximately at 4:00 pm.</li>
           </ul>
           </div>
+          {/* --- TABLA DE HORARIOS --- */}
+    <div style={{ marginTop: '25px', overflowX: 'auto' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', backgroundColor: '#fff', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+        <thead>
+          <tr style={{ backgroundColor: '#02678F', color: '#fff', textAlign: 'left' }}>
+            <th style={{ padding: '12px 15px' }}>Tournament Phase</th>
+            <th style={{ padding: '12px 15px' }}>Start Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: '1px solid #eee' }}>
+            <td style={{ padding: '10px 15px' }}>Group Stage</td>
+            <td style={{ padding: '10px 15px' }}>9:00 am</td>
+          </tr>
+          <tr style={{ borderBottom: '1px solid #eee' }}>
+            <td style={{ padding: '10px 15px' }}>Quarter-finals</td>
+            <td style={{ padding: '10px 15px' }}>1:30 pm</td>
+          </tr>
+          <tr style={{ borderBottom: '1px solid #eee' }}>
+            <td style={{ padding: '10px 15px' }}>Semi-finals</td>
+            <td style={{ padding: '10px 15px' }}>2:45 pm</td>
+          </tr>
+          <tr>
+            <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>Grand Final</td>
+            <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>3:00 pm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
       </section>
 
       {/* --- 3. GAMEPLAY --- */}
