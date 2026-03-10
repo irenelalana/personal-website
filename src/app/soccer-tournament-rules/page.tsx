@@ -47,6 +47,14 @@ export default function TournamentRulesPage() {
             <li><strong>Group Stage Timing:</strong> 16-minute matches (Two halves of 8 mins). There is a 4-minute transition before the next match starts.</li>
             <li><strong>Knockout Phase Timing:</strong> Quarter-finals, Semis, and Final are 20-minute matches (Two halves of 10 mins).</li>
             <li><strong>Scoring (Group Stage):</strong> Win = 3 pts, Draw = 1 pt, Loss = 0 pts.</li>
+            <li style={{ listStyle: 'none', marginTop: '10px' }}>
+              <strong>Group Stage Tie-breakers:</strong>
+              <ul style={{ marginLeft: '20px', fontSize: '0.95rem', color: '#555' }}>
+                  <li>1. <strong>Head-to-head:</strong> Result of the match between the tied teams.</li>
+                  <li>2. <strong>Goal Difference:</strong> Highest overall goal difference.</li>
+                  <li>3. <strong>Goals For:</strong> Most goals scored throughout the group stage.</li>
+              </ul>
+            </li>
             <li><strong>Tie-break (Knockout only):</strong> If level at full time, 3 penalties per team, then sudden death.</li>
             <li><strong>Schedule:</strong> The tournament starts at 9:00 am and will finish approximately at 2:00 pm.</li>
           </ul>
