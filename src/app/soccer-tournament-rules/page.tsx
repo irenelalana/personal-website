@@ -83,7 +83,7 @@ export default function TournamentRulesPage() {
           </tr>
           <tr>
             <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>Grand Final</td>
-            <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>3:00 pm</td>
+            <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>3:30 pm</td>
           </tr>
         </tbody>
       </table>
