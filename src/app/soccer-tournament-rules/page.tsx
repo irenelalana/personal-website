@@ -18,11 +18,10 @@ export default function TournamentRulesPage() {
         <div className="card-activate">
           <h2>General Spirit</h2>
           <p>
-            The Actívate Brisbane Soccer Tournament is designed to promote community, sportsmanship, and healthy competition. While rules are based on Futsal, they are adapted for grass and a fast-paced knockout format, ensuring an exciting experience for players and spectators alike.
-            </p>
-
-            <p>
-              Please note: By registering, you are not just signing up for the soccer tournament; your ticket grants you full access to the entire event. You'll be able to enjoy all the other activities scheduled throughout the day (yout tournament matches permitting), soak up the vibrant atmosphere, and connect with our wonderful community. It’s more than a competition—it’s a complete day out for everyone!
+            The Actívate Brisbane Soccer Tournament is designed to promote community, sportsmanship, and healthy competition. While rules are based on Futsal, they are adapted for grass and a fast-paced format, ensuring an exciting experience for players and spectators alike.
+          </p>
+          <p>
+            Please note: By registering, you are not just signing up for the soccer tournament; your ticket grants you full access to the entire event. You'll be able to enjoy all the other activities scheduled throughout the day, soak up the vibrant atmosphere, and connect with our wonderful community.
           </p>
         </div>
       </section>
@@ -38,15 +37,18 @@ export default function TournamentRulesPage() {
         </div>
       </section>
 
-      {/* --- 2. FORMAT & TIMING --- */}
+      {/* --- 2. TOURNAMENT FORMAT & TIMING --- */}
       <section className="content-section alt-bg">    
           <h2>2. Tournament Format & Timing</h2>
           <div className="card_single">
           <ul className="rules-list">
-            <li><strong>Bracket:</strong> 16 teams max. Direct knockout format.</li>
-            <li><strong>Match Time:</strong> Two halves of 10 mins (No half-time break).</li>
-            <li><strong>Tie-break:</strong> 3 penalties per team, then sudden death.</li>
-            <li><strong>Duration:</strong> The tournament will start at 9:00am and will finish approximately at 2:00pm.</li>
+            <li><strong>Structure:</strong> Group Stage (4 teams per group) followed by Quarter-finals, Semi-finals, and Final.</li>
+            <li><strong>Advancement:</strong> The <strong>top 2 teams</strong> from each group advance to the Knockout phase.</li>
+            <li><strong>Group Stage Timing:</strong> 16-minute matches (Two halves of 8 mins). There is a 4-minute transition before the next match starts.</li>
+            <li><strong>Knockout Phase Timing:</strong> Quarter-finals, Semis, and Final are 20-minute matches (Two halves of 10 mins).</li>
+            <li><strong>Scoring (Group Stage):</strong> Win = 3 pts, Draw = 1 pt, Loss = 0 pts.</li>
+            <li><strong>Tie-break (Knockout only):</strong> If level at full time, 3 penalties per team, then sudden death.</li>
+            <li><strong>Schedule:</strong> The tournament starts at 9:00 am and will finish approximately at 2:00 pm.</li>
           </ul>
           </div>
       </section>
@@ -56,15 +58,15 @@ export default function TournamentRulesPage() {
         <h2>3. Gameplay Rules</h2>
         <div className="card_single">
           <ul className="rules-list">
-            <li><strong>Team:</strong> All players must be adults (18+), from 5 to 8 players per team. </li>
-            <li><strong>Kit:</strong>All players must wear the same coloured jersey</li>
+            <li><strong>Team:</strong> All players must be adults (18+), from 5 to 8 players per team.</li>
+            <li><strong>Kit:</strong> All players must wear the same coloured jersey.</li>
             <li><strong>On the field:</strong> One goalkeeper and four outfield players.</li>
             <li><strong>Subs:</strong> Unlimited rolling subs (must be authorized by Referee).</li>
             <li><strong>Throw-ins:</strong> Taken with <strong>hands</strong>.</li>
             <li><strong>Corners:</strong> Taken with the <strong>foot</strong>.</li>
             <li><strong>Fouls:</strong> All are <strong>Direct Free Kicks</strong>.</li>
             <li><strong>Penalties:</strong> Fouls inside the rival area result in a penalty kick.</li>
-            <li><strong>Diversity:</strong> Male, female and mixed teams are welcome.</li>
+            <li><strong>Diversity:</strong> Male, female, and mixed teams are welcome.</li>
           </ul>
         </div>
       </section>
