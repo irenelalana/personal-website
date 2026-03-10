@@ -16,7 +16,7 @@ export default function EventRegistrationForm() {
   const [acceptedTerms, setAcceptedTerms] = useState(false); // NUEVO: Estado para T&C
 
   const [adults, setAdults] = useState<any[]>([]);
-  const [kids, setKids] = useState<any[]>([]);
+  const [youth, setYouth] = useState<any[]>([]);
   
   // EQUIPO: Inicializamos con 5 miembros
   const [team, setTeam] = useState({
@@ -41,23 +41,23 @@ export default function EventRegistrationForm() {
   }, []);
 
   const PRICE_ADULT = prices['Adult'] || 0;
-  const PRICE_KID = prices['Kid'] || 0;
+  const PRICE_YOUTH = prices['Youth'] || 0;
   const PRICE_TEAM = prices['Soccer Team'] || 0; // ¿El precio es fijo para 5-8 o por jugador? Asumo que es un Pack fijo por ahora.
 
-  const handleInputChange = (type: 'adult' | 'kid' | 'team', index: number, field: string, value: string) => {
+  const handleInputChange = (type: 'adult' | 'youth' | 'team', index: number, field: string, value: string) => {
     if (type === 'adult') {
       const newAdults = [...adults];
       // Usamos (as any) para que TS nos deje indexar con un string dinámico
       (newAdults[index] as any)[field] = value;
       setAdults(newAdults);
       if (index === 0 && (field === 'email' || field === 'phone')) {
-        const updatedKids = kids.map(k => k.useAdultContact ? { ...k, [field]: value } : k);
-        setKids(updatedKids);
+        const updatedyouth = youth.map(k => k.useAdultContact ? { ...k, [field]: value } : k);
+        setYouth(updatedyouth);
       }
-    } else if (type === 'kid') {
-      const newKids = [...kids];
-      (newKids[index] as any)[field] = value;
-      setKids(newKids);
+    } else if (type === 'youth') {
+      const newyouth = [...youth];
+      (newyouth[index] as any)[field] = value;
+      setYouth(newyouth);
     } else if (type === 'team') {
       const newMembers = [...team.members];
       // Aquí aplicamos lo mismo para tu error específico
@@ -66,16 +66,16 @@ export default function EventRegistrationForm() {
     }
   };
 
-  const updateCount = (type: 'adult' | 'kid', delta: number) => {
+  const updateCount = (type: 'adult' | 'youth', delta: number) => {
     if (type === 'adult') {
       const next = adults.length + delta;
       if (next < 0) return;
       delta > 0 ? setAdults([...adults, { name: '', email: '', phone: '' }]) : setAdults(adults.slice(0, -1));
     } else {
       if (adults.length === 0) return toast.error("Please, add at least one adult first");
-      const next = kids.length + delta;
+      const next = youth.length + delta;
       if (next < 0) return;
-      delta > 0 ? setKids([...kids, { name: '', email: '', phone: '', useAdultContact: false }]) : setKids(kids.slice(0, -1));
+      delta > 0 ? setYouth([...youth, { name: '', email: '', phone: '', useAdultContact: false }]) : setYouth(youth.slice(0, -1));
     }
   };
 
@@ -93,7 +93,7 @@ export default function EventRegistrationForm() {
   };
 
   const total = activeTab === 'general' 
-    ? (adults.length * PRICE_ADULT) + (kids.length * PRICE_KID)
+    ? (adults.length * PRICE_ADULT) + (youth.length * PRICE_YOUTH)
     : PRICE_TEAM;
 
   const handleSubmit = async () => {
@@ -112,12 +112,12 @@ export default function EventRegistrationForm() {
         if (!validateEmail(a.email)) return toast.error(`Invalid email for Adult ${i + 1}`);
         if (!validatePhone(a.phone)) return toast.error(`Invalid phone for Adult ${i + 1}`);
       }
-      for (let i = 0; i < kids.length; i++) {
-        const k = kids[i];
-        if (!k.name) return toast.error(`Name required for Kid ${i + 1}`);
+      for (let i = 0; i < youth.length; i++) {
+        const k = youth[i];
+        if (!k.name) return toast.error(`Name required for Youth ${i + 1}`);
         if (!k.useAdultContact) {
-          if (!validateEmail(k.email)) return toast.error(`Invalid email for Kid ${i + 1}`);
-          if (!validatePhone(k.phone)) return toast.error(`Invalid phone for Kid ${i + 1}`);
+          if (!validateEmail(k.email)) return toast.error(`Invalid email for Youth ${i + 1}`);
+          if (!validatePhone(k.phone)) return toast.error(`Invalid phone for Youth ${i + 1}`);
         }
       }
     } else if (activeTab === 'team') {
@@ -135,7 +135,7 @@ export default function EventRegistrationForm() {
     
     const payload = {
       adults: activeTab === 'general' ? adults : [],
-      kids: activeTab === 'general' ? kids : [],
+      youth: activeTab === 'general' ? youth : [],
       team: activeTab === 'team' ? { ...team, active: true } : null,
       source
     };
@@ -177,11 +177,11 @@ export default function EventRegistrationForm() {
             </div>
 
             <div className={`selector-item ${adults.length === 0 ? 'disabled' : ''}`}>
-              <label>Kids (${PRICE_KID})</label>
+              <label>Youth (12-17) (${PRICE_YOUTH})</label>
               <div className="counter">
-                <button type="button" onClick={() => updateCount('kid', -1)} disabled={adults.length === 0}>-</button>
-                <span className="count-value">{kids.length}</span>
-                <button type="button" onClick={() => updateCount('kid', 1)} disabled={adults.length === 0}>+</button>
+                <button type="button" onClick={() => updateCount('youth', -1)} disabled={adults.length === 0}>-</button>
+                <span className="count-value">{youth.length}</span>
+                <button type="button" onClick={() => updateCount('youth', 1)} disabled={adults.length === 0}>+</button>
               </div>
             </div>
           </div>
@@ -198,28 +198,29 @@ export default function EventRegistrationForm() {
               </article>
             ))}
 
-            {kids.map((kid, i) => (
+            {youth.map((y, i) => (
               <article key={i} className="form-card-activate kid-card">
                 <div className="card-header">
-                  <span className="badge orange">Kid {i + 1}</span>
+                  <span className="badge orange">Youth {i + 1}</span>
                   <label className="contact-sync">
-                    <input type="checkbox" checked={kid.useAdultContact} onChange={() => {
-                      const newKids = [...kids];
-                      newKids[i].useAdultContact = !newKids[i].useAdultContact;
-                      if(newKids[i].useAdultContact && adults[0]) {
-                        newKids[i].email = adults[0].email;
-                        newKids[i].phone = adults[0].phone;
+                    <span className="badge">Use Adult 1 info</span>
+                    <input type="checkbox" checked={y.useAdultContact} onChange={() => {
+                      const newyouth = [...youth];
+                      newyouth[i].useAdultContact = !newyouth[i].useAdultContact;
+                      if(newyouth[i].useAdultContact && adults[0]) {
+                        newyouth[i].email = adults[0].email;
+                        newyouth[i].phone = adults[0].phone;
                       }
-                      setKids(newKids);
-                    }} /> <span className="badge">Use Adult 1 info</span>
+                      setYouth(newyouth);
+                    }} /> 
                   </label>
                 </div>
                 <div className="input-group">
-                  <input type="text" placeholder="Kid's Full Name" value={kid.name} onChange={(e) => handleInputChange('kid', i, 'name', e.target.value)} required />
-                  {!kid.useAdultContact && (
+                  <input type="text" placeholder="Youth's Full Name" value={y.name} onChange={(e) => handleInputChange('youth', i, 'name', e.target.value)} required />
+                  {!y.useAdultContact && (
                     <>
-                      <input type="email" placeholder="Parent's Email" value={kid.email} onChange={(e) => handleInputChange('kid', i, 'email', e.target.value)} />
-                      <input type="tel" placeholder="Parent's Phone" value={kid.phone} onChange={(e) => handleInputChange('kid', i, 'phone', e.target.value)} />
+                      <input type="email" placeholder="Parent's Email" value={y.email} onChange={(e) => handleInputChange('youth', i, 'email', e.target.value)} />
+                      <input type="tel" placeholder="Parent's Phone" value={y.phone} onChange={(e) => handleInputChange('youth', i, 'phone', e.target.value)} />
                     </>
                   )}
                 </div>

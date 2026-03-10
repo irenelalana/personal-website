@@ -72,7 +72,7 @@ export default function ActivateBrisbanePage() {
         </div>
           <p className="hero-subtitle">Move. Connect. Celebrate.</p>
           <div className="hero-details">
-            <p>📅 12 July 2026</p>
+            <p>📅 Sunday 12 July 2026</p>
             <p>📍 Yeronga Eagles Football Club</p>
             <p>⏰ 8:00AM – 5:00PM</p>
             <p>📸 <a href="https://www.instagram.com/activatebrisbane" target="_blank"  style={{ textDecoration: 'underline', color: 'inherit' }}>
@@ -139,7 +139,7 @@ export default function ActivateBrisbanePage() {
               <li>Traditional games and activities</li>
               <li>Sponsor goodie bag</li>
               <li>Access to <a href="/soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</a> (Soccer Team Pack Needed)</li>
-              <li>Social soccer matches for kids and families</li>
+              <li>Social soccer matches for kids, teens and families</li>
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
               <li>Bibs</li>

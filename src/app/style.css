@@ -394,6 +394,10 @@ line-height: 1.5em;
   z-index:3;
 }
 
+.contact-sync{
+  padding-left: 30px;
+}
+
 .contact-form input,
 .contact-form textarea {
   width: 95%;

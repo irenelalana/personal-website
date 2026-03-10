@@ -225,7 +225,7 @@ export async function checkoutComplexBooking(data: any) {
   const { data: dbPrices } = await supabase
     .from('ticket_types')
     .select('name, price')
-    .in('name', ['Adult', 'Kid', 'Soccer Team']);
+    .in('name', ['Adult', 'Youth', 'Soccer Team']);
 
   const priceMap = dbPrices?.reduce((acc, curr) => ({
     ...acc, [curr.name]: curr.price
@@ -234,7 +234,7 @@ export async function checkoutComplexBooking(data: any) {
   // 2. Recalcular el total en el servidor (Seguridad)
   const serverTotal = 
     (data.adults.length * (priceMap['Adult'] || 0)) +
-    (data.kids.length * (priceMap['Kid'] || 0)) +
+    (data.youth.length * (priceMap['Youth'] || 0)) +
     (data.team ? (priceMap['Soccer Team'] || 0) : 0);
 
   // 3. Guardar la reserva pendiente en Supabase
@@ -260,21 +260,21 @@ export async function checkoutComplexBooking(data: any) {
     line_items.push({
       price_data: {
         currency: 'aud',
-        product_data: { name: 'Adulto Ticket' },
+        product_data: { name: 'Adult Ticket' },
         unit_amount: Math.round(priceMap['Adult'] * 100),
       },
       quantity: data.adults.length,
     });
   }
 
-  if (data.kids.length > 0) {
+  if (data.youth.length > 0) {
     line_items.push({
       price_data: {
         currency: 'aud',
-        product_data: { name: 'kid Ticket' },
-        unit_amount: Math.round(priceMap['Kid'] * 100),
+        product_data: { name: 'Youth Ticket' },
+        unit_amount: Math.round(priceMap['Youth'] * 100),
       },
-      quantity: data.kids.length,
+      quantity: data.youth.length,
     });
   }
 

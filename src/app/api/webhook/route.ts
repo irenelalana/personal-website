@@ -6,6 +6,10 @@ import QRCode from 'qrcode';
 import { createClient } from '@supabase/supabase-js';
 import { StandardFonts } from 'pdf-lib/cjs/api/StandardFonts';
 import PDFDocument from 'pdf-lib/cjs/api/PDFDocument';
+import { generateTicketsPDF } from '@/lib/generateTicketsPDF';
+import { signTicket } from "@/lib/tickets";
+
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -24,7 +28,7 @@ interface Attendee {
 
 interface BookingJSON {
   adults: Attendee[];
-  kids: Attendee[];
+  youth: Attendee[];
   source: string; // Nuevo campo para la fuente de la reserva
   team?: {
     active: boolean;
@@ -83,12 +87,13 @@ export async function POST(req: Request) {
       console.error('Booking not found in DB');
       return new NextResponse('Booking not found', { status: 404 });
     }
-
+    console.log(order)
     // Parseamos el JSON con los datos de la gente
     const bookingData = order.attendees_data as BookingJSON;
-    
+    //console.log("📋 Booking data:", bookingData);
+
     // Arrays para procesar
-    const ticketsToInsert = []; // Para guardar en tabla 'tickets' individualmente
+    const ticketsToInsert: any = []; // Para guardar en tabla 'tickets' individualmente
     const attachments = [];     // Para el email
     const ticketsHtml = [];     // Para el cuerpo del email
 
@@ -109,12 +114,12 @@ export async function POST(req: Request) {
     });
     
     // B. Niños
-    bookingData.kids.forEach(k => {
+    bookingData.youth.forEach(k => {
       allAttendees.push({ 
         name: k.name, 
         email: k.email, 
         phone: k.phone, 
-        type: 'Kid', 
+        type: 'Youth', 
         team: null,
         jerseyColour: null
       });
@@ -146,7 +151,10 @@ export async function POST(req: Request) {
 
       // Generar Buffer QR
       //const qrBuffer = await QRCode.toBuffer(ticketId);
-
+      const payload = signTicket(ticketId);
+      const ticketUrl = `https://irelaaquaandfitness.com/activate-brisbane/t/${payload}`;
+      const qrBuffer = await QRCode.toBuffer(ticketUrl);
+      const qrBase64 = qrBuffer.toString('base64');
       // Guardar ticket individual en DB (opcional, pero recomendado)
       ticketsToInsert.push({
         id: ticketId,
@@ -155,82 +163,54 @@ export async function POST(req: Request) {
         customer_name: person.name,
         source: bookingData.source,
         ticket_type: person.type,
-        qr_code: ticketId
+        qr_code: qrBase64
       });
 
       // Preparar adjunto
-      const qrBuffer = await QRCode.toBuffer(ticketId);
-      const qrBase64 = qrBuffer.toString('base64');
+      
+      
 
-      attachments.push({
-        filename: `ticket-${i + 1}.png`,
-        content: qrBase64,
-        cid: cidName,
-        disposition: 'inline',
-        contentType: 'image/png'
-      });
+      // attachments.push({
+      //   filename: `ticket-${i + 1}.png`,
+      //   content: qrBase64,
+      //   cid: cidName,
+      //   disposition: 'inline',
+      //   contentType: 'image/png'
+      // });
 
       // HTML del Ticket
-      ticketsHtml.push(`
-        <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; background-color: #ffffff;">
-          <h3 style="margin: 0 0 10px 0; color: #333;">${person.name}</h3>
-          <span style="background-color: #eff6ff; color: #1d4ed8; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
-            ${person.type}
-          </span>
-          <div style="margin: 20px 0;">
-            <img src="cid:qr_${ticketId}" width="180" height="180" style="display: block; margin: 0 auto;" />
-          </div>
-          <p style="font-size: 11px; color: #888;">ID: ${ticketId}</p>
-        </div>
-      `);
+      // ticketsHtml.push(`
+      //   <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; background-color: #ffffff;">
+      //     <h3 style="margin: 0 0 10px 0; color: #333;">${person.name}</h3>
+      //     <span style="background-color: #eff6ff; color: #1d4ed8; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+      //       ${person.type}
+      //     </span>
+      //     <div style="margin: 20px 0;">
+      //       <img src="cid:qr_${ticketId}" width="180" height="180" style="display: block; margin: 0 auto;" />
+      //     </div>
+      //     <p style="font-size: 11px; color: #888;">ID: ${ticketId}</p>
+      //   </div>
+      // `);
     }
 
-    for (let i = 0; i < allAttendees.length; i++) {
-        const person = allAttendees[i];
-        const ticketId = ticketsToInsert[i].id;
+    const ticketsForPDF = allAttendees.map((p, i) => ({
+      ticketId: ticketsToInsert[i].id,
+      attendeeName: p.name,
+      ticketType: p.type,
+      qrCode: ticketsToInsert[i].qr_code
+    }));
 
-        const page = pdfDoc.addPage([400, 500]);
+    const eventInfo = {
+      eventName: "Activate Brisbane",
+      eventDate: "Sunday 12 July 2026",
+      eventTime: "8:00 AM – 5:00 PM",
+      eventLocation: " Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104",
+      orderNumber: orderId,
+      logoPath: "./public/images/activate-brisbane-light.png",
+      eventWebsite: "https://www.irelaaquaandfitness.com/activate-brisbane"
+    };
 
-        const qrBuffer = await QRCode.toBuffer(ticketId);
-        const qrImage = await pdfDoc.embedPng(qrBuffer);
-
-        page.drawText("EVENT TICKET", {
-          x: 120,
-          y: 460,
-          size: 20,
-          font
-        });
-
-        page.drawText(person.name, {
-          x: 50,
-          y: 420,
-          size: 16,
-          font
-        });
-
-        page.drawText(person.type, {
-          x: 50,
-          y: 390,
-          size: 12,
-          font
-        });
-
-        page.drawImage(qrImage, {
-          x: 110,
-          y: 200,
-          width: 180,
-          height: 180
-        });
-
-        page.drawText(`Ticket ID: ${ticketId}`, {
-          x: 80,
-          y: 160,
-          size: 10,
-          font
-        });
-      }
-
-      const pdfBytes = await pdfDoc.save();
+      const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
     // 3. ACTUALIZAR BASE DE DATOS
     
     // A. Insertar los tickets individuales
@@ -250,35 +230,173 @@ export async function POST(req: Request) {
       })
       .eq('id', orderId);
 
-    // 4. ENVIAR EMAIL
-    await resend.emails.send({
-      from: 'Eventos <tickets@irelaaquaandfitness.com>',
-      to: customerEmail!,
-      subject: `Tus entradas confirmadas (${allAttendees.length})`,
-      attachments: [
-      {
-        filename: "tickets.pdf",
-        content: Buffer.from(pdfBytes).toString("base64"),
-        contentType: "application/pdf"
-      }
-  ],
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: auto; background-color: #f9fafb; padding: 20px;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #111;">¡Reserva Confirmada!</h1>
-            <p style="color: #666;">Hola ${customerName}, el pago se ha procesado correctamente.</p>
-            <p>Aquí tienes las entradas para todo el grupo/equipo.</p>
-          </div>
-          
-          ${ticketsHtml.join('')}
 
-          <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #999;">
-            <p>Guarda este correo. Necesitarás los códigos QR para acceder.</p>
+      const purchaseDate = new Date().toLocaleString("en-AU");
+
+      const ticketBreakdown = buildTicketBreakdown(
+        bookingData.adults.length,
+        bookingData.youth.length,
+        bookingData.team?.members.length || 0,
+        29,
+        10,
+        250
+      );
+
+      const totalPrice = order. total_amount ? `$${order. total_amount}.00` : "N/A";
+      const emailHtml = `
+        <div style="font-family: Arial, Helvetica, sans-serif; background-color:#f5f7fa; padding:40px 20px;">
+          <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+            <div style="background:#0c4a6e; color:white; padding:24px; text-align:center;">
+              <h1 style="margin:0; font-size:24px;">Activate Brisbane</h1>
+            </div>
+
+            <div style="padding:30px; color:#333333; line-height:1.6;">
+
+              <p style="font-size:16px;">Hola <strong>${customerName}</strong>!</p>
+
+              <p>
+                Thanks for your purchase and welcome to <strong>Activate Brisbane</strong>.
+              </p>
+
+              <p>
+                Your tickets have been successfully confirmed.<br/>
+                You'll find all tickets attached in the <strong>PDF included with this email</strong>.
+              </p>
+
+              <h3 style="margin-top:30px;">Order details</h3>
+
+              <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <tr>
+                  <td style="padding:6px 0; color:#666;">Order number:</td>
+                  <td style="padding:6px 0;"><strong>${orderId}</strong></td>
+                </tr>
+                <tr>
+                  <td style="padding:6px 0; color:#666;">Purchase date:</td>
+                  <td style="padding:6px 0;">${purchaseDate}</td>
+                </tr>
+              </table>
+
+              <div style="margin-top:20px;">
+                <strong>Tickets purchased:</strong>
+                <div style="margin-top:8px;">
+                  ${ticketBreakdown}
+                </div>
+              </div>
+
+              <p style="margin-top:16px; padding:6px 0; text-align:right; font-size: 1.4rem;">
+                <strong>Total paid: ${totalPrice} </strong>
+              </p>
+
+              <p style="margin-top:20px;">
+                Each ticket contains a unique QR code that will be scanned at the entrance.
+              </p>
+
+              <p>
+                Please keep this email or download the attached PDF and bring your ticket(s) with you on the day.
+              </p>
+
+              <h3 style="margin-top:32px;">Event details</h3>
+
+              <div style="background:#f3f4f6; padding:16px; border-radius:8px; font-size:14px;">
+                <p style="margin:4px 0;"><strong>Activate Brisbane</strong></p>
+                <p style="margin:4px 0;">📍 Location: Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104</p>
+                <p style="margin:4px 0;">📅 Date: 12 July 2026</p>
+                <p style="margin:4px 0;">⏰ Time: 8:00 AM - 5:00 PM</p>
+              </div>
+
+              <p style="margin-top:24px;">
+                If you have any questions, please contact us at<br/>
+                <a href="mailto:tickets@irelaaquaandfitness.com" style="color:#0c4a6e;">
+                  tickets@irelaaquaandfitness.com
+                </a>
+              </p>
+
+              <p style="margin-top:30px;">
+                We look forward to seeing you there.
+              </p>
+
+              <p>
+                Kind regards,<br/>
+                <strong>Activate Brisbane Team</strong>
+              </p>
+
+            </div>
+
+            <div style="background:#f9fafb; text-align:center; padding:14px; font-size:12px; color:#888;">
+              Activate Brisbane · Brisbane, QLD
+            </div>
+
           </div>
         </div>
-      `
-    });
+        `;
+
+      await resend.emails.send({
+        from: "Activate Brisbane <tickets@irelaaquaandfitness.com>",
+        to: customerEmail!,
+        subject: "Your Activate Brisbane tickets",
+        attachments: [
+          {
+            filename: "activate-brisbane-tickets.pdf",
+            content: Buffer.from(pdfBytes).toString("base64"),
+            contentType: "application/pdf"
+          }
+        ],
+        html: emailHtml
+      });
   }
 
   return new NextResponse(null, { status: 200 });
+}
+
+function buildTicketBreakdown(
+  adultCount: number,
+  youthCount: number,
+  teamCount: number,
+  adultPrice: number,
+  youthPrice: number,
+  teamPrice: number
+) {
+  const rows: string[] = [];
+
+  if (adultCount > 0) {
+    const total = adultPrice * adultCount;
+
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">${adultCount} × Adult ticket${adultCount > 1 ? "s" : ""}</td>
+        <td style="padding:6px 0; text-align:right;">$${adultPrice} × ${adultCount}</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  if (youthCount > 0) {
+    const total = youthPrice * youthCount;
+
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">${youthCount} × Youth ticket${youthCount > 1 ? "s" : ""}</td>
+        <td style="padding:6px 0; text-align:right;">$${youthPrice} × ${youthCount}</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  if (teamCount > 0) {
+    const total = teamPrice * teamCount;
+
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">1 Team ticket</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  return `
+    <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;">
+      ${rows.join("")}
+    </table>
+  `;
 }
