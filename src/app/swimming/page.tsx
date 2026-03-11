@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Swimming.module.css";
+import styles from "./swimming.module.css";
 
 export default function Swimming() {
   return (
