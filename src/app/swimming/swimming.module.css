@@ -1,0 +1,121 @@
+.servicesSection {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.cardSingle {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Layout en columna por defecto (móvil), cambia a fila en escritorio */
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .cardTop {
+    flex-direction: row;
+  }
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.textContent {
+  flex: 1;
+}
+
+.mainTitle {
+  font-size: 2rem;
+  color: #02678F; /* Azul corporativo */
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.subTitle {
+  font-size: 1.25rem;
+  color: #02678F;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+}
+
+.list {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.paragraph {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Sección inferior con un fondo ligeramente distinto para separar contenido */
+.caption {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eaeaea;
+}
+
+.trainingProgram {
+  margin-bottom: 2.5rem;
+}
+
+.formContainer {
+  margin-top: 2rem;
+}
+
+.formButton {
+  background-color: #f39304; /* Naranja corporativo */
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(243, 147, 4, 0.3);
+}
+
+.formButton:hover {
+  background-color: #d97d03;
+  transform: translateY(-2px);
+}
+
+/* Hack CSS para mantener el aspect ratio 16:9 del iframe de YouTube */
+.videoContainer {
+  position: relative;
+  padding-bottom: 56.25%; /* Relación 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
