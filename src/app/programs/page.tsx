@@ -15,12 +15,7 @@ const programList = [
 
 export default function Programs() {
   return (
-    <main className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.mainTitle}>NUESTROS PROGRAMAS</h1>
-        <p className={styles.subtitle}>Encuentra el entrenamiento perfecto para tus objetivos en Brisbane</p>
-      </div>
-
+    <div className={styles.container}>
       <section className={styles.grid}>
         {programList.map((program, index) => (
           <Link href={program.href} key={index} className={styles.cardLink}>
@@ -39,6 +34,6 @@ export default function Programs() {
           </Link>
         ))}
       </section>
-    </main>
+    </div>
   );
 }
