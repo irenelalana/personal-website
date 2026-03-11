@@ -73,6 +73,10 @@
   .detailsGrid {
     grid-template-columns: 1fr 1fr;
   }
+  .videoContainer {
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
 }
 
 .detailBox {
@@ -134,17 +138,22 @@
 /* Video Responsive */
 .videoContainer {
   position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
+  width: 100%;
+  max-width: 800px; /* Evita que el video se haga gigantesco en monitores pro */
+  margin: 1.5rem auto; 
+  aspect-ratio: 16 / 9; /* Esto fuerza la proporción de YouTube */
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* El iframe debe llenar el contenedor sin bordes ni recortes */
 .videoIframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
+  object-fit: cover; /* Asegura que el contenido llene el área si hay algún pixel de diferencia */
 }
