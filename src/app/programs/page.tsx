@@ -16,10 +16,10 @@ const programList = [
 export default function Programs() {
   return (
     <main className={styles.container}>
-      <header className={styles.header}>
+      <div className={styles.header}>
         <h1 className={styles.mainTitle}>NUESTROS PROGRAMAS</h1>
         <p className={styles.subtitle}>Encuentra el entrenamiento perfecto para tus objetivos en Brisbane</p>
-      </header>
+      </div>
 
       <section className={styles.grid}>
         {programList.map((program, index) => (
