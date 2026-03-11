@@ -89,7 +89,3 @@
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Ajuste de color para resaltar programas específicos como el del Council */
-.cardLink[href="/brisbane_city_council"] .cardOverlay {
-  background: linear-gradient(to top, rgba(243, 147, 4, 0.9) 0%, rgba(243, 147, 4, 0.4) 70%, transparent 100%);
-}
