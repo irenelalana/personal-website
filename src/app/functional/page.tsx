@@ -1,77 +1,88 @@
-// pages/functional.js
 import React from "react";
+import styles from "./functional.module.css";
 
 export default function Functional() {
   return (
-    <section id="services">
-      <div className="card_single">
-        <div className="card-top">
+    <section id="services" className={styles.servicesSection}>
+      <div className={styles.cardSingle}>
+        
+        {/* --- SECCIÓN HERO --- */}
+        <div className={styles.cardTop}>
           <img
             src="/images/Irela_fitness_trainer.JPG"
-            alt="Functional Training"
+            alt="Smart Fitness Program"
+            className={styles.heroImage}
           />
-          <div>
-            <h1>SMART FITNESS Program - Over 35 High quality Lifestyle:</h1>
-            <h2>Who it’s for</h2>
-          <ul>
-            <li>Frustrated with inefficient programs or feeling lost in a crowded gym full of equipment you don´t know how to use?</li>
-            <li>Tired of not seeing results, or embarrassed to work out in public?</li>
-            <li>Struggling to find a fitness routine that fits your busy life?</li>
-          </ul>
-            <p>Then, my Premium Smart Fitness Program is for you!</p>
-            <h2>Why now:</h2>
-            <ul>
-              <li>Muscle and bone density naturally decline after 30 (3-8% per decade)... the sooner you act, the more you preserve.</li>
-              <li>Prevent falls, aches, and stiffness before they become issues.</li>
-              <li>Functional training now sets you up for a healthier, more active and independent future.</li> 
-              <li>The perfect combination of coordination, balance, mobility, strength, cardio & core, which improves mood, concentration, time management, self-esteem, and reduces stress.</li>
+          <div className={styles.textContent}>
+            <h1 className={styles.mainTitle}>
+              SMART FITNESS Program
+            </h1>
+            <p className={styles.tagline}>Over 35 High Quality Lifestyle</p>
+
+            <h2 className={styles.subTitle}>Who it’s for</h2>
+            <ul className={styles.list}>
+              <li>Frustrated with inefficient programs or feeling lost in a gym?</li>
+              <li>Tired of not seeing results or embarrassed to work out in public?</li>
+              <li>Struggling to find a fitness routine that fits your busy life?</li>
             </ul>
-            <h2>What results you’ll get:</h2>
-            <ul>
-              <li>Improved core strength, posture, and balance with active habits.</li>
-              <li>Stronger muscles that protect joints and reduce injury risk.</li>
-              <li>Easier daily movement (carrying shopping, climbing stairs, playing with kids/grandkids).</li>
-              <li>Increased energy, confidence, and overall wellbeing</li>
-              <li>Support for other sports/activities (swimming, cycling, running, etc.)</li>
-              <li>Minimises Menopause symptoms.</li>
+            <p className={styles.highlightText}>Then, my Premium Smart Fitness Program is for you!</p>
+
+            <h2 className={styles.subTitle}>Why now:</h2>
+            <ul className={styles.list}>
+              <li><strong>Preserve your health:</strong> Muscle and bone density decline after 30 (3-8% per decade).</li>
+              <li><strong>Prevention:</strong> Avoid falls, aches, and stiffness before they start.</li>
+              <li><strong>Independence:</strong> Sets you up for a healthier, more active future.</li>
+              <li><strong>Mental Wellbeing:</strong> Improves mood, concentration, and reduces stress.</li>
             </ul>
           </div>
         </div>
 
-        <div className="caption">
-          <section id="training_program">
-            <h2>SMART FITNESS program high results:</h2>
-            <ul>
-              <li>Premium group, only 8 spots available.</li>
-              <li>Our live online workouts provide structure, accountability, and motivation.</li>
-              <li>10 Weeks program for $550.</li>
-              <li>60min sessions.</li>
-              <li>3 fitness live sessions per week.</li>
-              <li>Mon, Tue, Fri 6.15am / 1.30pm (Brisbane time)</li>
-              <li>Access to recorded materials.</li>
-              <li>Discounts with local partners.</li>
-              <li>Extra group swimming lessons included.</li>
-              <li>Follow ups, reports and analysys.</li>
-              <li>First week for free. (contact me to try now!)</li>
+        {/* --- RESULTADOS --- */}
+        <div className={styles.resultsSection}>
+          <h2 className={styles.subTitle}>What results you’ll get:</h2>
+          <div className={styles.resultsGrid}>
+            <div className={styles.resultItem}>Improved core strength, posture, and balance.</div>
+            <div className={styles.resultItem}>Stronger muscles to protect joints.</div>
+            <div className={styles.resultItem}>Easier daily movement (stairs, shopping, family).</div>
+            <div className={styles.resultItem}>Increased energy and overall confidence.</div>
+            <div className={styles.resultItem}>Support for other sports (swimming, cycling, running).</div>
+            <div className={styles.resultItem}>Minimises Menopause symptoms.</div>
+          </div>
+        </div>
 
-            <p>(If you prefer, personal training also available in Toowong, CBD and West End. Tell me what you need and I will tailor it for you) </p>
-              <form
-                action="https://shorturl.at/hcCjW"
-                target="_blank"
-                style={{ marginTop: "1rem" }}
-              >
-                <button className="form-button">See full program</button>
-              </form>
+        {/* --- DETALLES DEL PROGRAMA Y VIDEO --- */}
+        <div className={styles.caption}>
+          <section className={styles.programDetails}>
+            <h2 className={styles.subTitle}>SMART FITNESS Program High Results:</h2>
+            <ul className={styles.list}>
+              <li><strong>Premium group:</strong> Only 8 spots available.</li>
+              <li><strong>Structure:</strong> Live online workouts for accountability.</li>
+              <li><strong>Duration:</strong> 10 Weeks program ($550).</li>
+              <li><strong>Sessions:</strong> 3 fitness live sessions per week (60 min).</li>
+              <li><strong>Schedule:</strong> Mon, Tue, Fri 6.15am / 1.30pm (Brisbane time).</li>
+              <li><strong>Bonuses:</strong> Access to recorded materials & extra group swimming lessons.</li>
+              <li><strong>Try for free:</strong> First week for free! (Contact me now).</li>
             </ul>
+            
+            <p className={styles.ptNote}>
+              <em>Personal training also available in Toowong, CBD and West End. Tailored to your needs.</em>
+            </p>
+
+            <form action="https://shorturl.at/hcCjW" target="_blank" className={styles.formAction}>
+              <button className={styles.formButton}>See full program</button>
+            </form>
           </section>
-          <iframe
-            src="https://www.youtube.com/embed/XOcuZt7vKhs"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            style={{ marginTop: "1rem", height: "315px" }}
-          ></iframe>
+
+          {/* --- VIDEO SIN RECORTES --- */}
+          <div className={styles.videoContainer}>
+            <iframe
+              className={styles.videoIframe}
+              src="https://www.youtube.com/embed/XOcuZt7vKhs"
+              title="Smart Fitness Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
