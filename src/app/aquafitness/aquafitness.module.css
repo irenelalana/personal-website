@@ -1,0 +1,150 @@
+.servicesSection {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.cardSingle {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .cardTop {
+    flex-direction: row;
+  }
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.textContent {
+  flex: 1;
+}
+
+.mainTitle {
+  font-size: 1.8rem;
+  color: #02678F;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: #f39304;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.subTitle {
+  font-size: 1.2rem;
+  color: #02678F;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f39304;
+  display: inline-block;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .detailsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.detailBox {
+  background: #fdfdfd;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #02678F;
+}
+
+.list {
+  padding-left: 1.2rem;
+  line-height: 1.5;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.paragraph {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.caption {
+  padding: 2rem;
+  background-color: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .caption {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .trainingProgram {
+    flex: 1;
+  }
+  .videoContainer {
+    flex: 1;
+    max-width: 500px;
+  }
+}
+
+.bccNote {
+  background: #e8f4fd;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.locationNote, .neighborhoodNote {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Video Responsive */
+.videoContainer {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
