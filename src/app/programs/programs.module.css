@@ -1,0 +1,95 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.mainTitle {
+  color: #02678F; /* Azul Irela */
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* El Grid: 1 columna en móvil, 2 en tablet, 3 o 4 en desktop */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(2, 103, 143, 0.2);
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Esto fuerza el formato cuadrado */
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen llene el cuadrado sin deformarse */
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.1);
+}
+
+/* Superposición para el texto sobre la imagen */
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  background: linear-gradient(to top, rgba(2, 103, 143, 0.9) 0%, rgba(2, 103, 143, 0.4) 70%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 60%; /* Solo cubre la parte inferior */
+}
+
+.cardTitle {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajuste de color para resaltar programas específicos como el del Council */
+.cardLink[href="/brisbane_city_council"] .cardOverlay {
+  background: linear-gradient(to top, rgba(243, 147, 4, 0.9) 0%, rgba(243, 147, 4, 0.4) 70%, transparent 100%);
+}
