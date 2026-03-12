@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Partners.module.css";
 
 // --- DATOS DE VENUES ---
 const VENUES_DATA = [
@@ -101,25 +102,25 @@ const PARTNERS_DATA = [
   }
 ];
 
-export default function Partners() {
+export default function PartnersPage(): React.JSX.Element {
   return (
-    <section id="partners-modern" className="vp-page-container">
+    <section id="partners-modern" className={styles.pageContainer}>
       
       {/* --- SECCIÓN VENUES --- */}
-      <div className="vp-section-header">
+      <div className={styles.sectionHeader}>
         <h1>Venues</h1>
         <p>You can find me training and coaching here:</p>
       </div>
 
-      <div className="vp-grid">
+      <div className={styles.grid}>
         {VENUES_DATA.map((venue) => (
-          <div key={venue.id} className="vp-card">
-            <a href={venue.url} target="_blank" rel="noopener noreferrer" className="vp-logo-link">
-              <div className="vp-logo-container">
+          <div key={venue.id} className={styles.card}>
+            <a href={venue.url} target="_blank" rel="noopener noreferrer" className={styles.logoLink}>
+              <div className={styles.logoContainer}>
                 <img src={venue.logo} alt={`${venue.name} logo`} />
               </div>
             </a>
-            <div className="vp-card-content">
+            <div className={styles.cardContent}>
               <h3>{venue.name}</h3>
               {venue.description.map((line, index) => (
                 <p key={index}>{line}</p>
@@ -129,10 +130,10 @@ export default function Partners() {
         ))}
       </div>
 
-      <div className="vp-divider"></div>
+      <div className={styles.divider}></div>
 
       {/* --- SECCIÓN PARTNERS --- */}
-      <div className="vp-section-header">
+      <div className={styles.sectionHeader}>
         <h1>Partners</h1>
         <p>
           Very special partnerships with all these fabulous local collaborators.<br/>
@@ -140,21 +141,21 @@ export default function Partners() {
         </p>
       </div>
 
-      <div className="vp-grid">
+      <div className={styles.grid}>
         {PARTNERS_DATA.map((partner) => (
-          <div key={partner.id} className="vp-card vp-partner-card">
-            <a href={partner.url} target="_blank" rel="noopener noreferrer" className="vp-logo-link">
-              <div className="vp-logo-container">
+          <div key={partner.id} className={styles.card}>
+            <a href={partner.url} target="_blank" rel="noopener noreferrer" className={styles.logoLink}>
+              <div className={styles.logoContainer}>
                 <img src={partner.logo} alt={`${partner.name} logo`} />
               </div>
             </a>
-            <div className="vp-card-content vp-flex-grow">
+            <div className={`${styles.cardContent} ${styles.flexGrow}`}>
               <h3>{partner.name}</h3>
               <p>{partner.description}</p>
             </div>
             {/* Esta caja se quedará siempre pegada abajo gracias al flex-grow de arriba */}
-            <div className="vp-benefit-box">
-              <span className="vp-benefit-title">✨ Irela Clients Benefit:</span>
+            <div className={styles.benefitBox}>
+              <span className={styles.benefitTitle}>✨ Irela Clients Benefit:</span>
               <p>{partner.benefit}</p>
             </div>
           </div>
