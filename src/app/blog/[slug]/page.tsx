@@ -1,13 +1,10 @@
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 import { remark } from "remark";
 import html from "remark-html";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-
-import { getAllPosts, getPostBySlug } from "@/lib/getPost";
-
-// ... generateStaticParams y generateMetadata se mantienen igual ...
+import { getPostBySlug } from "@/lib/getPost";
+import styles from "./blogpost.module.css";
 
 export default async function BlogPostPage({
   params,
@@ -24,43 +21,43 @@ export default async function BlogPostPage({
     .process(post.content);
 
   return (
-    <div className="post-page-wrapper">
+    <div className={styles.wrapper}>
       {/* BOTÓN VOLVER */}
-      <div className="post-navigation">
-        <Link href="/blog" className="back-to-blog">
+      <nav className={styles.navigation}>
+        <Link href="/blog" className={styles.backLink}>
           ← Back to Blog
         </Link>
-      </div>
+      </nav>
 
-      <article className="post-container">
+      <article className={styles.container}>
         {/* CABECERA DEL POST */}
-        <div className="post-header">
-          <div className="post-category">Fitness & Well-being</div>
-          <h1 className="post-main-title">{post.title}</h1>
+        <header className={styles.header}>
+          <div className={styles.category}>Fitness & Well-being</div>
+          <h1 className={styles.mainTitle}>{post.title}</h1>
           
-          <div className="post-info">
-            <span className="post-date">
+          <div className={styles.info}>
+            <span className={styles.date}>
               Published on {format(parseISO(post.date), "MMMM d, yyyy")}
             </span>
-            <span className="post-author">By Irela Aqua & Fitness</span>
+            <span className={styles.author}>By Irela Aqua & Fitness</span>
           </div>
           
-          <div className="post-separator"></div>
-        </div>
+          <div className={styles.separator}></div>
+        </header>
 
-        {/* CONTENIDO DEL POST */}
+        {/* CONTENIDO DEL POST (HTML Dinámico) */}
         <div 
-          className="post-content-body"
+          className={styles.contentBody}
           dangerouslySetInnerHTML={{
             __html: processedContent.toString(),
           }}
         />
 
-        {/* PIE DE POST (Opcional) */}
-        <footer className="post-footer">
+        {/* PIE DE POST */}
+        <footer className={styles.footer}>
           <p>Did you enjoy this article? Share it with your community!</p>
-          <div className="post-share-placeholder">
-            {/* Aquí podrías añadir iconos de redes sociales en el futuro */}
+          <div className={styles.sharePlaceholder}>
+            {/* Espacio para futuros iconos sociales */}
           </div>
         </footer>
       </article>
