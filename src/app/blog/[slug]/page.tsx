@@ -31,7 +31,7 @@ export default async function BlogPostPage({
 
       <article className={styles.container}>
         {/* CABECERA DEL POST */}
-        <header className={styles.header}>
+        <div className={styles.header}>
           <div className={styles.category}>Fitness & Well-being</div>
           <h1 className={styles.mainTitle}>{post.title}</h1>
           
@@ -43,7 +43,7 @@ export default async function BlogPostPage({
           </div>
           
           <div className={styles.separator}></div>
-        </header>
+        </div>
 
         {/* CONTENIDO DEL POST (HTML Dinámico) */}
         <div 
