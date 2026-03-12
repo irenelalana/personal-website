@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Partners.module.css";
+import styles from "./partners.module.css";
 
 // --- DATOS DE VENUES ---
 const VENUES_DATA = [
