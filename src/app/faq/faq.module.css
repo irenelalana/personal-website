@@ -1,0 +1,170 @@
+/* --- FAQ PAGE MODERNIZATION --- */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  color: #333;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h1 {
+  color: #02678F;
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+.header p {
+  color: #666;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Layout Principal */
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (min-width: 992px) {
+  .contentWrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* Imagen Lateral */
+.imageContainer {
+  flex: 1;
+  max-width: 450px;
+  margin: 0 auto;
+  /* Animación suave para la foto al cargar (opcional) */
+  animation: fadeIn 0.8s ease-in-out; 
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heroImg {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* Contenedor del Acordeón */
+.accordionContainer {
+  flex: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Cada Item del Acordeón */
+.accordionItem {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.accordionItem:hover {
+  border-color: #02678F;
+}
+
+.accordionItem.open {
+  border-color: #02678F;
+  box-shadow: 0 4px 15px rgba(2, 103, 143, 0.1);
+}
+
+/* Botón (La pregunta) */
+.accordionHeader {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.accordionHeader:hover {
+  background-color: #f9fbfc;
+}
+
+.accordionHeader h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  padding-right: 20px;
+  line-height: 1.4;
+}
+
+.accordionItem.open .accordionHeader h3 {
+  color: #02678F;
+}
+
+/* El Icono (+ / -) */
+.icon {
+  font-size: 1.5rem;
+  color: #f39304;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Cuerpo de la respuesta (Animación de altura) */
+.accordionBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+
+.accordionItem.open .accordionBody {
+  grid-template-rows: 1fr;
+}
+
+.accordionContent {
+  overflow: hidden;
+  padding: 0 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.accordionItem.open .accordionContent {
+  padding-bottom: 20px;
+}
+
+.accordionContent p {
+  margin-bottom: 10px;
+}
+
+.accordionContent p:last-child {
+  margin-bottom: 0;
+}
+
+/* Lista dentro de las respuestas */
+.list {
+  margin: 10px 0 10px 20px;
+  list-style-type: disc;
+}
+
+.list li {
+  margin-bottom: 8px;
+}
