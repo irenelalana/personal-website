@@ -32,14 +32,14 @@
   flex-direction: column;
   gap: 40px;
 }
-
+/*
 @media (min-width: 992px) {
   .contentWrapper {
     flex-direction: row;
     align-items: flex-start;
   }
 }
-
+*/
 /* Imagen Lateral */
 .imageContainer {
   flex: 1;
