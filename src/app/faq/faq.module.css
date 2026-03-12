@@ -143,6 +143,7 @@
 .accordionContent {
   overflow: hidden;
   padding: 0 20px;
+  font-size: 1.2rem;
   color: #555;
   line-height: 1.6;
 }
