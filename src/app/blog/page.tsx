@@ -1,48 +1,49 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/getPost";
 import { format, parseISO } from "date-fns";
+import styles from "./blog.module.css";
 
-export default function BlogPage() {
+export default function BlogPage(): React.JSX.Element {
   const posts = getAllPosts();
 
   return (
-    <section id="blog-modern" className="blog-page-container">
+    <section id="blog-modern" className={styles.container}>
       
       {/* HEADER DEL BLOG */}
-      <div className="blog-header">
+      <div className={styles.header}>
         <h1>Blog & Insights</h1>
         <p>Tips, news, and thoughts on fitness, swimming, and well-being.</p>
       </div>
 
       {/* CUADRÍCULA DE ARTÍCULOS */}
-      <div className="blog-grid">
+      <div className={styles.grid}>
         {posts.map((post) => (
-          <article key={post.slug} className="blog-card">
-            <div className="blog-card-content">
+          <article key={post.slug} className={styles.card}>
+            <div className={styles.cardContent}>
               
               {/* Fecha (Meta info) */}
-              <div className="blog-meta">
-                <span className="blog-date">
+              <div className={styles.meta}>
+                <span className={styles.date}>
                   📅 {format(parseISO(post.date), "MMMM d, yyyy")}
                 </span>
               </div>
 
               {/* Título */}
-              <Link href={`/blog/${post.slug}`} className="blog-title-link">
-                <h2 className="blog-title">{post.title}</h2>
+              <Link href={`/blog/${post.slug}`} className={styles.titleLink}>
+                <h2 className={styles.title}>{post.title}</h2>
               </Link>
 
               {/* Extracto */}
-              <p className="blog-excerpt">
+              <p className={styles.excerpt}>
                 {post.excerpt}
               </p>
 
             </div>
 
             {/* Botón Leer Más (Empujado hacia abajo con flexbox) */}
-            <div className="blog-card-footer">
-              <Link href={`/blog/${post.slug}`} className="blog-read-more">
-                Read more <span className="arrow">→</span>
+            <div className={styles.cardFooter}>
+              <Link href={`/blog/${post.slug}`} className={styles.readMore}>
+                Read more <span className={styles.arrow}>→</span>
               </Link>
             </div>
           </article>
