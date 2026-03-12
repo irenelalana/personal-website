@@ -12,11 +12,14 @@
   margin-bottom: 60px;
 }
 
+.item-2 {
+  display: none;
+}
+
 @media (min-width: 992px) {
-  .split {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+ .item-2 {
+  display: block;
+}
 }
 
 .content {
