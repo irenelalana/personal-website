@@ -1,8 +1,8 @@
 'use client';
 import { useState } from "react";
 import Image from "next/image";
+import styles from "./faq.module.css";
 
-// Definimos los datos fuera del componente para que el código sea más limpio
 const FAQ_DATA = [
   {
     question: "Do you have any group sessions available now?",
@@ -53,7 +53,7 @@ const FAQ_DATA = [
     answer: (
       <>
         <p>Our swimming lessons are for all adults, regardless of their current level. We specialize in helping a diverse group of people, including:</p>
-        <ul className="faq-list">
+        <ul className={styles.list}>
           <li>Adults from a multicultural background who never learned to swim as a child.</li>
           <li>New triathletes who want to improve their technique before starting a training plan.</li>
           <li>Swimmers who need to fix their stroke technique or build confidence before joining a squad.</li>
@@ -92,57 +92,57 @@ const FAQ_DATA = [
   }
 ];
 
-export default function FAQPage() {
-  // Estado para controlar qué acordeón está abierto. 'null' significa todos cerrados.
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // El primero abierto por defecto
+export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0); 
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq-modern" className="faq-page-container">
+    <section id="faq-modern" className={styles.container}>
       
       {/* HEADER DE LA PÁGINA */}
-      <div className="faq-header">
+      <div className={styles.header}>
         <h1>Frequently Asked Questions</h1>
         <p>Everything you need to know about my training sessions, locations, and methodology.</p>
       </div>
 
-      <div className="faq-content-wrapper">
+      <div className={styles.contentWrapper}>
         
-        {/* IMAGEN LATERAL (Opcional, si quieres mantenerla) */}
-        <div className="faq-image-container fade-in">
+        {/* IMAGEN LATERAL */}
+        <div className={styles.imageContainer}>
           <Image
             src="/images/Irela_handstand_strength_core.jpg"
             alt="Coach Irela performing a handstand, showcasing strength and core"
             width={700}
             height={900}
-            className="faq-hero-img"
+            className={styles.heroImg}
             priority
           />
         </div>
 
         {/* LISTA DE PREGUNTAS (ACORDEÓN) */}
-        <div className="faq-accordion-container">
+        <div className={styles.accordionContainer}>
           {FAQ_DATA.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <div 
                 key={index} 
-                className={`faq-accordion-item ${isOpen ? 'open' : ''}`}
+                className={`${styles.accordionItem} ${isOpen ? styles.open : ''}`}
               >
                 <button 
-                  className="faq-accordion-header" 
+                  className={styles.accordionHeader} 
                   onClick={() => toggleAccordion(index)}
                   aria-expanded={isOpen}
                 >
                   <h3>{item.question}</h3>
-                  <span className="faq-icon">{isOpen ? '−' : '+'}</span>
+                  <span className={styles.icon}>{isOpen ? '−' : '+'}</span>
                 </button>
                 
-                <div className="faq-accordion-body">
-                  <div className="faq-accordion-content">
+                <div className={styles.accordionBody}>
+                  <div className={styles.accordionContent}>
+                    {/* Almacenamos texto o JSX según corresponda */}
                     {item.answer}
                   </div>
                 </div>
