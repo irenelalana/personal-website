@@ -1,0 +1,129 @@
+/* --- SINGLE BLOG POST STYLES --- */
+
+.wrapper {
+  max-width: 900px; 
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* Navegación */
+.navigation {
+  margin-bottom: 30px;
+}
+
+.backLink {
+  color: #02678F;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #f39304;
+}
+
+/* Contenedor principal */
+.container {
+  background: #fff;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.category {
+  color: #f39304;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  color: #02678F;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.8rem;
+  }
+}
+
+.info {
+  font-size: 0.9rem;
+  color: #888;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.separator {
+  width: 60px;
+  height: 4px;
+  background-color: #f39304;
+  margin: 30px auto 0;
+}
+
+/* Cuerpo del contenido (Estilizando el HTML de Remark) */
+.contentBody {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.contentBody h2 {
+  color: #02678F;
+  font-size: 1.8rem;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.contentBody h3 {
+  color: #02678F;
+  font-size: 1.4rem;
+  margin-top: 30px;
+}
+
+.contentBody p {
+  margin-bottom: 25px;
+}
+
+.contentBody ul, 
+.contentBody ol {
+  margin-bottom: 25px;
+  padding-left: 20px;
+}
+
+.contentBody li {
+  margin-bottom: 10px;
+}
+
+.contentBody strong {
+  color: #333;
+}
+
+/* Imágenes dentro del post */
+.contentBody img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 30px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Footer del post */
+.footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
