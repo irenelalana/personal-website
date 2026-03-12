@@ -143,7 +143,9 @@ export default function FAQ() {
                 <div className={styles.accordionBody}>
                   <div className={styles.accordionContent}>
                     {/* Almacenamos texto o JSX según corresponda */}
-                    {item.answer}
+                    <p>
+                      {item.answer}
+                    </p>
                   </div>
                 </div>
               </div>
