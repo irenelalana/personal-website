@@ -12,14 +12,14 @@
   margin-bottom: 60px;
 }
 
-.item-2 {
+.item2 {
   display: none;
 }
 
 @media (min-width: 992px) {
- .item-2 {
-  display: block;
-}
+ .item2 {
+    display: block;
+  }
 }
 
 .content {
