@@ -1,0 +1,124 @@
+.section {
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cardSingle {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.cardTop {
+  padding: 2rem;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  object-fit: cover;
+}
+
+.mainTitle {
+  color: #02678F;
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+}
+
+.introText {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Bloques para cada tipo de servicio */
+.serviceBlock {
+  background: #f8fbff;
+  border-left: 5px solid #02678F;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2.5rem;
+}
+
+.serviceBlockHoliday {
+  background: #fffdf8;
+  border-left: 5px solid #f39304;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.serviceTitle {
+  margin-top: 0;
+  color: #222;
+  font-size: 1.5rem;
+}
+
+.serviceDescription {
+  line-height: 1.6;
+  color: #444;
+}
+
+.infoBox {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #eef2f6;
+  margin: 1.5rem 0;
+}
+
+.infoBox p {
+  margin: 0.4rem 0;
+  color: #333;
+}
+
+/* Pasos y botones */
+.stepBlock {
+  margin-top: 1.5rem;
+}
+
+.stepTitle {
+  font-weight: 700;
+  color: #02678F;
+}
+
+.formButton {
+  display: inline-block;
+  background-color: #02678F;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 0.5rem;
+}
+
+.formButton:hover {
+  background-color: #014c6b;
+  transform: translateY(-2px);
+}
+
+.calendarWrapper {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.disclaimer {
+  font-size: 0.9rem;
+  color: #666;
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
