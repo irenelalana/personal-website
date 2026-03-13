@@ -13,6 +13,7 @@ export default function BrisbaneCityCouncil() {
             src="/images/Irela_Free_aquaerobics_brisbane.jpeg"
             alt="Brisbane City Council Active and Healthy Events"
             className={styles.heroImage}
+            style={{ maxWidth: '100%' }} // Refuerzo para evitar el scroll lateral
           />
           
           <div>
