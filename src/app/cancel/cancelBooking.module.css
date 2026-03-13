@@ -1,0 +1,79 @@
+.container {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; /* Fundamental para evitar el scroll lateral */
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.title {
+  color: #02678F;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.text {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.button {
+  display: inline-block;
+  background-color: #d9534f; /* Rojo para cancelación */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  width: 100%; /* Botón ancho completo en móvil */
+  max-width: 250px;
+}
+
+.button:hover {
+  background-color: #c9302c;
+  transform: translateY(-2px);
+}
+
+.buttonSecondary {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #02678F;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Ajustes para móviles muy pequeños */
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}

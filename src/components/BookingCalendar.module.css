@@ -1,7 +1,7 @@
 .calendarContainer {
   background: #ffffff;
   border-radius: 12px;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* Personalización básica para los botones de FullCalendar */
   --fc-button-bg-color: #02678F;
   --fc-button-border-color: #02678F;

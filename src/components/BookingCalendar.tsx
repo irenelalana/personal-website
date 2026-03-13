@@ -132,7 +132,7 @@ export default function BookingCalendar() {
                     name="name" 
                     required 
                     className={styles.input} 
-                    placeholder="Jane Doe"
+                    placeholder="Enter your full name"
                   />
                 </div>
                 
@@ -143,7 +143,7 @@ export default function BookingCalendar() {
                     type="email" 
                     required 
                     className={styles.input} 
-                    placeholder="jane@example.com"
+                    placeholder="youremail@example.com"
                   />
                 </div>
 
