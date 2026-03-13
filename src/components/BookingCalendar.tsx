@@ -10,6 +10,7 @@ import { toZonedTime } from 'date-fns-tz';
 import { getSessions, createBooking } from '@/app/actions' // Tus acciones
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import styles from './BookingCalendar.module.css' // Importamos el módulo CSS
 
 export default function BookingCalendar() {
   const router = useRouter()
@@ -93,15 +94,15 @@ export default function BookingCalendar() {
   }
 
   return (
-    <div className="p-4">
+    <div className={styles.calendarContainer}>
       {/* Calendario */}
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
-          left: 'prev,next today',
+          left: 'prev,next',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek'
+          right: ''
         }}
         events={events}
         eventClick={handleEventClick}
@@ -109,70 +110,67 @@ export default function BookingCalendar() {
         locale="en"
       />
 
-      {/* Modal Simple (puedes usar Dialog de UI libraries) */}
+      {/* Modal */}
       {isModalOpen && selectedSession && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <h2 className="text-xl font-bold mb-2">{selectedSession.title}</h2>
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2 className={styles.modalTitle}>{selectedSession.title}</h2>
             
-            <div className="mb-4 text-sm text-gray-600">
-              <p>📅 Date & Time: {selectedSession.start.toLocaleString()}</p>
-              <p>⏱ Duration: {selectedSession.duration} min</p>
-              <p>🟢 Availability: <strong>{selectedSession.available_spots}</strong> / {selectedSession.capacity} spots</p>
+            <div className={styles.sessionInfo}>
+              <p>📅 <strong>Date & Time:</strong> {selectedSession.start.toLocaleString()}</p>
+              <p>⏱ <strong>Duration:</strong> {selectedSession.duration} min</p>
+              <p>🟢 <strong>Availability:</strong> {selectedSession.available_spots} / {selectedSession.capacity} spots</p>
             </div>
 
             {selectedSession.available_spots > 0 ? (
-              <form onSubmit={handleBookingSubmit} className="space-y-3">
+              <form onSubmit={handleBookingSubmit}>
                 <input type="hidden" name="sessionId" value={selectedSession.id} />
                 
-                <div>
-                  <label className="block text-sm font-medium">Full Name</label>
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>Full Name</label>
                   <input 
                     name="name" 
                     required 
-                    className="w-full border p-2 rounded" 
-                    placeholder="your name"
+                    className={styles.input} 
+                    placeholder="Jane Doe"
                   />
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium">Email</label>
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>Email</label>
                   <input 
                     name="email" 
                     type="email" 
                     required 
-                    className="w-full border p-2 rounded" 
-                    placeholder="email@example.com"
+                    className={styles.input} 
+                    placeholder="jane@example.com"
                   />
                 </div>
 
-                <div className="flex justify-end gap-2 mt-4"> 
+                <div className={styles.buttonGroup}> 
                   <button 
-                    type="submit" 
-                    disabled={isPending} // Evita el doble clic
+                    type="button" 
+                    onClick={() => setIsModalOpen(false)}
+                    className={styles.btnCancel}
+                    disabled={isPending}
                   >
-                  {isPending ? (
-                    <>
-                      Loading...
-                      </>
-                    ) : (
-                      'Book Session'
-                    )}
+                    Cancel
                   </button>
                   <button 
-                      type="button" 
-                      onClick={() => setIsModalOpen(false)}
-                    >
-                      Cancel
-                    </button>
+                    type="submit" 
+                    className={styles.btnSubmit}
+                    disabled={isPending}
+                  >
+                    {isPending ? 'Loading...' : 'Book Session'}
+                  </button>
                 </div>
               </form>
             ) : (
-              <div className="text-center">
-                <p className="text-red-500 font-bold mb-4">This session is fully booked.</p>
+              <div className={styles.fullWarning}>
+                <p className={styles.fullWarningText}>This session is fully booked.</p>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
+                  className={styles.btnCancel}
                 >
                   Close
                 </button>
