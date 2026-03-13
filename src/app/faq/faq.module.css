@@ -154,12 +154,12 @@
 
 .accordionContent p {
   margin-bottom: 10px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .accordionContent p:last-child {
   margin-bottom: 0;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 /* Lista dentro de las respuestas */

@@ -1,12 +1,13 @@
 import React from 'react';
-import '../app/style.css';
+import styles from './Footer.module.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear(); 
 
   return (
-    <footer className="footer">
-      <div className="social-media">
+    <footer className={styles.footer}>
+      {/* Iconos en línea horizontal */}
+      <div className={styles.socialMedia}>
         <a href="https://www.instagram.com/irela_aquaandfitness/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <img src="/images/instagram_exercise_online_100x100.png" alt="Instagram logo Irela13Coach" />
         </a>
@@ -20,13 +21,19 @@ const Footer = () => {
           <img src="/images/linkedin_50x50.png" alt="LinkedIn logo Irela13Coach" />
         </a>
       </div>
-      <div className="footer-links">
-        <a href="./privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+
+      {/* Info en línea vertical */}
+      <div className={styles.infoContainer}>
+        <a href="./privacy-policy" className={styles.link} target="_blank" rel="noopener noreferrer">
+          Privacy Policy
+        </a>
+        <a href="./sustainability" className={styles.link} target="_blank" rel="noopener noreferrer">
+          Sustainability and Net Zero Intent
+        </a>
+        <div className={styles.copyright}>
+          ©{currentYear} Irela Aqua & Fitness
+        </div>
       </div>
-      <div className="footer-links">
-        <a href="./sustainability" target="_blank" rel="noopener noreferrer">Sustainability and Net Zero Intent</a>
-      </div>
-      <div className="copyright">©{currentYear} Irela Aqua & Fitness</div>
     </footer>
   );
 };

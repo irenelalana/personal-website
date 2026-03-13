@@ -1,0 +1,71 @@
+.footer {
+  background-color: #f39304;
+  width: 100%;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Fila horizontal para redes sociales */
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.socialMedia img {
+  width: 40px; /* Tamaño optimizado para que no se vean gigantes */
+  height: 40px;
+  transition: transform 0.2s ease; 
+}
+
+.socialMedia img:hover {
+  transform: translateY(-3px);
+}
+
+/* Bloque vertical para el resto de la info */
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+  color: white;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.5rem 1rem;
+  }
+  .socialMedia {
+    gap: 1rem;
+  }
+  .socialMedia img {
+    width: 35px;
+    height: 35px;
+  }
+}

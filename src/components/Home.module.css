@@ -1,0 +1,178 @@
+.mainContainer {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* --- HEADERS --- */
+.headerPhone {
+  display: block;
+  width: 100%;
+}
+
+.headerPhone img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.headerDesktop {
+  display: none; /* Oculto por defecto (móvil) */
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.headerDesktop img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* --- INTRO --- */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.intro {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* --- PROGRAMAS PRINCIPALES (Landscape) --- */
+.homePrograms {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.homePrograms img {
+  width: 100%;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.homePrograms img:hover {
+  transform: scale(1.02);
+}
+
+/* --- OTROS PROGRAMAS (Square) --- */
+.otherPrograms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 en móvil */
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.otherPrograms img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* --- SECCIONES FLUID X / EVERVESSEL --- */
+.homeFluidx {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  align-items: center; /* Centra elementos en móvil */
+}
+
+.fluidxText {
+  width: 100%;
+}
+
+.videoWrapper {
+  width: 100%;
+  max-width: 500px; /* Evita que el video crezca demasiado en móviles grandes */
+  position: relative;
+  padding-bottom: 56.25%; /* Mantiene el ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- VOUCHERS --- */
+.giftCards {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.voucherImg {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+/* --- MEDIA QUERIES (Desktop > 768px) --- */
+@media (min-width: 768px) {
+  .headerPhone {
+    display: none;
+  }
+
+  .headerDesktop {
+    display: grid;
+  }
+
+  .homePrograms {
+    flex-direction: row; /* Horizontal en desktop */
+    justify-content: space-between;
+  }
+
+  .homePrograms a {
+    flex: 1;
+  }
+
+  .otherPrograms {
+    grid-template-columns: repeat(4, 1fr); /* Todos en fila */
+  }
+
+  /* .homeFluidx {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .homeFluidx > div {
+    flex: 1;
+  } */
+
+  .homeFluidx {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Alinea el texto y el video verticalmente al centro */
+    gap: 4rem;
+  }
+
+  .fluidxText {
+    flex: 1.2; /* El texto tiene un poco más de peso visual */
+    text-align: left;
+  }
+
+  .videoWrapper {
+    flex: 1; /* El video ocupa el espacio restante */
+    max-width: 480px; /* LIMITADOR CLAVE: Ajusta este valor para que el alto coincida con tu texto */
+    padding-bottom: 25%; /* Reducimos el padding relativo al contenedor padre en flex */
+    /* Usar aspect-ratio es más moderno y preciso para esto: */
+    padding-bottom: 0; 
+    height: 270px; /* Altura fija aproximada para alinearse con un párrafo estándar */
+  }
+}
