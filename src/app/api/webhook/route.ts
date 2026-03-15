@@ -213,7 +213,7 @@ export async function POST(req: Request) {
       eventWebsite: "https://www.irelaaquaandfitness.com/activate-brisbane"
     };
 
-      const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
+      //const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
     // 3. ACTUALIZAR BASE DE DATOS
     
     // A. Insertar los tickets individuales
@@ -338,13 +338,13 @@ export async function POST(req: Request) {
         from: "Activate Brisbane <tickets@irelaaquaandfitness.com>",
         to: customerEmail!,
         subject: "Your Activate Brisbane tickets",
-        attachments: [
-          {
-            filename: "activate-brisbane-tickets.pdf",
-            content: Buffer.from(pdfBytes).toString("base64"),
-            contentType: "application/pdf"
-          }
-        ],
+        // attachments: [
+        //   {
+        //     filename: "activate-brisbane-tickets.pdf",
+        //     content: Buffer.from(pdfBytes).toString("base64"),
+        //     contentType: "application/pdf"
+        //   }
+        // ],
         html: emailHtml
       });
   }
