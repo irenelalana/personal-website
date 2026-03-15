@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
 import Stripe from 'stripe';
-import { redirect } from 'next/navigation';
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 // 1. Obtener sesiones
@@ -255,14 +255,9 @@ export async function checkoutComplexBooking(data: any) {
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane`,
     metadata: {
-      order_id: order.id 
+      order_id: order.id // Pasamos el ID para el Webhook
     }
   });
 
-  // 2. CAMBIA EL RETURN FINAL POR ESTO:
-  if (session.url) {
-    redirect(session.url); // Esto dispara la redirección automática a Stripe
-  } else {
-    return { error: "No se pudo crear la sesión de pago" };
-  }
+  return { url: session.url };
 }
