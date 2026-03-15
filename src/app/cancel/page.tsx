@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react"; // Importamos Suspense
 import { useRouter, useSearchParams } from "next/navigation";
-import { cancelBooking } from "@/app/actions"; // Asegúrate de que esta sea tu acción
+import { cancelBooking } from "@/app/actions";
 import { toast } from "sonner";
-import styles from "./cancelBooking.module.css"; // Crea este módulo CSS para estilos específicos de esta página
+import styles from "./cancelBooking.module.css";
 
-export default function CancelBooking() {
+// 1. Movemos la lógica a un componente interno
+function CancelBookingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const bookingId = searchParams.get("token"); // O el token que uses
+  const bookingId = searchParams.get("token");
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -78,5 +79,14 @@ export default function CancelBooking() {
         )}
       </div>
     </main>
+  );
+}
+
+// 2. La página principal exporta el componente envuelto en Suspense
+export default function CancelBooking() {
+  return (
+    <Suspense fallback={<div className={styles.container}>Loading...</div>}>
+      <CancelBookingContent />
+    </Suspense>
   );
 }
