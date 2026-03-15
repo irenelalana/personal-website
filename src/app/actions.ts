@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
 import Stripe from 'stripe';
+import { redirect } from 'next/navigation';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 // 1. Obtener sesiones
@@ -169,49 +170,6 @@ export async function sendContactEmail(formData: FormData) {
 }
 
 
-
-export async function checkoutTickets(cartItems: { id: string; qty: number }[]) {
-  const supabase = await createClient();
-
-  // 1. Obtener precios reales de la DB para evitar hackeos desde el frontend
-  const { data: dbTickets } = await supabase
-    .from('ticket_types')
-    .select('*')
-    .in('id', cartItems.map(i => i.id));
-
-  const line_items = cartItems.map(item => {
-    const ticket = dbTickets?.find(t => t.id === item.id);
-    if (!ticket) return null;
-    
-    return {
-      price_data: {
-        currency: 'aud',
-        product_data: {
-          name: ticket.name,
-          metadata: { ticket_type_id: ticket.id } // Importante para luego
-        },
-        unit_amount: ticket.price * 100, // Stripe usa centavos
-      },
-      quantity: item.qty,
-    };
-  }).filter(Boolean);
-
-  // 2. Crear sesión de Stripe
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: line_items as any,
-    mode: 'payment',
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane`,
-    metadata: {
-      // Guardamos un resumen en JSON para leerlo en el webhook
-      cart_summary: JSON.stringify(cartItems)
-    }
-  });
-
-  return { url: session.url };
-}
-
 // app/actions.ts
 
 // Asegúrate de tener una tabla 'orders' o 'bookings' que acepte un campo JSONB 'attendees_data'
@@ -297,9 +255,14 @@ export async function checkoutComplexBooking(data: any) {
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/activate-brisbane`,
     metadata: {
-      order_id: order.id // Pasamos el ID para el Webhook
+      order_id: order.id 
     }
   });
 
-  return { url: session.url };
+  // 2. CAMBIA EL RETURN FINAL POR ESTO:
+  if (session.url) {
+    redirect(session.url); // Esto dispara la redirección automática a Stripe
+  } else {
+    return { error: "No se pudo crear la sesión de pago" };
+  }
 }
