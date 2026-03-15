@@ -1281,36 +1281,93 @@ header {
     color: #444;
 }
 
-/* BOTONES DE NAVEGACIÓN */
+/* --- ESTILO UNIFICADO DE CARRUSELES --- */
+
+.carousel-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1100px; /* Ancho suficiente para 4 logos en desktop */
+    margin: 0 auto;
+}
+
+/* Contenedor principal sin paddings laterales que afecten el cálculo */
+.carousel-window {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    /* Quitamos el gap y usamos padding en los items para que el cálculo de 25% sea perfecto */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-item {
+    /* MÓVIL: 1 elemento */
+    flex: 0 0 100%; 
+    padding: 0 10px; /* El espacio entre logos se da aquí */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BOTONES DE NAVEGACIÓN (Tus botones con posición absoluta) */
 .carousel-btn {
     background: none;
     border: none;
-    font-size: 2rem;
-    color: #02678F; /* Azul */
+    font-size: 2.5rem;
+    color: #02678F;
     cursor: pointer;
     position: absolute;
-    top: 30%; /* Alineado con la foto */
+    top: 50%; /* Centrado vertical respecto al contenedor */
     transform: translateY(-50%);
-    padding: 10px;
+    z-index: 10;
+    /* padding: 10px; */
     transition: color 0.3s, transform 0.3s;
     opacity: 0.7;
 }
 
 .carousel-btn:hover {
-    color: #f39304; /* Naranja al hover */
+    color: #f39304;
     opacity: 1;
     transform: translateY(-50%) scale(1.1);
 }
 
-.prev-btn {
-    left: -10px; /* Ajusta la posición fuera del contenido */
+.prev-btn { left: -40px; }
+.next-btn { right: -40px; }
+
+
+
+/* CONTENEDORES DE IMÁGENES (Tus estilos de logos) */
+.main-sponsor-wrapper {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.next-btn {
-    right: -10px; /* Ajusta la posición fuera del contenido */
+
+/* Contenedor de la imagen ajustado para no romper el layout */
+.secondary-sponsor-wrapper {
+    width: 100%;
+    /* height: 180px; Bajamos un poco la altura para que en fila de 4 no sea gigante */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* INDICADORES (DOTS) */
+.sponsor-logo-img {
+    max-width: 90%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* DOTS (Tus estilos originales) */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -1323,69 +1380,20 @@ header {
     width: 12px;
     background-color: #e8e1d0;
     border-radius: 50%;
-    display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.dot.active {
-    background-color: #02678F; /* Punto activo azul */
-}
+.dot.active { background-color: #02678F; }
 
-.dot:hover {
-    background-color: #f39304; /* Hover naranja */
-}
-
-/* ANIMACIÓN DE FADE-IN */
+/* TU ANIMACIÓN FADE-IN */
 .fade-in {
-    animation: fadeInAnimation ease 0.6s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    animation: fadeInAnimation ease 0.8s forwards;
 }
 
 @keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.sponsors-card {
-    text-align: center;
-    min-height: 350px; /* Evita que la tarjeta salte si los logos tienen alturas distintas */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.sponsor-carousel {
-    margin-top: 30px;
-    position: relative;
-}
-
-.sponsor-logo-wrapper {
-    height: 300px; /* Altura máxima del logo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.sponsor-logo-img {
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: contain; /* Fundamental para no deformar logos */
-    transition: filter 0.3s;
-}
-
-/* Reutilizamos la animación fade-in que definimos para los trainers */
-.fade-in {
-    animation: fadeInAnimation ease 0.8s;
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .img-portrait-wrapper {
@@ -1892,3 +1900,12 @@ section {
 } */
 }
 
+/* AJUSTES PARA SPONSORS EN LAPTOP (>992px) */
+@media (min-width: 992px) {
+    .carousel-item {
+        flex: 0 0 25%; /* 100 / 4 = 25% exacto */
+    }
+    /* En PC las flechas pueden estar un poco más afuera si hay espacio */
+    .prev-btn { left: -50px; }
+    .next-btn { right: -50px; }
+}

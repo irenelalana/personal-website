@@ -9,6 +9,7 @@
   box-sizing: border-box; /* Fundamental para evitar el scroll lateral */
 }
 
+
 .card {
   background: white;
   padding: 2rem;

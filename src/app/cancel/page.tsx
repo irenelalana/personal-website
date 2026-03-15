@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cancelBooking } from "@/app/actions"; // Asegúrate de que esta sea tu acción
 import { toast } from "sonner";
-import styles from "./CancelBooking.module.css";
+import styles from "./cancelBooking.module.css"; // Crea este módulo CSS para estilos específicos de esta página
 
-export default function CancelBookingPage() {
+export default function CancelBooking() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("token"); // O el token que uses

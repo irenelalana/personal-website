@@ -6,7 +6,7 @@ import { Link } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { TRAINERS } from '@/data/trainers'; // Importamos la constante
 import { SPONSORS } from '@/data/sponsors';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { VENDORS } from '@/data/vendors';
 
 export default function ActivateBrisbanePage() {
 
@@ -31,14 +31,73 @@ export default function ActivateBrisbanePage() {
 
   const [sponsorIndex, setSponsorIndex] = useState(0);
 
-  // LOGICA DE AUTO-PLAY
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSponsorIndex((prev) => (prev === SPONSORS.length - 1 ? 0 : prev + 1));
-    }, 3000); // Cambia cada 3 segundos
 
-    return () => clearInterval(interval); // Limpieza al desmontar
-  }, []);
+  // Estados del carrusel
+const [itemsToShow, setItemsToShow] = useState(1); // 1 por defecto (móvil)
+
+// useEffect para detectar el ancho de la pantalla
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth >= 992) {
+      setItemsToShow(4); // Laptop / Desktop
+    } else if (window.innerWidth >= 768) {
+      setItemsToShow(2); // Tablet (opcional)
+    } else {
+      setItemsToShow(1); // Móvil
+    }
+  };
+
+  // Ejecutar al montar el componente
+  handleResize();
+
+  // Escuchar cambios de tamaño
+  window.addEventListener('resize', handleResize);
+  
+  // Limpiar el evento al desmontar
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+// Funciones de navegación corregidas
+const handleNextSponsor = () => {
+  setSponsorIndex((prev) => {
+    // Si ya no hay más "páginas" completas para mostrar, volvemos al principio
+    if (prev >= SPONSORS.length - itemsToShow) {
+      return 0;
+    }
+    return prev + 1;
+  });
+};
+
+const handlePrevSponsor = () => {
+  setSponsorIndex((prev) => {
+    // Si estamos en el inicio, vamos al último grupo posible
+    if (prev === 0) {
+      return Math.max(0, SPONSORS.length - itemsToShow);
+    }
+    return prev - 1;
+  });
+};
+
+const [vendorIndex, setVendorIndex] = useState(0);
+const handleNextVendor = () => {
+  setVendorIndex((prev) => {
+    // Si ya no hay más "páginas" completas para mostrar, volvemos al principio
+    if (prev >= VENDORS.length - itemsToShow) {
+      return 0;
+    }
+    return prev + 1;
+  });
+};
+
+const handlePrevVendor = () => {
+  setVendorIndex((prev) => {
+    // Si estamos en el inicio, vamos al último grupo posible
+    if (prev === 0) {
+      return Math.max(0, VENDORS.length - itemsToShow);
+    }
+    return prev - 1;
+  });
+};
   
   const scrollToForm = () => {
     const formElement = document.getElementById('registration-form');
@@ -180,7 +239,7 @@ export default function ActivateBrisbanePage() {
               </button>
               
               {/* Contenido del Entrenador Actual */}
-              <div className="trainer-slide fade-in">
+              <div className="trainer-slide">
                 <div className="trainer-photo-wrapper">
                   <Image 
                     src={currentTrainer.image} 
@@ -215,24 +274,67 @@ export default function ActivateBrisbanePage() {
             </div>
          </div>
 
-         <div className="card-activate sponsors-card">
-        <h2>🤝 Our Sponsors</h2>
-        <p>Proudly supported by local organisations committed to our community.</p>
-        
-        <div className="sponsor-carousel">
-          <div className="sponsor-logo-wrapper fade-in" key={sponsorIndex}>
+        <div className="card-activate sponsors-card fade-in">
+          <h2>🤝 Our Sponsors & Vendors</h2>
+          <p>Proudly supported by local organisations committed to our community.</p>
+          
+          <p><strong>Main Sponsor</strong></p>
+          <div className="main-sponsor-wrapper">
             <Image 
-              src={SPONSORS[sponsorIndex].logo} 
-              alt={SPONSORS[sponsorIndex].name}
-              width={300}
-              height={300}
-              className="sponsor-logo-img"
+              src="/images/Art_House_logo.png" 
+              alt="Art House" 
+              width={400} 
+              height={400} 
+              className="main-sponsor-logo-img"
             />
           </div>
+
+          <p style={{ marginTop: '20px' }}><strong>Additional Sponsors</strong></p>
           
-          {/* Dots opcionales para los sponsors */}
+          <div className="carousel-main-container">
+            {/* Botón Anterior */}
+            <button onClick={handlePrevSponsor} className="carousel-btn prev-btn" aria-label="Previous">
+              &#10094;
+            </button>
+
+            <div className="carousel-window">
+              <div 
+                className="carousel-track" 
+                style={{ 
+                  transform: `translateX(-${sponsorIndex * (100 / itemsToShow)}%)`,
+                  display: 'flex',
+                  transition: 'transform 0.5s ease-in-out'
+                }}
+              >
+                {SPONSORS.map((sponsor, i) => (
+                  <div 
+                    className="carousel-item" 
+                    key={i}
+                    style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
+                  >
+                    <div className="secondary-sponsor-wrapper">
+                      <Image 
+                        src={sponsor.logo} 
+                        alt={sponsor.name}
+                        width={300}
+                        height={300}
+                        className="sponsor-logo-img"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Botón Siguiente */}
+            <button onClick={handleNextSponsor} className="carousel-btn next-btn" aria-label="Next">
+              &#10095;
+            </button>
+          </div>
+
+          {/* Dots Dinámicos: solo mostramos dots hasta donde empieza el último grupo */}
           <div className="carousel-dots">
-            {SPONSORS.map((_, i) => (
+            {SPONSORS.slice(0, SPONSORS.length - (itemsToShow - 1)).map((_, i) => (
               <span 
                 key={i} 
                 className={`dot ${i === sponsorIndex ? 'active' : ''}`}
@@ -240,8 +342,60 @@ export default function ActivateBrisbanePage() {
               ></span>
             ))}
           </div>
+          <p style={{ marginTop: '20px' }}><strong>Vendors</strong></p>
+          
+          <div className="carousel-main-container">
+            {/* Botón Anterior */}
+            <button onClick={handlePrevVendor} className="carousel-btn prev-btn" aria-label="Previous">
+              &#10094;
+            </button>
+
+            <div className="carousel-window">
+              <div 
+                className="carousel-track" 
+                style={{ 
+                  transform: `translateX(-${vendorIndex * (100 / itemsToShow)}%)`,
+                  display: 'flex',
+                  transition: 'transform 0.5s ease-in-out'
+                }}
+              >
+                {VENDORS.map((vendor, i) => (
+                  <div 
+                    className="carousel-item" 
+                    key={i}
+                    style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
+                  >
+                    <div className="secondary-sponsor-wrapper">
+                      <Image 
+                        src={vendor.logo} 
+                        alt={vendor.name}
+                        width={300}
+                        height={300}
+                        className="sponsor-logo-img"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Botón Siguiente */}
+            <button onClick={handleNextVendor} className="carousel-btn next-btn" aria-label="Next">
+              &#10095;
+            </button>
+          </div>
+
+          {/* Dots Dinámicos: solo mostramos dots hasta donde empieza el último grupo */}
+          <div className="carousel-dots">
+            {VENDORS.slice(0, VENDORS.length - (itemsToShow - 1)).map((_, i) => (
+              <span 
+                key={i} 
+                className={`dot ${i === vendorIndex ? 'active' : ''}`}
+                onClick={() => setVendorIndex(i)}
+              ></span>
+            ))}
+          </div>
         </div>
-      </div>
       </section>
 
       {/* --- FINAL CTA & FORM --- */}
@@ -251,7 +405,7 @@ export default function ActivateBrisbanePage() {
             {/* <p>Early bird ends in...</p> */}
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
-            {/* <EventRegistrationForm />   */}
+            <EventRegistrationForm />  
         </div>
       </section>
 
