@@ -289,7 +289,7 @@ const handlePrevVendor = () => {
             />
           </div>
 
-          <p style={{ marginTop: '20px' }}><strong>Additional Sponsors</strong></p>
+          <p style={{ marginTop: '40px', marginBottom: '0px' }}><strong>Additional Sponsors</strong></p>
           
           <div className="carousel-main-container">
             {/* Botón Anterior */}
@@ -317,7 +317,7 @@ const handlePrevVendor = () => {
                         src={sponsor.logo} 
                         alt={sponsor.name}
                         width={300}
-                        height={300}
+                        height={200}
                         className="sponsor-logo-img"
                       />
                     </div>
@@ -342,7 +342,7 @@ const handlePrevVendor = () => {
               ></span>
             ))}
           </div>
-          <p style={{ marginTop: '20px' }}><strong>Vendors</strong></p>
+          <p style={{ marginTop: '40px', marginBottom: '0px' }}><strong>Vendors</strong></p>
           
           <div className="carousel-main-container">
             {/* Botón Anterior */}
@@ -370,7 +370,7 @@ const handlePrevVendor = () => {
                         src={vendor.logo} 
                         alt={vendor.name}
                         width={300}
-                        height={300}
+                        height={200}
                         className="sponsor-logo-img"
                       />
                     </div>
