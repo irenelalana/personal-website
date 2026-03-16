@@ -92,11 +92,6 @@ export async function POST(req: Request) {
     const bookingData = order.attendees_data as BookingJSON;
     //console.log("📋 Booking data:", bookingData);
 
-    // Arrays para procesar
-    const ticketsToInsert: any = []; // Para guardar en tabla 'tickets' individualmente
-    const attachments = [];     // Para el email
-    const ticketsHtml = [];     // Para el cuerpo del email
-
     // --- PROCESAMIENTO DE ASISTENTES ---
     // Creamos una lista plana de todos los tickets a generar
     let allAttendees: ProcessedAttendee[] = [];
@@ -144,57 +139,23 @@ export async function POST(req: Request) {
     }
 
     // --- GENERACIÓN DE QRs Y ADJUNTOS ---
-    for (let i = 0; i < allAttendees.length; i++) {
-      const person = allAttendees[i];
+    const ticketsToInsert = await Promise.all(allAttendees.map(async (person) => {
       const ticketId = crypto.randomUUID();
-      const cidName = `qr_${ticketId}`;
-
-      // Generar Buffer QR
-      //const qrBuffer = await QRCode.toBuffer(ticketId);
       const payload = signTicket(ticketId);
       const ticketUrl = `https://irelaaquaandfitness.com/activate-brisbane/t/${payload}`;
-      const qrBuffer = await QRCode.toBuffer(ticketUrl, {
-        width: 500,
-        margin: 4
-      });
+      
+      const qrBuffer = await QRCode.toBuffer(ticketUrl, { width: 500, margin: 4 });
       const qrBase64 = qrBuffer.toString('base64');
-      // Guardar ticket individual en DB (opcional, pero recomendado)
-      ticketsToInsert.push({
+
+      return {
         id: ticketId,
-        order_id: orderId, // Relacionamos con la compra grande
-        customer_email: person.email || customerEmail, // Usamos su email o el del pagador
+        order_id: orderId,
+        customer_email: person.email || customerEmail,
         customer_name: person.name,
-        source: bookingData.source,
         ticket_type: person.type,
         qr_code: qrBase64
-      });
-
-      // Preparar adjunto
-      
-      
-
-      // attachments.push({
-      //   filename: `ticket-${i + 1}.png`,
-      //   content: qrBase64,
-      //   cid: cidName,
-      //   disposition: 'inline',
-      //   contentType: 'image/png'
-      // });
-
-      // HTML del Ticket
-      // ticketsHtml.push(`
-      //   <div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; background-color: #ffffff;">
-      //     <h3 style="margin: 0 0 10px 0; color: #333;">${person.name}</h3>
-      //     <span style="background-color: #eff6ff; color: #1d4ed8; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
-      //       ${person.type}
-      //     </span>
-      //     <div style="margin: 20px 0;">
-      //       <img src="cid:qr_${ticketId}" width="180" height="180" style="display: block; margin: 0 auto;" />
-      //     </div>
-      //     <p style="font-size: 11px; color: #888;">ID: ${ticketId}</p>
-      //   </div>
-      // `);
-    }
+      };
+    }));
 
     const ticketsForPDF = allAttendees.map((p, i) => ({
       ticketId: ticketsToInsert[i].id,
@@ -209,11 +170,11 @@ export async function POST(req: Request) {
       eventTime: "8:00 AM – 5:00 PM",
       eventLocation: " Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104",
       orderNumber: orderId,
-      logoPath: "./public/images/activate-brisbane-light.png",
+      //logoPath: "./public/images/activate-brisbane-light.png",
       eventWebsite: "https://www.irelaaquaandfitness.com/activate-brisbane"
     };
 
-      //const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
+    const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
     // 3. ACTUALIZAR BASE DE DATOS
     
     // A. Insertar los tickets individuales
@@ -338,13 +299,13 @@ export async function POST(req: Request) {
         from: "Activate Brisbane <tickets@irelaaquaandfitness.com>",
         to: customerEmail!,
         subject: "Your Activate Brisbane tickets",
-        // attachments: [
-        //   {
-        //     filename: "activate-brisbane-tickets.pdf",
-        //     content: Buffer.from(pdfBytes).toString("base64"),
-        //     contentType: "application/pdf"
-        //   }
-        // ],
+        attachments: [
+          {
+            filename: "activate-brisbane-tickets.pdf",
+            content: Buffer.from(pdfBytes).toString("base64"),
+            contentType: "application/pdf"
+          }
+        ],
         html: emailHtml
       });
   }
