@@ -271,8 +271,8 @@ export async function POST(req: Request) {
 
               <p style="margin-top:24px;">
                 If you have any questions, please contact us at<br/>
-                <a href="mailto:tickets@irelaaquaandfitness.com" style="color:#0c4a6e;">
-                  tickets@irelaaquaandfitness.com
+                <a href="mailto:irela@irelaaquaandfitness.com" style="color:#0c4a6e;">
+                  irela@irelaaquaandfitness.com
                 </a>
               </p>
 
@@ -296,7 +296,7 @@ export async function POST(req: Request) {
         `;
 
       await resend.emails.send({
-        from: "Activate Brisbane <tickets@irelaaquaandfitness.com>",
+        from: "Activate Brisbane <irela@irelaaquaandfitness.com>",
         to: customerEmail!,
         subject: "Your Activate Brisbane tickets",
         attachments: [
