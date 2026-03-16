@@ -170,7 +170,7 @@ export async function POST(req: Request) {
       eventTime: "8:00 AM – 5:00 PM",
       eventLocation: " Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104",
       orderNumber: orderId,
-      //logoPath: "./public/images/activate-brisbane-light.png",
+      logoPath: "https://www.irelaaquaandfitness.com/images/activate-brisbane-light.png",
       eventWebsite: "https://www.irelaaquaandfitness.com/activate-brisbane"
     };
 
@@ -348,7 +348,7 @@ function buildTicketBreakdown(
   }
 
   if (teamCount > 0) {
-    const total = teamPrice * teamCount;
+    const total = teamPrice;
 
     rows.push(`
       <tr>

@@ -16,7 +16,7 @@ type EventInfo = {
   eventLocation: string;
   eventWebsite: string;
   orderNumber: string;
-  logoPath?: string;
+  logoPath: string;
 };
 
 export async function generateTicketsPDF(
@@ -29,12 +29,14 @@ export async function generateTicketsPDF(
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const bold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-  let logoImage;
+  // 1. Obtener la imagen desde la URL
+  const response = await fetch(eventInfo.logoPath);
+  const imageBytes = await response.arrayBuffer();
 
-  if (eventInfo.logoPath) {
-    const logoBytes = fs.readFileSync(eventInfo.logoPath);
-    logoImage = await pdfDoc.embedPng(logoBytes);
-  }
+  // 2. Insertar en el PDF
+  const logoImage = await pdfDoc.embedPng(imageBytes);
+
+
 
   for (const ticket of tickets) {
 
