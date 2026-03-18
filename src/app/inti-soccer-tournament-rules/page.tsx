@@ -30,13 +30,13 @@ interface Translation {
 
 const content: Record<'en' | 'es', Translation> = {
   en: {
-    title: "Soccer 5-a-side Tournament Rules",
+    title: "INTI Soccer 5-a-side Tournament Rules",
     subtitle: "Actívate Brisbane 2026",
     navBack: "BACK TO REGISTRATION",
     sections: {
       spirit: {
         title: "General Spirit",
-        p1: "The Actívate Brisbane Soccer Tournament is designed to promote community, sportsmanship, and healthy competition. While rules are based on Futsal, they are adapted for grass and a fast-paced format, ensuring an exciting experience for players and spectators alike.",
+        p1: "The INTI Soccer 5-a-side Tournament in Actívate Brisbane is designed to promote community, sportsmanship, and healthy competition. While rules are based on Futsal, they are adapted for grass and a fast-paced format, ensuring an exciting experience for players and spectators alike.",
         p2: "Please note: By registering, you are not just signing up for the soccer tournament; your ticket grants you full access to the entire event. You'll be able to enjoy all the other activities scheduled throughout the day, soak up the vibrant atmosphere, and connect with our wonderful community."
       },
       field: {
@@ -95,7 +95,7 @@ const content: Record<'en' | 'es', Translation> = {
     }
   },
   es: {
-    title: "Reglamento del Torneo de Fútbol 5",
+    title: "Reglamento del Torneo INTI de Fútbol 5",
     subtitle: "Actívate Brisbane 2026",
     navBack: "VOLVER AL REGISTRO",
     sections: {

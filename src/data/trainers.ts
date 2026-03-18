@@ -39,10 +39,10 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 5,
-    name: "Verónica (Speedfit QLD)",
-    role: "Speedfit QLD Owner & Entrepreneur",
-    description: "As the owner of Speedfit in Queensland, Verónica is on a mission to empower busy mums to reclaim their strength and energy. She specialises in efficient, science-backed fitness solutions that fit perfectly into a hectic lifestyle.",
-    image: "/images/veronica_foto.png",
+    name: "Karina (Natura Med)",
+    role: "Nutritionist",
+    description: "Nutritionist...",
+    image: "/images/Karina_foto.png",
   },
   {
     id: 6,
@@ -64,5 +64,19 @@ export const TRAINERS: Trainer[] = [
     role: "Zumba & Pilates Specialist",
     description: "With 11 years of experience in fitness and event management, Belén specialises in Zumba, Pilates and functional training to boost community wellbeing. She is passionate about creating inclusive activities that foster genuine connection.",
     image: "/images/belen_foto.png",
+  },
+  {
+    id: 9,
+    name: "Gabriela (PCYC)",
+    role: "Gymnastics for kids",
+    description: "Gymnastics classes for kids aged 3-12, designed to build confidence, coordination and strength in a fun and supportive environment.",
+    image: "/images/PCYC_logo.png",
+  },
+  {
+    id: 10,
+    name: "Elvira",
+    role: "Comedian",
+    description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
+    image: "/images/Elvira_foto.png",
   }
 ];

@@ -1,5 +1,6 @@
 'use client';
 import EventRegistrationForm from '@/components/EventRegistrationForm'; // Ajusta la ruta
+import EventRegistrationLongForm from '@/components/EventRengistrationLongForm';
 import Countdown from '@/components/Countdown';
 import Image from 'next/image';
 import { Link } from 'lucide-react';
@@ -193,11 +194,11 @@ const handlePrevVendor = () => {
         <div className="card_single">
             <ul>
               <li>Multiple 30-minute stage fitness sessions</li>
-              <li>Entry to the Family Run / Walk</li>
+              <li>Entry to the Icoté Sweet Run / Walk, proudly sponsored by <a href="https://www.instagram.com/icote_treats_by_maria/" target="_blank" rel="noopener noreferrer">Icoté Treats by María</a></li>
               <li>Free fitness assessment opportunities</li>
               <li>Traditional games and activities</li>
               <li>Sponsor goodie bag</li>
-              <li>Access to <a href="/soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</a> (Soccer Team Pack Needed)</li>
+              <li>Access to <a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a></li>
               <li>Social soccer matches for kids, teens and families</li>
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
@@ -229,8 +230,8 @@ const handlePrevVendor = () => {
          
          {/* TARJETA MODIFICADA CON CARRUSEL */}
          <div className="card-activate trainers-carousel-card">
-            <h2>👩‍🏫 Confirmed Coaches</h2>
-            <p className="section-subtitle">Qualified bilingual professionals leading high-energy sessions.</p>
+            <h2>👩‍🏫 Confirmed Sport and Health Professionals</h2>
+            <p className="section-subtitle">Qualified bilingual professionals leading high-energy sessions and workshops.</p>
             
             <div className="carousel-container">
               {/* Botón Anterior */}
@@ -406,6 +407,7 @@ const handlePrevVendor = () => {
             
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
             {/* <EventRegistrationForm />   */}
+            <EventRegistrationLongForm />
         </div>
       </section>
 
