@@ -7,7 +7,6 @@
   color: #333;
 }
 
-
 /* Header */
 .header {
   text-align: center;
@@ -126,22 +125,7 @@
   font-size: 1.5rem;
   color: #f39304;
   font-weight: bold;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-/* Cuerpo de la respuesta (Animación de altura) */
-.accordionBody {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-in-out;
-}
-
-.accordionItem.open .accordionBody {
-  grid-template-rows: 1fr;
-}
-
-.accordionContent {
+@@ -144,30 +141,29 @@
   overflow: hidden;
   padding: 0 20px;
   font-size: 1.2rem;
@@ -171,8 +155,4 @@
 
 .list li {
   margin-bottom: 8px;
-}
-
-button, form input[type=submit] {
-  color: #076873;
 }
