@@ -294,7 +294,7 @@ const handlePrevVendor = () => {
           
           <div className="carousel-main-container">
             {/* Botón Anterior */}
-            <button onClick={handlePrevSponsor} className="carousel-btn prev-btn" aria-label="Previous">
+            <button onClick={handlePrevSponsor} className="carousel-btn prev-btn photo-aligned-btn" aria-label="Previous">
               &#10094;
             </button>
 
@@ -328,7 +328,7 @@ const handlePrevVendor = () => {
             </div>
 
             {/* Botón Siguiente */}
-            <button onClick={handleNextSponsor} className="carousel-btn next-btn" aria-label="Next">
+            <button onClick={handleNextSponsor} className="carousel-btn next-btn photo-aligned-btn" aria-label="Next">
               &#10095;
             </button>
           </div>
@@ -347,7 +347,7 @@ const handlePrevVendor = () => {
           
           <div className="carousel-main-container">
             {/* Botón Anterior */}
-            <button onClick={handlePrevVendor} className="carousel-btn prev-btn" aria-label="Previous">
+            <button onClick={handlePrevVendor} className="carousel-btn prev-btn photo-aligned-btn" aria-label="Previous">
               &#10094;
             </button>
 
@@ -381,7 +381,7 @@ const handlePrevVendor = () => {
             </div>
 
             {/* Botón Siguiente */}
-            <button onClick={handleNextVendor} className="carousel-btn next-btn" aria-label="Next">
+            <button onClick={handleNextVendor} className="carousel-btn next-btn photo-aligned-btn" aria-label="Next">
               &#10095;
             </button>
           </div>
