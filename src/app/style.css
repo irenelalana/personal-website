@@ -1851,13 +1851,6 @@ header {
   transition: transform 0.2s;
 }
 
-  .card-activate {
-    width: 900px;
-  }
-
-  .card-activate p {
-    font-size: 1.5em;
-  }
 
 .content-section {
   padding: 40px 5px;
@@ -1922,6 +1915,14 @@ section {
     .carousel-item {
         flex: 0 0 25%; /* 100 / 4 = 25% exacto */
     }
+      .card-activate {
+    width: 900px;
+  }
+
+  .card-activate p {
+    font-size: 1.5em;
+  }
+
     /* En PC las flechas pueden estar un poco más afuera si hay espacio */
     /* Mantén las posiciones laterales separadas */
 .prev-btn.photo-aligned-btn {
