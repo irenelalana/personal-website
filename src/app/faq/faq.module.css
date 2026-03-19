@@ -6,6 +6,7 @@
   padding: 10px 10px;
 }
 
+
 /* Header */
 .header {
   text-align: center;
@@ -166,4 +167,8 @@
 
 .list li {
   margin-bottom: 8px;
+}
+
+h3 {
+  color: #076873;
 }
