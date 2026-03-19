@@ -1349,7 +1349,7 @@ header {
   position: absolute;
   /* Si tu foto mide 300px y está arriba del todo, el centro es 150px. 
      Ajusta este valor si tienes un margin o padding superior en .trainer-slide */
-  top: 150px; 
+  top: 100px; 
   transform: translateY(-50%); /* Centra el botón exactamente sobre ese punto */
   z-index: 10;
 }
@@ -1923,6 +1923,12 @@ section {
         flex: 0 0 25%; /* 100 / 4 = 25% exacto */
     }
     /* En PC las flechas pueden estar un poco más afuera si hay espacio */
-    .prev-btn { left: -50px; }
-    .next-btn { right: -50px; }
+    /* Mantén las posiciones laterales separadas */
+.prev-btn.photo-aligned-btn {
+  left: -50px; /* O el margen negativo que prefieras, ej: -1rem */
+}
+
+.next-btn.photo-aligned-btn {
+  right: -50px; /* O el margen negativo que prefieras, ej: -1rem */
+}
 }
