@@ -1338,8 +1338,30 @@ header {
     transform: translateY(-50%) scale(1.1);
 }
 
-.prev-btn { left: 0px; }
-.next-btn { right: 0px; }
+/* El contenedor padre debe ser relativo para que las flechas se posicionen respecto a él */
+.carousel-container {
+  position: relative;
+  /* ... resto de tus estilos ... */
+}
+
+/* Posicionamiento absoluto para anclar los botones */
+.photo-aligned-btn {
+  position: absolute;
+  /* Si tu foto mide 300px y está arriba del todo, el centro es 150px. 
+     Ajusta este valor si tienes un margin o padding superior en .trainer-slide */
+  top: 150px; 
+  transform: translateY(-50%); /* Centra el botón exactamente sobre ese punto */
+  z-index: 10;
+}
+
+/* Mantén las posiciones laterales separadas */
+.prev-btn.photo-aligned-btn {
+  left: 0; /* O el margen negativo que prefieras, ej: -1rem */
+}
+
+.next-btn.photo-aligned-btn {
+  right: 0; /* O el margen negativo que prefieras, ej: -1rem */
+}
 
 /* CONTENEDORES DE IMÁGENES (Tus estilos de logos) */
 .main-sponsor-wrapper {
