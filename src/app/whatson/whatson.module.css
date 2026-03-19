@@ -35,7 +35,7 @@
 .badge {
   display: inline-block;
   background: #02678F;
-  : white;
+  color: white;
   padding: 5px 15px;
   border-radius: 50px;
   font-size: 0.8rem;
@@ -45,7 +45,7 @@
 }
 
 .timetableSection h2 {
-  : #02678F;
+  color: #02678F;
   margin-bottom: 30px;
 }
 
@@ -147,7 +147,7 @@
 .primaryButton {
   display: inline-block;
   background-: #f39304;
-  : white;
+  color: white;
   padding: 15px 35px;
   border-radius: 50px;
   text-decoration: none;
