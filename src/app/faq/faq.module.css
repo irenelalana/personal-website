@@ -125,7 +125,22 @@
   font-size: 1.5rem;
   color: #f39304;
   font-weight: bold;
-@@ -144,30 +141,29 @@
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Cuerpo de la respuesta (Animación de altura) */
+.accordionBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+
+.accordionItem.open .accordionBody {
+  grid-template-rows: 1fr;
+}
+
+.accordionContent {
   overflow: hidden;
   padding: 0 20px;
   font-size: 1.2rem;
