@@ -169,10 +169,6 @@
   margin-bottom: 8px;
 }
 
-h3 {
-  color: #076873;
-}
-
-button {
+button, form input[type=submit] {
   color: #076873;
 }
