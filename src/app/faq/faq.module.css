@@ -4,7 +4,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 10px;
-  color: #333;
 }
 
 /* Header */
@@ -20,7 +19,6 @@
 }
 
 .header p {
-  color: #666;
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto;
@@ -100,7 +98,6 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  color: #333;
   transition: background-color 0.3s;
 }
 
@@ -144,7 +141,6 @@
   overflow: hidden;
   padding: 0 20px;
   font-size: 1.2rem;
-  color: #555;
   line-height: 1.6;
 }
 
