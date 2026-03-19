@@ -16,7 +16,7 @@ export default function WhatsOnPage() {
         </div>
 
         {/* SECCIÓN DESTACADA: BIENESTAR 360 WELLNESS */}
-        <section className={styles.challengeCard}>
+        {/* <section className={styles.challengeCard}>
           <div className={styles.challengeContent}>
             <span className={styles.partnerLabel}>BIENESTAR, 360 DOWNUNDER WELLNESS</span>
             <h2>IWD SELFCARE EVENT: CORE, CYCLE, GLOW</h2>
@@ -69,7 +69,7 @@ export default function WhatsOnPage() {
               </a>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* SECCIÓN DEL HORARIO (TIMETABLE) */}
         <div className={styles.timetableSection}>
