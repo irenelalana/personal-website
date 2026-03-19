@@ -1881,9 +1881,6 @@ header {
         font-size: 1.1rem;
     }
     
-    /* Reposicionamos las flechas para que no tapen la foto grande */
-    .prev-btn { left: -80px; }
-    .next-btn { right: -80px; }
 
   .item-2 {
     display: block;
