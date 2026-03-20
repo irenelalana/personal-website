@@ -4,7 +4,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 10px;
-  color: #333;
 }
 
 /* Encabezado */
@@ -20,7 +19,6 @@
 }
 
 .header p {
-  color: #666;
   font-size: 1.1rem;
 }
 
@@ -108,7 +106,6 @@
 
 /* Extracto con truncado de texto */
 .excerpt {
-  color: #555;
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;

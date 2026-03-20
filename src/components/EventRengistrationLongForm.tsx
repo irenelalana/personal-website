@@ -6,7 +6,7 @@ import { checkoutComplexBooking } from '@/app/actions';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
-const ACTIVITIES_OPTS = ['Icoté Treats Run / Walk', 'INTI Soccer 5-a-side Tournament', 'Group Fitness Classes', 'Wellness Workshops', 'Kids Activities', 'Social, fun & Community Activities'];
+const ACTIVITIES_OPTS = ['Icoté Sweet Run / Walk', 'INTI Soccer 5-a-side Tournament', 'Group Fitness Classes', 'Wellness Workshops', 'Kids Activities', 'Social, fun & Community Activities'];
 const AGE_OPTS = ['Under 18', '18-29', '30-49', '50-64', '65+'];
 const GENDER_OPTS = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
 //const COUNTRY_OPTS = ['Australia', 'Spain', 'Latin America', 'Europe (other)', 'Asia', 'Africa', 'Other', 'Prefer not to say'];

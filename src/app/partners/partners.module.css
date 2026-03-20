@@ -4,7 +4,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 10px;
-  color: #333;
 }
 
 /* Encabezados de Sección */
@@ -20,7 +19,6 @@
 }
 
 .sectionHeader p {
-  color: #555;
   font-size: 1.1rem;
   line-height: 1.5;
 }
@@ -111,7 +109,6 @@
 }
 
 .cardContent p {
-  color: #666;
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 8px;
@@ -140,7 +137,6 @@
 }
 
 .benefitBox p {
-  color: #333;
   font-weight: 600;
   margin: 0;
   font-size: 0.95rem;

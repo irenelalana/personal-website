@@ -13,6 +13,7 @@ export const SPONSORS: Sponsor[] = [
   { id: 6, name: "Australian Steak", logo: "/images/Australian_Steak_logo.png" },
   { id: 7, name: "Speedfit QLD", logo: "/images/speedfit_logo.png" },
   { id: 8, name: "Angelica RM cook", logo: "/images/angelica_chef_LOGO.png" },
+  { id: 9, name: "Icote Treats by Maria", logo: "/images/icote_logo.png" },
 
   // Añade todos los que necesites
 ]

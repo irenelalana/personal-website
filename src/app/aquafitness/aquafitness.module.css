@@ -2,7 +2,6 @@
   padding: 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  color: #333;
 }
 
 .cardSingle {
@@ -132,7 +131,6 @@
 .locationNote, .neighborhoodNote {
   margin-top: 1rem;
   font-weight: 500;
-  color: #444;
 }
 
 /* Video Responsive */

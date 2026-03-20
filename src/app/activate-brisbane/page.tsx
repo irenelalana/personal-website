@@ -282,8 +282,8 @@ const handlePrevVendor = () => {
           <p><strong>Main Sponsor</strong></p>
           <div className="main-sponsor-wrapper">
             <Image 
-              src="/images/Art_House_logo.png" 
-              alt="Art House" 
+              src="/images/welcome_main_sponsor_logo.png" 
+              alt="Welcome Main Sponsor of Actívate Brisbane" 
               width={400} 
               height={400} 
               className="main-sponsor-logo-img"

@@ -100,7 +100,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  color: #333;
+  color: #076873;
   transition: background-color 0.3s;
 }
 
@@ -144,7 +144,7 @@
   overflow: hidden;
   padding: 0 20px;
   font-size: 1.2rem;
-  color: #555;
+  color: #076873;
   line-height: 1.6;
 }
 
