@@ -59,7 +59,6 @@
 }
 
 .heroContent p {
-  color: #555;
   line-height: 1.7;
   font-size: 1.1rem;
   margin-bottom: 20px;
@@ -105,7 +104,6 @@
   padding: 12px 0 12px 35px;
   position: relative;
   border-bottom: 1px solid #e1e8ed;
-  color: #444;
 }
 
 .featureList li::before {

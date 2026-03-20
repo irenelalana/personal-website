@@ -53,14 +53,12 @@
 
 .corpLead {
   font-size: 1.25rem;
-  color: #444;
   font-weight: 500;
   line-height: 1.5;
   margin-bottom: 20px;
 }
 
 .corpTextContent p {
-  color: #666;
   line-height: 1.7;
   margin-bottom: 15px;
 }
@@ -96,7 +94,6 @@
   padding: 12px 0 12px 30px;
   position: relative;
   border-bottom: 1px solid #e1e8ed;
-  color: #444;
 }
 
 .corpServicesList li::before {
