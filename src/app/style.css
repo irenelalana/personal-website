@@ -1524,6 +1524,31 @@ header {
   margin-bottom: 30px;
 }
 
+.announcement-bar {
+  background-color: #f39304; /* Tu color naranja/rojo del evento */
+  color: white;
+  text-align: center;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.announcement-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: block; /* Hace que toda el área sea clicable en móvil */
+}
+
+.announcement-link strong {
+  text-decoration: underline;
+}
+
+.announcement-link:hover {
+  color: #fff3e0;
+  opacity: 0.9;
+}
+
 @media screen and  (min-width: 768px) {
   body {
     font-size: 1em;

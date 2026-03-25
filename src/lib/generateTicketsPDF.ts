@@ -6,6 +6,7 @@ type Ticket = {
   ticketId: string;
   attendeeName: string;
   ticketType: string;
+  kids?: string;
   qrCode: string;
 };
 
@@ -128,6 +129,16 @@ export async function generateTicketsPDF(
       size: 14,
       font
     });
+
+    // KIDS
+    if (ticket.kids && ticket.kids !== '0') {
+      page.drawText(`Kids: ${ticket.kids}`, {
+        x: margin,
+        y: height - 420,
+        size: 12,
+        font
+      });
+    }
 
     // QR
     const qrImage = await pdfDoc.embedPng(ticket.qrCode);

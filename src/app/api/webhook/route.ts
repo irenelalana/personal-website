@@ -8,6 +8,7 @@ import { StandardFonts } from 'pdf-lib/cjs/api/StandardFonts';
 import PDFDocument from 'pdf-lib/cjs/api/PDFDocument';
 import { generateTicketsPDF } from '@/lib/generateTicketsPDF';
 import { signTicket } from "@/lib/tickets";
+import { tr } from 'date-fns/locale';
 
 
 
@@ -21,15 +22,21 @@ const supabase = createClient(
 
 // Definimos la estructura de lo que guardaste en el JSON
 interface Attendee {
-  name: string;
+  firstName: string;
+  lastName: string;
   email?: string;
   phone?: string;
+  kids?: string;
 }
 
 interface BookingJSON {
   adults: Attendee[];
   youth: Attendee[];
-  source: string; // Nuevo campo para la fuente de la reserva
+  source: string; 
+  emergency: {     // NUEVO: Agregamos la interfaz de emergencia
+    name: string;
+    phone: string;
+  };
   team?: {
     active: boolean;
     teamName: string;
@@ -39,10 +46,15 @@ interface BookingJSON {
 }
 
 interface ProcessedAttendee {
-  name: string;
+  firstName: string;
+  lastName: string;
   email?: string;
   phone?: string;
+  kids?: string; // Nuevo campo para número de niños bajo su responsabilidad (solo para el primer adulto)
   type: string; // 'Adulto', 'Niño' o 'Jugador (Nombre Equipo)'
+  source: string; // Fuente de la reserva
+  emergencyContact: string;
+  emergencyPhone: string;
   team: string | null;
   jerseyColour: string | null;
 }
@@ -97,26 +109,36 @@ export async function POST(req: Request) {
     let allAttendees: ProcessedAttendee[] = [];
 
     // A. Adultos
-    bookingData.adults.forEach(a => {
+    bookingData.adults.forEach((a, index) => {
       allAttendees.push({ 
-        name: a.name, 
+        firstName: a.firstName,
+        lastName: a.lastName,
         email: a.email, 
         phone: a.phone, 
+        kids: index === 0 ? (a.kids || '0') : '0', // SOLO el primer adulto recibe los niños, el resto '0'
         type: 'Adult', 
         team: null ,
-        jerseyColour: null
+        jerseyColour: null,
+        source: bookingData.source,
+        emergencyContact: bookingData.emergency.name,
+        emergencyPhone: bookingData.emergency.phone
       });
     });
     
     // B. Niños
     bookingData.youth.forEach(k => {
       allAttendees.push({ 
-        name: k.name, 
+        firstName: k.firstName,
+        lastName: k.lastName,
         email: k.email, 
         phone: k.phone, 
+        kids: '0',
         type: 'Youth', 
         team: null,
-        jerseyColour: null
+        jerseyColour: null,
+        source: bookingData.source,
+        emergencyContact: bookingData.emergency.name,
+        emergencyPhone: bookingData.emergency.phone
       });
     });
     
@@ -125,14 +147,19 @@ export async function POST(req: Request) {
       const teamName = bookingData.team.teamName;
       const jerseyColour = bookingData.team.jerseyColour;
       bookingData.team.members.forEach(m => {
-        if (m.name) {
+        if (m.firstName) {
           allAttendees.push({ 
-            name: m.name, 
+            firstName: m.firstName,
+            lastName: m.lastName,
             email: m.email, 
-            phone: m.phone, 
+            phone: m.phone,
+            kids: '0', 
             type: `Player (${teamName})`, 
             team: teamName, 
-            jerseyColour: jerseyColour
+            jerseyColour: jerseyColour,
+            source: bookingData.source,
+            emergencyContact: bookingData.emergency.name,
+            emergencyPhone: bookingData.emergency.phone
           });
         }
       });
@@ -151,16 +178,23 @@ export async function POST(req: Request) {
         id: ticketId,
         order_id: orderId,
         customer_email: person.email || customerEmail,
-        customer_name: person.name,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        phone_number: person.phone,
+        kids: person.kids,
         ticket_type: person.type,
+        source: person.source,
+        emergency_contact: person.emergencyContact,
+        emergency_number: person.emergencyPhone,
         qr_code: qrBase64
       };
     }));
 
     const ticketsForPDF = allAttendees.map((p, i) => ({
       ticketId: ticketsToInsert[i].id,
-      attendeeName: p.name,
+      attendeeName: `${p.firstName} ${p.lastName}`,
       ticketType: p.type,
+      kids: p.kids,
       qrCode: ticketsToInsert[i].qr_code
     }));
 
@@ -181,7 +215,14 @@ export async function POST(req: Request) {
     // Asegúrate de tener una tabla 'tickets' con estas columnas o ajusta esto
     console.log("🎟️ Tickets a insertar:", ticketsToInsert);
     if (ticketsToInsert.length > 0) {
-      await supabase.from('tickets').insert(ticketsToInsert);
+      try {
+        const { data, error } = await supabase.from('tickets').insert(ticketsToInsert);
+        console.log("✅ Tickets insertados:", data);
+        console.error("❌ Error al insertar tickets:", error);
+      } catch (error) {
+        console.error("Error inserting tickets:", error);
+      }
+      // await supabase.from('tickets').insert(ticketsToInsert);
     }
 
     // B. Marcar la reserva global como PAGADA
@@ -201,9 +242,9 @@ export async function POST(req: Request) {
         bookingData.adults.length,
         bookingData.youth.length,
         bookingData.team?.members.length || 0,
-        29,
-        10,
-        250
+        25,
+        7,
+        200
       );
 
       const totalPrice = order. total_amount ? `$${order. total_amount}.00` : "N/A";

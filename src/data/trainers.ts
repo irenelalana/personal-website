@@ -6,6 +6,7 @@ export interface Trainer {
   role: string;
   description: string;
   image: string;
+  url: string;
 }
 
 export const TRAINERS: Trainer[] = [
@@ -13,8 +14,9 @@ export const TRAINERS: Trainer[] = [
     id: 1,
     name: "Irene Lalana (Irela Aqua & Fitness)",
     role: "Sport Science & Fitness Coach",
-    description: "Recognised as the 2025 National Group Exercise Leader of the Year with over 20 years' experience. Shes dedicated to building inclusive, high-impact active lifestyles for the community.",
+    description: "Recognised as the 2025 National Group Exercise Leader of the Year with over 20 years' experience. She's dedicated to building inclusive, high-impact active lifestyles for the community.",
     image: "/images/irela.png",
+    url: "https://www.irelaaquaandfitness.com/"
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ export const TRAINERS: Trainer[] = [
     role: "Yoga & Pilates Instructor",
     description: "Certified Yoga teacher with a background in neuroscience and therapy. She leads accessible sessions ranging from 'Inner Child' family yoga to high-intensity mobility drills.",
     image: "/images/Paola.png",
+    url: "https://www.instagram.com/yoga_with_pow/"
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ export const TRAINERS: Trainer[] = [
     role: "Zumba Instructor & Nutritionist",
     description: "A certified fitness expert who treats dance as powerful medicine for the soul. Her 'Zumba with Intention' sessions combine HIIT and agility with a focus on emotional transformation.",
     image: "/images/lala.png",
+    url: "https://www.zumba.com/en-US/p/FuegoBeats"
   },
   {
     id: 4,
@@ -36,6 +40,7 @@ export const TRAINERS: Trainer[] = [
     role: "Capoeira Instructor & Osteopath",
     description: "A professional Osteopath and Capoeira practitioner with 10 years under her belt. She blends martial arts with Yoga and Pilates for a unique, holistic approach to movement.",
     image: "/images/Yaya_foto.png",
+    url: "https://xangocapoeira.com/"
   },
   {
     id: 5,
@@ -43,13 +48,15 @@ export const TRAINERS: Trainer[] = [
     role: "Nutritionist",
     description: "Nutritionist...",
     image: "/images/Karina_foto.png",
+    url: "https://naturamed.com.au/"
   },
   {
     id: 6,
     name: "Denise (Move in Tune)",
     role: "Strength & Conditioning PT",
-    description: "An Argentine Personal Trainer(Cert IV) specialising in functional circuits and mobility. She focuses on building strength and flexibility through sessions that really get you moving.",
+    description: "An Argentine Personal Trainer (Cert IV) specialising in functional circuits and mobility. She focuses on building strength and flexibility through sessions that really get you moving.",
     image: "/images/denise.png",
+    url: "https://www.instagram.com/move.in.tune/"
   },
   {
     id: 7,
@@ -57,6 +64,7 @@ export const TRAINERS: Trainer[] = [
     role: "Fitness & Booty Specialist",
     description: "Qualified PT (Cert III & IV) leading intensive lower-body sessions. Her 30-minute 'Booty with Bands' classes are designed for maximum energy and toning.",
     image: "/images/Manu_foto.png",
+    url: "https://www.instagram.com/__manufit/"
   },
   {
     id: 8,
@@ -64,6 +72,7 @@ export const TRAINERS: Trainer[] = [
     role: "Zumba & Pilates Specialist",
     description: "With 11 years of experience in fitness and event management, Belén specialises in Zumba, Pilates and functional training to boost community wellbeing. She is passionate about creating inclusive activities that foster genuine connection.",
     image: "/images/belen_foto.png",
+    url: "https://www.instagram.com/belen.roldanfit/"
   },
   {
     id: 9,
@@ -71,12 +80,14 @@ export const TRAINERS: Trainer[] = [
     role: "Gymnastics for kids",
     description: "Gymnastics classes for kids aged 3-12, designed to build confidence, coordination and strength in a fun and supportive environment.",
     image: "/images/PCYC_logo.png",
+    url: "https://www.pcyc.org.au"
   },
   {
     id: 10,
-    name: "Elvira",
+    name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
     image: "/images/Elvira_foto.png",
+    url: "https://elviracete.com/"
   }
 ];

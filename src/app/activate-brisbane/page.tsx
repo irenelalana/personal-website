@@ -133,16 +133,27 @@ const handlePrevVendor = () => {
           <p className="hero-subtitle">Move. Connect. Celebrate.</p>
           <div className="hero-details">
             <p>📅 Sunday 12 July 2026</p>
-            <p>📍 Yeronga Eagles Football Club</p>
+            <p>📍<a href='https://www.google.com/maps/place/Yeronga+Eagles+Football+Club/@-27.5095064,153.0124028,17z/data=!3m1!4b1!4m6!3m5!1s0x6b915b28bd4f65cd:0x12cd3765e151ac6f!8m2!3d-27.5095064!4d153.0149831!16s%2Fg%2F11n0c49qd_?entry=ttu&g_ep=EgoyMDI2MDMyMi4wIKXMDSoASAFQAw%3D%3D' target="_blank" rel="noopener noreferrer">
+                Yeronga Eagles Football Club
+              </a>
+            </p>
             <p>⏰ 8:00AM – 5:00PM</p>
-            <p>📸 <a href="https://www.instagram.com/activatebrisbane" target="_blank"  style={{ textDecoration: 'underline', color: 'inherit' }}>
-              Follow us for updates and exclusive content!
-            </a></p>
+            <p>
+              <Image 
+                src="/images/instagram_exercise_online_100x100.png"// Usamos la importación estática
+                alt="Instagram logo" 
+                width={20} // Especificamos el ancho en píxeles (sin 'px')
+                height={20} // Especificamos el alto en píxeles
+              />
+              <a href="https://www.instagram.com/activatebrisbane" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>
+                Follow us for updates and exclusive content!
+              </a>
+            </p>
           </div>
           
           <div className="cta-container">
             <button className="cta-button pulse" onClick={scrollToForm}>
-              Tickets Coming Soon
+              Tickets Available!
             </button>
           </div>
         </div>
@@ -167,6 +178,27 @@ const handlePrevVendor = () => {
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don't just attend — you participate."
           </p>
+
+          {/* Nuevo párrafo de ubicación con logo discreto */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '15px', 
+            marginTop: '25px', 
+            paddingTop: '15px', 
+            borderTop: '1px solid #eee' // Una línea muy sutil para separar
+          }}>
+            <Image 
+              src="/images/yeronga-logo.jpg" // Cambia esto por el nombre exacto de tu archivo
+              alt="Yeronga Eagles FC Logo"
+              width={60} 
+              height={60}
+              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }} // Opacidad baja para que sea discreto
+            />
+            <p style={{ margin: 0, lineHeight: '1.4' }}>
+              The event will take place at the home of <a href='https://www.yerongaefc.com.au/' target='_blank' rel='noopener noreferrer'>Yeronga Eagles Football Club</a>, their soccer fields and amenities provide a professional and energetic environment for all our activities.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -174,13 +206,13 @@ const handlePrevVendor = () => {
       <section className="content-section alt-bg">
         <h2>🎯 Who is it for?</h2>
         <div className="features-grid">
-          <div className="feature-item">✔ Spanish-Speaking Community in Brisbane</div>
+          <div className="feature-item">✔ Spanish-Speaking Communities in Brisbane</div>
           <div className="feature-item">✔ Fitness lovers</div>
           <div className="feature-item">✔ Soccer lovers</div>
           <div className="feature-item">✔ Runners</div>
-          <div className="feature-item">✔ Exercise passionate</div>
+          <div className="feature-item">✔ Exercise passionates</div>
           <div className="feature-item">✔ Active Families</div>
-          <div className="feature-item">✔ Multicultural community</div>
+          <div className="feature-item">✔ Multicultural communities</div>
           <div className="feature-item">✔ Pet Friendly!</div>
         </div>
         <p style={{textAlign: 'center', marginTop: '20px'}}>
@@ -198,7 +230,7 @@ const handlePrevVendor = () => {
               <li>Free fitness assessment opportunities</li>
               <li>Traditional games and activities</li>
               <li>Sponsor goodie bag</li>
-              <li>Access to <a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a></li>
+              <li>Access to <a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a>and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
               <li>Social soccer matches for kids, teens and families</li>
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
@@ -207,7 +239,7 @@ const handlePrevVendor = () => {
         </div>
         <div className="cta-container" style={{marginTop: '30px'}}>
             <button className="cta-button" onClick={scrollToForm}>
-              Tickets coming soon
+              Purchase Your Ticket Now
             </button>
         </div>
       </section>
@@ -242,13 +274,15 @@ const handlePrevVendor = () => {
               {/* Contenido del Entrenador Actual */}
               <div className="trainer-slide">
                 <div className="trainer-photo-wrapper">
-                  <Image 
+                  <a href={currentTrainer.url} target="_blank" rel="noopener noreferrer">
+                  <Image
                     src={currentTrainer.image} 
                     alt={`Trainer ${currentTrainer.name}`}
                     width={300} // Ajusta según diseño
                     height={300} // Ajusta según diseño
                     className="trainer-photo-round"
                   />
+                  </a>
                 </div>
                 <div className="trainer-text">
                   <h3>{currentTrainer.name}</h3>
@@ -281,13 +315,15 @@ const handlePrevVendor = () => {
           
           <p><strong>Main Sponsor</strong></p>
           <div className="main-sponsor-wrapper">
-            <Image 
-              src="/images/welcome_main_sponsor_logo.png" 
-              alt="Welcome Main Sponsor of Actívate Brisbane" 
-              width={400} 
-              height={400} 
-              className="main-sponsor-logo-img"
+            <a href="https://welcomestudentsgroup.com/" target="_blank" rel="noopener noreferrer">
+              <Image 
+                src="/images/welcome_main_sponsor_logo.png" 
+                alt="Welcome Main Sponsor of Actívate Brisbane" 
+                width={400} 
+                height={400} 
+                className="main-sponsor-logo-img"
             />
+            </a>
           </div>
 
           <p style={{ marginTop: '40px', marginBottom: '0px' }}><strong>Additional Sponsors</strong></p>
@@ -314,13 +350,15 @@ const handlePrevVendor = () => {
                     style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
                   >
                     <div className="secondary-sponsor-wrapper">
-                      <Image 
-                        src={sponsor.logo} 
-                        alt={sponsor.name}
-                        width={300}
-                        height={200}
-                        className="sponsor-logo-img"
-                      />
+                      <a href={sponsor.url} target="_blank" rel="noopener noreferrer">
+                        <Image 
+                          src={sponsor.logo} 
+                          alt={sponsor.name}
+                          width={300}
+                          height={200}
+                          className="sponsor-logo-img"
+                        />
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -367,13 +405,15 @@ const handlePrevVendor = () => {
                     style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
                   >
                     <div className="secondary-sponsor-wrapper">
-                      <Image 
-                        src={vendor.logo} 
-                        alt={vendor.name}
-                        width={300}
-                        height={200}
-                        className="sponsor-logo-img"
-                      />
+                      <a href={vendor.url} target="_blank" rel="noopener noreferrer">
+                        <Image 
+                          src={vendor.logo} 
+                          alt={vendor.name}
+                          width={300}
+                          height={200}
+                          className="sponsor-logo-img"
+                        />
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -402,21 +442,20 @@ const handlePrevVendor = () => {
       {/* --- FINAL CTA & FORM --- */}
       <section id="registration-form" className="form-section">
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h2 style={{color: '#f39304'}}>🎟 TICKETS WILL BE AVAILABLE SOON</h2>
-            {/* <p>Early bird ends in...</p> */}
-            
+            <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
+            <h2 style={{color: '#f39304'}}>Launch Special Offer!! Get the best price before April 15!!</h2>
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
-            {/* <EventRegistrationForm />   */}
-            <EventRegistrationLongForm />
+            <EventRegistrationForm />  
+            {/* <EventRegistrationLongForm /> */}
         </div>
       </section>
 
       {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
       <div className="fixed-banner">
-        <span>12 July 2026 - Tickets Selling Soon</span>
-        {/* <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
+        <span>Launch Special Offer</span>
+        <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
-        </button> */}
+        </button>
       </div>
 
     </div>

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Reviews from '@/components/Reviews';
 import ContactForm from '@/components/ContactForm';
+import ActivatePopup from '@/components/ActivatePopup';
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Reviews/>
         <Footer />
         <Toaster position="top-center" richColors />
+        <ActivatePopup />
       </body>
     </html>
   );

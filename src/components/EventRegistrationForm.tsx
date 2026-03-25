@@ -4,25 +4,29 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { checkoutComplexBooking } from '@/app/actions';
 import { toast } from 'sonner';
-import Link from 'next/link'; // Importamos Link para los términos
+import Link from 'next/link';
 
 export default function EventRegistrationLongForm() {
-  const SOURCES = ['Irela Aqua and Fitness', 'Belen Roldan', 'Move in Tune (Denise)', 'Fuego Beats (Lala)', 'Paola Castro', 'Natura Med (Karina)', 'Xango Capoeira (Yaya)', 'Christian el Koala','Social Media', 'Word of Mouth', 'Other'];
+  const SOURCES = ['Irela Aqua and Fitness', 'Belen Roldan', 'Move in Tune (Denise)', 'Fuego Beats (Lala)', 'Paola Castro', 'Natura Med (Karina)', 'Xango Capoeira (Yaya)', 'Manu Fit', 'Elvira Cete','Social Media', 'Word of Mouth', 'Other'];
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
   const [prices, setPrices] = useState<Record<string, number>>({});
 
   const [activeTab, setActiveTab] = useState<'general' | 'team'>('general');
-  const [acceptedTerms, setAcceptedTerms] = useState(false); // NUEVO: Estado para T&C
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const [adults, setAdults] = useState<any[]>([]);
   const [youth, setYouth] = useState<any[]>([]);
+  const [kidsUnder11, setKidsUnder11] = useState<string>('0');
   
-  // EQUIPO: Inicializamos con 5 miembros
+  // NUEVO: Estado para el contacto de emergencia
+  const [emergency, setEmergency] = useState({ name: '', phone: '' });
+  
   const [team, setTeam] = useState({
     teamName: '',
     jerseyColour: '',
-    members: Array.from({ length: 5 }, () => ({ name: '', email: '', phone: '' }))
+    // Cambiamos name por firstName y lastName
+    members: Array.from({ length: 5 }, () => ({ firstName: '', lastName: '', email: '', phone: '' }))
   });
   const [source, setSource] = useState('');
 
@@ -42,25 +46,19 @@ export default function EventRegistrationLongForm() {
 
   const PRICE_ADULT = prices['Adult'] || 0;
   const PRICE_YOUTH = prices['Youth'] || 0;
-  const PRICE_TEAM = prices['Soccer Team'] || 0; // ¿El precio es fijo para 5-8 o por jugador? Asumo que es un Pack fijo por ahora.
+  const PRICE_TEAM = prices['Soccer Team'] || 0;
 
   const handleInputChange = (type: 'adult' | 'youth' | 'team', index: number, field: string, value: string) => {
     if (type === 'adult') {
       const newAdults = [...adults];
-      // Usamos (as any) para que TS nos deje indexar con un string dinámico
       (newAdults[index] as any)[field] = value;
       setAdults(newAdults);
-      if (index === 0 && (field === 'email' || field === 'phone')) {
-        const updatedyouth = youth.map(k => k.useAdultContact ? { ...k, [field]: value } : k);
-        setYouth(updatedyouth);
-      }
     } else if (type === 'youth') {
       const newyouth = [...youth];
       (newyouth[index] as any)[field] = value;
       setYouth(newyouth);
     } else if (type === 'team') {
       const newMembers = [...team.members];
-      // Aquí aplicamos lo mismo para tu error específico
       (newMembers[index] as any)[field] = value;
       setTeam({ ...team, members: newMembers });
     }
@@ -70,19 +68,21 @@ export default function EventRegistrationLongForm() {
     if (type === 'adult') {
       const next = adults.length + delta;
       if (next < 0) return;
-      delta > 0 ? setAdults([...adults, { name: '', email: '', phone: '' }]) : setAdults(adults.slice(0, -1));
+      if (next === 0) setKidsUnder11('0');
+      // Todos los adultos se inicializan igual, pero solo mostraremos/validaremos email/phone para el index 0
+      delta > 0 ? setAdults([...adults, { firstName: '', lastName: '', email: '', phone: '' }]) : setAdults(adults.slice(0, -1));
     } else {
       if (adults.length === 0) return toast.error("Please, add at least one adult first");
       const next = youth.length + delta;
       if (next < 0) return;
-      delta > 0 ? setYouth([...youth, { name: '', email: '', phone: '', useAdultContact: false }]) : setYouth(youth.slice(0, -1));
+      // Quitamos el useAdultContact
+      delta > 0 ? setYouth([...youth, { firstName: '', lastName: '', email: '', phone: '' }]) : setYouth(youth.slice(0, -1));
     }
   };
 
-  // NUEVO: Funciones para gestionar jugadores del equipo (min 5, max 8)
   const addPlayer = () => {
     if (team.members.length < 8) {
-      setTeam({ ...team, members: [...team.members, { name: '', email: '', phone: '' }] });
+      setTeam({ ...team, members: [...team.members, { firstName: '', lastName: '', email: '', phone: '' }] });
     }
   };
 
@@ -97,46 +97,75 @@ export default function EventRegistrationLongForm() {
     : PRICE_TEAM;
 
   const handleSubmit = async () => {
-    // 1. Validación de Términos (Obligatorio en todos los casos)
     if (!acceptedTerms) return toast.error("You must accept the Terms and Conditions to proceed");
-    
-    // 2. Validación de Tickets Totales y Fuente
     if (total === 0 && activeTab === 'general') return toast.error("Select at least one ticket to proceed");
     if (!source) return toast.error("Please select how you heard about us");
 
-    // 3. Validaciones de Datos
+    // NUEVO: Validación de Contacto de Emergencia
+    if (!emergency.name) return toast.error("Emergency contact name is required");
+    if (!validatePhone(emergency.phone)) return toast.error("Invalid emergency phone number");
+
     if (activeTab === 'general') {
-      for (let i = 0; i < adults.length; i++) {
-        const a = adults[i];
-        if (!a.name) return toast.error(`Name required for Adult ${i + 1}`);
-        if (!validateEmail(a.email)) return toast.error(`Invalid email for Adult ${i + 1}`);
-        if (!validatePhone(a.phone)) return toast.error(`Invalid phone for Adult ${i + 1}`);
+      // Validamos al primer adulto (Obligatorio email y tfno)
+      if (adults.length > 0) {
+        if (!adults[0].firstName || !adults[0].lastName) return toast.error("First and Last Name required for Adult 1");
+        if (!validateEmail(adults[0].email)) return toast.error("Invalid email for Adult 1");
+        if (!validatePhone(adults[0].phone)) return toast.error("Invalid phone for Adult 1");
       }
+      
+      // Validamos el resto de adultos (Solo nombre)
+      for (let i = 1; i < adults.length; i++) {
+        if (!adults[i].firstName || !adults[i].lastName) return toast.error(`First and Last Name required for Adult ${i + 1}`);
+      }
+      
+      // Validamos jóvenes (Solo nombre)
       for (let i = 0; i < youth.length; i++) {
-        const k = youth[i];
-        if (!k.name) return toast.error(`Name required for Youth ${i + 1}`);
-        if (!k.useAdultContact) {
-          if (!validateEmail(k.email)) return toast.error(`Invalid email for Youth ${i + 1}`);
-          if (!validatePhone(k.phone)) return toast.error(`Invalid phone for Youth ${i + 1}`);
-        }
+        if (!youth[i].firstName || !youth[i].lastName) return toast.error(`First and Last Name required for Youth ${i + 1}`);
       }
     } else if (activeTab === 'team') {
       if (!team.teamName) return toast.error("Team name is required");
       if (!team.jerseyColour) return toast.error("Jersey colour is required");
-      for (let i = 0; i < team.members.length; i++) {
-        const m = team.members[i];
-        if (!m.name) return toast.error(`Name required for Player ${i + 1}`);
-        if (!validateEmail(m.email)) return toast.error(`Invalid email for Player ${i + 1}`);
-        if (!validatePhone(m.phone)) return toast.error(`Invalid phone for Player ${i + 1}`);
+      
+      // Validamos al Capitán (Obligatorio email y tfno)
+      if (team.members.length > 0) {
+        if (!team.members[0].firstName || !team.members[0].lastName) return toast.error("First and Last Name required for Captain (Player 1)");
+        if (!validateEmail(team.members[0].email)) return toast.error("Invalid email for Captain (Player 1)");
+        if (!validatePhone(team.members[0].phone)) return toast.error("Invalid phone for Captain (Player 1)");
+      }
+
+      // Validamos el resto de jugadores (Solo nombre)
+      for (let i = 1; i < team.members.length; i++) {
+        if (!team.members[i].firstName || !team.members[i].lastName) return toast.error(`First and Last Name required for Player ${i + 1}`);
       }
     }
 
     setLoading(true);
+
+    // Asignamos el email y teléfono del Adulto 1 o Capitán al resto de los asistentes en el payload
+    const payloadAdults = adults.map((adult, index) => ({
+      ...adult,
+      email: index === 0 ? adult.email : adults[0].email,
+      phone: index === 0 ? adult.phone : adults[0].phone,
+      kids: index === 0 ? kidsUnder11 : '0'
+    }));
+
+    const payloadYouth = youth.map((y) => ({
+      ...y,
+      email: adults.length > 0 ? adults[0].email : '',
+      phone: adults.length > 0 ? adults[0].phone : ''
+    }));
+
+    const payloadTeamMembers = team.members.map((m, index) => ({
+      ...m,
+      email: index === 0 ? m.email : team.members[0].email,
+      phone: index === 0 ? m.phone : team.members[0].phone,
+    }));
     
     const payload = {
-      adults: activeTab === 'general' ? adults : [],
-      youth: activeTab === 'general' ? youth : [],
-      team: activeTab === 'team' ? { ...team, active: true } : null,
+      adults: activeTab === 'general' ? payloadAdults : [],
+      youth: activeTab === 'general' ? payloadYouth : [],
+      team: activeTab === 'team' ? { ...team, members: payloadTeamMembers, active: true } : null,
+      emergency, // Añadimos el contacto de emergencia global
       source
     };
 
@@ -155,10 +184,10 @@ export default function EventRegistrationLongForm() {
       
       <div className="form-tabs">
         <button className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`} onClick={() => setActiveTab('general')}>
-          Single & Multiple Event Tickets
+          🏋🏽‍♀️🏃🏾Single & Multiple Event Tickets🏋🏻🏃🏼‍♀️
         </button>
         <button className={`tab-btn ${activeTab === 'team' ? 'active' : ''}`} onClick={() => setActiveTab('team')}>
-          Soccer Team Pack
+          ⚽Soccer Team Pack⚽
         </button>
       </div>
 
@@ -167,6 +196,7 @@ export default function EventRegistrationLongForm() {
       {activeTab === 'general' && (
         <div className="tab-content fade-in">
           <div className="ticket-selectors">
+            {/* ... (Contadores igual que antes) ... */}
             <div className="selector-item">
               <label>Adults (${PRICE_ADULT})</label>
               <div className="counter">
@@ -177,11 +207,27 @@ export default function EventRegistrationLongForm() {
             </div>
 
             <div className={`selector-item ${adults.length === 0 ? 'disabled' : ''}`}>
-              <label>Youth (12-17) (${PRICE_YOUTH})</label>
+              <label>Youth (11-17) (${PRICE_YOUTH})</label>
               <div className="counter">
                 <button type="button" onClick={() => updateCount('youth', -1)} disabled={adults.length === 0}>-</button>
                 <span className="count-value">{youth.length}</span>
                 <button type="button" onClick={() => updateCount('youth', 1)} disabled={adults.length === 0}>+</button>
+              </div>
+            </div>
+            <div className={`selector-item ${adults.length === 0 ? 'disabled' : ''}`}>
+              <label>Kids Under 11 (Free)</label>
+              <div className="counter" style={{ justifyContent: 'flex-start' }}>
+                <select 
+                  value={kidsUnder11} 
+                  onChange={(e) => setKidsUnder11(e.target.value)}
+                  disabled={adults.length === 0}
+                  style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid #cbd5e1', background: 'white', color: 'black', minWidth: '70px', cursor: adults.length === 0 ? 'not-allowed' : 'pointer' }}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3+">3+</option>
+                </select>
               </div>
             </div>
           </div>
@@ -191,9 +237,16 @@ export default function EventRegistrationLongForm() {
               <article key={i} className="form-card-activate">
                 <div className="card-header"><span className="badge">Adult {i + 1}</span></div>
                 <div className="input-group">
-                  <input type="text" placeholder="Full Name" value={adult.name} onChange={(e) => handleInputChange('adult', i, 'name', e.target.value)} required />
-                  <input type="email" placeholder="Email Address" value={adult.email} onChange={(e) => handleInputChange('adult', i, 'email', e.target.value)} required />
-                  <input type="tel" placeholder="Phone Number" value={adult.phone} onChange={(e) => handleInputChange('adult', i, 'phone', e.target.value)} required />
+                  {/* Sustituye el input de "Full Name" por estos dos: */}
+                  <input type="text" placeholder="First Name" value={adult.firstName} onChange={(e) => handleInputChange('adult', i, 'firstName', e.target.value)} required />
+                  <input type="text" placeholder="Last Name" value={adult.lastName} onChange={(e) => handleInputChange('adult', i, 'lastName', e.target.value)} required />
+                  {/* Solo mostramos Email y Teléfono para el primer adulto */}
+                  {i === 0 && (
+                    <>
+                      <input type="email" placeholder="Email Address" value={adult.email} onChange={(e) => handleInputChange('adult', i, 'email', e.target.value)} required />
+                      <input type="tel" placeholder="Phone Number" value={adult.phone} onChange={(e) => handleInputChange('adult', i, 'phone', e.target.value)} required />
+                    </>
+                  )}
                 </div>
               </article>
             ))}
@@ -202,27 +255,12 @@ export default function EventRegistrationLongForm() {
               <article key={i} className="form-card-activate kid-card">
                 <div className="card-header">
                   <span className="badge orange">Youth {i + 1}</span>
-                  <label className="contact-sync">
-                    <span className="badge">Use Adult 1 info</span>
-                    <input type="checkbox" checked={y.useAdultContact} onChange={() => {
-                      const newyouth = [...youth];
-                      newyouth[i].useAdultContact = !newyouth[i].useAdultContact;
-                      if(newyouth[i].useAdultContact && adults[0]) {
-                        newyouth[i].email = adults[0].email;
-                        newyouth[i].phone = adults[0].phone;
-                      }
-                      setYouth(newyouth);
-                    }} /> 
-                  </label>
                 </div>
                 <div className="input-group">
-                  <input type="text" placeholder="Youth's Full Name" value={y.name} onChange={(e) => handleInputChange('youth', i, 'name', e.target.value)} required />
-                  {!y.useAdultContact && (
-                    <>
-                      <input type="email" placeholder="Parent's Email" value={y.email} onChange={(e) => handleInputChange('youth', i, 'email', e.target.value)} />
-                      <input type="tel" placeholder="Parent's Phone" value={y.phone} onChange={(e) => handleInputChange('youth', i, 'phone', e.target.value)} />
-                    </>
-                  )}
+                  {/* Sustituye el input de "Youth's Full Name" por estos dos: */}
+                  <input type="text" placeholder="Youth's First Name" value={y.firstName} onChange={(e) => handleInputChange('youth', i, 'firstName', e.target.value)} required />
+                  <input type="text" placeholder="Youth's Last Name" value={y.lastName} onChange={(e) => handleInputChange('youth', i, 'lastName', e.target.value)} required />
+                  {/* Eliminamos los campos de email y phone para youth */}
                 </div>
               </article>
             ))}
@@ -247,17 +285,23 @@ export default function EventRegistrationLongForm() {
               <div className="team-grid">
                 {team.members.map((m, i) => (
                   <div key={i} className="team-member-row">
-                    <span className="member-label">Player {i+1} {i >= 5 ? '(Optional)' : ''}</span>
+                    <span className="member-label">{i === 0 ? 'Player 1 (Captain)' : `Player ${i+1}`} {i >= 5 ? '(Optional)' : ''}</span>
                     <div className="input-group">
-                      <input type="text" placeholder="Name" value={m.name} onChange={(e) => handleInputChange('team', i, 'name', e.target.value)} />
-                      <input type="email" placeholder="Email" value={m.email} onChange={(e) => handleInputChange('team', i, 'email', e.target.value)} />
-                      <input type="tel" placeholder="Phone" value={m.phone} onChange={(e) => handleInputChange('team', i, 'phone', e.target.value)} />
+                      {/* Sustituye el input de "Name" por estos dos: */}
+                      <input type="text" placeholder="First Name" value={m.firstName} onChange={(e) => handleInputChange('team', i, 'firstName', e.target.value)} />
+                      <input type="text" placeholder="Last Name" value={m.lastName} onChange={(e) => handleInputChange('team', i, 'lastName', e.target.value)} />
+                      {/* Solo mostramos Email y Teléfono para el primer jugador (Capitán) */}
+                      {i === 0 && (
+                        <>
+                          <input type="email" placeholder="Email" value={m.email} onChange={(e) => handleInputChange('team', i, 'email', e.target.value)} />
+                          <input type="tel" placeholder="Phone" value={m.phone} onChange={(e) => handleInputChange('team', i, 'phone', e.target.value)} />
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Botones para añadir/quitar jugadores extras */}
               <div className="team-actions">
                 <button type="button" onClick={removePlayer} disabled={team.members.length <= 5} className="team-btn remove">
                   - Remove Player
@@ -272,8 +316,21 @@ export default function EventRegistrationLongForm() {
         </div>
       )}
 
-      {/* --- FOOTER: Origen, T&C y Pago --- */}
+      {/* --- FOOTER: Origen, Emergencia, T&C y Pago --- */}
       <div className="form-footer">
+        
+        {/* NUEVO: Contacto de Emergencia */}
+        {((activeTab === 'general' && adults.length > 0) || activeTab === 'team') && (
+          <div className="emergency-section" style={{ background: '#f8fafc', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
+            <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Emergency Contact <span style={{color: 'red'}}>*</span></h4>
+            <div className="input-group">
+              <input type="text" placeholder="Emergency Contact Name" value={emergency.name} onChange={(e) => setEmergency({...emergency, name: e.target.value})} required style={{marginBottom: '10px', width: '100%', padding: '0.8rem', borderRadius: '4px', border: '1px solid #cbd5e1'}} />
+              <input type="tel" placeholder="Emergency Contact Phone" value={emergency.phone} onChange={(e) => setEmergency({...emergency, phone: e.target.value})} required style={{width: '100%', padding: '0.8rem', borderRadius: '4px', border: '1px solid #cbd5e1'}} />
+            </div>
+            <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '5px' }}>This contact will be used for all registered members in this booking.</p>
+          </div>
+        )}
+
         <div className="source-section">
           <label>Where did you hear from us?</label>
           <select value={source} onChange={(e) => setSource(e.target.value)} required>
@@ -282,7 +339,6 @@ export default function EventRegistrationLongForm() {
           </select>
         </div>
 
-        {/* NUEVO: Terms and Conditions */}
         <div className="terms-container">
           <label className="terms-label">
             <input 
