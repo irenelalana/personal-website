@@ -235,6 +235,7 @@ const handlePrevVendor = () => {
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
               <li>Bibs</li>
+              <li>Standup Comedy and Music to end the day</li>
             </ul>
         </div>
         <div className="cta-container" style={{marginTop: '30px'}}>
