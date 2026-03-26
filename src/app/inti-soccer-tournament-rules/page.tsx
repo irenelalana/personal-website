@@ -50,7 +50,7 @@ const content: Record<'en' | 'es', Translation> = {
         title: "2. Tournament Format & Timing",
         struct: "Structure: Group Stage (4 teams per group) followed by Quarter-finals, Semi-finals, and Final.",
         adv: "Advancement: The top 2 teams from each group advance to the Knockout phase.",
-        timeG: "Group Stage Timing: 16-minute matches (Two halves of 8 mins). 4-minute transition.",
+        timeG: "Group Stage Timing: 18-minute matches (no halves). 2-minute transition between matches.",
         timeK: "Knockout Phase Timing: Quarter-finals, Semis, and Final are 20-minute matches (Two halves of 10 mins).",
         score: "Scoring (Group Stage): Win = 3 pts, Draw = 1 pt, Loss = 0 pts.",
         tieTitle: "Group Stage Tie-breakers:",
