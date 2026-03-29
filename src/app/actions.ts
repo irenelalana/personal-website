@@ -8,6 +8,10 @@ import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
 import Stripe from 'stripe';
 
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  console.error("❌ CRITICAL: Supabase variables are missing in Server Actions!");
+}
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 // 1. Obtener sesiones
