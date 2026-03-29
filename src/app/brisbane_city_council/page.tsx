@@ -64,10 +64,12 @@ export default function BrisbaneCityCouncil() {
                 <p>🧘‍♀️ <strong>Low Impact & Pilates:</strong> Fridays 9:45am, Anzac Park, Toowong (Resuming 30th Jan).</p>
                 <p><em>*Except School Holidays.</em></p>
               </div>
+
               <form action="https://forms.gle/XjEFREE7PKHYdn2H8" target="_blank" rel="noreferrer">
                 <button className={styles.formButton}>Pre-activity form</button>
               </form>
             </div>
+
             {/* --- SCHOOL HOLIDAY SPECIALS --- */}
             <h2 className={styles.mainTitle} style={{ marginTop: '3rem', fontSize: '1.8rem' }}>
               School Holiday Specials
@@ -85,7 +87,6 @@ export default function BrisbaneCityCouncil() {
               <form action="https://forms.gle/xWXUSxYNzE5X7D6GA" target="_blank" rel="noreferrer">
                 <button className={styles.formButton}>Pre-activity form</button>
               </form>
-
             </div>
             <div className={styles.serviceBlockHoliday}>
               <h3 className={styles.serviceTitle}>Aquafitness for Teens</h3>
@@ -100,7 +101,6 @@ export default function BrisbaneCityCouncil() {
               <form action="https://forms.gle/xWXUSxYNzE5X7D6GA" target="_blank" rel="noreferrer">
                 <button className={styles.formButton}>Pre-activity form</button>
               </form>
-
             </div>
 
           </div>
