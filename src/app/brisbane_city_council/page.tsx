@@ -32,9 +32,8 @@ export default function BrisbaneCityCouncil() {
               </p>
 
               <div className={styles.infoBox}>
-                <p>🌳 <strong>Functional Fitness:</strong> Thursdays 6:00am, Moorlands Park, Auchenflower (Resuming 29th Jan).</p>
-                <p>🧘‍♀️ <strong>Low Impact & Pilates:</strong> Fridays 9:45am, Anzac Park, Toowong (Resuming 30th Jan).</p>
-                <p><em>*Except School Holidays.</em></p>
+                <p>🌳 <strong>Functional Fitness:</strong> Thursdays 6:00am, Moorlands Park, Auchenflower (except School Holidays).</p>
+                <p>🧘‍♀️ <strong>Low Impact & Pilates:</strong> Fridays 9:45am, Anzac Park, Toowong (except School Holidays).</p>
               </div>
 
               <form action="https://forms.gle/XjEFREE7PKHYdn2H8" target="_blank" rel="noreferrer">
@@ -55,7 +54,6 @@ export default function BrisbaneCityCouncil() {
               <div className={styles.infoBox}>
                 <p>📍 <strong>Location:</strong> Musgrave Park Pool, West End, Brisbane.</p>
                 <p>⏰ <strong>Schedule:</strong> Mondays 5:30pm & Fridays 12:30pm (except School Holidays).</p>
-                <p>🗓️ <strong>Resuming:</strong> 30th January 2026.</p>
               </div>
 
               <div className={styles.stepBlock}>
