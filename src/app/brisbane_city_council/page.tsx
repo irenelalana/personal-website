@@ -1,8 +1,14 @@
 "use client";
 
 import React from "react";
-import BookingCalendar from '@/components/BookingCalendar';
 import styles from './BrisbaneCityCouncil.module.css'; // Ajusta la ruta si es necesario
+import dynamic from 'next/dynamic';
+
+// Importamos el calendario de forma dinámica, apagando el renderizado en servidor
+const BookingCalendar = dynamic(() => import('@/components/BookingCalendar'), { 
+  ssr: false,
+  loading: () => <p style={{ textAlign: 'center', padding: '2rem' }}>Loading calendar...</p> // Opcional: mensaje mientras carga
+});
 
 export default function BrisbaneCityCouncil() {
   return (
