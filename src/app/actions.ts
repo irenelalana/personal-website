@@ -18,7 +18,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export async function getSessions() {
   // AÑADIR AWAIT AQUÍ 👇
   const supabase = await createClient() 
-  console.log("Supabase Client Created in getSessions", supabase)
+  //console.log("Supabase Client Created in getSessions", supabase)
   const { data, error } = await supabase
     .from('sessions')
     .select(`
@@ -31,7 +31,7 @@ export async function getSessions() {
     `)
 
   if (error) {
-    console.error('Error fetching sessions:', error)
+    //console.error('Error fetching sessions:', error)
     return []
   }
   return data.map((session: any) => ({
