@@ -1,6 +1,5 @@
 'use client';
 import EventRegistrationForm from '@/components/EventRegistrationForm'; // Ajusta la ruta
-import EventRegistrationLongForm from '@/components/EventRengistrationLongForm';
 import Countdown from '@/components/Countdown';
 import Image from 'next/image';
 import { Link } from 'lucide-react';
@@ -452,12 +451,12 @@ const handlePrevVendor = () => {
       </section>
 
       {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
-      {/* <div className="fixed-banner">
+      <div className="fixed-banner">
         <span>Launch Special Offer</span>
         <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
         </button>
-      </div> */}
+      </div>
 
     </div>
   );

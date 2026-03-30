@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Reviews/>
         <Footer />
         <Toaster position="top-center" richColors />
-        {/* <ActivatePopup /> */}
+        <ActivatePopup />
       </body>
     </html>
   );

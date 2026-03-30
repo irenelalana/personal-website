@@ -115,7 +115,7 @@ export default function BrisbaneCityCouncil() {
 
             <div id="booking-calendar">
               <div className={styles.calendarWrapper}>
-                <p style={{ color: '#f39304' }}>The calendar is not available, sorry for the inconvenience, it will be soon, thanks for you patience!</p>
+                {/* <p style={{ color: '#f39304' }}>The calendar is not available, sorry for the inconvenience, it will be soon, thanks for you patience!</p> */}
                   <BookingCalendar />
               </div>
               <div className={styles.disclaimer}>

@@ -354,11 +354,11 @@ export default function EventRegistrationLongForm() {
           <span className="total-label">Subtotal:</span>
           <span className="total-amount">${total} AUD</span>
         </div>
-        <p style={{ color: '#f39304' }}>Tickets are not available at the moment, sorry for the inconvenience. They will be available soon, thanks for your patience!</p>
+        {/* <p style={{ color: '#f39304' }}>Tickets are not available at the moment, sorry for the inconvenience. They will be available soon, thanks for your patience!</p> */}
 
-        {/* <button className="payment-button cta-button" onClick={handleSubmit} disabled={loading || (activeTab === 'general' && total === 0)}>
+        <button className="payment-button cta-button" onClick={handleSubmit} disabled={loading || (activeTab === 'general' && total === 0)}>
           {loading ? 'PROCESSING...' : 'PURCHASE TICKETS'}
-        </button> */}
+        </button>
       </div>
     </section>
   );
