@@ -68,7 +68,7 @@ export default function Functional() {
               <em>Personal training also available in Toowong, CBD and West End. Tailored to your needs.</em>
             </p>
 
-            <form action="https://shorturl.at/hcCjW" target="_blank" className={styles.formAction}>
+            <form action="https://canva.link/hiohvgr8naoxz52" target="_blank" className={styles.formAction}>
               <button className={styles.formButton}>See full program</button>
             </form>
           </section>

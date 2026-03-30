@@ -69,9 +69,10 @@ export default function Swimming() {
               <li>Follow ups, reports and analysys.</li>
             </ul>
             
-            <form action="https://shorturl.at/Doc2b" target="_blank" rel="noopener noreferrer" className={styles.formContainer}>
+            <form action="https://canva.link/9napv4bspbvny9y" target="_blank" rel="noopener noreferrer" className={styles.formContainer}>
               <button className={styles.formButton}>See full program</button>
             </form>
+          
           </section>
           
           <div className={styles.videoContainer}>
