@@ -16,6 +16,7 @@ export const SPONSORS: Sponsor[] = [
   { id: 8, name: "Australian Steak", logo: "/images/Australian_Steak_logo.png", url: "https://www.australiansteakco.com.au/" },
   { id: 9, name: "Angelica RM cook", logo: "/images/Angelica_chef_LOGO.png", url: "https://www.instagram.com/angelica.r.m.chef/" },
   { id: 10, name: "Latin Temple Beauty", logo: "/images/ltb.png", url: "https://latintemplebeauty.com.au/" },
+  { id: 11, name: "Roblading", logo: "/images/Roblading_logo.png", url: "https://www.roblading.com.au/#home" },
 
   // Añade todos los que necesites
 ]

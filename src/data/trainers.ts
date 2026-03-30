@@ -84,6 +84,14 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 10,
+    name: "Robledo (Roblading)",
+    role: " Inline skate sessions for kids",  
+    description: "Inspiring children to skating through fun games and structured sessions, developing balance, coordination, and confidence while having a great time.",
+    image: "/images/Roble_foto.png",
+    url: "https://www.roblading.com.au/#home"
+  },
+  {
+    id: 11,
     name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",

@@ -16,13 +16,13 @@ export default function Swimming() {
           <div className={styles.textContent}>
             <h1 className={styles.mainTitle}>ADULTS SWIMMING LESSONS</h1>
             
-            <h2 className={styles.subTitle}>Who it’s for</h2>
+            <h2 className={styles.subTitle}>Who it's for</h2>
             <ul className={styles.list}>
               <li>Do you think It is too late to learn new skills, and enjoy Australian treasures around the water?</li>
-              <li>You learnt to swim as a child but can´t remember much how to perform?</li>
+              <li>You learnt to swim as a child but can't remember much how to perform?</li>
               <li>Are afraid of water or just feel nervous when you have to breath under the water?</li>
               <li>You come from a non aquatic background and feel that nobody understands your needs and your starting point?</li>
-              <li>The doctor told you that swimming would be great to reduce your aches but don´t know how to do it efficiently and confidently?</li>
+              <li>The doctor told you that swimming would be great to reduce your aches but don't know how to do it efficiently and confidently?</li>
             </ul>
             <p className={styles.paragraph}>You are in the right place!</p>
             
@@ -49,26 +49,24 @@ export default function Swimming() {
         <div className={styles.caption}>
           <section id="training_program" className={styles.trainingProgram}>
             <h2 className={styles.subTitle}>SMART STROKES GROUP LESSONS:</h2>
-            <ul className={styles.list}>
+            {/* <ul className={styles.list}>
               <li>Smart Strokes is a swimming premium group for stroke correction in adults - intermediate level, for those wanting to swim longer without fatigue with a fun and unique touch of variety.</li>
               <li>Mondays and Wednsedays 6.30pm, Tuesdyas 12.00pm. We improve technique and endurance in Musgrave Park Pool, West End.</li>
               <li>6 (45min) session packs, $132. At Musgrave Park Pool, West End.</li>
               <li>New Beginners groups! Tuesdays 10.00 am, Thursdays 3.00 pm, Fridays 11.30am.</li>
-            </ul>
+            </ul> */}
             
             <h2 className={styles.subTitle}>PRIVATE SWIMMING LESSONS</h2>
             <ul className={styles.list}>
               <li>Musgrave Park Pool (West End) and QUT Kelvin Grove Campus, Brisbane.</li>
               <li>Adults Beginners - Intermediate - advanced - triathletes level.</li>
-              <li>10 Weeks program.</li>
+              {/* <li>10 Weeks program.</li> */}
               <li>45 - 60min private sessions.</li>
-              <li>$693 - $855.</li>
-              <li>Budget option: sharing lessons. Bring a friend or I´ll find your buddie</li>
+              <li>$85 - $105 per session</li>
+              <li>Budget option: sharing lessons. Bring a friend or I'll find your buddie</li>
               <li>Reschedule within 24h notice.</li>
               <li>Discounts with local partners.</li>
-              <li>Preference in spots over casuals.</li>
               <li>Follow ups, reports and analysys.</li>
-              <li>Casual options available (try now!).</li>
             </ul>
             
             <form action="https://shorturl.at/Doc2b" target="_blank" rel="noopener noreferrer" className={styles.formContainer}>
