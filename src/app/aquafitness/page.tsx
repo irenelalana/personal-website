@@ -68,8 +68,8 @@ export default function AquafitnessPage() {
           <section id="training_program" className={styles.trainingProgram}>
             <h2 className={styles.subTitle}>JOIN NOW THE AQUA CHALLENGE SUMMER 2026:</h2>
             <ul className={styles.list}>
-              <li>10 weeks challenge 27/01/2026 - 03/04/2026</li>
-              <li>Tuesdays 9.00am / Thursdays 9.00am / Wednesdays 5.30pm</li>
+              <li>10 weeks challenge 07/04/2026 - 11/06/2026</li>
+              <li>Tuesdays 9.00am (Deep water) / Wednesdays 5.30pm / Wednesdays 9.00am</li>
               <li>60 min sessions.</li>
               <li>$150 per slot (10 sessions).</li>
               <li>Discounts with local partners.</li>
@@ -77,7 +77,7 @@ export default function AquafitnessPage() {
 
             <h2 className={styles.subTitle}>CASUAL AQUA OPTIONS:</h2>
             <ul className={styles.list}>
-              <li>$20 casual. 10 passes for $180 (expiring in 6 months).</li>
+              <li>$20 casual</li>
               <li>Mondays* and Wednesdays 5.30pm. Tuesdays (deep water) and Thursdays 9.00am. Fridays* 12.30pm.</li>
               <li className={styles.bccNote}>
                 *Monday and Friday are <strong>FREE</strong> as part of BCC Active and Healthy program 
