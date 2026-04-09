@@ -46,7 +46,7 @@ export const TRAINERS: Trainer[] = [
     id: 5,
     name: "Karina (Natura Med)",
     role: "Nutritionist",
-    description: "Nutritionist...",
+    description: "Qualified and certified naturopath based in Australia, with a background in medicine from Peru. She takes an integrative and evidence-informed approach to health, focusing on gut health, immune function, and both women's and men's health.",
     image: "/images/Karina_foto.png",
     url: "https://naturamed.com.au/"
   },
@@ -79,7 +79,7 @@ export const TRAINERS: Trainer[] = [
     name: "Gabriela (PCYC)",
     role: "Gymnastics for kids",
     description: "Gymnastics classes for kids aged 3-12, designed to build confidence, coordination and strength in a fun and supportive environment.",
-    image: "/images/PCYC_logo.png",
+    image: "/images/Gabriela_PHOTO.png",
     url: "https://www.pcyc.org.au"
   },
   {
@@ -92,6 +92,14 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 11,
+    name: "Carla Araneda (Rayun Florece)",
+    role: "Yoga",
+    description: "Certified Yoga and Meditation teacher, member of Yoga Australia and an International Biodecoding Coach.",
+    image: "/images/Carla_Yoga_foto.png",
+    url: "https://www.instagram.com/rayun.florece/"
+  },
+  {
+    id: 12,
     name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
