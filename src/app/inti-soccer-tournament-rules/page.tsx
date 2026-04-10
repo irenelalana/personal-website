@@ -115,7 +115,7 @@ const content: Record<'en' | 'es', Translation> = {
         title: "2. Formato y Tiempos",
         struct: "Estructura: Fase de Grupos (4 equipos por grupo) seguida de Cuartos, Semifinales y Final.",
         adv: "Clasificación: Los 2 mejores de cada grupo pasan a la fase eliminatoria.",
-        timeG: "Fase de Grupos: Partidos de 16 min (dos partes de 8 min). Transición de 4 min entre partidos.",
+        timeG: "Fase de Grupos: Partidos de 18 min (sin partes). Transición de 2 min entre partidos.",
         timeK: "Eliminatorias: Cuartos, Semis y Final son partidos de 20 min (dos partes de 10 min).",
         score: "Puntuación (Grupos): Victoria = 3 pts, Empate = 1 pt, Derrota = 0 pts.",
         tieTitle: "Desempate en Fase de Grupos:",
