@@ -92,14 +92,6 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 11,
-    name: "Carla & Dale (Rayun Florece)",
-    role: "Yoga & Meditation",
-    description: "Certified Yoga and Meditation teachers and members of Yoga Australia. Helping others achieve inner peace, well-being, and relaxation through yoga, meditation, breathing techniques, sound healing, and a healthy lifestyle.",
-    image: "/images/Carla_Yoga_foto.png",
-    url: "https://www.instagram.com/rayun.florece/"
-  },
-  {
-    id: 12,
     name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",

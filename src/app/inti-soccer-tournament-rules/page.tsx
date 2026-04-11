@@ -243,7 +243,7 @@ export default function TournamentRulesPage() {
                 </tr>
                 <tr style={{ borderBottom: '1px solid #eee' }}>
                   <td style={{ padding: '10px 15px' }}>{t.sections.table.sFinal}</td>
-                  <td style={{ padding: '10px 15px' }}>2:45 pm</td>
+                  <td style={{ padding: '10px 15px' }}>2:30 pm</td>
                 </tr>
                 <tr>
                   <td style={{ padding: '10px 15px', fontWeight: 'bold', color: '#f39304' }}>{t.sections.table.gFinal}</td>
