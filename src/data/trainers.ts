@@ -92,6 +92,14 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 11,
+    name: "Agus & Leo",
+    role: "Zumba instructors",  
+    description: "Argentinian instructors Leo (Buenos Aires) and Agus (Córdoba) bring over 10 years of Zumba Fitness® experience to Brisbane. Fusing their energy as a team to help you level up and smash your goals together through the power of dance.",
+    image: "/images/LEO_AGUS_FOTO.png",
+    url: "https://www.instagram.com/leopelayo_instructor/"
+  },
+  {
+    id: 12,
     name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
