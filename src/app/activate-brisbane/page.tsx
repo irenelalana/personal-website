@@ -411,7 +411,7 @@ const handlePrevVendor = () => {
                           alt={vendor.name}
                           width={300}
                           height={200}
-                          className="sponsor-logo-img"
+                          className="vendor-logo-img"
                         />
                       </a>
                     </div>
