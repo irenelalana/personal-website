@@ -325,7 +325,7 @@ export default function TournamentRulesPage() {
             {t.sections.prizes.thanks}
           </p>
       
-          <div className="card" style={{ textAlign: 'center', padding: '2.5rem', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
+          <div className="card" style={{ textAlign: 'center', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
             <h2 style={{ marginBottom: '0.5rem' }}>{t.sections.prizes.title}</h2>
             <h3 style={{ color: '#f39304', marginBottom: '2.5rem', fontWeight: 'bold' }}>{t.sections.prizes.value}</h3>
       
