@@ -242,9 +242,9 @@ export async function POST(req: Request) {
         bookingData.adults.length,
         bookingData.youth.length,
         bookingData.team?.members.length || 0,
-        25,
-        7,
-        200
+        29,
+        10,
+        250
       );
 
       const totalPrice = order. total_amount ? `$${order. total_amount}.00` : "N/A";

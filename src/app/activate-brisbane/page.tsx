@@ -443,7 +443,8 @@ const handlePrevVendor = () => {
       <section id="registration-form" className="form-section">
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
-            <h2 style={{color: '#f39304'}}>Launch Special Offer!! Get the best price before April 15!!</h2>
+            <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Get the best price before April 15!!</h2>
+            <h2 style={{color: '#f39304'}}>'Volando voy' Special Offer!! Great deal until May 27 or until sold out!!</h2>
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
             <EventRegistrationForm />  
             {/* <EventRegistrationLongForm /> */}
@@ -452,7 +453,7 @@ const handlePrevVendor = () => {
 
       {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
       <div className="fixed-banner">
-        <span>Launch Special Offer</span>
+        <span>'Volando voy' deal!</span>
         <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
         </button>
