@@ -24,8 +24,12 @@ interface Translation {
       throwIns: string; corners: string; fouls: string; penalties: string; diversity: string;
     };
     discipline: { title: string; p1: string; item1: string; item2: string; item3: string };
-    prizes: { title: string; p1: string; p2: string };
-  }
+    prizes: { thanks: string; title: string; value: string;
+          first: { rank: string; desc: string; footer: string;};
+          second: { rank: string; desc: string; footer: string;};
+          third: { rank: string; desc: string; sponsor: string; };
+        };
+    }
 }
 
 const content: Record<'en' | 'es', Translation> = {
@@ -88,9 +92,24 @@ const content: Record<'en' | 'es', Translation> = {
         item3: "Expulsion results in a 1-match ban for the next round."
       },
       prizes: {
-        title: "🏆 Prizes & Awards",
-        p1: "We are currently finalising our sponsors to bring you the best rewards!",
-        p2: "Winners and runners-up awards will be announced soon."
+        thanks: "A special thanks to our sponsors for donating such a fabulous prizes for the tournament.",
+        title: "🔥 FOOTBALL TOURNAMENT PRIZES 🔥",
+        value: "VALUED AT $2,500",
+        third: {
+          rank: "🥉 3rd Place",
+          desc: "You will enjoy 8 padel courts (1h each, off-peak) — because the game doesn't end on the field.",
+          sponsor: "Courtesy of Padel Brisbane"
+        },
+        second: {
+          rank: "🥈 2nd Place",
+          desc: "All of the above + Delicious Spanish Bites menu for each of the 8 players 🍽️🇪🇸",
+          footer: "The perfect post-tournament celebration."
+        },
+        first: {
+          rank: "🥇 1st Place",
+          desc: "All of the above + 1 Myotherapy session for each player 💪",
+          footer: "To recover like true professionals, in collaboration with Inti Massage"
+        }
       }
     }
   },
@@ -153,9 +172,24 @@ const content: Record<'en' | 'es', Translation> = {
         item3: "La expulsión conlleva un partido de sanción para la siguiente ronda."
       },
       prizes: {
-        title: "🏆 Premios",
-        p1: "Estamos finalizando los patrocinadores para traeros las mejores recompensas.",
-        p2: "Los premios para ganadores y subcampeones se anunciarán pronto."
+        thanks: "Queremos dar un agradecimiento especial a nuestros patrocinadores por donar estos fabulosos premios para el torneo.",
+        title: "🔥 PREMIOS TORNEO DE FÚTBOL 🔥",
+        value: "VALORADOS EN $2,500",
+        third: {
+          rank: "🥉 3er puesto",
+          desc: "Disfrutaréis de 8 pistas de pádel (1h cada una en horario off-peak) — porque el juego no termina en el campo.",
+          sponsor: "Cortesía de Padel Brisbane"
+        },
+        second: {
+          rank: "🥈 2º puesto",
+          desc: "Todo lo anterior + menú de Delicious Spanish Bites para cada uno de los 8 jugadores 🍽️🇪🇸",
+          footer: "La celebración perfecta después del torneo."
+        },
+        first: {
+          rank: "🥇 1er puesto",
+          desc: "Todo lo anterior + 1 sesión de Myotherapy para cada jugador 💪",
+          footer: "Para recuperarse como auténticos profesionales, en colaboración con Inti Massage"
+        }
       }
     }
   }
@@ -284,10 +318,38 @@ export default function TournamentRulesPage() {
       </section>
 
       <section className="content-section alt-bg">
-        <div className="card" style={{textAlign: 'center', border: '2px dashed #ccc'}}>
-          <h2>{t.sections.prizes.title}</h2>
-          <p>{t.sections.prizes.p1}</p>
-          <p style={{fontStyle: 'italic', color: '#02678F'}}>{t.sections.prizes.p2}</p>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+          
+          {/* Sección de agradecimiento */}
+          <p style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '1.1rem', color: '#64748b' }}>
+            {t.sections.prizes.thanks}
+          </p>
+      
+          <div className="card" style={{ textAlign: 'center', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
+            <h2 style={{ marginBottom: '0.5rem' }}>{t.sections.prizes.title}</h2>
+            <h3 style={{ color: '#f39304', marginBottom: '2.5rem', fontWeight: 'bold' }}>{t.sections.prizes.value}</h3>
+      
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', textAlign: 'left' }}>
+              {/* 3er Puesto */}
+              <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#ffffff', border: '1px solid #f1f5f9' }}>
+                <h4 style={{ fontSize: '1.3rem', color: '#475569', marginBottom: '0.5rem' }}>{t.sections.prizes.third.rank}</h4>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: '#02678F', fontWeight: '500' }}>{t.sections.prizes.third.sponsor}</p>
+              </div>
+              {/* 2º Puesto */}
+              <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                <h4 style={{ fontSize: '1.4rem', color: '#1e293b', marginBottom: '0.5rem' }}>{t.sections.prizes.second.rank}</h4>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.second.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: '#64748b', fontStyle: 'italic' }}>{t.sections.prizes.second.footer}</p>
+              </div>
+              {/* 1er Puesto */}
+              <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#fffbeb', border: '1px solid #fef3c7' }}>
+                <h4 style={{ fontSize: '1.4rem', color: '#92400e', marginBottom: '0.5rem' }}>{t.sections.prizes.first.rank}</h4>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.first.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: '#02678F', fontStyle: 'italic' }}>{t.sections.prizes.first.footer}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

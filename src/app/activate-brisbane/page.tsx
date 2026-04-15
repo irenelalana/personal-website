@@ -229,7 +229,7 @@ const handlePrevVendor = () => {
               <li>Free fitness assessment opportunities</li>
               <li>Traditional games and activities</li>
               <li>Sponsor goodie bag</li>
-              <li><a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament for adults</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a> and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
+              <li><a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament for adults</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a>, <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer">Padel Brisbane</a> and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
               <li>Social soccer matches for kids, teens and families</li>
               <li>Food trucks and licensed bar access</li>
               <li>Raffle tickets</li>
@@ -411,7 +411,7 @@ const handlePrevVendor = () => {
                           alt={vendor.name}
                           width={300}
                           height={200}
-                          className="sponsor-logo-img"
+                          className="vendor-logo-img"
                         />
                       </a>
                     </div>

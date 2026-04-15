@@ -199,7 +199,7 @@ export async function POST(req: Request) {
     }));
 
     const eventInfo = {
-      eventName: "Activate Brisbane",
+      eventName: "Actívate Brisbane",
       eventDate: "Sunday 12 July 2026",
       eventTime: "8:00 AM – 5:00 PM",
       eventLocation: " Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104",
@@ -213,7 +213,7 @@ export async function POST(req: Request) {
     
     // A. Insertar los tickets individuales
     // Asegúrate de tener una tabla 'tickets' con estas columnas o ajusta esto
-    console.log("🎟️ Tickets a insertar:", ticketsToInsert);
+    //console.log("🎟️ Tickets a insertar:", ticketsToInsert);
     if (ticketsToInsert.length > 0) {
       try {
         const { data, error } = await supabase.from('tickets').insert(ticketsToInsert);
@@ -253,7 +253,7 @@ export async function POST(req: Request) {
           <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
             <div style="background:#0c4a6e; color:white; padding:24px; text-align:center;">
-              <h1 style="margin:0; font-size:24px;">Activate Brisbane</h1>
+              <h1 style="margin:0; font-size:24px;">Actívate Brisbane</h1>
             </div>
 
             <div style="padding:30px; color:#333333; line-height:1.6;">
@@ -261,7 +261,7 @@ export async function POST(req: Request) {
               <p style="font-size:16px;">Hola <strong>${customerName}</strong>!</p>
 
               <p>
-                Thanks for your purchase and welcome to <strong>Activate Brisbane</strong>.
+                Thanks for your purchase and welcome to <strong>Actívate Brisbane</strong>.
               </p>
 
               <p>
@@ -304,7 +304,7 @@ export async function POST(req: Request) {
               <h3 style="margin-top:32px;">Event details</h3>
 
               <div style="background:#f3f4f6; padding:16px; border-radius:8px; font-size:14px;">
-                <p style="margin:4px 0;"><strong>Activate Brisbane</strong></p>
+                <p style="margin:4px 0;"><strong>Actívate Brisbane</strong></p>
                 <p style="margin:4px 0;">📍 Location: Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104</p>
                 <p style="margin:4px 0;">📅 Date: 12 July 2026</p>
                 <p style="margin:4px 0;">⏰ Time: 8:00 AM - 5:00 PM</p>
@@ -323,13 +323,13 @@ export async function POST(req: Request) {
 
               <p>
                 Kind regards,<br/>
-                <strong>Activate Brisbane Team</strong>
+                <strong>Actívate Brisbane Team</strong>
               </p>
 
             </div>
 
             <div style="background:#f9fafb; text-align:center; padding:14px; font-size:12px; color:#888;">
-              Activate Brisbane · Brisbane, QLD
+              Actívate Brisbane · Brisbane, QLD
             </div>
 
           </div>
@@ -337,9 +337,9 @@ export async function POST(req: Request) {
         `;
 
       await resend.emails.send({
-        from: "Activate Brisbane <irela@irelaaquaandfitness.com>",
+        from: "Actívate Brisbane <irela@irelaaquaandfitness.com>",
         to: customerEmail!,
-        subject: "Your Activate Brisbane tickets",
+        subject: "Your Actívate Brisbane tickets",
         attachments: [
           {
             filename: "activate-brisbane-tickets.pdf",
