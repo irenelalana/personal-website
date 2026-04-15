@@ -92,7 +92,7 @@ const content: Record<'en' | 'es', Translation> = {
         item3: "Expulsion results in a 1-match ban for the next round."
       },
       prizes: {
-        thanks: "A special thanks to our sponsors for making this tournament possible.",
+        thanks: "A special thanks to our sponsors for donating such a fabulous prizes for the tournament.",
         title: "🔥 FOOTBALL TOURNAMENT PRIZES 🔥",
         value: "VALUED AT $2,500",
         third: {
@@ -172,7 +172,7 @@ const content: Record<'en' | 'es', Translation> = {
         item3: "La expulsión conlleva un partido de sanción para la siguiente ronda."
       },
       prizes: {
-        thanks: "Queremos dar un agradecimiento especial a nuestros patrocinadores por hacer este torneo posible.",
+        thanks: "Queremos dar un agradecimiento especial a nuestros patrocinadores por donar estos fabulosos premios para el torneo.",
         title: "🔥 PREMIOS TORNEO DE FÚTBOL 🔥",
         value: "VALORADOS EN $2,500",
         third: {
