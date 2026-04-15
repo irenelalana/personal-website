@@ -333,13 +333,13 @@ export default function TournamentRulesPage() {
               {/* 3er Puesto */}
               <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#ffffff', border: '1px solid #f1f5f9' }}>
                 <h4 style={{ fontSize: '1.3rem', color: '#475569', marginBottom: '0.5rem' }}>{t.sections.prizes.third.rank}</h4>
-                <p>{t.sections.prizes.third.desc}</p>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.desc}</p>
                 <p style={{ fontSize: '0.9rem', color: '#02678F', fontWeight: '500' }}>{t.sections.prizes.third.sponsor}</p>
               </div>
               {/* 2º Puesto */}
               <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
                 <h4 style={{ fontSize: '1.4rem', color: '#1e293b', marginBottom: '0.5rem' }}>{t.sections.prizes.second.rank}</h4>
-                <p style={{ fontWeight: '600' }}>{t.sections.prizes.second.desc}</p>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.second.desc}</p>
                 <p style={{ fontSize: '0.9rem', color: '#64748b', fontStyle: 'italic' }}>{t.sections.prizes.second.footer}</p>
               </div>
               {/* 1er Puesto */}
