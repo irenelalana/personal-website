@@ -9,7 +9,7 @@ const Header = () => {
       {/* NUEVO: Barra de Anuncios Temporal */}
       <div className="announcement-bar">
         <Link href="/activate-brisbane" className="announcement-link">
-          🔥 'Volando voy' Special Deal: <strong>Actívate Brisbane!</strong> Grab your tickets now
+          🔥<strong>Actívate Brisbane July 12</strong> Grab your tickets now
         </Link>
       </div>
 
