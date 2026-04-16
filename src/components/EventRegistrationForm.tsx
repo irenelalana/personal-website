@@ -30,6 +30,15 @@ export default function EventRegistrationLongForm() {
   });
   const [source, setSource] = useState('');
 
+  const [activities, setActivities] = useState({
+    runningRace: false,
+    fitness: false,
+    soccer: false,
+    socialSoccer: false,
+    party: false,
+    kidsFun: false
+  });
+
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePhone = (phone: string) => /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]{8,15}$/.test(phone);
 
@@ -98,6 +107,9 @@ export default function EventRegistrationLongForm() {
 
   const handleSubmit = async () => {
     if (!acceptedTerms) return toast.error("You must accept the Terms and Conditions to proceed");
+    // NUEVA VALIDACIÓN: Al menos una actividad seleccionada
+    const hasActivity = Object.values(activities).some(val => val === true);
+    if (!hasActivity) return toast.error("Please select at least one activity");
     if (total === 0 && activeTab === 'general') return toast.error("Select at least one ticket to proceed");
     if (!source) return toast.error("Please select how you heard about us");
 
@@ -166,7 +178,8 @@ export default function EventRegistrationLongForm() {
       youth: activeTab === 'general' ? payloadYouth : [],
       team: activeTab === 'team' ? { ...team, members: payloadTeamMembers, active: true } : null,
       emergency, // Añadimos el contacto de emergencia global
-      source
+      source,
+      activities
     };
 
     const res = await checkoutComplexBooking(payload);
@@ -330,6 +343,39 @@ export default function EventRegistrationLongForm() {
             <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '5px' }}>This contact will be used for all registered members in this booking.</p>
           </div>
         )}
+
+        {/* NUEVO: Selección de Actividades */}
+        <div className="activities-section" style={{ background: '#f8fafc', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
+          <h4 style={{ margin: '0 0 5px 0', color: '#0f172a' }}>Which activities will you participate in? <span style={{color: 'red'}}>*</span></h4>
+          <p style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '15px' }}>Select all that apply.</p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.runningRace} onChange={(e) => setActivities({...activities, runningRace: e.target.checked})} />
+              Icoté Sweet Run / Walk 8:00am
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.fitness} onChange={(e) => setActivities({...activities, fitness: e.target.checked})} />
+              Fitness activities 9:00am - 4:00pm
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.kidsFun} onChange={(e) => setActivities({...activities, kidsFun: e.target.checked})} />
+              Kids & Youth activities 9:00am - 4:00pm
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.socialSoccer} onChange={(e) => setActivities({...activities, socialSoccer: e.target.checked})} />
+              Social Soccer (kids, youth and families) 1:30pm & 3:00pm
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.soccer} onChange={(e) => setActivities({...activities, soccer: e.target.checked})} />
+              Inti Soccer Tournament (Adults only) 9:00am - 4:00pm
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input type="checkbox" checked={activities.party} onChange={(e) => setActivities({...activities, party: e.target.checked})} />
+              End of party 4:00pm
+            </label>
+          </div>
+        </div>
 
         <div className="source-section">
           <label>Where did you hear from us?</label>

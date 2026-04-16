@@ -29,6 +29,15 @@ interface Attendee {
   kids?: string;
 }
 
+interface Activities {
+  runningRace: boolean;
+  fitness: boolean;
+  soccer: boolean;
+  socialSoccer: boolean;
+  party: boolean;
+  kidsFun: boolean;
+}
+
 interface BookingJSON {
   adults: Attendee[];
   youth: Attendee[];
@@ -37,6 +46,7 @@ interface BookingJSON {
     name: string;
     phone: string;
   };
+  activities: Activities;
   team?: {
     active: boolean;
     teamName: string;
@@ -44,6 +54,8 @@ interface BookingJSON {
     members: Attendee[];
   };
 }
+
+
 
 interface ProcessedAttendee {
   firstName: string;
@@ -57,6 +69,7 @@ interface ProcessedAttendee {
   emergencyPhone: string;
   team: string | null;
   jerseyColour: string | null;
+  activities: Activities;
 }
 
 export async function POST(req: Request) {
@@ -121,7 +134,8 @@ export async function POST(req: Request) {
         jerseyColour: null,
         source: bookingData.source,
         emergencyContact: bookingData.emergency.name,
-        emergencyPhone: bookingData.emergency.phone
+        emergencyPhone: bookingData.emergency.phone,
+        activities: bookingData.activities
       });
     });
     
@@ -138,7 +152,8 @@ export async function POST(req: Request) {
         jerseyColour: null,
         source: bookingData.source,
         emergencyContact: bookingData.emergency.name,
-        emergencyPhone: bookingData.emergency.phone
+        emergencyPhone: bookingData.emergency.phone,
+        activities: bookingData.activities
       });
     });
     
@@ -159,7 +174,8 @@ export async function POST(req: Request) {
             jerseyColour: jerseyColour,
             source: bookingData.source,
             emergencyContact: bookingData.emergency.name,
-            emergencyPhone: bookingData.emergency.phone
+            emergencyPhone: bookingData.emergency.phone,
+            activities: bookingData.activities
           });
         }
       });
@@ -186,7 +202,13 @@ export async function POST(req: Request) {
         source: person.source,
         emergency_contact: person.emergencyContact,
         emergency_number: person.emergencyPhone,
-        qr_code: qrBase64
+        qr_code: qrBase64,
+        running_race: person.activities.runningRace,
+        fitness: person.activities.fitness,
+        soccer: person.activities.soccer,
+        social_soccer: person.activities.socialSoccer,
+        party: person.activities.party,
+        kids_fun: person.activities.kidsFun
       };
     }));
 
