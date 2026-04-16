@@ -444,7 +444,9 @@ const handlePrevVendor = () => {
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
             <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Get the best price before April 15!!</h2>
-            <h2 style={{color: '#f39304'}}>'Volando voy' Special Offer!! Great deal until May 27 or until sold out!!</h2>
+            <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Great deal until May 27 or until sold out!! (Adults $29, Youth $10, Soccer Team Pack $250)</h2>
+            <h2 style={{color: '#d97803', fontSize: '0.95rem', opacity: 0.5}}>Falto yo, contad conmigo!! Upcoming price until July 1 or until sold out!! (Adults $39, Youth $10, Soccer Team Pack $325)</h2>
+            <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Upcoming price until July 12 or until sold out!! (Adults $49, Youth $10, Soccer Team Pack $410)</h2>
             {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
             <EventRegistrationForm />  
             {/* <EventRegistrationLongForm /> */}

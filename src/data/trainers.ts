@@ -100,6 +100,14 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 12,
+    name: "Ileana (Rumbaile)",
+    role: "Zumba instructor",  
+    description: "Certified Zumba & Zumba Gold instructor bringing high energy and inclusive vibes to every class. I've been dancing since childhood and love making fitness feel like a party. My goal is to keep you moving, having fun, and leaving with a smile!",
+    image: "/images/Ileana_foto.png",
+    url: "https://www.instagram.com/rumbaile/"
+  },
+  {
+    id: 13,
     name: "Elvira Cete",
     role: "Comedian",
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
