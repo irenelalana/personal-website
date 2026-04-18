@@ -73,6 +73,21 @@ export default function ActivateBrisbanePage() {
     return () => window.removeEventListener('resize', handleResize); // Limpiar el evento al desmontar
   }, []);
 
+  const [isPaused, setIsPaused] = useState(false);
+  useEffect(() => {
+  if (isPaused) return; // Si está pausado, no creamos el intervalo
+
+  const interval = setInterval(() => {
+    nextTrainer();
+    handleNextSponsor();
+    handleNextVendor();
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [isPaused, displayTrainers, displaySponsors, displayVendors, itemsToShow]);
+
+  // Dependencias: si los datos cambian, el intervalo se reinicia con la info fresca.
+
   // Funciones de navegación corregidas (usando los arrays mezclados)
   const handleNextSponsor = () => {
     setSponsorIndex((prev) => {
@@ -118,7 +133,7 @@ export default function ActivateBrisbanePage() {
   };
 
   return (
-    <div className="landing-page">
+    <div className="landing-page" onMouseEnter={() => setIsPaused(true)}  onMouseLeave={() => setIsPaused(false)}>
       {/* --- HERO SECTION --- */}
       <section className="hero-section">
         <div className="hero-content">
