@@ -8,96 +8,107 @@ import { TRAINERS } from '@/data/trainers'; // Importamos la constante
 import { SPONSORS } from '@/data/sponsors';
 import { VENDORS } from '@/data/vendors';
 
+// --- FUNCIÓN PARA MEZCLAR ARRAYS ---
+// Se coloca fuera del componente para que no se vuelva a crear en cada render
+const shuffleArray = (array: any) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export default function ActivateBrisbanePage() {
+  // --- ESTADOS DE DATOS MEZCLADOS ---
+  // Inicializamos con los datos originales para evitar errores de Hydration en Next.js
+  const [displayTrainers, setDisplayTrainers] = useState(TRAINERS);
+  const [displaySponsors, setDisplaySponsors] = useState(SPONSORS);
+  const [displayVendors, setDisplayVendors] = useState(VENDORS);
 
+  // Al montar el componente en el navegador, aplicamos el orden aleatorio
+  useEffect(() => {
+    setDisplayTrainers(shuffleArray(TRAINERS));
+    setDisplaySponsors(shuffleArray(SPONSORS));
+    setDisplayVendors(shuffleArray(VENDORS));
+  }, []);
 
-
-  // --- LÓGICA DEL CARRUSEL ---
+  // --- LÓGICA DEL CARRUSEL DE TRAINERS ---
   const [currentTrainerIndex, setCurrentTrainerIndex] = useState(0);
 
   const nextTrainer = () => {
     setCurrentTrainerIndex((prevIndex) => 
-      prevIndex === TRAINERS.length - 1 ? 0 : prevIndex + 1
+      prevIndex === displayTrainers.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevTrainer = () => {
     setCurrentTrainerIndex((prevIndex) => 
-      prevIndex === 0 ? TRAINERS.length - 1 : prevIndex - 1
+      prevIndex === 0 ? displayTrainers.length - 1 : prevIndex - 1
     );
   };
 
-  const currentTrainer = TRAINERS[currentTrainerIndex];
+  const currentTrainer = displayTrainers[currentTrainerIndex];
 
+  // --- LÓGICA DE SPONSORS Y VENDORS ---
   const [sponsorIndex, setSponsorIndex] = useState(0);
+  const [vendorIndex, setVendorIndex] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(1); // 1 por defecto (móvil)
 
+  // useEffect para detectar el ancho de la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 992) {
+        setItemsToShow(4); // Laptop / Desktop
+      } else if (window.innerWidth >= 768) {
+        setItemsToShow(2); // Tablet (opcional)
+      } else {
+        setItemsToShow(1); // Móvil
+      }
+    };
 
-  // Estados del carrusel
-const [itemsToShow, setItemsToShow] = useState(1); // 1 por defecto (móvil)
+    handleResize(); // Ejecutar al montar el componente
+    window.addEventListener('resize', handleResize); // Escuchar cambios de tamaño
+    
+    return () => window.removeEventListener('resize', handleResize); // Limpiar el evento al desmontar
+  }, []);
 
-// useEffect para detectar el ancho de la pantalla
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth >= 992) {
-      setItemsToShow(4); // Laptop / Desktop
-    } else if (window.innerWidth >= 768) {
-      setItemsToShow(2); // Tablet (opcional)
-    } else {
-      setItemsToShow(1); // Móvil
-    }
+  // Funciones de navegación corregidas (usando los arrays mezclados)
+  const handleNextSponsor = () => {
+    setSponsorIndex((prev) => {
+      if (prev >= displaySponsors.length - itemsToShow) {
+        return 0;
+      }
+      return prev + 1;
+    });
   };
 
-  // Ejecutar al montar el componente
-  handleResize();
+  const handlePrevSponsor = () => {
+    setSponsorIndex((prev) => {
+      if (prev === 0) {
+        return Math.max(0, displaySponsors.length - itemsToShow);
+      }
+      return prev - 1;
+    });
+  };
 
-  // Escuchar cambios de tamaño
-  window.addEventListener('resize', handleResize);
-  
-  // Limpiar el evento al desmontar
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
+  const handleNextVendor = () => {
+    setVendorIndex((prev) => {
+      if (prev >= displayVendors.length - itemsToShow) {
+        return 0;
+      }
+      return prev + 1;
+    });
+  };
 
-// Funciones de navegación corregidas
-const handleNextSponsor = () => {
-  setSponsorIndex((prev) => {
-    // Si ya no hay más "páginas" completas para mostrar, volvemos al principio
-    if (prev >= SPONSORS.length - itemsToShow) {
-      return 0;
-    }
-    return prev + 1;
-  });
-};
-
-const handlePrevSponsor = () => {
-  setSponsorIndex((prev) => {
-    // Si estamos en el inicio, vamos al último grupo posible
-    if (prev === 0) {
-      return Math.max(0, SPONSORS.length - itemsToShow);
-    }
-    return prev - 1;
-  });
-};
-
-const [vendorIndex, setVendorIndex] = useState(0);
-const handleNextVendor = () => {
-  setVendorIndex((prev) => {
-    // Si ya no hay más "páginas" completas para mostrar, volvemos al principio
-    if (prev >= VENDORS.length - itemsToShow) {
-      return 0;
-    }
-    return prev + 1;
-  });
-};
-
-const handlePrevVendor = () => {
-  setVendorIndex((prev) => {
-    // Si estamos en el inicio, vamos al último grupo posible
-    if (prev === 0) {
-      return Math.max(0, VENDORS.length - itemsToShow);
-    }
-    return prev - 1;
-  });
-};
+  const handlePrevVendor = () => {
+    setVendorIndex((prev) => {
+      if (prev === 0) {
+        return Math.max(0, displayVendors.length - itemsToShow);
+      }
+      return prev - 1;
+    });
+  };
   
   const scrollToForm = () => {
     const formElement = document.getElementById('registration-form');
@@ -112,23 +123,22 @@ const handlePrevVendor = () => {
       <section className="hero-section">
         <div className="hero-content">
           <div className="logo-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
-        {/* H1 oculto para SEO (opcional pero recomendado) */}
-        <h1 className="sr-only" style={{ display: 'none' }}>Actívate Brisbane</h1>
+            <h1 className="sr-only" style={{ display: 'none' }}>Actívate Brisbane</h1>
   
-        <Image 
-          src="/images/activate-brisbane.png"          // Ruta a tu imagen en la carpeta public
-          alt="Actívate Brisbane Logo"
-          width={500}              // Ajusta el tamaño según tu diseño
-          height={100}             // Ajusta el tamaño según tu diseño
-          priority                 // Indica a Next.js que cargue esta imagen primero
-          style={{ 
-            maxWidth: '100%', 
-            height: 'auto',
-            display: 'block',
-            margin: '0 auto'
-          }}
-        />
-        </div>
+            <Image 
+              src="/images/activate-brisbane.png"
+              alt="Actívate Brisbane Logo"
+              width={500}
+              height={100}
+              priority
+              style={{ 
+                maxWidth: '100%', 
+                height: 'auto',
+                display: 'block',
+                margin: '0 auto'
+              }}
+            />
+          </div>
           <p className="hero-subtitle">Move. Connect. Celebrate.</p>
           <div className="hero-details">
             <p>📅 Sunday 12 July 2026</p>
@@ -139,10 +149,10 @@ const handlePrevVendor = () => {
             <p>⏰ 8:00AM – 5:00PM</p>
             <p>
               <Image 
-                src="/images/instagram_exercise_online_100x100.png"// Usamos la importación estática
+                src="/images/instagram_exercise_online_100x100.png"
                 alt="Instagram logo" 
-                width={20} // Especificamos el ancho en píxeles (sin 'px')
-                height={20} // Especificamos el alto en píxeles
+                width={20}
+                height={20}
               />
               <a href="https://www.instagram.com/activatebrisbane" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>
                 Follow us for updates and exclusive content!
@@ -178,21 +188,20 @@ const handlePrevVendor = () => {
             "This is not a passive event. You don't just attend — you participate."
           </p>
 
-          {/* Nuevo párrafo de ubicación con logo discreto */}
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: '15px', 
             marginTop: '25px', 
             paddingTop: '15px', 
-            borderTop: '1px solid #eee' // Una línea muy sutil para separar
+            borderTop: '1px solid #eee'
           }}>
             <Image 
-              src="/images/yeronga-logo.jpg" // Cambia esto por el nombre exacto de tu archivo
+              src="/images/yeronga-logo.jpg"
               alt="Yeronga Eagles FC Logo"
               width={60} 
               height={60}
-              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }} // Opacidad baja para que sea discreto
+              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
             />
             <p style={{ margin: 0, lineHeight: '1.4' }}>
               The event will take place at the home of <a href='https://www.yerongaefc.com.au/' target='_blank' rel='noopener noreferrer'>Yeronga Eagles Football Club</a>, their soccer fields and amenities provide a professional and energetic environment for all our activities.
@@ -257,29 +266,27 @@ const handlePrevVendor = () => {
         </div>
       </section>
 
-      {/* --- EVENT DETAILS (Sección modificada) --- */}
+      {/* --- EVENT DETAILS --- */}
       <section className="content-section details-grid">
          
-         {/* TARJETA MODIFICADA CON CARRUSEL */}
+         {/* TARJETA MODIFICADA CON CARRUSEL DE TRAINERS (Aleatorio) */}
          <div className="card-activate trainers-carousel-card">
             <h2>👩‍🏫 Confirmed Sport and Health Professionals</h2>
             <p className="section-subtitle">Qualified bilingual professionals leading high-energy sessions and workshops.</p>
             
             <div className="carousel-container">
-              {/* Botón Anterior */}
               <button onClick={prevTrainer} className="carousel-btn prev-btn photo-aligned-btn" aria-label="Previous trainer">
-                &#10094; {/* Icono < */}
+                ❮
               </button>
               
-              {/* Contenido del Entrenador Actual */}
               <div className="trainer-slide">
                 <div className="trainer-photo-wrapper">
                   <a href={currentTrainer.url} target="_blank" rel="noopener noreferrer">
                   <Image
                     src={currentTrainer.image} 
                     alt={`Trainer ${currentTrainer.name}`}
-                    width={300} // Ajusta según diseño
-                    height={300} // Ajusta según diseño
+                    width={300}
+                    height={300}
                     className="trainer-photo-round"
                   />
                   </a>
@@ -291,15 +298,13 @@ const handlePrevVendor = () => {
                 </div>
               </div>
 
-              {/* Botón Siguiente */}
               <button onClick={nextTrainer} className="carousel-btn next-btn photo-aligned-btn" aria-label="Next trainer">
-                &#10095; {/* Icono > */}
+                ❯
               </button>
             </div>
             
-            {/* Indicadores de puntos (Dots) */}
             <div className="carousel-dots">
-              {TRAINERS.map((_, index) => (
+              {displayTrainers.map((_, index) => (
                 <span 
                   key={index} 
                   className={`dot ${index === currentTrainerIndex ? 'active' : ''}`}
@@ -329,9 +334,8 @@ const handlePrevVendor = () => {
           <p style={{ marginTop: '40px', marginBottom: '0px' }}><strong>Additional Sponsors</strong></p>
           
           <div className="carousel-main-container">
-            {/* Botón Anterior */}
             <button onClick={handlePrevSponsor} className="carousel-btn prev-btn photo-aligned-btn" aria-label="Previous">
-              &#10094;
+              ❮
             </button>
 
             <div className="carousel-window">
@@ -343,11 +347,12 @@ const handlePrevVendor = () => {
                   transition: 'transform 0.5s ease-in-out'
                 }}
               >
-                {SPONSORS.map((sponsor, i) => (
+                {/* Iteramos sobre displaySponsors en lugar de SPONSORS */}
+                {displaySponsors.map((sponsor, i) => (
                   <div 
                     className="carousel-item" 
                     key={i}
-                    style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
+                    style={{ flex: `0 0 ${100 / itemsToShow}%` }}
                   >
                     <div className="secondary-sponsor-wrapper">
                       <a href={sponsor.url} target="_blank" rel="noopener noreferrer">
@@ -365,15 +370,13 @@ const handlePrevVendor = () => {
               </div>
             </div>
 
-            {/* Botón Siguiente */}
             <button onClick={handleNextSponsor} className="carousel-btn next-btn photo-aligned-btn" aria-label="Next">
-              &#10095;
+              ❯
             </button>
           </div>
 
-          {/* Dots Dinámicos: solo mostramos dots hasta donde empieza el último grupo */}
           <div className="carousel-dots">
-            {SPONSORS.slice(0, SPONSORS.length - (itemsToShow - 1)).map((_, i) => (
+            {displaySponsors.slice(0, displaySponsors.length - (itemsToShow - 1)).map((_, i) => (
               <span 
                 key={i} 
                 className={`dot ${i === sponsorIndex ? 'active' : ''}`}
@@ -381,12 +384,12 @@ const handlePrevVendor = () => {
               ></span>
             ))}
           </div>
+
           <p style={{ marginTop: '40px', marginBottom: '0px' }}><strong>Vendors</strong></p>
           
           <div className="carousel-main-container">
-            {/* Botón Anterior */}
             <button onClick={handlePrevVendor} className="carousel-btn prev-btn photo-aligned-btn" aria-label="Previous">
-              &#10094;
+              ❮
             </button>
 
             <div className="carousel-window">
@@ -398,11 +401,12 @@ const handlePrevVendor = () => {
                   transition: 'transform 0.5s ease-in-out'
                 }}
               >
-                {VENDORS.map((vendor, i) => (
+                {/* Iteramos sobre displayVendors en lugar de VENDORS */}
+                {displayVendors.map((vendor, i) => (
                   <div 
                     className="carousel-item" 
                     key={i}
-                    style={{ flex: `0 0 ${100 / itemsToShow}%` }} // Esto fuerza el ancho exacto
+                    style={{ flex: `0 0 ${100 / itemsToShow}%` }}
                   >
                     <div className="secondary-sponsor-wrapper">
                       <a href={vendor.url} target="_blank" rel="noopener noreferrer">
@@ -420,15 +424,13 @@ const handlePrevVendor = () => {
               </div>
             </div>
 
-            {/* Botón Siguiente */}
             <button onClick={handleNextVendor} className="carousel-btn next-btn photo-aligned-btn" aria-label="Next">
-              &#10095;
+              ❯
             </button>
           </div>
 
-          {/* Dots Dinámicos: solo mostramos dots hasta donde empieza el último grupo */}
           <div className="carousel-dots">
-            {VENDORS.slice(0, VENDORS.length - (itemsToShow - 1)).map((_, i) => (
+            {displayVendors.slice(0, displayVendors.length - (itemsToShow - 1)).map((_, i) => (
               <span 
                 key={i} 
                 className={`dot ${i === vendorIndex ? 'active' : ''}`}
@@ -447,13 +449,11 @@ const handlePrevVendor = () => {
             <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Great deal until May 27 or until sold out!! (Adults $29, Youth $10, Soccer Team Pack $250)</h2>
             <h2 style={{color: '#d97803', fontSize: '0.95rem', opacity: 0.5}}>Falto yo, contad conmigo!! Upcoming price until July 1 or until sold out!! (Adults $39, Youth $10, Soccer Team Pack $325)</h2>
             <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Upcoming price until July 12 or until sold out!! (Adults $49, Youth $10, Soccer Team Pack $410)</h2>
-            {/* AQUÍ CARGAMOS TU FORMULARIO EXISTENTE */}
             <EventRegistrationForm />  
-            {/* <EventRegistrationLongForm /> */}
         </div>
       </section>
 
-      {/* Banner flotante (Solo visible al hacer scroll hacia abajo si lo deseas, o fijo siempre) */}
+      {/* Banner flotante */}
       <div className="fixed-banner">
         <span>'Volando voy' deal!</span>
         <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
