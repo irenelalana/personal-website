@@ -1,0 +1,311 @@
+/* smartStrokes.module.css */
+
+.smartStrokesWrapper {
+  padding: 20px 0;
+  background-color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.container {
+  max-width: 1200px; /* Un poco más ancho para acomodar las 3 columnas */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Hero Section --- */
+.planningHero {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.heroImageWrapper {
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.landscapeImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+.heroContent {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.badge {
+  color: #f39304;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+}
+
+.heroContent h1 {
+  color: #02678F;
+  font-size: 3.5rem;
+  margin: 10px 0 20px;
+  line-height: 1.1;
+}
+
+.description {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* --- Pain Points Section --- */
+.painPointsCard {
+  text-align: left;
+  margin-top: 40px;
+  background-color: #f4f8fa;
+  padding: 30px;
+  border-radius: 20px;
+  border-left: 5px solid #f39304;
+}
+
+.painPointsCard p {
+  font-weight: 700;
+  color: #02678F;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.painPointsList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.painPointsList li {
+  font-size: 1rem;
+  color: #555;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* --- How it Works Section --- */
+.howItWorks {
+  margin: 80px 0;
+  text-align: center;
+}
+
+.howItWorks h2 {
+  color: #02678F;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.stepItem {
+  padding: 20px;
+}
+
+.stepIcon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.stepItem h3 {
+  color: #02678F;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.stepItem p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* --- Pricing/Plans Section --- */
+.planDetailsSection {
+  background-color: #f9fbfc;
+  padding: 60px 20px;
+  border-radius: 30px;
+  border: 1px solid #e1e8ed;
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  align-items: stretch; /* Hace que todas las tarjetas midan lo mismo */
+}
+
+.planCard {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.planCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo destacado para el plan Progression */
+.recommended {
+  border: 3px solid #f39304;
+  transform: scale(1.03);
+  position: relative;
+}
+
+/* .recommended::before {
+  content: "MOST POPULAR";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f39304;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+} */
+
+.planCardHeader {
+  background-color: #02678F;
+  color: white;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.planCardHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.priceTag {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: #f39304;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+.planCardBody {
+  padding: 30px;
+  flex-grow: 1; /* Empuja el botón hacia abajo */
+  display: flex;
+  flex-direction: column;
+}
+
+.planSummary {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.featureList li {
+  padding: 12px 0 12px 30px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.featureList li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #f39304;
+  font-weight: bold;
+}
+
+/* --- CTA Buttons --- */
+.ctaWrapper {
+  margin-top: auto;
+  text-align: center;
+}
+
+.mainButton {
+  display: block;
+  background-color: #f39304;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.mainButton:hover {
+  background-color: #02678F;
+}
+
+.helperText {
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+  text-align: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .recommended {
+    transform: scale(1);
+    margin: 15px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+  
+  .plansGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .planCardHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
