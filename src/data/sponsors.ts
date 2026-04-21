@@ -20,4 +20,5 @@ export const SPONSORS: Sponsor[] = [
   { id: 12, name: "Roblading", logo: "/images/Roblading_logo.png", url: "https://www.roblading.com.au/#home" },
   { id: 13, name: "Bienestar 360", logo: "/images/Bienestar360_logo.png", url: "https://latintemplebeauty.com.au/bienestar360-holisticwellness/" },
   { id: 14, name: "Padel Brisbane", logo: "/images/padel_logo_redondo.png", url:"https://padelbrisbane.co/" },
+  { id: 15, name: "Harry's Farm Markets", logo: "/images/Harris_farm_redondo.png", url: "https://www.harrisfarm.com.au/"},
 ]
