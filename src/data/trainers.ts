@@ -113,5 +113,13 @@ export const TRAINERS: Trainer[] = [
     description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
     image: "/images/Elvira_foto.png",
     url: "https://elviracete.com/"
+  },
+  {
+    id: 14,
+    name: "Helen Gomez (Vitalis)",
+    role: "Nutritionist",
+    description: "Clinical Nutritionist with over 10 years of experience helping people like you regain their well-being in a holistic ( the body as a whole connected mind-body spirit) and personalised way.",
+    image: "/images/Helen_vitalis_redondo.png",
+    url: "https://vitalisnutritionclinic.com.au/"
   }
 ];
