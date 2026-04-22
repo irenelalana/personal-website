@@ -153,7 +153,7 @@ export async function sendContactEmail(formData: FormData) {
   try {
     const { data, error } = await resend.emails.send({
       from: 'Irela Web Contact Form <irela@irelaaquaandfitness.com>',
-      to: 'irela13@hotmail.com', // EL EMAIL DONDE QUIERES RECIBIR LOS MENSAJES
+      to: 'irela@irelaaquaandfitness.com', // EL EMAIL DONDE QUIERES RECIBIR LOS MENSAJES
       subject: `New Contact Lead: ${name}`,
       replyTo: email, // Para que al dar a "Responder" le escribas al cliente
       html: `
