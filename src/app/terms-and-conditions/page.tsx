@@ -61,6 +61,7 @@ export default function TermsAndConditionsPage() {
               <li>Exercise or yoga mat (for fitness sessions)</li>
               <li>Comfortable sportswear and appropriate footwear</li>
               <li>Any necessary personal medication</li>
+              <li><strong>Refrain from bringing any type of chair, as they are not allowed in the soccer field</strong></li>
             </ul>
             <p>6.6 Single-use plastics are discouraged.</p>
             <p>6.7 The Event supports Brisbane City Council’s environmental priorities.</p>
