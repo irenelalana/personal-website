@@ -48,7 +48,7 @@ export default function Swimming() {
         {/* --- SECCIÓN INFERIOR (PROGRAMAS Y VÍDEO) --- */}
         <div className={styles.caption}>
           <section id="training_program" className={styles.trainingProgram}>
-            <h2 className={styles.subTitle}>SMART STROKES GROUP LESSONS:</h2>
+            <h2 className={styles.subTitle}>Next available sessions: 08/06/2026</h2>
             {/* <ul className={styles.list}>
               <li>Smart Strokes is a swimming premium group for stroke correction in adults - intermediate level, for those wanting to swim longer without fatigue with a fun and unique touch of variety.</li>
               <li>Mondays and Wednsedays 6.30pm, Tuesdyas 12.00pm. We improve technique and endurance in Musgrave Park Pool, West End.</li>
@@ -56,8 +56,7 @@ export default function Swimming() {
               <li>New Beginners groups! Tuesdays 10.00 am, Thursdays 3.00 pm, Fridays 11.30am.</li>
             </ul> */}
             
-            
-            <h2 className={styles.subTitle}>Next available sessions: 08/06/2026</h2>
+            <h2 className={styles.subTitle}>PRIVATE SWIMMING LESSONS</h2>
             <ul className={styles.list}>
               <li>Musgrave Park Pool (West End) and QUT Kelvin Grove Campus, Brisbane.</li>
               <li>Adults Beginners - Intermediate - advanced - triathletes level.</li>
