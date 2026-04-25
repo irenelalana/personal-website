@@ -56,6 +56,7 @@ export default function Swimming() {
               <li>New Beginners groups! Tuesdays 10.00 am, Thursdays 3.00 pm, Fridays 11.30am.</li>
             </ul> */}
             
+            
             <h2 className={styles.subTitle}>Next available sessions: 08/06/2026</h2>
             <ul className={styles.list}>
               <li>Musgrave Park Pool (West End) and QUT Kelvin Grove Campus, Brisbane.</li>
