@@ -121,5 +121,30 @@ export const TRAINERS: Trainer[] = [
     description: "Clinical Nutritionist with over 10 years of experience helping people like you regain their well-being in a holistic ( the body as a whole connected mind-body spirit) and personalised way.",
     image: "/images/Helen_vitalis_redondo.png",
     url: "https://vitalisnutritionclinic.com.au/"
-  }
+  },
+  {
+    id: 15,
+    name: "Irene Usabiaga",
+    role: "Massage Therapist",
+    description: "Certified Remedial Massage Therapist with over 6 years of experience and a background as a former professional cyclist. Extensive experience across sports, clinical, and wellness environments.",
+    image: "/images/Irene_redondo.png",
+    url: "https://www.instagram.com/ireneusabiaga/"
+  },
+  {
+    id: 16,
+    name: "Pilar Martin",
+    role: "Pelvic Health Physiotherapist",
+    description: "Empowering individuals to overcome pelvic floor dysfunction with confidence and support. Discover how to optimise your pelvic health and enhance your fitness and overall wellbeing as part of a sustainable lifestyle.",
+    image: "/images/pilar_redondo.png",
+    url: "https://www.instagram.com/pilarespelvicos/"
+  },
+  {
+    id: 17,
+    name: "Lourdes Villalobos (It's Aura)",
+    role: "Women's Health Coach",
+    description: "Supporting women through different stages of life, helping them reconnect with their bodies, improving their wellbeing, and approaching their health with greater awareness.",
+    image: "/images/Lourde_redondo.png",
+    url: "https://www.instagram.com/itsaura.au/"
+  },
+
 ];
