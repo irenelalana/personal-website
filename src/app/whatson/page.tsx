@@ -72,7 +72,7 @@ export default function WhatsOnPage() {
         </section> */}
 
         {/* SECCIÓN DEL HORARIO (TIMETABLE) */}
-        <div className={styles.timetableSection}>
+        {/* <div className={styles.timetableSection}>
           <div className={styles.badge}>Current Schedule</div>
           <h2>Weekly Timetable</h2>
           <div className={styles.imgWrapper}>
@@ -85,7 +85,7 @@ export default function WhatsOnPage() {
             />
           </div>
           <p className={styles.updateNote}>Work-outs in progress! New sessions added regularly.</p>
-        </div>
+        </div> */}
 
         {/* SECCIÓN DESTACADA: CHALLENGE */}
         <section className={styles.challengeCard}>
