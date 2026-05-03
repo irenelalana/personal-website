@@ -22,4 +22,6 @@ export const SPONSORS: Sponsor[] = [
   { id: 14, name: "Padel Brisbane", logo: "/images/padel_logo_redondo.png", url:"https://padelbrisbane.co/" },
   { id: 15, name: "Harry's Farm Markets", logo: "/images/Harris_farm_redondo.png", url: "https://www.harrisfarm.com.au/"},
   { id: 16, name: "DOMO Accommodation", logo: "/images/DOMO_REDONDO.png", url: "https://www.domoaccommodation.com/" },
+  { id: 17, name: "Fit College", logo: "/images/Fitcollage_redondo.png", url: "https://www.fitcollege.edu.au/" },
+  { id: 18, name: "Lending Place", logo: "/images/Lendingplace_redondo.png", url: "https://lendingplace.com.au/" },
 ]
