@@ -1559,6 +1559,14 @@ header {
   opacity: 0.9;
 }
 
+.desktop-inclusions {
+    display: none;
+  }
+
+.mobile-inclusions {
+  display: grid;
+}
+
 @media screen and  (min-width: 768px) {
   body {
     font-size: 1em;
@@ -1935,6 +1943,13 @@ header {
 
   .item-2 {
     display: block;
+  }
+  .desktop-inclusions {
+    display: grid;
+  }
+
+  .mobile-inclusions {
+    display: none;
   }
 
 /* div {

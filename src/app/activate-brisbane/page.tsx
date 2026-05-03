@@ -197,7 +197,7 @@ export default function ActivateBrisbanePage() {
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            This event brings together group fitness, family runs, a soccer 5-a-side tournament, and wellness workshops.
+            This event brings together group fitness, family runs, a <a href="/inti-soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</a>, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don't just attend — you participate."
@@ -246,9 +246,30 @@ export default function ActivateBrisbanePage() {
       {/* --- WHATS INCLUDED --- */}
       <section className="content-section">
         <h2>🏃 What's Included in Your Ticket?</h2>
-        <div>
+        <div className="desktop-inclusions">
           <img
               src="/images/ticket-inclusions.png"
+              alt="Ticket Inclusions"
+              style={{maxWidth: "100%"}}
+              //style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
+            />
+            {/* <ul>
+              <li>Multiple 30-minute stage fitness sessions</li>
+              <li>Entry to the Icoté Sweet Run / Walk, proudly sponsored by <a href="https://www.instagram.com/icote_treats_by_maria/" target="_blank" rel="noopener noreferrer">Icoté Treats by María</a></li>
+              <li>Free fitness assessment opportunities</li>
+              <li>Traditional games and activities</li>
+              <li>Sponsor goodie bag</li>
+              <li><a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament for adults</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a>, <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer">Padel Brisbane</a> and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
+              <li>Social soccer matches for kids, teens and families</li>
+              <li>Food trucks and licensed bar access</li>
+              <li>Raffle tickets</li>
+              <li>Bibs</li>
+              <li>Standup Comedy and Music to end the day</li>
+            </ul> */}
+        </div>
+        <div className="mobile-inclusions">
+          <img
+              src="/images/ticket-inclusions-mobile.png"
               alt="Ticket Inclusions"
               style={{maxWidth: "100%"}}
               //style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
