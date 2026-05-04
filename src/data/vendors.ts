@@ -14,6 +14,7 @@ export const VENDORS: Vendor[] = [
   { id: 6, name: "Magia", logo: "/images/Magia_logo.png", url: "https://magiabakery.com/" },
   { id: 7, name: "Little Caracas", logo: "/images/Litle_Caracas_logo_vendor.png", url: "https://www.instagram.com/littlecaracas.au/" },
   { id: 8, name: "No worries, Spanish", logo: "/images/No_worries_spanish_logo_vendor.png", url: "https://www.noworriesspanish.com/" },
+  { id: 9, name: "Robelto Art", logo: "/images/Robelto_redondo.png", url: "https://www.instagram.com/robeltoart/" },
 
   // Añade todos los que necesites
 ]
