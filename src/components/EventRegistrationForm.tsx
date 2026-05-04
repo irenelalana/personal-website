@@ -197,7 +197,7 @@ export default function EventRegistrationLongForm() {
       
       <div className="form-tabs">
         <button className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`} onClick={() => setActiveTab('general')}>
-          🏋🏽‍♀️🏃🏾Single & Multiple Event Tickets🏋🏻🏃🏼‍♀️
+          🏋🏽‍♀️🏃🏾Individual Event Tickets🏋🏻🏃🏼‍♀️
         </button>
         <button className={`tab-btn ${activeTab === 'team' ? 'active' : ''}`} onClick={() => setActiveTab('team')}>
           ⚽Soccer Team Pack (Only for adults)⚽

@@ -192,7 +192,7 @@ export default function ActivateBrisbanePage() {
       {/* --- WHAT IS IT --- */}
       <section className="content-section">
         <div className="card-activate">
-          <h2>💥 What is ACTÍVATE BRISBANE?</h2>
+          <h2>What is ACTÍVATE BRISBANE?</h2>
           <p>
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
@@ -227,7 +227,7 @@ export default function ActivateBrisbanePage() {
 
       {/* --- WHO IS IT FOR --- */}
       <section className="content-section alt-bg">
-        <h2>🎯 Who is it for?</h2>
+        <h2>Who is it for?</h2>
         <div className="features-grid">
           <div className="feature-item">✔ Spanish-Speaking Communities in Brisbane</div>
           <div className="feature-item">✔ Fitness lovers</div>
@@ -245,7 +245,7 @@ export default function ActivateBrisbanePage() {
 
       {/* --- WHATS INCLUDED --- */}
       <section className="content-section">
-        <h2>🏃 What's Included in Your Ticket?</h2>
+        <h2>What's Included in Your Ticket?</h2>
         <div className="desktop-inclusions">
           <img
               src="/images/ticket-inclusions.png"
@@ -298,7 +298,7 @@ export default function ActivateBrisbanePage() {
       {/* --- WHY MATTERS --- */}
       <section className="content-section alt-bg">
         <div className="card-activate">
-            <h2>🤝 Why This Event Matters</h2>
+            <h2>Why This Event Matters</h2>
             <p>
                 Research shows that culturally inclusive, community-led events significantly increase participation in physical activity.
             </p>
@@ -313,7 +313,7 @@ export default function ActivateBrisbanePage() {
          
          {/* TARJETA MODIFICADA CON CARRUSEL DE TRAINERS (Aleatorio) */}
          <div className="card-activate trainers-carousel-card">
-            <h2>👩‍🏫 Confirmed Sport and Health Professionals</h2>
+            <h2>Confirmed Sport and Health Professionals</h2>
             <p className="section-subtitle">Qualified bilingual professionals leading high-energy sessions and workshops.</p>
             
             <div className="carousel-container">
@@ -487,10 +487,10 @@ export default function ActivateBrisbanePage() {
       <section id="registration-form" className="form-section">
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
-            <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Get the best price before April 15!!</h2>
-            <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Great deal until May 27 or until sold out!! (Adults $29, Youth $10, Soccer Team Pack $250)</h2>
-            <h2 style={{color: '#d97803', fontSize: '0.95rem', opacity: 0.5}}>Falto yo, contad conmigo!! Upcoming price until July 1 or until sold out!! (Adults $39, Youth $10, Soccer Team Pack $325)</h2>
-            <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Upcoming price until July 12 or until sold out!! (Adults $49, Youth $10, Soccer Team Pack $410)</h2>
+            <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Best price before April 15th!!</h2>
+            <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Until May 27th (Adults $29, Soccer Team $250)</h2>
+            <h2 style={{color: '#d97803', fontSize: '0.95rem', opacity: 0.5}}>Falto yo, contad conmigo!! Until July 1st (Adults $39, Soccer Team $325)</h2>
+            <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Until July 12th (Adults $49, Soccer Team $410)</h2>
             <EventRegistrationForm />  
         </div>
       </section>

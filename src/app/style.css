@@ -583,7 +583,7 @@ header {
 
 .hero-subtitle {
   font-size: 1.5em; /* Ajuste manual porque tu global p es muy grande en desktop */
-  font-style: italic;
+  font-weight: bold;
   margin-top: -10px;
   color: #f39304;
 }
