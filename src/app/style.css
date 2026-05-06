@@ -1536,8 +1536,8 @@ header {
   background-color: #f39304; /* Tu color naranja/rojo del evento */
   color: white;
   text-align: center;
-  padding: 8px 15px;
-  font-size: 0.9rem;
+  padding: 0px 8px 0px 8px;
+  font-size: 1.1rem;
   position: sticky;
   top: 0;
   z-index: 101;
