@@ -28,7 +28,7 @@ export default function AboutPage(): React.JSX.Element {
               <li><strong>Group Exercise Leader & Instructor of the Year (2025)</strong> - National Fitness Awards by Ausactive.</li>
               <li><strong>Lord Mayor Emerging Leader of the Year (2025)</strong>.</li>
               <li><strong>Aquaprofessional of the Year (2024)</strong>.</li>
-              <li><strong>Australian Swimming Master Champion (2025)</strong> & Lifesaving World Silver Medal (2024).</li>
+              <li><strong>Australian Swimming Master Champion (2025, 2026)</strong> & Lifesaving World Silver Medal (2024).</li>
             </ul>
           </div>
         </div>

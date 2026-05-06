@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         </h2>
         
         <p className={styles.intro}>
-          Hi! I'm <strong>Irene Lalana</strong>, Australian Master swimming Champion 2025, 
+          Hi! I'm <strong>Irene Lalana</strong>, Australian Master swimming Champion 2025 and 2026, 
           Spanish Lifesaving National records and Silver medal in World Championship 2024, 
           Australian Aquaprofessional of the year 2024 and Group Exercise Leader and Instructor 
           of the year 2025, sports science graduate, and your go-to coach...
