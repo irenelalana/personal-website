@@ -69,7 +69,7 @@ export default function TermsAndConditionsPage() {
 
             <h3>7. Liability</h3>
             <p>To the fullest extent permitted by Australian law, the organisers disclaim liability for any personal injury, loss, theft or damage to personal property occurring at the Event, except where such liability cannot be excluded by law.</p>
-            
+            <p>Parents and guardians remain fully responsible for the supervision, safety and behaviour of any children attending the event with them at all times.</p>
             <p className="legal-highlight">
               <strong>By purchasing or holding a ticket, you acknowledge that you have read, understood and agreed to these Terms and Conditions.</strong>
             </p>
