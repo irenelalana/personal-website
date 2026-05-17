@@ -7,7 +7,7 @@ const programList = [
   { href: "/aquafitness", title: "AQUAFITNESS", img: "/images/Aquaerobics_westend.jpg" },
   { href: "/swimming", title: "ADULTS SWIMMING LESSONS", img: "/images/Swimming_lessons_for_adult.jpeg" },
   { href: "/pilates", title: "PILATES", img: "/images/Pilates_classes_online.jpeg" },
-  { href: "/triathlon", title: "SWIMMING FOR TRIATHLETES", img: "/images/Triathlon.jpg" },
+  { href: "/smart-strokes", title: "ONLINE SMART STROKES", img: "/images/smart_strokes_video_analysis.png" },
   { href: "/brisbane_city_council", title: "BCC ACTIVE AND HEALTHY", img: "/images/Brisbane_city_council.png" },
   { href: "/planning", title: "PLANNING", img: "/images/Planning_for_triathlon_run_swim_strength.jpeg" },
   { href: "/corporate_events", title: "CORPORATE WELLNESS", img: "/images/Irela13coach_teambuilding_forcompanies.jpeg" },

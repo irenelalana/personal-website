@@ -1,7 +1,55 @@
-import React from "react";
+'use client';
+
+import React, { useState, useRef } from "react";
 import styles from "./smartStrokes.module.css";
+import { sendSmartStrokesEnquiry } from '@/app/actions'; // Ajusta esta ruta según tu estructura
 
 export default function SmartStrokes() {
+  const formRef = useRef<HTMLDivElement>(null);
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    program: 'General Enquiry',
+    message: ''
+  });
+  
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  // Función para hacer scroll y rellenar el programa
+  const handleProgramClick = (e: React.MouseEvent, programName: string) => {
+    e.preventDefault();
+    setFormData(prev => ({ ...prev, program: `Enquiry for ${programName}` }));
+    
+    // Pequeño delay para asegurar que el scroll funcione fluidamente
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    try {
+      const response = await sendSmartStrokesEnquiry(formData);
+      if (response.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', program: 'General Enquiry', message: '' }); // Reset
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
+  };
+
   return (
     <main className={styles.smartStrokesWrapper}>
       <div className={styles.container}>
@@ -35,7 +83,7 @@ export default function SmartStrokes() {
           </div>
         </section>
 
-        {/* CÓMO FUNCIONA - Actualizado a 4 pasos con Initial Assessment */}
+        {/* CÓMO FUNCIONA */}
         <section className={styles.howItWorks}>
           <h2>How it Works</h2>
           <div className={styles.stepsGrid}>
@@ -83,7 +131,7 @@ export default function SmartStrokes() {
                   <li>15-min Live Q&A Follow-up</li>
                 </ul>
                 <div className={styles.ctaWrapper}>
-                  <a href="#contact" className={styles.mainButton}>Get Your Analysis</a>
+                  <button onClick={(e) => handleProgramClick(e, 'The Insight')} className={styles.mainButton}>Get Your Analysis</button>
                 </div>
               </div>
             </div>
@@ -103,12 +151,12 @@ export default function SmartStrokes() {
                   <li>Progress Video Review (after first month)</li>
                 </ul>
                 <div className={styles.ctaWrapper}>
-                  <a href="#contact" className={styles.mainButton}>Start Training</a>
+                  <button onClick={(e) => handleProgramClick(e, 'Progression')} className={styles.mainButton}>Start Training</button>
                 </div>
               </div>
             </div>
 
-            {/* TIER 3: TOTAL IMMERSION (Actualizado con métricas) */}
+            {/* TIER 3: TOTAL IMMERSION */}
             <div className={styles.planCard}>
               <div className={styles.planCardHeader}>
                 <h2>"Immersion"</h2>
@@ -124,12 +172,101 @@ export default function SmartStrokes() {
                   <li><strong>Metric tracking (via Garmin, Strava, etc.)</strong></li>
                 </ul>
                 <div className={styles.ctaWrapper}>
-                  <a href="#contact" className={styles.mainButton}>Go Premium</a>
+                  <button onClick={(e) => handleProgramClick(e, 'Immersion')} className={styles.mainButton}>Go Premium</button>
                 </div>
               </div>
             </div>
 
           </div>
+        </section>
+
+        {/* FORMULARIO DE ENQUIRY */}
+        <section ref={formRef} className={styles.enquirySection}>
+          <h2>Ready to improve your stroke?</h2>
+          <p>Fill out the form below and we will get back to you shortly.</p>
+
+          {status === 'success' ? (
+            <div className={styles.successMessage}>
+              <h3>✅ Enquiry Sent!</h3>
+              <p>Thank you for reaching out. We have received your details and will reply very soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className={styles.enquiryForm}>
+              <div className={styles.formGroup}>
+                <label htmlFor="name">Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required 
+                  value={formData.name} 
+                  onChange={handleChange} 
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="email">Email</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="email">Phone</label>
+                <input 
+                  type="phone" 
+                  id="phone" 
+                  name="phone" 
+                  required 
+                  value={formData.phone} 
+                  onChange={handleChange} 
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="program">Program of Interest</label>
+                <input 
+                  type="text" 
+                  id="program" 
+                  name="program" 
+                  value={formData.program} 
+                  onChange={handleChange}
+                  readOnly // Opcional: quita readOnly si quieres que puedan editarlo
+                  className={styles.readOnlyInput}
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="message">Message / Goals</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows={4} 
+                  required 
+                  value={formData.message} 
+                  onChange={handleChange}
+                  placeholder="Tell us a bit about your swimming background and goals..."
+                />
+              </div>
+
+              {status === 'error' && (
+                <p className={styles.errorMessage}>There was an error sending your message. Please try again.</p>
+              )}
+
+              <button 
+                type="submit" 
+                className={styles.submitButton} 
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? 'Sending...' : 'Send Enquiry'}
+              </button>
+            </form>
+          )}
         </section>
 
       </div>

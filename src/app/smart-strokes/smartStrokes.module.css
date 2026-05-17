@@ -174,19 +174,18 @@
   position: relative;
 }
 
-/* .recommended::before {
-  content: "MOST POPULAR";
+.recommended::before {
+  content: "BEST VALUE";
   position: absolute;
-  top: -15px;
   left: 50%;
   transform: translateX(-50%);
   background: #f39304;
   color: white;
-  padding: 5px 15px;
+  padding: 0px 15px;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 800;
-} */
+}
 
 .planCardHeader {
   background-color: #02678F;
@@ -296,6 +295,22 @@
   .stepsGrid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.mainButton {
+  display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: #f39304;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 @media (max-width: 480px) {

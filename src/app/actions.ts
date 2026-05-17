@@ -7,6 +7,10 @@ import { format } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import { enAU } from 'date-fns/locale'
 import Stripe from 'stripe';
+import { generateTicketsPDF } from '@/lib/generateTicketsPDF';
+import { signTicket } from "@/lib/tickets";
+import QRCode from 'qrcode';
+
 
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
   console.error("❌ CRITICAL: Supabase variables are missing in Server Actions!");
@@ -180,7 +184,6 @@ export async function sendContactEmail(formData: FormData) {
 // Asegúrate de tener una tabla 'orders' o 'bookings' que acepte un campo JSONB 'attendees_data'
 // CREATE TABLE orders (id uuid primary key, attendees_data jsonb, status text default 'pending', ...);
 
-
 export async function checkoutComplexBooking(data: any) {
   const supabase = await createClient();
 
@@ -195,28 +198,273 @@ export async function checkoutComplexBooking(data: any) {
   }), {} as Record<string, number>) || {};
 
   // 2. Recalcular el total en el servidor (Seguridad)
-  const serverTotal = 
+  const baseTotal = 
     (data.adults.length * (priceMap['Adult'] || 0)) +
     (data.youth.length * (priceMap['Youth'] || 0)) +
     (data.team ? (priceMap['Soccer Team'] || 0) : 0);
 
-  // 3. Guardar la reserva pendiente en Supabase
+  let serverTotal = baseTotal;
+  let couponApplied = null;
+
+  // LOGICA DE VALIDACIÓN DEL CUPÓN
+  if (data.couponCode) {
+    const { data: coupon, error: couponError } = await supabase
+      .from('coupons')
+      .select('*')
+      .eq('code', data.couponCode.trim().toUpperCase())
+      .eq('is_active', true)
+      .single();
+
+    if (couponError || !coupon) {
+      console.error("Invalid or inactive coupon:", data.couponCode);
+      return { error: "Invalid or inactive coupon code" };
+    }
+
+    if (coupon.max_uses && coupon.times_used >= coupon.max_uses) {
+      return { error: "This coupon has reached its maximum usage limit" };
+    }
+
+    if (coupon.discount_type === 'percentage' && coupon.discount_value === 100) {
+      serverTotal = 0;
+      couponApplied = coupon;
+    }
+  }
+
+  const isBypass = serverTotal === 0 && couponApplied;
+  const initialOrderStatus = isBypass ? 'completed' : 'pending_payment';
+
+  // 3. Guardar la reserva en Supabase
   const { data: order, error } = await supabase
     .from('orders')
     .insert({
-      status: 'pending_payment',
+      status: initialOrderStatus,
       attendees_data: data,
       total_amount: serverTotal
     })
     .select('id')
     .single();
 
-  if (error) {
+  if (error || !order) {
     console.error("Error saving order:", error);
     return { error: "DB Error" };
   }
 
-  // 4. Crear Line Items para Stripe (Stripe usa centavos, por eso * 100)
+  // ==========================================
+  // FLUJO DIRECTO PARA INVITADOS (BYPASS)
+  // ==========================================
+  if (isBypass) {
+    // A) Incrementar el contador del cupón
+    await supabase
+      .from('coupons')
+      .update({ times_used: couponApplied.times_used + 1 })
+      .eq('id', couponApplied.id);
+
+    // Identificamos al comprador principal (Adulto 1)
+    const customerEmail = data.adults[0]?.email || 'no-email@example.com';
+    const customerName = `${data.adults[0]?.firstName} ${data.adults[0]?.lastName}`;
+
+    // B) ESTRUCTURACIÓN DE ASISTENTES (Igual que el Webhook)
+    const allAttendees: any[] = [];
+
+    data.adults.forEach((a: any, index: number) => {
+      allAttendees.push({ 
+        firstName: a.firstName, lastName: a.lastName, email: a.email, phone: a.phone, 
+        kids: index === 0 ? (a.kids || '0') : '0', 
+        type: 'Adult', source: data.source,
+        emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+        activities: data.activities
+      });
+    });
+
+    data.youth.forEach((k: any) => {
+      allAttendees.push({ 
+        firstName: k.firstName, lastName: k.lastName, email: k.email, phone: k.phone, 
+        kids: '0', type: 'Youth', source: data.source,
+        emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+        activities: data.activities
+      });
+    });
+
+    if (data.team?.active && data.team.members) {
+      const teamName = data.team.teamName;
+      data.team.members.forEach((m: any) => {
+        if (m.firstName) {
+          allAttendees.push({ 
+            firstName: m.firstName, lastName: m.lastName, email: m.email, phone: m.phone,
+            kids: '0', type: `Player (${teamName})`, source: data.source,
+            emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+            activities: data.activities
+          });
+        }
+      });
+    }
+
+    // C) GENERACIÓN DE QRs Y ESTRUCTURAS DE BASE DE DATOS Y PDF
+    const ticketsToInsert = await Promise.all(allAttendees.map(async (person) => {
+      const ticketId = crypto.randomUUID();
+      const payload = signTicket(ticketId);
+      const ticketUrl = `https://irelaaquaandfitness.com/activate-brisbane/t/${payload}`;
+      
+      const qrBuffer = await QRCode.toBuffer(ticketUrl, { width: 500, margin: 4 });
+      const qrBase64 = qrBuffer.toString('base64');
+
+      return {
+        id: ticketId,
+        order_id: order.id,
+        customer_email: person.email || customerEmail,
+        first_name: person.firstName,
+        last_name: person.lastName,
+        phone_number: person.phone,
+        kids: person.kids,
+        ticket_type: person.type,
+        source: person.source,
+        emergency_contact: person.emergencyContact,
+        emergency_number: person.emergencyPhone,
+        qr_code: qrBase64,
+        running_race: person.activities?.runningRace || false,
+        fitness: person.activities?.fitness || false,
+        soccer: person.activities?.soccer || false,
+        social_soccer: person.activities?.socialSoccer || false,
+        party: person.activities?.party || false,
+        kids_fun: person.activities?.kidsFun || false
+      };
+    }));
+
+    const ticketsForPDF = allAttendees.map((p, i) => ({
+      ticketId: ticketsToInsert[i].id,
+      attendeeName: `${p.firstName} ${p.lastName}`,
+      ticketType: p.type,
+      kids: p.kids,
+      qrCode: ticketsToInsert[i].qr_code
+    }));
+
+    const eventInfo = {
+      eventName: "Actívate Brisbane",
+      eventDate: "Sunday 12 July 2026",
+      eventTime: "8:00 AM – 5:00 PM",
+      eventLocation: " Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104",
+      orderNumber: order.id,
+      logoPath: "https://www.irelaaquaandfitness.com/images/activate-brisbane-light.png",
+      eventWebsite: "https://www.irelaaquaandfitness.com/activate-brisbane"
+    };
+
+    // Generar el PDF
+    const pdfBytes = await generateTicketsPDF(ticketsForPDF, eventInfo);
+
+    // D) ACTUALIZAR BASE DE DATOS
+    if (ticketsToInsert.length > 0) {
+      const { error: ticketsError } = await supabase.from('tickets').insert(ticketsToInsert);
+      if (ticketsError) console.error("Error inserting bypass tickets:", ticketsError);
+    }
+
+    await supabase
+      .from('orders')
+      .update({ 
+        customer_email: customerEmail,
+        stripe_session_id: `bypass_${couponApplied.code}` // Marca especial para identificar bypass
+      })
+      .eq('id', order.id);
+
+    // E) ENVIAR EMAIL CON RESEND
+    const purchaseDate = new Date().toLocaleString("en-AU");
+    const ticketBreakdown = buildTicketBreakdown(
+      data.adults.length,
+      data.youth.length,
+      data.team?.active ? 1 : 0, // Ajustado para que si hay equipo, sume 1 "Team Ticket"
+      priceMap['Adult'] || 29,
+      priceMap['Youth'] || 10,
+      priceMap['Soccer Team'] || 250
+    );
+
+    const emailHtml = `
+      <div style="font-family: Arial, Helvetica, sans-serif; background-color:#f5f7fa; padding:40px 20px;">
+        <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+          <div style="background:#0c4a6e; color:white; padding:24px; text-align:center;">
+            <h1 style="margin:0; font-size:24px;">Actívate Brisbane</h1>
+          </div>
+          <div style="padding:30px; color:#333333; line-height:1.6;">
+            <p style="font-size:16px;">Hola <strong>${customerName}</strong>!</p>
+            <p>Thanks for your purchase and welcome to <strong>Actívate Brisbane</strong>.</p>
+            <p>Your tickets have been successfully confirmed.<br/>
+              You'll find all tickets attached in the <strong>PDF included with this email</strong>.</p>
+            
+            <h3 style="margin-top:30px;">Order details</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+              <tr>
+                <td style="padding:6px 0; color:#666;">Order number:</td>
+                <td style="padding:6px 0;"><strong>${order.id}</strong></td>
+              </tr>
+              <tr>
+                <td style="padding:6px 0; color:#666;">Purchase date:</td>
+                <td style="padding:6px 0;">${purchaseDate}</td>
+              </tr>
+              <tr>
+                <td style="padding:6px 0; color:#666;">Coupon Applied:</td>
+                <td style="padding:6px 0;"><strong>${couponApplied.code} (100% OFF)</strong></td>
+              </tr>
+            </table>
+
+            <div style="margin-top:20px;">
+              <strong>Tickets purchased:</strong>
+              <div style="margin-top:8px;">
+                ${ticketBreakdown}
+              </div>
+            </div>
+
+            <p style="margin-top:16px; padding:6px 0; text-align:right; font-size: 1.4rem;">
+              <strong>Total paid: $0.00 </strong>
+            </p>
+
+            <p style="margin-top:20px;">Each ticket contains a unique QR code that will be scanned at the entrance.</p>
+            <p>Please keep this email or download the attached PDF and bring your ticket(s) with you on the day.</p>
+
+            <h3 style="margin-top:32px;">Event details</h3>
+            <div style="background:#f3f4f6; padding:16px; border-radius:8px; font-size:14px;">
+              <p style="margin:4px 0;"><strong>Actívate Brisbane</strong></p>
+              <p style="margin:4px 0;">📍 Location: Yeronga Eagles Football Club, 51 Cansdale St, Yeronga QLD 4104</p>
+              <p style="margin:4px 0;">📅 Date: 12 July 2026</p>
+              <p style="margin:4px 0;">⏰ Time: 8:00 AM - 5:00 PM</p>
+            </div>
+
+            <p style="margin-top:24px;">
+              If you have any questions, please contact us at<br/>
+              <a href="mailto:irela@irelaaquaandfitness.com" style="color:#0c4a6e;">irela@irelaaquaandfitness.com</a>
+            </p>
+            <p style="margin-top:30px;">We look forward to seeing you there.</p>
+            <p>Kind regards,<br/><strong>Actívate Brisbane Team</strong></p>
+          </div>
+          <div style="background:#f9fafb; text-align:center; padding:14px; font-size:12px; color:#888;">
+            Actívate Brisbane · Brisbane, QLD
+          </div>
+        </div>
+      </div>
+    `;
+
+    try {
+      await resend.emails.send({
+        from: "Actívate Brisbane <irela@irelaaquaandfitness.com>",
+        to: customerEmail,
+        subject: "Your Actívate Brisbane tickets",
+        attachments: [
+          {
+            filename: "activate-brisbane-tickets.pdf",
+            content: Buffer.from(pdfBytes).toString("base64"),
+            contentType: "application/pdf"
+          }
+        ],
+        html: emailHtml
+      });
+    } catch (emailError) {
+      console.error("Error sending Bypass email:", emailError);
+    }
+
+    // Retorna directamente al Success sin pasar por Stripe
+    return { url: `${process.env.NEXT_PUBLIC_APP_URL}/success?order_id=${order.id}` };
+  }
+
+  // ==========================================
+  // 4. Crear Line Items para Stripe (Flujo de Pago Normal)
+  // ==========================================
   const line_items = [];
 
   if (data.adults.length > 0) {
@@ -252,7 +500,6 @@ export async function checkoutComplexBooking(data: any) {
     });
   }
 
-  // 5. Crear Sesión de Stripe
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items,
@@ -260,9 +507,87 @@ export async function checkoutComplexBooking(data: any) {
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment-cancelled`,
     metadata: {
-      order_id: order.id // Pasamos el ID para el Webhook
+      order_id: order.id 
     }
   });
 
   return { url: session.url };
+}
+
+// ==========================================
+// FUNCIÓN AUXILIAR (Fuera del export principal)
+// ==========================================
+function buildTicketBreakdown(
+  adultCount: number,
+  youthCount: number,
+  teamCount: number,
+  adultPrice: number,
+  youthPrice: number,
+  teamPrice: number
+) {
+  const rows: string[] = [];
+
+  if (adultCount > 0) {
+    const total = adultPrice * adultCount;
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">${adultCount} × Adult ticket${adultCount > 1 ? "s" : ""}</td>
+        <td style="padding:6px 0; text-align:right;">$${adultPrice} × ${adultCount}</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  if (youthCount > 0) {
+    const total = youthPrice * youthCount;
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">${youthCount} × Youth ticket${youthCount > 1 ? "s" : ""}</td>
+        <td style="padding:6px 0; text-align:right;">$${youthPrice} × ${youthCount}</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  if (teamCount > 0) {
+    const total = teamPrice;
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">1 Team ticket</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  return `
+    <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;">
+      ${rows.join("")}
+    </table>
+  `;
+}
+
+export async function sendSmartStrokesEnquiry(formData: { name: string; email: string; phone: string; program: string; message: string }) {
+  try {
+    const { name, email, phone, program, message } = formData;
+
+    await resend.emails.send({
+      from: 'Online Smart Strokes Enquiry <irela@irelaaquaandfitness.com>', // Cambia esto por tu dominio verificado en Resend (ej. info@irelaaquaandfitness.com)
+      to: 'irela@irelaaquaandfitness.com', 
+      subject: `Online Smart Strokes Enquiry: ${program}`,
+      html: `
+        <h2>Online Smart Strokes Enquiry</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Program:</strong> ${program}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending enquiry via Resend:", error);
+    return { success: false, error: 'Failed to send email' };
+  }
 }
