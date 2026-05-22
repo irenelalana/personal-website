@@ -488,7 +488,7 @@ export default function ActivateBrisbanePage() {
         <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
             <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Best price before April 15th!!</h2>
-            <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Until May 27th (Adults $29, Soccer Team $250)</h2>
+            <h2 style={{color: '#f39304', fontSize: '1.2rem', fontWeight: 'bold', border: '2px solid #f39304', padding: '10px', borderRadius: '5px'}}>Volando voy!! Until May 31st (Adults $29, Soccer Team $250)</h2>
             <h2 style={{color: '#d97803', fontSize: '0.95rem', opacity: 0.5}}>Falto yo, contad conmigo!! Until July 1st (Adults $39, Soccer Team $325)</h2>
             <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Until July 12th (Adults $49, Soccer Team $410)</h2>
             <EventRegistrationForm />  

@@ -94,7 +94,7 @@ const content: Record<'en' | 'es', Translation> = {
       prizes: {
         thanks: "A special thanks to our sponsors for donating such a fabulous prizes for the tournament.",
         title: "🔥 FOOTBALL TOURNAMENT PRIZES 🔥",
-        value: "VALUED AT $2,500",
+        value: "VALUED AT MORE THAN $8,500!!",
         third: {
           rank: "🥉 3rd Place",
           desc: "You will enjoy 8 padel courts (1h each, off-peak) — because the game doesn't end on the field.",
@@ -177,7 +177,7 @@ const content: Record<'en' | 'es', Translation> = {
       prizes: {
         thanks: "Queremos dar un agradecimiento especial a nuestros patrocinadores por donar estos fabulosos premios para el torneo.",
         title: "🔥 PREMIOS TORNEO DE FÚTBOL 🔥",
-        value: "VALORADOS EN $2,500",
+        value: "VALORADOS EN MÁS DE $8,500!!",
         third: {
           rank: "🥉 3er puesto",
           desc: "Disfrutaréis de 8 pistas de pádel (1h cada una en horario off-peak) — porque el juego no termina en el campo.",
