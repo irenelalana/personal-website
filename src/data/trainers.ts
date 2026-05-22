@@ -153,5 +153,13 @@ export const TRAINERS: Trainer[] = [
     description: "Passionate about helping little ones move, express themselves, and fall in love with music from around the world. Through fun games, creative choreography, and lots of positive vibes, my classes are all about building confidence, coordination, and joy.",
     image: "/images/Alejandra_redondo.png",
     url: "https://www.instagram.com/zumbakidsbne/"
+  },
+  {
+    id: 19,
+    name: "Ale Caicedo",
+    role: "Breathwork Instructor & Embodiment Facilitator",
+    description: "Helping people reconnect with themselves through breath, movement, and nervous system awareness.",
+    image: "/images/Aleredondo.png",
+    url: "https://www.instagram.com/byalecaicedo/"
   }
 ];

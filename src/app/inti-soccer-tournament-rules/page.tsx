@@ -25,9 +25,9 @@ interface Translation {
     };
     discipline: { title: string; p1: string; item1: string; item2: string; item3: string };
     prizes: { thanks: string; title: string; value: string;
-          first: { rank: string; desc: string; footer: string;};
-          second: { rank: string; desc: string; footer: string;};
-          third: { rank: string; desc: string; sponsor: string; };
+          first: { rank: string; desc: string; welcome: string; footer: string;};
+          second: { rank: string; desc: string; welcome: string; footer: string;};
+          third: { rank: string; desc: string; welcome: string; sponsor: string; };
         };
     }
 }
@@ -98,16 +98,19 @@ const content: Record<'en' | 'es', Translation> = {
         third: {
           rank: "🥉 3rd Place",
           desc: "You will enjoy 8 padel courts (1h each, off-peak) — because the game doesn't end on the field.",
+          welcome: "$150 in Education services for each team member by Welcome Education",
           sponsor: "Courtesy of Padel Brisbane"
         },
         second: {
           rank: "🥈 2nd Place",
-          desc: "All of the above + Delicious Spanish Bites menu for each of the 8 players 🍽️🇪🇸",
+          desc: "All of the above + Delicious Spanish Bites menu for each of the 8 players 🥘",
+          welcome: "$250 in Education services for each team member by Welcome Education",
           footer: "The perfect post-tournament celebration."
         },
         first: {
           rank: "🥇 1st Place",
           desc: "All of the above + 1 Myotherapy session for each player 💪",
+          welcome: "$350 in Education services for each team member by Welcome Education",
           footer: "To recover like true professionals, in collaboration with Inti Massage"
         }
       }
@@ -178,17 +181,20 @@ const content: Record<'en' | 'es', Translation> = {
         third: {
           rank: "🥉 3er puesto",
           desc: "Disfrutaréis de 8 pistas de pádel (1h cada una en horario off-peak) — porque el juego no termina en el campo.",
-          sponsor: "Cortesía de Padel Brisbane"
+          sponsor: "Cortesía de Padel Brisbane",
+          welcome: "$150 en servicios de Educación para cada miembro del equipo por Welcome Education",
         },
         second: {
           rank: "🥈 2º puesto",
-          desc: "Todo lo anterior + menú de Delicious Spanish Bites para cada uno de los 8 jugadores 🍽️🇪🇸",
-          footer: "La celebración perfecta después del torneo."
+          desc: "Todo lo anterior + menú de Delicious Spanish Bites para cada uno de los 8 jugadores 🥘",
+          footer: "La celebración perfecta después del torneo.",
+          welcome: "$250 en servicios de Educación para cada miembro del equipo por Welcome Education",
         },
         first: {
           rank: "🥇 1er puesto",
           desc: "Todo lo anterior + 1 sesión de Myotherapy para cada jugador 💪",
-          footer: "Para recuperarse como auténticos profesionales, en colaboración con Inti Massage"
+          footer: "Para recuperarse como auténticos profesionales, en colaboración con Inti Massage",
+          welcome: "$350 en servicios de Educación para cada miembro del equipo por Welcome Education"
         }
       }
     }
@@ -335,18 +341,21 @@ export default function TournamentRulesPage() {
                 <h4 style={{ fontSize: '1.3rem', color: '#475569', marginBottom: '0.5rem' }}>{t.sections.prizes.third.rank}</h4>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.desc}</p>
                 <p style={{ fontSize: '0.9rem', color: '#02678F', fontWeight: '500' }}>{t.sections.prizes.third.sponsor}</p>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.welcome}</p>
               </div>
               {/* 2º Puesto */}
               <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
                 <h4 style={{ fontSize: '1.4rem', color: '#1e293b', marginBottom: '0.5rem' }}>{t.sections.prizes.second.rank}</h4>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.second.desc}</p>
                 <p style={{ fontSize: '0.9rem', color: '#64748b', fontStyle: 'italic' }}>{t.sections.prizes.second.footer}</p>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.second.welcome}</p>
               </div>
               {/* 1er Puesto */}
               <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#fffbeb', border: '1px solid #fef3c7' }}>
                 <h4 style={{ fontSize: '1.4rem', color: '#92400e', marginBottom: '0.5rem' }}>{t.sections.prizes.first.rank}</h4>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.first.desc}</p>
                 <p style={{ fontSize: '0.9rem', color: '#02678F', fontStyle: 'italic' }}>{t.sections.prizes.first.footer}</p>
+                <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.first.welcome}</p>
               </div>
             </div>
           </div>
