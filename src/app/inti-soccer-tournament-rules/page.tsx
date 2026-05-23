@@ -99,19 +99,21 @@ const content: Record<'en' | 'es', Translation> = {
           rank: "🥉 3rd Place",
           desc: "You will enjoy 8 padel courts (1h each, off-peak) — because the game doesn't end on the field.",
           welcome: "$150 in Education services for each team member by Welcome Education",
-          sponsor: "Courtesy of Padel Brisbane"
+          sponsor: "Courtesy of <a href='https://padelbrisbane.co/' target='_blank'>Padel Brisbane</a>"
         },
         second: {
           rank: "🥈 2nd Place",
-          desc: "All of the above + Delicious Spanish Bites menu for each of the 8 players 🥘",
-          welcome: "$250 in Education services for each team member by Welcome Education",
-          footer: "The perfect post-tournament celebration."
+          desc: "Padel courts + <a href='https://deliciousspanishbites.com.au/' target='_blank'>Delicious Spanish Bites menu</a> for each of the 8 players 🥘",
+          footer: "The perfect post-tournament celebration.",
+          welcome: "$250 in Education services for each team member by Welcome Education"
+          
         },
         first: {
           rank: "🥇 1st Place",
-          desc: "All of the above + 1 Myotherapy session for each player 💪",
-          welcome: "$350 in Education services for each team member by Welcome Education",
-          footer: "To recover like true professionals, in collaboration with Inti Massage"
+          desc: "Padel courts + Delicious Spanish Bites menu + 1 Myotherapy session for each player 💪",
+          footer: "To recover like true professionals, in collaboration with <a href='https://www.intimassage.com.au/' target='_blank'>Inti Massage</a>",
+          welcome: "$350 in Education services for each team member by <a href='https://welcomestudentsgroup.com/' target='_blank'>Welcome Education</a>"
+          
         }
       }
     }
@@ -181,20 +183,20 @@ const content: Record<'en' | 'es', Translation> = {
         third: {
           rank: "🥉 3er puesto",
           desc: "Disfrutaréis de 8 pistas de pádel (1h cada una en horario off-peak) — porque el juego no termina en el campo.",
-          sponsor: "Cortesía de Padel Brisbane",
+          sponsor: "Cortesía de <a href='https://padelbrisbane.co/' target='_blank'>Padel Brisbane</a>",
           welcome: "$150 en servicios de Educación para cada miembro del equipo por Welcome Education",
         },
         second: {
           rank: "🥈 2º puesto",
-          desc: "Todo lo anterior + menú de Delicious Spanish Bites para cada uno de los 8 jugadores 🥘",
+          desc: "Pistas de pádel + menú de <a href='https://deliciousspanishbites.com.au/ target='_blank'>Delicious Spanish Bites menu</a> para cada uno de los 8 jugadores 🥘",
           footer: "La celebración perfecta después del torneo.",
           welcome: "$250 en servicios de Educación para cada miembro del equipo por Welcome Education",
         },
         first: {
           rank: "🥇 1er puesto",
-          desc: "Todo lo anterior + 1 sesión de Myotherapy para cada jugador 💪",
-          footer: "Para recuperarse como auténticos profesionales, en colaboración con Inti Massage",
-          welcome: "$350 en servicios de Educación para cada miembro del equipo por Welcome Education"
+          desc: "Pistas de pádel + menú + 1 sesión de Myotherapy para cada jugador 💪",
+          footer: "Para recuperarse como auténticos profesionales, en colaboración con <a href='https://www.intimassage.com.au/' target='_blank'>Inti Massage</a>",
+          welcome: "$350 en servicios de Educación para cada miembro del equipo por <a href='https://welcomestudentsgroup.com/' target='_blank'>Welcome Education</a>"
         }
       }
     }

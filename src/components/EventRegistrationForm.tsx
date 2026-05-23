@@ -107,7 +107,12 @@ export default function EventRegistrationLongForm() {
     ? (adults.length * PRICE_ADULT) + (youth.length * PRICE_YOUTH)
     : PRICE_TEAM;
 
-  const total = appliedCoupon && appliedCoupon.discount_value === 100 ? 0 : baseTotal;
+  let total = baseTotal;
+  if (appliedCoupon && appliedCoupon.discount_value) {
+    // Calculamos el descuento basado en el porcentaje
+    const discountAmount = (baseTotal * appliedCoupon.discount_value) / 100;
+    total = baseTotal - discountAmount;
+  }
 
   // FUNCIÓN PARA VALIDAR EL CUPÓN EN BD
   const handleApplyCoupon = async () => {
@@ -433,7 +438,7 @@ export default function EventRegistrationLongForm() {
           </div>
           {appliedCoupon && (
             <p style={{ fontSize: '0.85rem', color: '#16a34a', marginTop: '8px', fontWeight: 'bold' }}>
-              ✓ Coupon "{appliedCoupon.code}" applied successfully! 100% Discount activated.
+              ✓ Coupon "{appliedCoupon.code}" applied successfully! {appliedCoupon.discount_value}% Discount activated.
             </p>
           )}
         </div>
@@ -472,7 +477,7 @@ export default function EventRegistrationLongForm() {
           {/* Muestra el precio tachado si hay descuento */}
           <span className="total-amount">
             {appliedCoupon ? <span style={{ textDecoration: 'line-through', color: '#94a3b8', marginRight: '10px', fontSize: '1.1rem' }}>${baseTotal} AUD</span> : null}
-            ${total} AUD
+            ${total % 1 === 0 ? total : total.toFixed(2)} AUD
           </span>
         </div>
 

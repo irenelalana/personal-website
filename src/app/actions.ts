@@ -205,6 +205,7 @@ export async function checkoutComplexBooking(data: any) {
 
   let serverTotal = baseTotal;
   let couponApplied = null;
+  let discountMultiplier = 1; // Por defecto es 1 (sin descuento)
 
   // LOGICA DE VALIDACIÓN DEL CUPÓN
   if (data.couponCode) {
@@ -224,8 +225,10 @@ export async function checkoutComplexBooking(data: any) {
       return { error: "This coupon has reached its maximum usage limit" };
     }
 
-    if (coupon.discount_type === 'percentage' && coupon.discount_value === 100) {
-      serverTotal = 0;
+    if (coupon.discount_type === 'percentage' && coupon.discount_value > 0) {
+      // Calculamos el multiplicador. Ej: 25% de descuento = (100 - 25) / 100 = 0.75
+      discountMultiplier = (100 - coupon.discount_value) / 100;
+      serverTotal = baseTotal * discountMultiplier;
       couponApplied = coupon;
     }
   }
@@ -472,7 +475,8 @@ export async function checkoutComplexBooking(data: any) {
       price_data: {
         currency: 'aud',
         product_data: { name: 'Adult Ticket' },
-        unit_amount: Math.round(priceMap['Adult'] * 100),
+        // Multiplicamos el precio base por el descuento antes de pasarlo a centavos
+        unit_amount: Math.round((priceMap['Adult'] * discountMultiplier) * 100),
       },
       quantity: data.adults.length,
     });
@@ -483,7 +487,7 @@ export async function checkoutComplexBooking(data: any) {
       price_data: {
         currency: 'aud',
         product_data: { name: 'Youth Ticket' },
-        unit_amount: Math.round(priceMap['Youth'] * 100),
+        unit_amount: Math.round((priceMap['Youth'] * discountMultiplier) * 100),
       },
       quantity: data.youth.length,
     });
@@ -494,7 +498,7 @@ export async function checkoutComplexBooking(data: any) {
       price_data: {
         currency: 'aud',
         product_data: { name: `Team: ${data.team.teamName}` },
-        unit_amount: Math.round(priceMap['Soccer Team'] * 100),
+        unit_amount: Math.round((priceMap['Soccer Team'] * discountMultiplier) * 100),
       },
       quantity: 1,
     });
@@ -507,7 +511,9 @@ export async function checkoutComplexBooking(data: any) {
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment-cancelled`,
     metadata: {
-      order_id: order.id 
+      order_id: order.id,
+      // Pasamos el ID del cupón a Stripe para poder procesarlo en el Webhook
+      coupon_id: couponApplied ? couponApplied.id : null 
     }
   });
 

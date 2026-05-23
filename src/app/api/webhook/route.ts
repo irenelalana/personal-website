@@ -95,6 +95,7 @@ export async function POST(req: Request) {
     const orderId = session.metadata?.order_id;
     const customerEmail = session.customer_details?.email;
     const customerName = session.customer_details?.name;
+    const couponId = session.metadata?.coupon_id;
 
     if (!orderId) {
       console.error('No booking_id found in session metadata');
@@ -257,17 +258,69 @@ export async function POST(req: Request) {
       })
       .eq('id', orderId);
 
+      // --- NUEVO: INCREMENTAR EL USO DEL CUPÓN (SI SE USÓ UNO) ---
+    if (couponId) {
+      const { data: couponData, error: couponFetchError } = await supabase
+        .from('coupons')
+        .select('times_used')
+        .eq('id', couponId)
+        .single();
+
+      if (!couponFetchError && couponData) {
+        await supabase
+          .from('coupons')
+          .update({ times_used: couponData.times_used + 1 })
+          .eq('id', couponId);
+        console.log(`🎟️ Uso del cupón ${couponId} incrementado.`);
+      }
+    }
 
       const purchaseDate = new Date().toLocaleString("en-AU");
+
+      const teamCount = bookingData.team?.active ? 1 : 0;
 
       const ticketBreakdown = buildTicketBreakdown(
         bookingData.adults.length,
         bookingData.youth.length,
-        bookingData.team?.members.length || 0,
+        teamCount,
         29,
         10,
         250
       );
+
+      // --- NUEVA LÓGICA DE PRECIOS ---
+      // Calculamos cuánto habría costado sin descuento
+      const baseTotal = (bookingData.adults.length * 29) + (bookingData.youth.length * 10) + (teamCount * 250);
+      const finalTotal = order.total_amount || baseTotal;
+
+      let priceHtml = "";
+
+      if (baseTotal > finalTotal) {
+        // Hubo descuento
+        const discountAmount = baseTotal - finalTotal;
+        priceHtml = `
+          <div style="margin-top:16px; text-align:right; border-top: 1px solid #e5e7eb; padding-top: 12px;">
+            <p style="margin:4px 0; font-size: 1.1rem; color:#666;">
+              Subtotal: $${baseTotal.toFixed(2)}
+            </p>
+            <p style="margin:4px 0; font-size: 1.1rem; color:#16a34a;">
+              Discount applied: -$${discountAmount.toFixed(2)}
+            </p>
+            <p style="margin:8px 0 0 0; font-size: 1.4rem; color:#111827;">
+              <strong>Total paid: $${finalTotal.toFixed(2)}</strong>
+            </p>
+          </div>
+        `;
+      } else {
+        // No hubo descuento (flujo normal)
+        priceHtml = `
+          <div style="margin-top:16px; text-align:right; border-top: 1px solid #e5e7eb; padding-top: 12px;">
+            <p style="margin:0; font-size: 1.4rem; color:#111827;">
+              <strong>Total paid: $${finalTotal.toFixed(2)}</strong>
+            </p>
+          </div>
+        `;
+      }
 
       const totalPrice = order. total_amount ? `$${order. total_amount}.00` : "N/A";
       const emailHtml = `
@@ -311,9 +364,7 @@ export async function POST(req: Request) {
                 </div>
               </div>
 
-              <p style="margin-top:16px; padding:6px 0; text-align:right; font-size: 1.4rem;">
-                <strong>Total paid: ${totalPrice} </strong>
-              </p>
+              ${priceHtml}
 
               <p style="margin-top:20px;">
                 Each ticket contains a unique QR code that will be scanned at the entrance.
