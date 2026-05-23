@@ -25,9 +25,9 @@ interface Translation {
     };
     discipline: { title: string; p1: string; item1: string; item2: string; item3: string };
     prizes: { thanks: string; title: string; value: string;
-          first: { rank: string; desc: string; welcome: string; footer: string;};
-          second: { rank: string; desc: string; welcome: string; footer: string;};
-          third: { rank: string; desc: string; welcome: string; sponsor: string; };
+          first: { rank: any; desc: any; welcome: any; footer: any;};
+          second: { rank: any; desc: any; welcome: any; footer: any;};
+          third: { rank: any; desc: any; welcome: any; footer: any; };
         };
     }
 }
@@ -99,21 +99,19 @@ const content: Record<'en' | 'es', Translation> = {
           rank: "🥉 3rd Place",
           desc: "You will enjoy 8 padel courts (1h each, off-peak) — because the game doesn't end on the field.",
           welcome: "$150 in Education services for each team member by Welcome Education",
-          sponsor: "Courtesy of <a href='https://padelbrisbane.co/' target='_blank'>Padel Brisbane</a>"
+          footer: <>Courtesy of <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Padel Brisbane</a></>
         },
         second: {
           rank: "🥈 2nd Place",
-          desc: "Padel courts + <a href='https://deliciousspanishbites.com.au/' target='_blank'>Delicious Spanish Bites menu</a> for each of the 8 players 🥘",
-          footer: "The perfect post-tournament celebration.",
-          welcome: "$250 in Education services for each team member by Welcome Education"
-          
+          desc: <>Padel courts + <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Delicious Spanish Bites menu</a> for each of the 8 players 🥘</>,
+          welcome: "$250 in Education services for each team member by Welcome Education",
+          footer: "The perfect post-tournament celebration."
         },
         first: {
           rank: "🥇 1st Place",
           desc: "Padel courts + Delicious Spanish Bites menu + 1 Myotherapy session for each player 💪",
-          footer: "To recover like true professionals, in collaboration with <a href='https://www.intimassage.com.au/' target='_blank'>Inti Massage</a>",
-          welcome: "$350 in Education services for each team member by <a href='https://welcomestudentsgroup.com/' target='_blank'>Welcome Education</a>"
-          
+          welcome: <>$350 in Education services for each team member by <a href="https://welcomestudentsgroup.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Welcome Education</a></>,
+          footer: <>To recover like true professionals, in collaboration with <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Inti Massage</a></>
         }
       }
     }
@@ -183,20 +181,20 @@ const content: Record<'en' | 'es', Translation> = {
         third: {
           rank: "🥉 3er puesto",
           desc: "Disfrutaréis de 8 pistas de pádel (1h cada una en horario off-peak) — porque el juego no termina en el campo.",
-          sponsor: "Cortesía de <a href='https://padelbrisbane.co/' target='_blank'>Padel Brisbane</a>",
           welcome: "$150 en servicios de Educación para cada miembro del equipo por Welcome Education",
+          footer: <>Cortesía de <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Padel Brisbane</a></>
         },
         second: {
           rank: "🥈 2º puesto",
-          desc: "Pistas de pádel + menú de <a href='https://deliciousspanishbites.com.au/ target='_blank'>Delicious Spanish Bites menu</a> para cada uno de los 8 jugadores 🥘",
-          footer: "La celebración perfecta después del torneo.",
+          desc: <>Pistas de pádel + menú de <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Delicious Spanish Bites</a> para cada uno de los 8 jugadores 🥘</>,
           welcome: "$250 en servicios de Educación para cada miembro del equipo por Welcome Education",
+          footer: "La celebración perfecta después del torneo."
         },
         first: {
           rank: "🥇 1er puesto",
           desc: "Pistas de pádel + menú + 1 sesión de Myotherapy para cada jugador 💪",
-          footer: "Para recuperarse como auténticos profesionales, en colaboración con <a href='https://www.intimassage.com.au/' target='_blank'>Inti Massage</a>",
-          welcome: "$350 en servicios de Educación para cada miembro del equipo por <a href='https://welcomestudentsgroup.com/' target='_blank'>Welcome Education</a>"
+          welcome: <>$350 en servicios de Educación para cada miembro del equipo por <a href="https://welcomestudentsgroup.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Welcome Education</a></>,
+          footer: <>Para recuperarse como auténticos profesionales, en colaboración con <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Inti Massage</a></>
         }
       }
     }
@@ -333,7 +331,7 @@ export default function TournamentRulesPage() {
             {t.sections.prizes.thanks}
           </p>
       
-          <div className="card" style={{ textAlign: 'center', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
+          <div className="card-prizes" style={{ textAlign: 'center', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
             <h2 style={{ marginBottom: '0.5rem' }}>{t.sections.prizes.title}</h2>
             <h3 style={{ color: '#f39304', marginBottom: '2.5rem', fontWeight: 'bold' }}>{t.sections.prizes.value}</h3>
       
@@ -342,7 +340,7 @@ export default function TournamentRulesPage() {
               <div style={{ padding: '1.5rem', borderRadius: '12px', background: '#ffffff', border: '1px solid #f1f5f9' }}>
                 <h4 style={{ fontSize: '1.3rem', color: '#475569', marginBottom: '0.5rem' }}>{t.sections.prizes.third.rank}</h4>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.desc}</p>
-                <p style={{ fontSize: '0.9rem', color: '#02678F', fontWeight: '500' }}>{t.sections.prizes.third.sponsor}</p>
+                <p style={{ fontSize: '0.9rem', color: '#02678F', fontWeight: '500' }}>{t.sections.prizes.third.footer}</p>
                 <p style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{t.sections.prizes.third.welcome}</p>
               </div>
               {/* 2º Puesto */}
