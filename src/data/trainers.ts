@@ -161,5 +161,13 @@ export const TRAINERS: Trainer[] = [
     description: "Helping people reconnect with themselves through breath, movement, and nervous system awareness.",
     image: "/images/Aleredondo.png",
     url: "https://www.instagram.com/byalecaicedo/"
+  },
+  {
+    id: 20,
+    name: "Franco Zumbafit",
+    role: "Zumba Instructor",
+    description: "Peruvian Zumba instructor with 4 years of experience creating energetic and uplifting classes. Combining the best Latin rhythms with powerful cardio, good vibes, and a contagious energy that gets everyone dancing from start to finish.",
+    image: "/images/Franco_redondo.png",
+    url: "https://www.instagram.com/franco.zumbafit/"
   }
 ];
