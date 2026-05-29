@@ -204,23 +204,49 @@ export default function ActivateBrisbanePage() {
           </p>
 
           <div style={{ 
-            display: 'flex', 
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center', 
             gap: '15px', 
             marginTop: '25px', 
             paddingTop: '15px', 
             borderTop: '1px solid #eee'
           }}>
-            <Image 
-              src="/images/yeronga-logo.jpg"
-              alt="Yeronga Eagles FC Logo"
-              width={60} 
-              height={60}
-              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
-            />
+            
             <p style={{ margin: 0, lineHeight: '1.4' }}>
               The event will take place at the home of <a href='https://www.yerongaefc.com.au/' target='_blank' rel='noopener noreferrer'>Yeronga Eagles Football Club</a>, their soccer fields and amenities provide a professional and energetic environment for all our activities.
             </p>
+            <Image 
+              src="/images/yeronga-logo.jpg"
+              alt="Yeronga Eagles FC Logo"
+              width={150} 
+              height={150}
+              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
+            />
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center', 
+            gap: '20px', 
+            marginTop: '25px', 
+            paddingTop: '15px', 
+            borderTop: '1px solid #eee'
+          }}>
+            <Image 
+              src="/images/Joe.png"
+              alt="Joe Kelly, proudly supporting Actívate Brisbane"
+              width={360}
+              height={180}
+              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '5%' }}
+            />
+            <Image 
+              src="/images/Activate Brisbane - Nicole Johnston Supporter Logo 2025.png"
+              alt="Nicole Johnston, proudly supporting Actívate Brisbane"
+              width={360}
+              height={198}
+              style={{ opacity: 0.8, flexShrink: 0, borderRadius: '5%' }}
+            />
           </div>
         </div>
       </section>
