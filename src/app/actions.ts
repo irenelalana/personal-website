@@ -374,9 +374,9 @@ export async function checkoutComplexBooking(data: any) {
       data.adults.length,
       data.youth.length,
       data.team?.active ? 1 : 0, // Ajustado para que si hay equipo, sume 1 "Team Ticket"
-      priceMap['Adult'] || 29,
+      priceMap['Adult'] || 39,
       priceMap['Youth'] || 10,
-      priceMap['Soccer Team'] || 250
+      priceMap['Soccer Team'] || 325
     );
 
     const emailHtml = `

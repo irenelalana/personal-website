@@ -283,14 +283,14 @@ export async function POST(req: Request) {
         bookingData.adults.length,
         bookingData.youth.length,
         teamCount,
-        29,
+        39,
         10,
-        250
+        325
       );
 
       // --- NUEVA LÓGICA DE PRECIOS ---
       // Calculamos cuánto habría costado sin descuento
-      const baseTotal = (bookingData.adults.length * 29) + (bookingData.youth.length * 10) + (teamCount * 250);
+      const baseTotal = (bookingData.adults.length * 39) + (bookingData.youth.length * 10) + (teamCount * 325);
       const finalTotal = order.total_amount || baseTotal;
 
       let priceHtml = "";
