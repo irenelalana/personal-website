@@ -27,5 +27,6 @@ export const SPONSORS: Sponsor[] = [
   { id: 19, name: "Latinoz Australia", logo: "/images/latinoz_redondo.png", url: "https://www.latinoz.org.au/" },
   { id: 20, name: "Spanish Film Fest", logo: "/images/spanish_fest_redondo.png", url: "https://spanishfilmfestival.com/" },
   { id: 21, name: "Mac's Labels", logo: "/images/macs_labels_redondo.png", url: "https://www.macslabels.com.au/" },
-  { id: 22, name: "Guzman y Gomez", logo: "/images/GyG_redondo.png", url: "https://www.guzmanygomez.com.au/" }
+  { id: 22, name: "Guzman y Gomez", logo: "/images/GyG_redondo.png", url: "https://www.guzmanygomez.com.au/" },
+  { id: 23, name: "Pachamama Coffee", logo: "/images/pachamamasponsor_redondo.png", url: "https://www.pachamamacoffee.com.au/" }
 ]
