@@ -169,5 +169,13 @@ export const TRAINERS: Trainer[] = [
     description: "Peruvian Zumba instructor with 4 years of experience creating energetic and uplifting classes. Combining the best Latin rhythms with powerful cardio, good vibes, and a contagious energy that gets everyone dancing from start to finish.",
     image: "/images/Franco_redondo.png",
     url: "https://www.instagram.com/franco.zumbafit/"
+  },
+  {
+    id: 21,
+    name: "Fallon y Jose (Salsa Fever)",
+    role: "Salsa Instructor",
+    description: "Led by Jose and Cali, Salsa Fever Academy is Brisbane's home of Colombian Salsa Caleña. With 10+ years of experience and roots in Cali's legendary salsa scene, including the world-famous Feria de Cali and Salsódromo. We'll get you moving the right way.",
+    image: "/images/fallon_jose_redondo.png",
+    url: "https://www.instagram.com/fiebredesalsa.au"
   }
 ];
