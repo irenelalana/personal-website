@@ -9,7 +9,6 @@ import { SPONSORS } from '@/data/sponsors';
 import { VENDORS } from '@/data/vendors';
 
 // --- FUNCIÓN PARA MEZCLAR ARRAYS ---
-// Se coloca fuera del componente para que no se vuelva a crear en cada render
 const shuffleArray = (array: any) => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -19,14 +18,23 @@ const shuffleArray = (array: any) => {
   return shuffled;
 };
 
+// --- CONFIGURACIÓN DE LAS AGENDAS ---
+const AGENDAS = [
+  { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/agenda_fitness.png' },   // Rojo vibrante
+  { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/agenda_wellness.png' }, // Morado bienestar
+  { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/agenda_kids.png' },         // Azul celeste divertido
+  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/agenda_soccer.png' },     // Verde césped
+];
+
 export default function ActivateBrisbanePage() {
+  // --- ESTADO PARA LA AGENDA ACTIVA ---
+  const [activeAgenda, setActiveAgenda] = useState('fitness');
+
   // --- ESTADOS DE DATOS MEZCLADOS ---
-  // Inicializamos con los datos originales para evitar errores de Hydration en Next.js
   const [displayTrainers, setDisplayTrainers] = useState(TRAINERS);
   const [displaySponsors, setDisplaySponsors] = useState(SPONSORS);
   const [displayVendors, setDisplayVendors] = useState(VENDORS);
 
-  // Al montar el componente en el navegador, aplicamos el orden aleatorio
   useEffect(() => {
     setDisplayTrainers(shuffleArray(TRAINERS));
     setDisplaySponsors(shuffleArray(SPONSORS));
@@ -53,42 +61,37 @@ export default function ActivateBrisbanePage() {
   // --- LÓGICA DE SPONSORS Y VENDORS ---
   const [sponsorIndex, setSponsorIndex] = useState(0);
   const [vendorIndex, setVendorIndex] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState(1); // 1 por defecto (móvil)
+  const [itemsToShow, setItemsToShow] = useState(1);
 
-  // useEffect para detectar el ancho de la pantalla
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 992) {
-        setItemsToShow(4); // Laptop / Desktop
+        setItemsToShow(4);
       } else if (window.innerWidth >= 768) {
-        setItemsToShow(2); // Tablet (opcional)
+        setItemsToShow(2);
       } else {
-        setItemsToShow(1); // Móvil
+        setItemsToShow(1);
       }
     };
 
-    handleResize(); // Ejecutar al montar el componente
-    window.addEventListener('resize', handleResize); // Escuchar cambios de tamaño
-    
-    return () => window.removeEventListener('resize', handleResize); // Limpiar el evento al desmontar
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const [isPaused, setIsPaused] = useState(false);
   useEffect(() => {
-  if (isPaused) return; // Si está pausado, no creamos el intervalo
+    if (isPaused) return;
 
-  const interval = setInterval(() => {
-    nextTrainer();
-    handleNextSponsor();
-    handleNextVendor();
-  }, 4000);
+    const interval = setInterval(() => {
+      nextTrainer();
+      handleNextSponsor();
+      handleNextVendor();
+    }, 4000);
 
-  return () => clearInterval(interval);
-}, [isPaused, displayTrainers, displaySponsors, displayVendors, itemsToShow]);
+    return () => clearInterval(interval);
+  }, [isPaused, displayTrainers, displaySponsors, displayVendors, itemsToShow]);
 
-  // Dependencias: si los datos cambian, el intervalo se reinicia con la info fresca.
-
-  // Funciones de navegación corregidas (usando los arrays mezclados)
   const handleNextSponsor = () => {
     setSponsorIndex((prev) => {
       if (prev >= displaySponsors.length - itemsToShow) {
@@ -133,13 +136,12 @@ export default function ActivateBrisbanePage() {
   };
 
   return (
-    <div className="landing-page" onMouseEnter={() => setIsPaused(true)}  onMouseLeave={() => setIsPaused(false)}>
+    <div className="landing-page" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
       {/* --- HERO SECTION --- */}
       <section className="hero-section">
         <div className="hero-content">
           <div className="logo-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
             <h1 className="sr-only" style={{ display: 'none' }}>Actívate Brisbane</h1>
-  
             <Image 
               src="/images/activate-brisbane.png"
               alt="Actívate Brisbane Logo"
@@ -197,7 +199,7 @@ export default function ActivateBrisbanePage() {
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            This event brings together group fitness, family runs, a <a href="/inti-soccer-tournament-rules" target="_blank">soccer 5-a-side tournament</a>, and wellness workshops.
+            This event brings together group fitness, family runs, a a href="/inti-soccer-tournament-rules" target="_blank"soccer 5-a-side tournament/a, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don't just attend — you participate."
@@ -212,7 +214,6 @@ export default function ActivateBrisbanePage() {
             paddingTop: '15px', 
             borderTop: '1px solid #eee'
           }}>
-            
             <p style={{ margin: 0, lineHeight: '1.4' }}>
               The event will take place at the home of <a href='https://www.yerongaefc.com.au/' target='_blank' rel='noopener noreferrer'>Yeronga Eagles Football Club</a>, their soccer fields and amenities provide a professional and energetic environment for all our activities.
             </p>
@@ -273,46 +274,10 @@ export default function ActivateBrisbanePage() {
       <section className="content-section">
         <h2>What's Included in Your Ticket?</h2>
         <div className="desktop-inclusions">
-          <img
-              src="/images/ticket-inclusions.png"
-              alt="Ticket Inclusions"
-              style={{maxWidth: "100%"}}
-              //style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
-            />
-            {/* <ul>
-              <li>Multiple 30-minute stage fitness sessions</li>
-              <li>Entry to the Icoté Sweet Run / Walk, proudly sponsored by <a href="https://www.instagram.com/icote_treats_by_maria/" target="_blank" rel="noopener noreferrer">Icoté Treats by María</a></li>
-              <li>Free fitness assessment opportunities</li>
-              <li>Traditional games and activities</li>
-              <li>Sponsor goodie bag</li>
-              <li><a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament for adults</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a>, <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer">Padel Brisbane</a> and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
-              <li>Social soccer matches for kids, teens and families</li>
-              <li>Food trucks and licensed bar access</li>
-              <li>Raffle tickets</li>
-              <li>Bibs</li>
-              <li>Standup Comedy and Music to end the day</li>
-            </ul> */}
+          <img src="/images/ticket-inclusions.png" alt="Ticket Inclusions" style={{maxWidth: "100%"}} />
         </div>
         <div className="mobile-inclusions">
-          <img
-              src="/images/ticket-inclusions-mobile.png"
-              alt="Ticket Inclusions"
-              style={{maxWidth: "100%"}}
-              //style={{ opacity: 0.8, flexShrink: 0, borderRadius: '50%' }}
-            />
-            {/* <ul>
-              <li>Multiple 30-minute stage fitness sessions</li>
-              <li>Entry to the Icoté Sweet Run / Walk, proudly sponsored by <a href="https://www.instagram.com/icote_treats_by_maria/" target="_blank" rel="noopener noreferrer">Icoté Treats by María</a></li>
-              <li>Free fitness assessment opportunities</li>
-              <li>Traditional games and activities</li>
-              <li>Sponsor goodie bag</li>
-              <li><a href="/inti-soccer-tournament-rules" target="_blank">INTI soccer 5-a-side tournament for adults</a> (Soccer Team Pack Needed), proudly sponsored by <a href="https://www.intimassage.com.au/" target="_blank" rel="noopener noreferrer">Inti Massage & Myotherapy</a>, <a href="https://padelbrisbane.co/" target="_blank" rel="noopener noreferrer">Padel Brisbane</a> and <a href="https://deliciousspanishbites.com.au/" target="_blank" rel="noopener noreferrer">Delicious Spanish Bites</a></li>
-              <li>Social soccer matches for kids, teens and families</li>
-              <li>Food trucks and licensed bar access</li>
-              <li>Raffle tickets</li>
-              <li>Bibs</li>
-              <li>Standup Comedy and Music to end the day</li>
-            </ul> */}
+          <img src="/images/ticket-inclusions-mobile.png" alt="Ticket Inclusions" style={{maxWidth: "100%"}} />
         </div>
         <div className="cta-container" style={{marginTop: '30px'}}>
             <button className="cta-button" onClick={scrollToForm}>
@@ -321,8 +286,85 @@ export default function ActivateBrisbanePage() {
         </div>
       </section>
 
-      {/* --- WHY MATTERS --- */}
+      {/* --- EVENT AGENDAS (NUEVA SECCIÓN RECOMENDADA) --- */}
       <section className="content-section alt-bg">
+        <h2 style={{ marginBottom: '10px' }}>Event Agendas</h2>
+        <p style={{ textAlign: 'center', marginBottom: '25px', color: '#64748b' }}>
+          Explore our tailored lineups. Click on any category to see its full schedule!
+        </p>
+
+        {/* Línea horizontal de opciones con colores diferenciados */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '12px', 
+          marginBottom: '30px', 
+          flexWrap: 'wrap',
+          padding: '0 10px'
+        }}>
+          {AGENDAS.map((agenda) => {
+            const isSelected = activeAgenda === agenda.id;
+            return (
+              <button
+                key={agenda.id}
+                onClick={() => setActiveAgenda(agenda.id)}
+                style={{
+                  padding: '10px 24px',
+                  borderRadius: '30px',
+                  border: isSelected ? `2px solid ${agenda.color}` : '2px solid #cbd5e1',
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  backgroundColor: isSelected ? agenda.color : '#ffffff',
+                  color: isSelected ? '#ffffff' : '#475569',
+                  transition: 'all 0.25s ease',
+                  boxShadow: isSelected ? '0 4px 12px rgba(0, 0, 0, 0.15)' : 'none',
+                  outline: 'none'
+                }}
+              >
+                {agenda.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Contenedor de las imágenes Portrait (Solo una visible a la vez) */}
+        <div style={{ 
+          maxWidth: '480px', 
+          margin: '0 auto', 
+          padding: '0 15px',
+          display: 'flex',
+          justifyContent: 'center'
+        }}>
+          {AGENDAS.map((agenda) => (
+            <div 
+              key={agenda.id} 
+              style={{ 
+                display: activeAgenda === agenda.id ? 'block' : 'none',
+                width: '100%',
+                animation: 'fadeIn 0.4s ease'
+              }}
+            >
+              <Image
+                src={agenda.image}
+                alt={`Agenda ${agenda.label}`}
+                width={450}
+                height={630} // Proporción portrait estándarizada
+                style={{ 
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '12px', 
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                  display: 'block'
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* --- WHY MATTERS (Le quitamos alt-bg para mantener la alternancia limpia) --- */}
+      <section className="content-section">
         <div className="card-activate">
             <h2>Why This Event Matters</h2>
             <p>
@@ -336,7 +378,6 @@ export default function ActivateBrisbanePage() {
 
       {/* --- EVENT DETAILS --- */}
       <section className="content-section details-grid">
-         
          {/* TARJETA MODIFICADA CON CARRUSEL DE TRAINERS (Aleatorio) */}
          <div className="card-activate trainers-carousel-card">
             <h2>Confirmed Sport and Health Professionals</h2>
@@ -415,7 +456,6 @@ export default function ActivateBrisbanePage() {
                   transition: 'transform 0.5s ease-in-out'
                 }}
               >
-                {/* Iteramos sobre displaySponsors en lugar de SPONSORS */}
                 {displaySponsors.map((sponsor, i) => (
                   <div 
                     className="carousel-item" 
@@ -469,7 +509,6 @@ export default function ActivateBrisbanePage() {
                   transition: 'transform 0.5s ease-in-out'
                 }}
               >
-                {/* Iteramos sobre displayVendors en lugar de VENDORS */}
                 {displayVendors.map((vendor, i) => (
                   <div 
                     className="carousel-item" 
@@ -515,7 +554,7 @@ export default function ActivateBrisbanePage() {
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
             <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Best price before April 15th!!</h2>
             <h2 style={{color: '#94a3b8', textDecoration: 'line-through'}}>Volando voy!! Until May 31st (Adults $29, Soccer Team $250)</h2>
-            <h2 style={{color: '#d97803', fontSize: '1.2rem',  border: '2px solid #d97803', padding: '10px', borderRadius: '5px'}}>Falto yo, contad conmigo!! Until July 1st (Adults $39, Soccer Team $325)</h2>
+            <h2 style={{color: '#d97803', fontSize: '1.2rem', border: '2px solid #d97803', padding: '10px', borderRadius: '5px'}}>Falto yo, contad conmigo!! Until July 1st (Adults $39, Soccer Team $325)</h2>
             <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Until July 12th (Adults $49, Soccer Team $410)</h2>
             <EventRegistrationForm />  
         </div>
