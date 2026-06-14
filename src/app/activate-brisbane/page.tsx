@@ -199,7 +199,7 @@ export default function ActivateBrisbanePage() {
             ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
-            This event brings together group fitness, family runs, a a href="/inti-soccer-tournament-rules" target="_blank"soccer 5-a-side tournament/a, and wellness workshops.
+            This event brings together group fitness, family runs, a <a href="/inti-soccer-tournament-rules" target="_blank" rel="noopener noreferrer">soccer 5-a-side tournament</a>, and wellness workshops.
           </p>
           <p style={{ marginTop: '20px', fontStyle: 'italic', fontWeight: 'bold' }}>
             "This is not a passive event. You don't just attend — you participate."
