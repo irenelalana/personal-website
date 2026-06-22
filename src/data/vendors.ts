@@ -8,12 +8,13 @@ export interface Vendor {
 export const VENDORS: Vendor[] = [
   { id: 1, name: " Delicious Spanish Bites", logo: "/images/spanishbites.png", url: "https://deliciousspanishbites.com.au/" },
   { id: 2, name: "Latin Books", logo: "/images/latinbooks.png", url: "https://latinbooks.com.au/" },
-  { id: 3, name: " Vida Free", logo: "/images/vidafree.png", url: "https://www.instagram.com/vidafreeaus/" },
+  { id: 3, name: "Vida Free", logo: "/images/vidafree.png", url: "https://www.instagram.com/vidafreeaus/" },
   { id: 4, name: "Icote Treats by Maria", logo: "/images/icote_vendor_logo.png", url: "https://www.instagram.com/icote_treats_by_maria/" },
   { id: 5, name: "Pachamama Coffee", logo: "/images/pachamama_LOGO.png", url: "https://www.pachamamacoffee.com.au/" },
   { id: 6, name: "Magia", logo: "/images/Magia_logo.png", url: "https://magiabakery.com/" },
-  { id: 7, name: "Little Caracas", logo: "/images/Litle_Caracas_logo_vendor.png", url: "https://www.instagram.com/littlecaracas.au/" },
-  { id: 8, name: "Robelto Art", logo: "/images/Robelto_redondo.png", url: "https://www.instagram.com/robeltoart/" },
-
+  { id: 7, name: "Robelto Art", logo: "/images/Robelto_redondo.png", url: "https://www.instagram.com/robeltoart/" },
+  { id: 8, name: "Miss Gaby", logo: "/images/MIss_gaby_redondo_vendor.png", url: "http://www.missgabyenaustralia.com" },
+  { id: 9, name: "Simon Mungarrieta", logo: "/images/Mortage_redondo_vendor.png", url: "https://www.mortgagechoice.com.au/simon.mungarrieta/our-team/team-profiles/" },
+  { id: 10, name: "Luisa TradeMarks", logo: "/images/Luisa_redondo.png", url: "https://luisaatrademarks.com/welcome" },
   // Añade todos los que necesites
 ]
