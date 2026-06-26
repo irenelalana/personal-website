@@ -108,14 +108,6 @@ export const TRAINERS: Trainer[] = [
   },
   {
     id: 13,
-    name: "Elvira Cete",
-    role: "Comedian",
-    description: "A comedian who brings laughter and joy to the event. Her performances are designed to entertain and engage all participants.",
-    image: "/images/Elvira_foto.png",
-    url: "https://elviracete.com/"
-  },
-  {
-    id: 14,
     name: "Helen Gomez (Vitalis)",
     role: "Nutritionist",
     description: "Clinical Nutritionist with over 10 years of experience helping people like you regain their well-being in a holistic ( the body as a whole connected mind-body spirit) and personalised way.",
@@ -123,7 +115,7 @@ export const TRAINERS: Trainer[] = [
     url: "https://vitalisnutritionclinic.com.au/"
   },
   {
-    id: 15,
+    id: 14,
     name: "Irene Usabiaga",
     role: "Massage Therapist",
     description: "Certified Remedial Massage Therapist with over 6 years of experience and a background as a former professional cyclist. Extensive experience across sports, clinical, and wellness environments.",

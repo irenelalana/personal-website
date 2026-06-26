@@ -191,7 +191,7 @@ export async function checkoutComplexBooking(data: any) {
   const { data: dbPrices } = await supabase
     .from('ticket_types')
     .select('name, price')
-    .in('name', ['Adult', 'Students', 'Youth', 'Soccer Team']);
+    .in('name', ['Adult', 'Student', 'Youth', 'Soccer Team']);
 
   const priceMap = dbPrices?.reduce((acc, curr) => ({
     ...acc, [curr.name]: curr.price
@@ -200,7 +200,7 @@ export async function checkoutComplexBooking(data: any) {
   // 2. Recalcular el total en el servidor (Seguridad)
   const baseTotal = 
     ((data.adults?.length || 0) * (priceMap['Adult'] || 0)) +
-    ((data.students?.length || 0) * (priceMap['Students'] || 0)) +
+    ((data.students?.length || 0) * (priceMap['Student'] || 0)) +
     ((data.youth?.length || 0) * (priceMap['Youth'] || 0)) +
     (data.team?.active ? (priceMap['Soccer Team'] || 0) : 0);
 
@@ -541,7 +541,7 @@ export async function checkoutComplexBooking(data: any) {
       quantity: 1,
     });
   }
-
+  //console.log(data);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items,
@@ -553,7 +553,7 @@ export async function checkoutComplexBooking(data: any) {
       coupon_id: couponApplied ? couponApplied.id : null 
     }
   });
-
+  //console.log(line_items);
   return { url: session.url };
 }
 

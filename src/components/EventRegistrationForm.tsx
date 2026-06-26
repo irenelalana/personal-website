@@ -378,12 +378,17 @@ export default function EventRegistrationLongForm() {
                     <input type="text" placeholder="Last Name" value={student.lastName} onChange={(e) => handleInputChange('student', i, 'lastName', e.target.value)} required />
                     
                     <input type="text" placeholder="Student Number" value={student.studentNumber || ''} onChange={(e) => handleInputChange('student', i, 'studentNumber', e.target.value)} />
-
-                    {isPrimary && (
+                    {i === 0 && (
+                    <>
+                      <input type="email" placeholder="Email Address" value={student.email} onChange={(e) => handleInputChange('student', i, 'email', e.target.value)} required />
+                      <input type="tel" placeholder="Phone Number" value={student.phone} onChange={(e) => handleInputChange('student', i, 'phone', e.target.value)} required />
+                    </>
+                  )}
+                    {/* {isPrimary && (
                       <div style={{ padding: '10px', background: '#f0f9ff', marginBottom: '10px', borderRadius: '4px', fontSize: '0.8rem', color: '#0369a1' }}>
                         You are the primary contact for this booking.
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </article>
               );
