@@ -57,6 +57,8 @@ export default function EventRegistrationLongForm() {
     loadPrices();
   }, []);
 
+  
+
   const PRICE_ADULT = prices['Adult'] || 0;
   const PRICE_STUDENT = prices['Students'] || 19.95;
   const PRICE_YOUTH = prices['Youth'] || 0;
@@ -113,6 +115,16 @@ export default function EventRegistrationLongForm() {
     }
   };
 
+  const isOnlyStudents = activeTab === 'general' && students.length > 0 && adults.length === 0 && youth.length === 0;
+
+  useEffect(() => {
+    if (isOnlyStudents && appliedCoupon) {
+      setAppliedCoupon(null);
+      setCouponCode('');
+      setSource('');
+      toast.info("Coupon removed: Discounts do not apply for student-only bookings.");
+    }
+  }, [isOnlyStudents, appliedCoupon]);
   // CÁLCULO DE TOTALES ADAPTADO A CUPONES
   const baseTotal = activeTab === 'general' 
     ? (adults.length * PRICE_ADULT) + (students.length * PRICE_STUDENT) + (youth.length * PRICE_YOUTH)
@@ -502,33 +514,36 @@ export default function EventRegistrationLongForm() {
         </div>
 
         {/* --- INPUT DE CUPÓN --- */}
-        <div className="coupon-section" style={{ background: '#f1f5f9', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #cbd5e1' }}>
-          <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Do you have a Coupon Code?</h4>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <input 
-              type="text" 
-              placeholder="ENTER CODE" 
-              value={couponCode} 
-              onChange={(e) => setCouponCode(e.target.value)}
-              disabled={!!appliedCoupon}
-              style={{ flex: 1, padding: '0.6rem', borderRadius: '4px', border: '1px solid #cbd5e1', textTransform: 'uppercase', background: appliedCoupon ? '#e2e8f0' : '#fff' }}
-            />
-            {appliedCoupon ? (
-              <button type="button" onClick={handleRemoveCoupon} style={{ padding: '0.6rem 1rem', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                Remove
-              </button>
-            ) : (
-              <button type="button" onClick={handleApplyCoupon} disabled={isValidatingCoupon || !couponCode.trim()} style={{ padding: '0.6rem 1rem', background: '#0f7a93', color: '#fff', border: 'none', borderRadius: '4px', cursor: (isValidatingCoupon || !couponCode.trim()) ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}>
-                {isValidatingCoupon ? 'Validating...' : 'Apply'}
-              </button>
+        {/* --- INPUT DE CUPÓN --- */}
+        {!isOnlyStudents && (
+          <div className="coupon-section" style={{ background: '#f1f5f9', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #cbd5e1' }}>
+            <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Do you have a Coupon Code?</h4>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <input 
+                type="text" 
+                placeholder="ENTER CODE" 
+                value={couponCode} 
+                onChange={(e) => setCouponCode(e.target.value)}
+                disabled={!!appliedCoupon}
+                style={{ flex: 1, padding: '0.6rem', borderRadius: '4px', border: '1px solid #cbd5e1', textTransform: 'uppercase', background: appliedCoupon ? '#e2e8f0' : '#fff' }}
+              />
+              {appliedCoupon ? (
+                <button type="button" onClick={handleRemoveCoupon} style={{ padding: '0.6rem 1rem', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                  Remove
+                </button>
+              ) : (
+                <button type="button" onClick={handleApplyCoupon} disabled={isValidatingCoupon || !couponCode.trim()} style={{ padding: '0.6rem 1rem', background: '#0f7a93', color: '#fff', border: 'none', borderRadius: '4px', cursor: (isValidatingCoupon || !couponCode.trim()) ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}>
+                  {isValidatingCoupon ? 'Validating...' : 'Apply'}
+                </button>
+              )}
+            </div>
+            {appliedCoupon && (
+              <p style={{ fontSize: '0.85rem', color: '#16a34a', marginTop: '8px', fontWeight: 'bold' }}>
+                ✓ Coupon "{appliedCoupon.code}" applied successfully! {appliedCoupon.discount_value}% Discount activated.
+              </p>
             )}
           </div>
-          {appliedCoupon && (
-            <p style={{ fontSize: '0.85rem', color: '#16a34a', marginTop: '8px', fontWeight: 'bold' }}>
-              ✓ Coupon "{appliedCoupon.code}" applied successfully! {appliedCoupon.discount_value}% Discount activated.
-            </p>
-          )}
-        </div>
+        )}
 
         {/* --- CONDICIONAL: SELECCIÓN DE ORIGEN O ALERTA DE CUPÓN --- */}
         {appliedCoupon ? (
