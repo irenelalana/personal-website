@@ -402,7 +402,7 @@ export async function checkoutComplexBooking(data: any) {
       data.youth?.length || 0,
       data.team?.active ? 1 : 0, 
       priceMap['Adult'] || 39,
-      priceMap['Students'] || 19.95,
+      priceMap['Student'] || 19.95,
       priceMap['Youth'] || 10,
       priceMap['Soccer Team'] || 325
     );
@@ -514,7 +514,7 @@ export async function checkoutComplexBooking(data: any) {
       price_data: {
         currency: 'aud',
         product_data: { name: 'Student Ticket' },
-        unit_amount: Math.round((priceMap['Students'] * discountMultiplier) * 100),
+        unit_amount: Math.round((priceMap['Student'] * discountMultiplier) * 100),
       },
       quantity: data.students.length,
     });
