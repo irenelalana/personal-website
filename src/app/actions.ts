@@ -187,11 +187,11 @@ export async function sendContactEmail(formData: FormData) {
 export async function checkoutComplexBooking(data: any) {
   const supabase = await createClient();
 
-  // 1. Obtener precios OFICIALES de la base de datos
+  // 1. Obtener precios OFICIALES de la base de datos (Incluyendo 'Students')
   const { data: dbPrices } = await supabase
     .from('ticket_types')
     .select('name, price')
-    .in('name', ['Adult', 'Youth', 'Soccer Team']);
+    .in('name', ['Adult', 'Students', 'Youth', 'Soccer Team']);
 
   const priceMap = dbPrices?.reduce((acc, curr) => ({
     ...acc, [curr.name]: curr.price
@@ -199,9 +199,10 @@ export async function checkoutComplexBooking(data: any) {
 
   // 2. Recalcular el total en el servidor (Seguridad)
   const baseTotal = 
-    (data.adults.length * (priceMap['Adult'] || 0)) +
-    (data.youth.length * (priceMap['Youth'] || 0)) +
-    (data.team ? (priceMap['Soccer Team'] || 0) : 0);
+    ((data.adults?.length || 0) * (priceMap['Adult'] || 0)) +
+    ((data.students?.length || 0) * (priceMap['Students'] || 0)) +
+    ((data.youth?.length || 0) * (priceMap['Youth'] || 0)) +
+    (data.team?.active ? (priceMap['Soccer Team'] || 0) : 0);
 
   let serverTotal = baseTotal;
   let couponApplied = null;
@@ -262,31 +263,56 @@ export async function checkoutComplexBooking(data: any) {
       .update({ times_used: couponApplied.times_used + 1 })
       .eq('id', couponApplied.id);
 
-    // Identificamos al comprador principal (Adulto 1)
-    const customerEmail = data.adults[0]?.email || 'no-email@example.com';
-    const customerName = `${data.adults[0]?.firstName} ${data.adults[0]?.lastName}`;
+    // Identificamos al comprador principal (Adulto 1, o Estudiante 1 si no hay adultos)
+    let customerEmail = 'no-email@example.com';
+    let customerName = 'Guest';
+
+    if (data.adults && data.adults.length > 0) {
+      customerEmail = data.adults[0]?.email || customerEmail;
+      customerName = `${data.adults[0]?.firstName} ${data.adults[0]?.lastName}`;
+    } else if (data.students && data.students.length > 0) {
+      customerEmail = data.students[0]?.email || customerEmail;
+      customerName = `${data.students[0]?.firstName} ${data.students[0]?.lastName}`;
+    }
 
     // B) ESTRUCTURACIÓN DE ASISTENTES (Igual que el Webhook)
     const allAttendees: any[] = [];
 
-    data.adults.forEach((a: any, index: number) => {
-      allAttendees.push({ 
-        firstName: a.firstName, lastName: a.lastName, email: a.email, phone: a.phone, 
-        kids: index === 0 ? (a.kids || '0') : '0', 
-        type: 'Adult', source: data.source,
-        emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
-        activities: data.activities
+    if (data.adults) {
+      data.adults.forEach((a: any, index: number) => {
+        allAttendees.push({ 
+          firstName: a.firstName, lastName: a.lastName, email: a.email, phone: a.phone, 
+          kids: index === 0 ? (a.kids || '0') : '0', 
+          type: 'Adult', source: data.source,
+          emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+          activities: data.activities
+        });
       });
-    });
+    }
 
-    data.youth.forEach((k: any) => {
-      allAttendees.push({ 
-        firstName: k.firstName, lastName: k.lastName, email: k.email, phone: k.phone, 
-        kids: '0', type: 'Youth', source: data.source,
-        emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
-        activities: data.activities
+    if (data.students) {
+      data.students.forEach((s: any, index: number) => {
+        const isPrimary = (!data.adults || data.adults.length === 0) && index === 0;
+        allAttendees.push({ 
+          firstName: s.firstName, lastName: s.lastName, email: s.email, phone: s.phone, 
+          kids: isPrimary ? (s.kids || '0') : '0', 
+          type: 'Students', source: data.source,
+          emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+          activities: data.activities
+        });
       });
-    });
+    }
+
+    if (data.youth) {
+      data.youth.forEach((k: any) => {
+        allAttendees.push({ 
+          firstName: k.firstName, lastName: k.lastName, email: k.email, phone: k.phone, 
+          kids: '0', type: 'Youth', source: data.source,
+          emergencyContact: data.emergency?.name, emergencyPhone: data.emergency?.phone,
+          activities: data.activities
+        });
+      });
+    }
 
     if (data.team?.active && data.team.members) {
       const teamName = data.team.teamName;
@@ -371,10 +397,12 @@ export async function checkoutComplexBooking(data: any) {
     // E) ENVIAR EMAIL CON RESEND
     const purchaseDate = new Date().toLocaleString("en-AU");
     const ticketBreakdown = buildTicketBreakdown(
-      data.adults.length,
-      data.youth.length,
-      data.team?.active ? 1 : 0, // Ajustado para que si hay equipo, sume 1 "Team Ticket"
+      data.adults?.length || 0,
+      data.students?.length || 0,
+      data.youth?.length || 0,
+      data.team?.active ? 1 : 0, 
       priceMap['Adult'] || 39,
+      priceMap['Students'] || 19.95,
       priceMap['Youth'] || 10,
       priceMap['Soccer Team'] || 325
     );
@@ -470,19 +498,29 @@ export async function checkoutComplexBooking(data: any) {
   // ==========================================
   const line_items = [];
 
-  if (data.adults.length > 0) {
+  if (data.adults && data.adults.length > 0) {
     line_items.push({
       price_data: {
         currency: 'aud',
         product_data: { name: 'Adult Ticket' },
-        // Multiplicamos el precio base por el descuento antes de pasarlo a centavos
         unit_amount: Math.round((priceMap['Adult'] * discountMultiplier) * 100),
       },
       quantity: data.adults.length,
     });
   }
 
-  if (data.youth.length > 0) {
+  if (data.students && data.students.length > 0) {
+    line_items.push({
+      price_data: {
+        currency: 'aud',
+        product_data: { name: 'Student Ticket' },
+        unit_amount: Math.round((priceMap['Students'] * discountMultiplier) * 100),
+      },
+      quantity: data.students.length,
+    });
+  }
+
+  if (data.youth && data.youth.length > 0) {
     line_items.push({
       price_data: {
         currency: 'aud',
@@ -493,7 +531,7 @@ export async function checkoutComplexBooking(data: any) {
     });
   }
 
-  if (data.team) {
+  if (data.team?.active) {
     line_items.push({
       price_data: {
         currency: 'aud',
@@ -512,7 +550,6 @@ export async function checkoutComplexBooking(data: any) {
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment-cancelled`,
     metadata: {
       order_id: order.id,
-      // Pasamos el ID del cupón a Stripe para poder procesarlo en el Webhook
       coupon_id: couponApplied ? couponApplied.id : null 
     }
   });
@@ -525,9 +562,11 @@ export async function checkoutComplexBooking(data: any) {
 // ==========================================
 function buildTicketBreakdown(
   adultCount: number,
+  studentCount: number,
   youthCount: number,
   teamCount: number,
   adultPrice: number,
+  studentPrice: number,
   youthPrice: number,
   teamPrice: number
 ) {
@@ -539,6 +578,17 @@ function buildTicketBreakdown(
       <tr>
         <td style="padding:6px 0;">${adultCount} × Adult ticket${adultCount > 1 ? "s" : ""}</td>
         <td style="padding:6px 0; text-align:right;">$${adultPrice} × ${adultCount}</td>
+        <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
+      </tr>
+    `);
+  }
+
+  if (studentCount > 0) {
+    const total = studentPrice * studentCount;
+    rows.push(`
+      <tr>
+        <td style="padding:6px 0;">${studentCount} × Student ticket${studentCount > 1 ? "s" : ""}</td>
+        <td style="padding:6px 0; text-align:right;">$${studentPrice} × ${studentCount}</td>
         <td style="padding:6px 0; text-align:right;"><strong>$${total}</strong></td>
       </tr>
     `);
@@ -577,7 +627,7 @@ export async function sendSmartStrokesEnquiry(formData: { name: string; email: s
     const { name, email, phone, program, message } = formData;
 
     await resend.emails.send({
-      from: 'Online Smart Strokes Enquiry <irela@irelaaquaandfitness.com>', // Cambia esto por tu dominio verificado en Resend (ej. info@irelaaquaandfitness.com)
+      from: 'Online Smart Strokes Enquiry <irela@irelaaquaandfitness.com>', // Cambia esto por tu dominio verificado en Resend
       to: 'irela@irelaaquaandfitness.com', 
       subject: `Online Smart Strokes Enquiry: ${program}`,
       html: `

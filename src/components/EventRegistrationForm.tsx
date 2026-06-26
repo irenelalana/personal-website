@@ -16,6 +16,7 @@ export default function EventRegistrationLongForm() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const [adults, setAdults] = useState<any[]>([]);
+  const [students, setStudents] = useState<any[]>([]);
   const [youth, setYouth] = useState<any[]>([]);
   const [kidsUnder11, setKidsUnder11] = useState<string>('0');
   
@@ -57,14 +58,19 @@ export default function EventRegistrationLongForm() {
   }, []);
 
   const PRICE_ADULT = prices['Adult'] || 0;
+  const PRICE_STUDENT = prices['Students'] || 19.95;
   const PRICE_YOUTH = prices['Youth'] || 0;
   const PRICE_TEAM = prices['Soccer Team'] || 0;
 
-  const handleInputChange = (type: 'adult' | 'youth' | 'team', index: number, field: string, value: string) => {
+  const handleInputChange = (type: 'adult' | 'youth' | 'team' | 'student', index: number, field: string, value: string) => {
     if (type === 'adult') {
       const newAdults = [...adults];
       (newAdults[index] as any)[field] = value;
       setAdults(newAdults);
+    } else if (type === 'student') {
+      const newStudents = [...students];
+      (newStudents[index] as any)[field] = value;
+      setStudents(newStudents);
     } else if (type === 'youth') {
       const newyouth = [...youth];
       (newyouth[index] as any)[field] = value;
@@ -76,14 +82,19 @@ export default function EventRegistrationLongForm() {
     }
   };
 
-  const updateCount = (type: 'adult' | 'youth', delta: number) => {
+  const updateCount = (type: 'adult' | 'youth' | 'student', delta: number) => {
     if (type === 'adult') {
       const next = adults.length + delta;
       if (next < 0) return;
-      if (next === 0) setKidsUnder11('0');
+      if (next === 0 && students.length === 0) setKidsUnder11('0');
       delta > 0 ? setAdults([...adults, { firstName: '', lastName: '', email: '', phone: '' }]) : setAdults(adults.slice(0, -1));
+    } else if (type === 'student') {
+      const next = students.length + delta;
+      if (next < 0) return;
+      if (next === 0 && adults.length === 0) setKidsUnder11('0');
+      delta > 0 ? setStudents([...students, { firstName: '', lastName: '', email: '', phone: '', studentNumber: '' }]) : setStudents(students.slice(0, -1));
     } else {
-      if (adults.length === 0) return toast.error("Please, add at least one adult first");
+      if (adults.length === 0 && students.length === 0) return toast.error("Please, add at least one Adult or Student first");
       const next = youth.length + delta;
       if (next < 0) return;
       delta > 0 ? setYouth([...youth, { firstName: '', lastName: '', email: '', phone: '' }]) : setYouth(youth.slice(0, -1));
@@ -104,12 +115,11 @@ export default function EventRegistrationLongForm() {
 
   // CÁLCULO DE TOTALES ADAPTADO A CUPONES
   const baseTotal = activeTab === 'general' 
-    ? (adults.length * PRICE_ADULT) + (youth.length * PRICE_YOUTH)
+    ? (adults.length * PRICE_ADULT) + (students.length * PRICE_STUDENT) + (youth.length * PRICE_YOUTH)
     : PRICE_TEAM;
 
   let total = baseTotal;
   if (appliedCoupon && appliedCoupon.discount_value) {
-    // Calculamos el descuento basado en el porcentaje
     const discountAmount = (baseTotal * appliedCoupon.discount_value) / 100;
     total = baseTotal - discountAmount;
   }
@@ -131,14 +141,13 @@ export default function EventRegistrationLongForm() {
         toast.error("Invalid or inactive coupon code");
         setAppliedCoupon(null);
       } else {
-        // Validación básica en frontend (El backend volverá a comprobar por seguridad)
         if (data.max_uses && data.times_used >= data.max_uses) {
           return toast.error("This coupon has reached its maximum usage limit");
         }
         
         toast.success(`Coupon applied: ${data.discount_value}% OFF`);
         setAppliedCoupon(data);
-        setSource(data.code); // Forzamos el source con el nombre del código
+        setSource(data.code);
       }
     } catch (err) {
       toast.error("Error validating coupon");
@@ -159,12 +168,10 @@ export default function EventRegistrationLongForm() {
     const hasActivity = Object.values(activities).some(val => val === true);
     if (!hasActivity) return toast.error("Please select at least one activity");
     
-    // Modificado: Ahora valida que haya tickets seleccionados en lugar de mirar si el coste es 0
-    if (activeTab === 'general' && adults.length === 0 && youth.length === 0) {
+    if (activeTab === 'general' && adults.length === 0 && youth.length === 0 && students.length === 0) {
       return toast.error("Select at least one ticket to proceed");
     }
 
-    // Definición final de la fuente (Prioridad absoluta al cupón)
     const finalSource = appliedCoupon ? appliedCoupon.code : source;
     if (!finalSource) return toast.error("Please select how you heard about us");
 
@@ -172,6 +179,8 @@ export default function EventRegistrationLongForm() {
     if (!validatePhone(emergency.phone)) return toast.error("Invalid emergency phone number");
 
     if (activeTab === 'general') {
+      const primaryIsStudent = adults.length === 0 && students.length > 0;
+
       if (adults.length > 0) {
         if (!adults[0].firstName || !adults[0].lastName) return toast.error("First and Last Name required for Adult 1");
         if (!validateEmail(adults[0].email)) return toast.error("Invalid email for Adult 1");
@@ -180,6 +189,17 @@ export default function EventRegistrationLongForm() {
       for (let i = 1; i < adults.length; i++) {
         if (!adults[i].firstName || !adults[i].lastName) return toast.error(`First and Last Name required for Adult ${i + 1}`);
       }
+
+      if (primaryIsStudent) {
+        if (!students[0].firstName || !students[0].lastName) return toast.error("First and Last Name required for Student 1");
+        if (!validateEmail(students[0].email)) return toast.error("Invalid email for Student 1");
+        if (!validatePhone(students[0].phone)) return toast.error("Invalid phone for Student 1");
+      }
+      const startStudentIdx = primaryIsStudent ? 1 : 0;
+      for (let i = startStudentIdx; i < students.length; i++) {
+        if (!students[i].firstName || !students[i].lastName) return toast.error(`First and Last Name required for Student ${i + 1}`);
+      }
+
       for (let i = 0; i < youth.length; i++) {
         if (!youth[i].firstName || !youth[i].lastName) return toast.error(`First and Last Name required for Youth ${i + 1}`);
       }
@@ -199,17 +219,27 @@ export default function EventRegistrationLongForm() {
 
     setLoading(true);
 
+    const primaryEmail = adults.length > 0 ? adults[0].email : (students.length > 0 ? students[0].email : '');
+    const primaryPhone = adults.length > 0 ? adults[0].phone : (students.length > 0 ? students[0].phone : '');
+
     const payloadAdults = adults.map((adult, index) => ({
       ...adult,
-      email: index === 0 ? adult.email : adults[0].email,
-      phone: index === 0 ? adult.phone : adults[0].phone,
+      email: index === 0 ? adult.email : primaryEmail,
+      phone: index === 0 ? adult.phone : primaryPhone,
       kids: index === 0 ? kidsUnder11 : '0'
+    }));
+
+    const payloadStudents = students.map((s, index) => ({
+      ...s,
+      email: (adults.length === 0 && index === 0) ? s.email : primaryEmail,
+      phone: (adults.length === 0 && index === 0) ? s.phone : primaryPhone,
+      kids: (adults.length === 0 && index === 0) ? kidsUnder11 : '0'
     }));
 
     const payloadYouth = youth.map((y) => ({
       ...y,
-      email: adults.length > 0 ? adults[0].email : '',
-      phone: adults.length > 0 ? adults[0].phone : ''
+      email: primaryEmail,
+      phone: primaryPhone
     }));
 
     const payloadTeamMembers = team.members.map((m, index) => ({
@@ -220,11 +250,12 @@ export default function EventRegistrationLongForm() {
     
     const payload = {
       adults: activeTab === 'general' ? payloadAdults : [],
+      students: activeTab === 'general' ? payloadStudents : [],
       youth: activeTab === 'general' ? payloadYouth : [],
       team: activeTab === 'team' ? { ...team, members: payloadTeamMembers, active: true } : null,
       emergency, 
-      source: finalSource, // Guarda el código del cupón directamente aquí
-      couponCode: appliedCoupon ? appliedCoupon.code : null, // Pasamos el código para la validación del backend
+      source: finalSource,
+      couponCode: appliedCoupon ? appliedCoupon.code : null,
       activities
     };
 
@@ -264,22 +295,33 @@ export default function EventRegistrationLongForm() {
               </div>
             </div>
 
-            <div className={`selector-item ${adults.length === 0 ? 'disabled' : ''}`}>
-              <label>Youth (11-17) (${PRICE_YOUTH})</label>
+            {/* SELECTOR INTERMEDO DE ESTUDIANTES */}
+            <div className="selector-item">
+              <label>Students (${PRICE_STUDENT})</label>
               <div className="counter">
-                <button type="button" onClick={() => updateCount('youth', -1)} disabled={adults.length === 0}>-</button>
-                <span className="count-value">{youth.length}</span>
-                <button type="button" onClick={() => updateCount('youth', 1)} disabled={adults.length === 0}>+</button>
+                <button type="button" onClick={() => updateCount('student', -1)}>-</button>
+                <span className="count-value">{students.length}</span>
+                <button type="button" onClick={() => updateCount('student', 1)}>+</button>
               </div>
             </div>
-            <div className={`selector-item ${adults.length === 0 ? 'disabled' : ''}`}>
+
+            <div className={`selector-item ${(adults.length === 0 && students.length === 0) ? 'disabled' : ''}`}>
+              <label>Youth (11-17) (${PRICE_YOUTH})</label>
+              <div className="counter">
+                <button type="button" onClick={() => updateCount('youth', -1)} disabled={adults.length === 0 && students.length === 0}>-</button>
+                <span className="count-value">{youth.length}</span>
+                <button type="button" onClick={() => updateCount('youth', 1)} disabled={adults.length === 0 && students.length === 0}>+</button>
+              </div>
+            </div>
+
+            <div className={`selector-item ${(adults.length === 0 && students.length === 0) ? 'disabled' : ''}`}>
               <label>Kids Under 11 (Free)</label>
               <div className="counter" style={{ justifyContent: 'flex-start' }}>
                 <select 
                   value={kidsUnder11} 
                   onChange={(e) => setKidsUnder11(e.target.value)}
-                  disabled={adults.length === 0}
-                  style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid #cbd5e1', background: 'white', color: 'black', minWidth: '70px', cursor: adults.length === 0 ? 'not-allowed' : 'pointer' }}
+                  disabled={adults.length === 0 && students.length === 0}
+                  style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid #cbd5e1', background: 'white', color: 'black', minWidth: '70px', cursor: (adults.length === 0 && students.length === 0) ? 'not-allowed' : 'pointer' }}
                 >
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -292,7 +334,7 @@ export default function EventRegistrationLongForm() {
 
           <div className="registration-forms">
             {adults.map((adult, i) => (
-              <article key={i} className="form-card-activate">
+              <article key={`adult-${i}`} className="form-card-activate">
                 <div className="card-header"><span className="badge">Adult {i + 1}</span></div>
                 <div className="input-group">
                   <input type="text" placeholder="First Name" value={adult.firstName} onChange={(e) => handleInputChange('adult', i, 'firstName', e.target.value)} required />
@@ -307,8 +349,33 @@ export default function EventRegistrationLongForm() {
               </article>
             ))}
 
+            {/* FORMULARIOS PARA ESTUDIANTES */}
+            {students.map((student, i) => {
+              const isPrimary = adults.length === 0 && i === 0;
+              return (
+                <article key={`student-${i}`} className="form-card-activate student-card" style={{ borderLeft: '4px solid #0ea5e9' }}>
+                  <div className="card-header">
+                    <span className="badge" style={{ backgroundColor: '#0ea5e9', color: 'white' }}>Student {i + 1}</span>
+                  </div>
+                  <div className="input-group">
+                    <input type="text" placeholder="First Name" value={student.firstName} onChange={(e) => handleInputChange('student', i, 'firstName', e.target.value)} required />
+                    <input type="text" placeholder="Last Name" value={student.lastName} onChange={(e) => handleInputChange('student', i, 'lastName', e.target.value)} required />
+                    
+                    <input type="text" placeholder="Student Number" value={student.studentNumber || ''} onChange={(e) => handleInputChange('student', i, 'studentNumber', e.target.value)} />
+
+                    {isPrimary && (
+                      <>
+                        <input type="email" placeholder="Email Address" value={student.email} onChange={(e) => handleInputChange('student', i, 'email', e.target.value)} required />
+                        <input type="tel" placeholder="Phone Number" value={student.phone} onChange={(e) => handleInputChange('student', i, 'phone', e.target.value)} required />
+                      </>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+
             {youth.map((y, i) => (
-              <article key={i} className="form-card-activate kid-card">
+              <article key={`youth-${i}`} className="form-card-activate kid-card">
                 <div className="card-header">
                   <span className="badge orange">Youth {i + 1}</span>
                 </div>
@@ -371,7 +438,7 @@ export default function EventRegistrationLongForm() {
       {/* --- FOOTER: Origen, Emergencia, T&C y Pago --- */}
       <div className="form-footer">
         
-        {((activeTab === 'general' && adults.length > 0) || activeTab === 'team') && (
+        {((activeTab === 'general' && (adults.length > 0 || students.length > 0)) || activeTab === 'team') && (
           <div className="emergency-section" style={{ background: '#f8fafc', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Emergency Contact <span style={{color: 'red'}}>*</span></h4>
             <div className="input-group">
@@ -414,7 +481,7 @@ export default function EventRegistrationLongForm() {
           </div>
         </div>
 
-        {/* SECCIÓN NUEVA: INPUT DE CUPÓN */}
+        {/* --- INPUT DE CUPÓN --- */}
         <div className="coupon-section" style={{ background: '#f1f5f9', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #cbd5e1' }}>
           <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Do you have a Coupon Code?</h4>
           <div style={{ display: 'flex', gap: '10px' }}>
@@ -443,7 +510,7 @@ export default function EventRegistrationLongForm() {
           )}
         </div>
 
-        {/* CONDICIONAL: SELECCIÓN DE ORIGEN O ALERTA DE CUPÓN */}
+        {/* --- CONDICIONAL: SELECCIÓN DE ORIGEN O ALERTA DE CUPÓN --- */}
         {appliedCoupon ? (
           <div className="source-section" style={{ marginBottom: '1.5rem', padding: '10px', background: '#ecfdf5', border: '1px solid #a7f3d0', borderRadius: '6px' }}>
             <p style={{ margin: 0, fontSize: '0.9rem', color: '#065f46' }}>
@@ -455,6 +522,7 @@ export default function EventRegistrationLongForm() {
             <label>Where did you hear from us?</label>
             <select value={source} onChange={(e) => setSource(e.target.value)} required>
               <option value="">Please select...</option>
+              <option value="Other">Other</option>
               <option value="Other">Other</option>
               {SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -474,14 +542,12 @@ export default function EventRegistrationLongForm() {
 
         <div className="total-container">
           <span className="total-label">Subtotal:</span>
-          {/* Muestra el precio tachado si hay descuento */}
           <span className="total-amount">
             {appliedCoupon ? <span style={{ textDecoration: 'line-through', color: '#94a3b8', marginRight: '10px', fontSize: '1.1rem' }}>${baseTotal} AUD</span> : null}
             ${total % 1 === 0 ? total : total.toFixed(2)} AUD
           </span>
         </div>
 
-        {/* Modificado: El botón ya no se bloquea si total es 0 siempre que haya un baseTotal válido */}
         <button className="payment-button cta-button" onClick={handleSubmit} disabled={loading || baseTotal === 0}>
           {loading ? 'PROCESSING...' : total === 0 ? 'CLAIM FREE TICKETS' : 'PURCHASE TICKETS'}
         </button>
