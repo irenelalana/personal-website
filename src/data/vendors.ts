@@ -16,5 +16,11 @@ export const VENDORS: Vendor[] = [
   { id: 8, name: "Miss Gaby", logo: "/images/MIss_gaby_redondo_vendor.png", url: "http://www.missgabyenaustralia.com" },
   { id: 9, name: "Simon Mungarrieta", logo: "/images/Mortage_redondo_vendor.png", url: "https://www.mortgagechoice.com.au/simon.mungarrieta/our-team/team-profiles/" },
   { id: 10, name: "Luisa TradeMarks", logo: "/images/Luisa_redondo.png", url: "https://luisaatrademarks.com/welcome" },
+  { id: 11, name: "Naturamed", logo: "/images/naturamed_logo.png", url: "https://naturamed.com.au/" },
+  { id: 12, name: "Moce in Tune", logo: "/images/Moveintune_redondo.png", url: "https://www.instagram.com/move.in.tune/" },
+  { id: 13, name: "It's Aura", logo: "/images/Aura_redondo.png", url: "https://www.instagram.com/itsaura.au/" },
+  { id: 14, name: "Latin Temple Beauty y Jesica Lule", logo: "/images/lule_ltb_redondo.png", url: "https://latintemplebeauty.com.au/mind-body-challenge-irela-aquafitness-bodycontouring/" },
+  { id: 15, name: "Vitalis", logo: "/images/Vitalis_redondo.png", url: "https://vitalisnutritionclinic.com.au/" },
+  { id: 16, name: "Vitality", logo: "/images/Vitality.png", url: "https://www.instagram.com/wellness.therapies" },
   // Añade todos los que necesites
 ]
