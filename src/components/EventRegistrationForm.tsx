@@ -217,6 +217,22 @@ export default function EventRegistrationLongForm() {
       }
     }
 
+    const isPrimaryAdult = adults.length > 0;
+    const isPrimaryStudent = adults.length === 0 && students.length > 0;
+
+    // Validar responsable (Adulto o Estudiante)
+    if (isPrimaryAdult) {
+      if (!adults[0].firstName || !adults[0].lastName || !validateEmail(adults[0].email) || !validatePhone(adults[0].phone)) {
+        return toast.error("Please complete all required fields for Adult 1 (Name, Email, Phone)");
+      }
+    } else if (isPrimaryStudent) {
+      if (!students[0].firstName || !students[0].lastName || !validateEmail(students[0].email) || !validatePhone(students[0].phone)) {
+        return toast.error("Please complete all required fields for Student 1 (Name, Email, Phone)");
+      }
+    } else if (activeTab === 'general') {
+      return toast.error("Please add at least one Adult or Student");
+    }
+
     setLoading(true);
 
     const primaryEmail = adults.length > 0 ? adults[0].email : (students.length > 0 ? students[0].email : '');
@@ -364,10 +380,9 @@ export default function EventRegistrationLongForm() {
                     <input type="text" placeholder="Student Number" value={student.studentNumber || ''} onChange={(e) => handleInputChange('student', i, 'studentNumber', e.target.value)} />
 
                     {isPrimary && (
-                      <>
-                        <input type="email" placeholder="Email Address" value={student.email} onChange={(e) => handleInputChange('student', i, 'email', e.target.value)} required />
-                        <input type="tel" placeholder="Phone Number" value={student.phone} onChange={(e) => handleInputChange('student', i, 'phone', e.target.value)} required />
-                      </>
+                      <div style={{ padding: '10px', background: '#f0f9ff', marginBottom: '10px', borderRadius: '4px', fontSize: '0.8rem', color: '#0369a1' }}>
+                        You are the primary contact for this booking.
+                      </div>
                     )}
                   </div>
                 </article>
@@ -548,8 +563,12 @@ export default function EventRegistrationLongForm() {
           </span>
         </div>
 
-        <button className="payment-button cta-button" onClick={handleSubmit} disabled={loading || baseTotal === 0}>
-          {loading ? 'PROCESSING...' : total === 0 ? 'CLAIM FREE TICKETS' : 'PURCHASE TICKETS'}
+        <button 
+          className="payment-button cta-button" 
+          onClick={handleSubmit} 
+          disabled={loading} // Quitamos la restricción de baseTotal === 0
+        >
+          {loading ? 'PROCESSING...' : (total === 0 ? 'CONFIRM REGISTRATION' : 'PURCHASE TICKETS')}
         </button>
       </div>
     </section>
