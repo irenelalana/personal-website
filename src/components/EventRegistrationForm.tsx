@@ -86,7 +86,7 @@ export default function EventRegistrationLongForm() {
 
   const handleAddMinor = (type: 'youth' | 'kids') => {
     if (adults.length === 0 && students.length === 0) {
-      toast.error("Please, add at least one Adult first to register a minor.");
+      toast.error("Please, add at least one Adult or Student first.");
       return;
     }
     
@@ -368,6 +368,9 @@ export default function EventRegistrationLongForm() {
             {/* --- SECCIÓN KIDS UNDER 11 --- */}
             <div className="selector-item">
               <label>Kids Under 11 (Free)</label>
+              <p style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', margin: 0 }}>
+                  * Requires at least one adult ticket.
+                </p>
               <div className="counter" style={{ justifyContent: 'flex-start' }}>
                 <select 
                   value={kidsUnder11} 
