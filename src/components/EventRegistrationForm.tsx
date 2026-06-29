@@ -84,6 +84,17 @@ export default function EventRegistrationLongForm() {
     }
   };
 
+  const handleAddMinor = (type: 'youth' | 'kids') => {
+    if (adults.length === 0 && students.length === 0) {
+      toast.error("Please, add at least one Adult or Student first to register a minor.");
+      return;
+    }
+    
+    if (type === 'youth') {
+      setYouth([...youth, { firstName: '', lastName: '', email: '', phone: '' }]);
+    }
+  };
+
   const updateCount = (type: 'adult' | 'youth' | 'student', delta: number) => {
     if (type === 'adult') {
       const next = adults.length + delta;
@@ -96,7 +107,6 @@ export default function EventRegistrationLongForm() {
       if (next === 0 && adults.length === 0) setKidsUnder11('0');
       delta > 0 ? setStudents([...students, { firstName: '', lastName: '', email: '', phone: '', studentNumber: '' }]) : setStudents(students.slice(0, -1));
     } else {
-      if (adults.length === 0 && students.length === 0) return toast.error("Please, add at least one Adult or Student first");
       const next = youth.length + delta;
       if (next < 0) return;
       delta > 0 ? setYouth([...youth, { firstName: '', lastName: '', email: '', phone: '' }]) : setYouth(youth.slice(0, -1));
@@ -287,13 +297,20 @@ export default function EventRegistrationLongForm() {
       activities
     };
 
-    const res = await checkoutComplexBooking(payload);
-    
-    if (res?.url) {
-      window.location.href = res.url;
-    } else {
-      toast.error("Error processing registration. Please try again.");
-      setLoading(false);
+    // En tu función handleSubmit:
+    try {
+      const res = await checkoutComplexBooking(payload);
+      
+      if (res?.url) {
+        window.location.href = res.url;
+      } else {
+        toast.error("Error processing registration. Please try again.");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+      setLoading(false); // Resetea el botón si el servidor falla
     }
   };
 
@@ -333,23 +350,35 @@ export default function EventRegistrationLongForm() {
               </div>
             </div>
 
-            <div className={`selector-item ${(adults.length === 0 && students.length === 0) ? 'disabled' : ''}`}>
-              <label>Youth (11-17) (${PRICE_YOUTH})</label>
+            {/* --- SECCIÓN YOUTH --- */}
+            <div className="selector-item">
+              <label>
+                Youth (11-17) (${PRICE_YOUTH})
+                <p style={{ fontSize: '0.7rem', color: '#64748b', fontStyle: 'italic', margin: 0 }}>
+                  * Requires at least one adult or student ticket.
+                </p>
+              </label>
               <div className="counter">
-                <button type="button" onClick={() => updateCount('youth', -1)} disabled={adults.length === 0 && students.length === 0}>-</button>
+                <button type="button" onClick={() => updateCount('youth', -1)}>-</button>
                 <span className="count-value">{youth.length}</span>
-                <button type="button" onClick={() => updateCount('youth', 1)} disabled={adults.length === 0 && students.length === 0}>+</button>
+                <button type="button" onClick={() => handleAddMinor('youth')}>+</button>
               </div>
             </div>
 
-            <div className={`selector-item ${(adults.length === 0 && students.length === 0) ? 'disabled' : ''}`}>
+            {/* --- SECCIÓN KIDS UNDER 11 --- */}
+            <div className="selector-item">
               <label>Kids Under 11 (Free)</label>
               <div className="counter" style={{ justifyContent: 'flex-start' }}>
                 <select 
                   value={kidsUnder11} 
-                  onChange={(e) => setKidsUnder11(e.target.value)}
-                  disabled={adults.length === 0 && students.length === 0}
-                  style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid #cbd5e1', background: 'white', color: 'black', minWidth: '70px', cursor: (adults.length === 0 && students.length === 0) ? 'not-allowed' : 'pointer' }}
+                  onChange={(e) => {
+                    if (adults.length === 0 && students.length === 0) {
+                      toast.error("Please, add at least one Adult or Student first.");
+                    } else {
+                      setKidsUnder11(e.target.value);
+                    }
+                  }}
+                  style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid #cbd5e1', background: 'white', color: 'black', minWidth: '70px' }}
                 >
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -358,6 +387,7 @@ export default function EventRegistrationLongForm() {
                 </select>
               </div>
             </div>
+
           </div>
 
           <div className="registration-forms">
@@ -523,7 +553,7 @@ export default function EventRegistrationLongForm() {
                 type="text" 
                 placeholder="ENTER CODE" 
                 value={couponCode} 
-                onChange={(e) => setCouponCode(e.target.value)}
+                onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                 disabled={!!appliedCoupon}
                 style={{ flex: 1, padding: '0.6rem', borderRadius: '4px', border: '1px solid #cbd5e1', textTransform: 'uppercase', background: appliedCoupon ? '#e2e8f0' : '#fff' }}
               />
@@ -557,8 +587,6 @@ export default function EventRegistrationLongForm() {
             <label>Where did you hear from us?</label>
             <select value={source} onChange={(e) => setSource(e.target.value)} required>
               <option value="">Please select...</option>
-              <option value="Other">Other</option>
-              <option value="Other">Other</option>
               {SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>

@@ -22,5 +22,6 @@ export const VENDORS: Vendor[] = [
   { id: 14, name: "Latin Temple Beauty y Jesica Lule", logo: "/images/lule_ltb_redondo.png", url: "https://latintemplebeauty.com.au/mind-body-challenge-irela-aquafitness-bodycontouring/" },
   { id: 15, name: "Vitalis", logo: "/images/Vitalis_redondo.png", url: "https://vitalisnutritionclinic.com.au/" },
   { id: 16, name: "Vitality", logo: "/images/Vitality.png", url: "https://www.instagram.com/wellness.therapies" },
+  { id: 17, name: "Latinhub", logo: "/images/LatinHub.png", url: "https://latinhub.net/" },
   // Añade todos los que necesites
 ]

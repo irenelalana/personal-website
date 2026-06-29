@@ -28,5 +28,6 @@ export const SPONSORS: Sponsor[] = [
   { id: 20, name: "Spanish Film Fest", logo: "/images/spanish_fest_redondo.png", url: "https://spanishfilmfestival.com/" },
   { id: 21, name: "Mac's Labels", logo: "/images/macs_labels_redondo.png", url: "https://www.macslabels.com.au/" },
   { id: 22, name: "Guzman y Gomez", logo: "/images/GyG_redondo.png", url: "https://www.guzmanygomez.com.au/" },
-  { id: 23, name: "Pachamama Coffee", logo: "/images/pachamamasponsor_redondo.png", url: "https://www.pachamamacoffee.com.au/" }
+  { id: 23, name: "Pachamama Coffee", logo: "/images/pachamamasponsor_redondo.png", url: "https://www.pachamamacoffee.com.au/" },
+  { id: 24, name: "Ecuapremium", logo: "/images/Ecuapremium_redondo.png", url: "http://www.ecuapremium.com.au" },
 ]
