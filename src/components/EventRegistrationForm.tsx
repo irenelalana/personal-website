@@ -7,6 +7,10 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 
 export default function EventRegistrationLongForm() {
+  // 🔧 Cambia esto a `false` cuando quieras reabrir las inscripciones de equipos de futbol
+  const SOCCER_TEAM_SOLD_OUT = true;
+  const WAITLIST_EMAIL = 'irela@irelaaquaandfitness.com';
+
   const SOURCES = ['Irela Aqua and Fitness', 'Belen Roldan', 'Yeronga Eagles', 'Warriors', 'Move in Tune (Denise)', 'Fuego Beats (Lala)', 'Paola Castro', 'Natura Med (Karina)', 'Xango Capoeira (Yaya)', 'Manu Fit', 'Elvira Cete', 'Agus & Leo', 'Ileana Contreras', 'Helen Gomez (Vitalis)', 'Pilar Martin', 'Lourdes Villalobos (It\'s Aura)', 'Ale Caicedo', 'Franco Zumbafit', 'Social Media', 'Word of Mouth', 'Other'];
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
@@ -56,8 +60,6 @@ export default function EventRegistrationLongForm() {
     }
     loadPrices();
   }, []);
-
-  
 
   const PRICE_ADULT = prices['Adult'] || 0;
   const PRICE_STUDENT = prices['Students'] || 19.95;
@@ -135,6 +137,7 @@ export default function EventRegistrationLongForm() {
       toast.info("Coupon removed: Discounts do not apply for student-only bookings.");
     }
   }, [isOnlyStudents, appliedCoupon]);
+
   // CÁLCULO DE TOTALES ADAPTADO A CUPONES
   const baseTotal = activeTab === 'general' 
     ? (adults.length * PRICE_ADULT) + (students.length * PRICE_STUDENT) + (youth.length * PRICE_YOUTH)
@@ -185,6 +188,11 @@ export default function EventRegistrationLongForm() {
   };
 
   const handleSubmit = async () => {
+    // 🚫 Bloqueo de seguridad: por si el flujo llegara a activeTab 'team' estando sold out
+    if (activeTab === 'team' && SOCCER_TEAM_SOLD_OUT) {
+      return toast.error("Soccer team registrations are sold out. Please join the waiting list.");
+    }
+
     if (!acceptedTerms) return toast.error("You must accept the Terms and Conditions to proceed");
     
     const hasActivity = Object.values(activities).some(val => val === true);
@@ -321,12 +329,42 @@ export default function EventRegistrationLongForm() {
         <button className={`tab-btn ${activeTab === 'general' ? 'active' : ''}`} onClick={() => setActiveTab('general')}>
           🏋🏽‍♀️🏃🏾Individual Event Tickets🏋🏻🏃🏼‍♀️
         </button>
-        <button className={`tab-btn ${activeTab === 'team' ? 'active' : ''}`} onClick={() => setActiveTab('team')}>
-          ⚽Soccer Team Pack (Only for adults)⚽
+        <button
+          className={`tab-btn ${activeTab === 'team' ? 'active' : ''} ${SOCCER_TEAM_SOLD_OUT ? 'disabled' : ''}`}
+          onClick={() => !SOCCER_TEAM_SOLD_OUT && setActiveTab('team')}
+          disabled={SOCCER_TEAM_SOLD_OUT}
+          style={SOCCER_TEAM_SOLD_OUT ? { opacity: 0.55, cursor: 'not-allowed' } : undefined}
+        >
+          {SOCCER_TEAM_SOLD_OUT ? '⚽ Soccer Team Pack — SOLD OUT All team spots have been filled ⚽' : '⚽Soccer Team Pack (Only for adults)⚽'}
+          {SOCCER_TEAM_SOLD_OUT ? <p style={{ margin: 0, fontSize: '0.9rem', color: '#7f1d1d' }}>Join the waiting list sending an email to {WAITLIST_EMAIL}</p> : ''}
         </button>
       </div>
 
       <hr style={{margin: '1.5rem 0', opacity: 0.2}} />
+
+      {/* {SOCCER_TEAM_SOLD_OUT && (
+        <div style={{
+          background: '#fef2f2',
+          border: '1px solid #fecaca',
+          borderRadius: '8px',
+          padding: '15px',
+          marginBottom: '1.5rem',
+          textAlign: 'center'
+        }}>
+          <p style={{ margin: '0 0 8px 0', fontWeight: 'bold', color: '#991b1b' }}>
+            ⚽ Soccer Team Registration is SOLD OUT
+          </p>
+          <p style={{ margin: 0, fontSize: '0.9rem', color: '#7f1d1d' }}>
+            All team spots have been filled.{' '}
+            <a
+              href={`mailto:${WAITLIST_EMAIL}?subject=${encodeURIComponent('Soccer Team Waiting List - Actívate Brisbane')}&body=${encodeURIComponent('Hi, I would like to join the waiting list for the Inti Soccer Tournament team registration.\n\nTeam name:\nContact name:\nContact phone:')}`}
+              style={{ color: '#0f7a93', fontWeight: 'bold', textDecoration: 'underline' }}
+            >
+              Join the waiting list
+            </a>
+          </p>
+        </div>
+      )} */}
 
       {activeTab === 'general' && (
         <div className="tab-content fade-in">
@@ -429,11 +467,6 @@ export default function EventRegistrationLongForm() {
                       <input type="tel" placeholder="Phone Number" value={student.phone} onChange={(e) => handleInputChange('student', i, 'phone', e.target.value)} required />
                     </>
                   )}
-                    {/* {isPrimary && (
-                      <div style={{ padding: '10px', background: '#f0f9ff', marginBottom: '10px', borderRadius: '4px', fontSize: '0.8rem', color: '#0369a1' }}>
-                        You are the primary contact for this booking.
-                      </div>
-                    )} */}
                   </div>
                 </article>
               );
@@ -454,7 +487,7 @@ export default function EventRegistrationLongForm() {
         </div>
       )}
 
-      {activeTab === 'team' && (
+      {activeTab === 'team' && !SOCCER_TEAM_SOLD_OUT && (
         <div className="tab-content fade-in">
           <div className="registration-forms">
             <article className="form-card-activate team-card">
@@ -503,7 +536,7 @@ export default function EventRegistrationLongForm() {
       {/* --- FOOTER: Origen, Emergencia, T&C y Pago --- */}
       <div className="form-footer">
         
-        {((activeTab === 'general' && (adults.length > 0 || students.length > 0)) || activeTab === 'team') && (
+        {((activeTab === 'general' && (adults.length > 0 || students.length > 0)) || (activeTab === 'team' && !SOCCER_TEAM_SOLD_OUT)) && (
           <div className="emergency-section" style={{ background: '#f8fafc', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #e2e8f0' }}>
             <h4 style={{ margin: '0 0 10px 0', color: '#0f172a' }}>Emergency Contact <span style={{color: 'red'}}>*</span></h4>
             <div className="input-group">
@@ -546,7 +579,6 @@ export default function EventRegistrationLongForm() {
           </div>
         </div>
 
-        {/* --- INPUT DE CUPÓN --- */}
         {/* --- INPUT DE CUPÓN --- */}
         {!isOnlyStudents && (
           <div className="coupon-section" style={{ background: '#f1f5f9', padding: '15px', borderRadius: '8px', marginBottom: '1.5rem', border: '1px solid #cbd5e1' }}>
@@ -617,7 +649,7 @@ export default function EventRegistrationLongForm() {
         <button 
           className="payment-button cta-button" 
           onClick={handleSubmit} 
-          disabled={loading} // Quitamos la restricción de baseTotal === 0
+          disabled={loading || (activeTab === 'team' && SOCCER_TEAM_SOLD_OUT)}
         >
           {loading ? 'PROCESSING...' : (total === 0 ? 'CONFIRM REGISTRATION' : 'PURCHASE TICKETS')}
         </button>
