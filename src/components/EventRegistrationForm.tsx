@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default function EventRegistrationLongForm() {
   // 🔧 Cambia esto a `false` cuando quieras reabrir las inscripciones de equipos de futbol
   const SOCCER_TEAM_SOLD_OUT = true;
-  const WAITLIST_EMAIL = 'irela@irelaaquaandfitness.com';
+  const WAITLIST_EMAIL = 'activatebrisbane@gmail.com'; //'irela@irelaaquaandfitness.com';
 
   const SOURCES = ['Irela Aqua and Fitness', 'Belen Roldan', 'Yeronga Eagles', 'Warriors', 'Move in Tune (Denise)', 'Fuego Beats (Lala)', 'Paola Castro', 'Natura Med (Karina)', 'Xango Capoeira (Yaya)', 'Manu Fit', 'Elvira Cete', 'Agus & Leo', 'Ileana Contreras', 'Helen Gomez (Vitalis)', 'Pilar Martin', 'Lourdes Villalobos (It\'s Aura)', 'Ale Caicedo', 'Franco Zumbafit', 'Social Media', 'Word of Mouth', 'Other'];
   const supabase = createClient();
@@ -335,7 +335,7 @@ export default function EventRegistrationLongForm() {
           disabled={SOCCER_TEAM_SOLD_OUT}
           style={SOCCER_TEAM_SOLD_OUT ? { opacity: 0.55, cursor: 'not-allowed' } : undefined}
         >
-          {SOCCER_TEAM_SOLD_OUT ? '⚽ Soccer Team Pack — SOLD OUT All team spots have been filled ⚽' : '⚽Soccer Team Pack (Only for adults)⚽'}
+          {SOCCER_TEAM_SOLD_OUT ? '⚽ Soccer Team Pack — SOLD OUT - All team spots have been filled ⚽' : '⚽Soccer Team Pack (Only for adults)⚽'}
           {SOCCER_TEAM_SOLD_OUT ? <p style={{ margin: 0, fontSize: '0.9rem', color: '#7f1d1d' }}>Join the waiting list sending an email to {WAITLIST_EMAIL}</p> : ''}
         </button>
       </div>
