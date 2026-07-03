@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export default function EventRegistrationLongForm() {
   // 🔧 Cambia esto a `false` cuando quieras reabrir las inscripciones de equipos de futbol
-  const SOCCER_TEAM_SOLD_OUT = true;
+  const SOCCER_TEAM_SOLD_OUT = false;
   const WAITLIST_EMAIL = 'activatebrisbane@gmail.com'; //'irela@irelaaquaandfitness.com';
 
   const SOURCES = ['Irela Aqua and Fitness', 'Belen Roldan', 'Yeronga Eagles', 'Warriors', 'Move in Tune (Denise)', 'Fuego Beats (Lala)', 'Paola Castro', 'Natura Med (Karina)', 'Xango Capoeira (Yaya)', 'Manu Fit', 'Elvira Cete', 'Agus & Leo', 'Ileana Contreras', 'Helen Gomez (Vitalis)', 'Pilar Martin', 'Lourdes Villalobos (It\'s Aura)', 'Ale Caicedo', 'Franco Zumbafit', 'Social Media', 'Word of Mouth', 'Other'];
