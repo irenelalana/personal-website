@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'; // Importa Suspense
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import confetti from 'canvas-confetti';
+import { fbEvent } from '@/lib/fbpixel';
 
 // 1. Creamos un componente interno para la lógica de los params
 function SuccessContent() {
@@ -19,6 +20,28 @@ function SuccessContent() {
     }
 
     setLoading(false);
+
+    // 📊 META PIXEL: Purchase, con el monto real verificado contra Stripe.
+    // Usamos sessionStorage para no disparar el evento dos veces si el
+    // usuario refresca esta página o vuelve atrás con el navegador.
+    const alreadyTracked = sessionStorage.getItem(`purchase_tracked_${sessionId}`);
+
+    if (!alreadyTracked) {
+      fetch(`/api/verify-session?session_id=${sessionId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.amount !== undefined) {
+            fbEvent('Purchase', {
+              value: data.amount,
+              currency: data.currency,
+              content_name: 'Actívate Brisbane - Ticket Purchase',
+              event_id: sessionId, // Ayuda a deduplicar si más adelante añades Conversions API
+            });
+            sessionStorage.setItem(`purchase_tracked_${sessionId}`, '1');
+          }
+        })
+        .catch((err) => console.error('Error verifying session for Meta Pixel:', err));
+    }
 
     // Efecto de Confeti
     const duration = 3 * 1000;

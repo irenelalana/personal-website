@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { checkoutComplexBooking } from '@/app/actions';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { fbEvent } from '@/lib/fbpixel';
 
 export default function EventRegistrationLongForm() {
   // 🔧 Cambia esto a `false` cuando quieras reabrir las inscripciones de equipos de futbol
@@ -49,6 +50,16 @@ export default function EventRegistrationLongForm() {
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePhone = (phone: string) => /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]{8,15}$/.test(phone);
+
+  // 📊 META PIXEL: ViewContent al montar el formulario.
+  // Esto es lo que te permite crear en Ads Manager la audiencia de
+  // "gente que llegó al formulario" para luego excluir a quienes ya compraron.
+  useEffect(() => {
+    fbEvent('ViewContent', {
+      content_name: 'Actívate Brisbane - Registration Form',
+      content_category: 'event_registration',
+    });
+  }, []);
 
   useEffect(() => {
     async function loadPrices() {
@@ -305,6 +316,15 @@ export default function EventRegistrationLongForm() {
       activities
     };
 
+    // 📊 META PIXEL: InitiateCheckout justo antes de mandar al usuario a Stripe.
+    // Señal de intención más fuerte que ViewContent: esta gente llegó hasta el final del formulario.
+    fbEvent('InitiateCheckout', {
+      value: total,
+      currency: 'AUD',
+      content_name: activeTab === 'team' ? 'Soccer Team Pack' : 'Individual Event Tickets',
+      num_items: activeTab === 'team' ? 1 : (adults.length + students.length + youth.length),
+    });
+
     // En tu función handleSubmit:
     try {
       const res = await checkoutComplexBooking(payload);
@@ -341,30 +361,6 @@ export default function EventRegistrationLongForm() {
       </div>
 
       <hr style={{margin: '1.5rem 0', opacity: 0.2}} />
-
-      {/* {SOCCER_TEAM_SOLD_OUT && (
-        <div style={{
-          background: '#fef2f2',
-          border: '1px solid #fecaca',
-          borderRadius: '8px',
-          padding: '15px',
-          marginBottom: '1.5rem',
-          textAlign: 'center'
-        }}>
-          <p style={{ margin: '0 0 8px 0', fontWeight: 'bold', color: '#991b1b' }}>
-            ⚽ Soccer Team Registration is SOLD OUT
-          </p>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: '#7f1d1d' }}>
-            All team spots have been filled.{' '}
-            <a
-              href={`mailto:${WAITLIST_EMAIL}?subject=${encodeURIComponent('Soccer Team Waiting List - Actívate Brisbane')}&body=${encodeURIComponent('Hi, I would like to join the waiting list for the Inti Soccer Tournament team registration.\n\nTeam name:\nContact name:\nContact phone:')}`}
-              style={{ color: '#0f7a93', fontWeight: 'bold', textDecoration: 'underline' }}
-            >
-              Join the waiting list
-            </a>
-          </p>
-        </div>
-      )} */}
 
       {activeTab === 'general' && (
         <div className="tab-content fade-in">

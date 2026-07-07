@@ -1,10 +1,11 @@
 // import './global.css';
-import './style.css'
+
 import type { Metadata } from 'next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Reviews from '@/components/Reviews';
 import ContactForm from '@/components/ContactForm';
+import MetaPixel from '@/components/MetaPixel';
 import ActivatePopup from '@/components/ActivatePopup';
 import { Toaster } from 'sonner'
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="font-serif text-[#076873]">
+        <MetaPixel />
         <Header />
         <main className="p-5">{children}</main>
         <ContactForm />
