@@ -361,6 +361,17 @@ export default function ActivateBrisbanePage() {
             </div>
           ))}
         </div>
+        {/* --- MAPA --- */}
+              <div style={{ marginBottom: '30px' }}>
+                <h2 style={{ fontSize: '1.15rem', margin: '0 0 12px', color: '#0f172a' }}>Event Map</h2>
+                  <Image
+                    src="/images/event-map.jpg"
+                    alt="Actívate Brisbane Event Map"
+                    width={500}
+                    height={400}
+                    style={{ width: '100%', height: 'auto', borderRadius: '12px' }}
+                  />
+              </div>
       </section>
 
       {/* --- WHY MATTERS (Le quitamos alt-bg para mantener la alternancia limpia) --- */}
