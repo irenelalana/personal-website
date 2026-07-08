@@ -2,20 +2,24 @@
 // components/MetaPixel.tsx
 
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FB_PIXEL_ID, pageview } from '@/lib/fbpixel';
 
-export default function MetaPixel() {
+// Este subcomponente es el único que usa useSearchParams,
+// por eso lo aislamos y lo envolvemos en su propio Suspense.
+function PixelRouteTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Con App Router las navegaciones son client-side, así que el <script> base
-  // solo dispara el PageView inicial. Este efecto cubre los cambios de ruta.
   useEffect(() => {
     pageview();
   }, [pathname, searchParams]);
 
+  return null;
+}
+
+export default function MetaPixel() {
   return (
     <>
       <Script id="meta-pixel-base" strategy="afterInteractive">
@@ -42,6 +46,9 @@ export default function MetaPixel() {
           alt=""
         />
       </noscript>
+      <Suspense fallback={null}>
+        <PixelRouteTracker />
+      </Suspense>
     </>
   );
 }
