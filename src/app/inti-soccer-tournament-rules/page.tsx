@@ -44,25 +44,25 @@ const content: Record<'en' | 'es', Translation> = {
         p2: "Please note: By registering, you are not just signing up for the soccer tournament; your ticket grants you full access to the entire event. You'll be able to enjoy all the other activities scheduled throughout the day, soak up the vibrant atmosphere, and connect with our wonderful community."
       },
       field: {
-        title: "1. Field & Equipment",
-        dim: "Dimensions: 30m x 20m grass pitch.",
-        bound: "Boundaries: All lines delimited by cones.",
-        area: "Penalty Area: Full width and 6m deep.",
-        spot: "Penalty Spot: 6m from centre of the goal."
+        title: "1. Field and Equipment",
+        dim: "Dimensions: Grass field of 35m x 28m.",
+        bound: "Boundaries: All margins and areas of the field are marked by blue lines.",
+        area: "Penalty Area: 11 meters wide and 4.5m deep.",
+        spot: "Penalty Spot: 6m from the center of the goal."
       },
       format: {
-        title: "2. Tournament Format & Timing",
-        struct: "Structure: Group Stage (4 teams per group) followed by Quarter-finals, Semi-finals, and Final.",
-        adv: "Advancement: The top 2 teams from each group advance to the Knockout phase.",
-        timeG: "Group Stage Timing: 18-minute matches (no halves). 2-minute transition between matches.",
-        timeK: "Knockout Phase Timing: Quarter-finals, Semis, and Final are 20-minute matches (Two halves of 10 mins).",
-        score: "Scoring (Group Stage): Win = 3 pts, Draw = 1 pt, Loss = 0 pts.",
-        tieTitle: "Group Stage Tie-breakers:",
+        title: "2. Format and Times",
+        struct: "Structure: Group Stage (4 teams per group) followed by Quarterfinals, Semifinals, and Final.",
+        adv: "Qualification: The top 2 from each group advance to the knockout stage.",
+        timeG: "Group Stage: Matches of 18 min (2 halves of 9 minutes with no break). 2 min transition between matches.",
+        timeK: "Knockouts: Quarterfinals, Semis, and Final are 20 min matches (two halves of 10 min).",
+        score: "Scoring (Groups): Win = 3 pts, Draw = 1 pt, Loss = 0 pts.",
+        tieTitle: "Group Stage Tiebreaker:",
         tie1: "1. Head-to-head: Result of the match between the tied teams.",
-        tie2: "2. Goal Difference: Highest overall goal difference.",
-        tie3: "3. Goals For: Most goals scored throughout the group stage.",
-        tieKO: "Tie-break (Knockout only): If level at full time, 3 penalties per team, then sudden death.",
-        schedule: "Schedule: The tournament starts at 9:00 am and will finish approximately at 4:00 pm."
+        tie2: "2. Goal Difference (Goal Average): Best overall difference.",
+        tie3: "3. Goals Scored: Most goals scored throughout the group stage.",
+        tieKO: "Tiebreaker (Knockouts Only): If tied, 3 penalties per team, then sudden death.",
+        schedule: "Schedule: The tournament starts at 9:00 am and will finish around 4:00 pm."
       },
       table: {
         phase: "Tournament Phase",
@@ -128,16 +128,16 @@ const content: Record<'en' | 'es', Translation> = {
       },
       field: {
         title: "1. Campo y Equipamiento",
-        dim: "Dimensiones: Campo de césped de 30m x 20m.",
-        bound: "Límites: Todas las líneas delimitadas por conos.",
-        area: "Área de Penalti: Ancho total y 6m de profundidad.",
+        dim: "Dimensiones: Campo de césped de 35m x 28m.",
+        bound: "Límites: Todas los margenes y áreas del campo estan delimitados por lineas azules.",
+        area: "Área de Penalti: 11 metros de ancho y 4.5m de profundidad.",
         spot: "Punto de Penalti: a 6m del centro de la portería."
       },
       format: {
         title: "2. Formato y Tiempos",
         struct: "Estructura: Fase de Grupos (4 equipos por grupo) seguida de Cuartos, Semifinales y Final.",
         adv: "Clasificación: Los 2 mejores de cada grupo pasan a la fase eliminatoria.",
-        timeG: "Fase de Grupos: Partidos de 18 min (sin partes). Transición de 2 min entre partidos.",
+        timeG: "Fase de Grupos: Partidos de 18 min (2 partes de 9 minutos sin descanso). Transición de 2 min entre partidos.",
         timeK: "Eliminatorias: Cuartos, Semis y Final son partidos de 20 min (dos partes de 10 min).",
         score: "Puntuación (Grupos): Victoria = 3 pts, Empate = 1 pt, Derrota = 0 pts.",
         tieTitle: "Desempate en Fase de Grupos:",
