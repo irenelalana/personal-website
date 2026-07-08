@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 // --- CONFIGURACIÓN DE LAS AGENDAS (misma data que la landing page) ---
 const AGENDAS = [
-  { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/agenda_fitness.png' },
-  { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/agenda_wellness.png' },
-  { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/agenda_kids.png' },
-  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/agenda_soccer.png' },
+  { id: 'kickoff', label: 'Kick-off', color: '#FF5E52', image: '/images/EVENT AGENDAS.png' },
+  { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/FITNESS.png' },   // Rojo vibrante
+  { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/WELLNESS.png' }, // Morado bienestar
+  { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/KIDS.png' },         // Azul celeste divertido
+  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/SOCCER.png' },     // Verde césped
 ];
-
 export default function MapAndAgendaPage() {
-  const [activeAgenda, setActiveAgenda] = useState('fitness');
+  const [activeAgenda, setActiveAgenda] = useState('kickoff');
 
   return (
     <div style={{ maxWidth: '520px', margin: '0 auto', padding: '20px 16px 60px' }}>
