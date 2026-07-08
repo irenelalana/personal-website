@@ -20,15 +20,16 @@ const shuffleArray = (array: any) => {
 
 // --- CONFIGURACIÓN DE LAS AGENDAS ---
 const AGENDAS = [
-  { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/agenda_fitness.png' },   // Rojo vibrante
-  { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/agenda_wellness.png' }, // Morado bienestar
-  { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/agenda_kids.png' },         // Azul celeste divertido
-  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/agenda_soccer.png' },     // Verde césped
+  { id: 'kickoff', label: 'Kick-off', color: '#FF5E52', image: '/images/EVENT AGENDAS.png' },
+  { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/FITNESS.png' },   // Rojo vibrante
+  { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/WELLNESS.png' }, // Morado bienestar
+  { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/KIDS.png' },         // Azul celeste divertido
+  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/SOCCER.png' },     // Verde césped
 ];
 
 export default function ActivateBrisbanePage() {
   // --- ESTADO PARA LA AGENDA ACTIVA ---
-  const [activeAgenda, setActiveAgenda] = useState('fitness');
+  const [activeAgenda, setActiveAgenda] = useState('kickoff');
 
   // --- ESTADOS DE DATOS MEZCLADOS ---
   const [displayTrainers, setDisplayTrainers] = useState(TRAINERS);
