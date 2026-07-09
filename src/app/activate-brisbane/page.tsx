@@ -197,7 +197,7 @@ export default function ActivateBrisbanePage() {
         <div className="card-activate">
           <h2>What is ACTÍVATE BRISBANE?</h2>
           <p>
-            ACTÍVATE BRISBANE is a one-day immersive fitness and sports in Spanish experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
+            ACTÍVATE BRISBANE is a one-day immersive fitness and sports experience created to inspire people of all ages and fitness levels to move more, connect more and feel stronger together.
           </p>
           <p>
             This event brings together group fitness, family runs, a <a href="/inti-soccer-tournament-rules" target="_blank" rel="noopener noreferrer">soccer 5-a-side tournament</a>, and wellness workshops.
@@ -257,13 +257,13 @@ export default function ActivateBrisbanePage() {
       <section className="content-section alt-bg">
         <h2>Who is it for?</h2>
         <div className="features-grid">
-          <div className="feature-item">✔ Spanish-Speaking Communities in Brisbane</div>
+          <div className="feature-item">✔ Multicultural Communities in Brisbane</div>
           <div className="feature-item">✔ Fitness lovers</div>
           <div className="feature-item">✔ Soccer lovers</div>
           <div className="feature-item">✔ Runners</div>
           <div className="feature-item">✔ Exercise passionates</div>
           <div className="feature-item">✔ Active Families</div>
-          <div className="feature-item">✔ Multicultural communities</div>
+          <div className="feature-item">✔ Spanish-Speaking Communities</div>
           <div className="feature-item">✔ Pet Friendly!</div>
         </div>
         <p style={{textAlign: 'center', marginTop: '20px'}}>
