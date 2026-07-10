@@ -125,9 +125,9 @@ export default function DoorCheckinPage() {
               <th style={thStyle}>First Name</th>
               <th style={thStyle}>Last Name</th>
               <th style={thStyle}>Kids</th>
-              <th style={thStyle}>Email</th>
-              <th style={thStyle}>Order ID</th>
               <th style={thStyle}>Purchased At (Brisbane)</th>
+              <th style={thStyle}>Email</th>
+              <th style={thStyle}>Order ID</th>  
             </tr>
           </thead>
           <tbody>

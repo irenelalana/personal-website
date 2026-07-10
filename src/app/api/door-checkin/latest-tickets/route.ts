@@ -13,7 +13,7 @@ const supabaseAdmin = createClient(
 export async function GET() {
   const { data, error } = await supabaseAdmin
     .from('tickets')
-    .select('id, first_name, last_name, kids, customer_email, order_id, created_at')
+    .select('id, first_name, last_name, kids,  created_at, customer_email, order_id,')
     .order('created_at', { ascending: false })
     .limit(50);
 
