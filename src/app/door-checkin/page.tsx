@@ -143,11 +143,11 @@ export default function DoorCheckinPage() {
                 <td style={tdStyle}>{ticket.first_name}</td>
                 <td style={tdStyle}>{ticket.last_name}</td>
                 <td style={tdStyle}>{ticket.kids ?? '0'}</td>
+                <td style={tdStyle}>{formatBrisbaneTime(ticket.created_at)}</td>
                 <td style={tdStyle}>{ticket.customer_email}</td>
                 <td style={{ ...tdStyle, fontFamily: 'monospace', fontSize: '0.85rem' }}>
                   {ticket.order_id}
                 </td>
-                <td style={tdStyle}>{formatBrisbaneTime(ticket.created_at)}</td>
               </tr>
             ))}
           </tbody>
