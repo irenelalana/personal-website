@@ -566,15 +566,15 @@ export default function ActivateBrisbanePage() {
             <h1 style={{color: '#f39304'}}>🎟 Tickets</h1>
             <h2 style={{ color: '#94a3b8', textDecoration: 'line-through' }}>Launch Special Offer!! Best price before April 15th!!</h2>
             <h2 style={{color: '#94a3b8', textDecoration: 'line-through'}}>Volando voy!! Until May 31st (Adults $29, Soccer Team $250)</h2>
-            <h2 style={{color: '#d97803', fontSize: '1.2rem', border: '2px solid #d97803', padding: '10px', borderRadius: '5px'}}>Falto yo, contad conmigo!! Until July 10th (Adults $39, Soccer Team $325)</h2>
-            <h2 style={{color: '#b95a02', fontSize: '0.95rem', opacity: 0.5}}>Me pilla el toro!! Until July 12th (Adults $49, Soccer Team $410)</h2>
+            <h2 style={{color: '#94a3b8', textDecoration: 'line-through'}}>Falto yo, contad conmigo!! Until July 10th (Adults $39, Soccer Team $325)</h2>
+            <h2 style={{color: '#b95a02', fontSize: '1.2rem', border: '2px solid #d97803', padding: '10px', borderRadius: '5px'}}>Me pilla el toro!! (Adults $49, Soccer Team $410)</h2>
             <EventRegistrationForm />  
         </div>
       </section>
 
       {/* Banner flotante */}
       <div className="fixed-banner">
-        <span>'Falto yo, contad conmigo' deal!</span>
+        <span>Me pilla el toro!</span>
         <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
         </button>
