@@ -15,7 +15,7 @@ export async function GET() {
     .from('tickets')
     .select('id, first_name, last_name, kids,  created_at, customer_email, order_id')
     .order('created_at', { ascending: false })
-    .limit(50);
+    .limit(100);
 
   if (error) {
     console.error('Error fetching latest tickets:', error);

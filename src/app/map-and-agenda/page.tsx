@@ -8,7 +8,7 @@ const AGENDAS = [
   { id: 'fitness', label: 'Fitness', color: '#116490', image: '/images/FITNESS.png' },   // Rojo vibrante
   { id: 'wellness', label: 'Wellness', color: '#688A57', image: '/images/WELLNESS.png' }, // Morado bienestar
   { id: 'kids', label: 'Kids', color: '#E7A129', image: '/images/KIDS.png' },         // Azul celeste divertido
-  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/SOCCER.png' },     // Verde césped
+  { id: 'soccer', label: 'Soccer', color: '#E4CC32', image: '/images/Soccer_cruces.png' },     // Verde césped
 ];
 export default function MapAndAgendaPage() {
   const [activeAgenda, setActiveAgenda] = useState('kickoff');
