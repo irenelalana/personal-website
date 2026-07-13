@@ -568,17 +568,17 @@ export default function ActivateBrisbanePage() {
             <h2 style={{color: '#94a3b8', textDecoration: 'line-through'}}>Volando voy!! Until May 31st (Adults $29, Soccer Team $250)</h2>
             <h2 style={{color: '#94a3b8', textDecoration: 'line-through'}}>Falto yo, contad conmigo!! Until July 10th (Adults $39, Soccer Team $325)</h2>
             <h2 style={{color: '#b95a02', fontSize: '1.2rem', border: '2px solid #d97803', padding: '10px', borderRadius: '5px'}}>Me pilla el toro!! (Adults $49, Soccer Team $410)</h2>
-            <EventRegistrationForm />  
+            {/* <EventRegistrationForm />   */}
         </div>
       </section>
 
       {/* Banner flotante */}
-      <div className="fixed-banner">
+      {/* <div className="fixed-banner">
         <span>Me pilla el toro!</span>
         <button onClick={scrollToForm} style={{fontSize: '0.8em', margin: 0, padding: '5px 10px'}}>
             Buy Now
         </button>
-      </div>
+      </div> */}
 
     </div>
   );
