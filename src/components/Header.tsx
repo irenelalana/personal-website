@@ -7,11 +7,11 @@ const Header = () => {
   return (
     <>
       {/* NUEVO: Barra de Anuncios Temporal */}
-      <div className="announcement-bar">
+      {/* <div className="announcement-bar">
         <Link href="/activate-brisbane" className="announcement-link">
           🔥<strong>Actívate Brisbane July 12</strong> Tickets here!
         </Link>
-      </div>
+      </div> */}
 
       <header>
         <div className="home-logo">
