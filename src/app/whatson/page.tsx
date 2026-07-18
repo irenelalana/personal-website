@@ -16,16 +16,16 @@ export default function WhatsOnPage() {
         </div>
 
         {/* SECCIÓN DESTACADA: BIENESTAR 360 WELLNESS */}
-        {/* <section className={styles.challengeCard}>
+        <section className={styles.challengeCard}>
           <div className={styles.challengeContent}>
             <span className={styles.partnerLabel}>BIENESTAR, 360 DOWNUNDER WELLNESS</span>
-            <h2>IWD SELFCARE EVENT: CORE, CYCLE, GLOW</h2>
+            <h2>The Language of the Body: Connection, Art & Inner Sovereignty</h2>
             <p className={styles.challengeSubtitle}>In collaboration with <strong>Latin Temple Beauty</strong></p>
             
             <div className={styles.imgWrapper}>
               <Image
-                src="/images/15thMarch2026Bienestar360.jpg"
-                alt="IWD Selfcare Event Poster"
+                src="/images/Bienestar-jul-2026.jpeg"
+                alt="The Language of the Body: Connection, Art & Inner Sovereignty"
                 width={1000}
                 height={600}
                 className={styles.timetableImg}
@@ -36,31 +36,32 @@ export default function WhatsOnPage() {
             <div className={styles.challengeFeatures}>
               <div className={styles.featureItem}>
                 <span className={styles.featureIcon}>✨</span>
-                <p>Our first edition of 2026 is officially here, and it’s a special one. This is a journey designed for YOU—the incredible migrant women of Brisbane. And because we want our community to be more inclusive than ever, this event will be held entirely in English for the very first time! 🌏💖 Whether you’ve been here a week or a decade, this is your space to connect and thrive.</p>
+                <p>This month, we invite you to experience "The Language of the Body: Connection, Art & Inner Sovereignty", a unique journey designed to help you slow down, reconnect with yourself, and experience the healing power of movement, creativity, and mindful connection.</p>
               </div>
               
               <div className={styles.featureItem}>
                 <span className={styles.featureIcon}>🔍</span>
                 <div>
-                  <p><strong>What’s the journey about?</strong></p>
+                  <p><strong>What's the journey about?</strong></p>
                   <ul className={styles.innerList}>
-                    <li><strong>CORE:</strong> Master your inner foundation with a Pelvic Floor focused Pilates masterclass by Irene Lalana</li>
-                    <li><strong>CYCLE:</strong> Learn the link between nutrition and your hormonal health (including the secrets of Seed Cycling!) with Dr. Karina Ruiz.</li>
-                    <li><strong>GLOW:</strong> Reclaim your radiance with practical facial self-care and natural rejuvenation techniques by Angie Mackay.</li>
+                    <li><strong>Connection through Art:</strong> Experience a mindful body painting activity where you'll exchange symbolic artwork with a partner as a way of sharing intentions, kindness, and human connection.</li>
+                    <li><strong>Conscious Movement & Dance Flow:</strong> Enjoy a guided somatic movement experience with live music designed to regulate the nervous system, release tension, and allow your body to express itself freely—whether dancing, stretching, or simply being present.</li>
+                    <li><strong>Reflection & Integration:</strong> Participate in a supportive sharing circle where you'll have the opportunity to reflect on your experience in a safe, judgment-free environment.</li>
+                    <li><strong>Clay Creation Workshop:</strong> Reconnect with your creativity by working with clay as a symbol of transformation, resilience, and personal empowerment</li>
                   </ul>
                 </div>
               </div>
 
               <div className={styles.ctaWrapper}>
-                <p>📅 When: Sunday, 15th March | 8:00 AM – 12:00 PM</p>
+                <p>📅 When: Sunday, 26th July | 9:00 AM - 1:00 PM</p>
                 <p>📍 Where: Coorparoo School of Arts</p>
               </div>
             </div>
 
             <div className={styles.ctaWrapper}>
-              <p>Expect more than just workshops—we’re talking nourishing snacks, a high-value raffle, and the chance to meet a diverse group of inspiring women just like you.</p>
+              <p>Expect more than just workshops—we're talking nourishing snacks, a high-value raffle, and the chance to meet a diverse group of inspiring women just like you.</p>
               <a 
-                href="https://events.humanitix.com/experience-a-journey-to-holistic-wellness-v-2026-iwd-edition" 
+                href="https://events.humanitix.com/bienestar-360-experience-a-journey-to-holistic-wellness-vi-2026" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={styles.primaryButton}
@@ -69,7 +70,7 @@ export default function WhatsOnPage() {
               </a>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* SECCIÓN DEL HORARIO (TIMETABLE) */}
         {/* <div className={styles.timetableSection}>
